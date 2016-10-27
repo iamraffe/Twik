@@ -1,0 +1,45 @@
+<section class="signin">
+  <div class="col-sm-6 col-sm-offset-3 well well-lg">
+    <header>
+      <h1>Log in</h1>
+    </header>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="row">
+        <%= form_group_for f, :email, label: false do %>
+          <div class="input-group">
+            <%= f.email_field :email, class:"form-control", placeholder: "Email" %>
+            <span class="input-group-addon"><span class="fa fa-user"></span></span>
+          </div>
+        <% end %>
+        <%= form_group_for f, :password, label: false do %>
+          <div class="input-group">
+            <%= f.password_field :password, class:"form-control", placeholder: "Password" %>
+            <span class="input-group-addon"><span class="fa fa-lock"></span></span>
+          </div>
+        <% end %>
+
+        <% if devise_mapping.rememberable? -%>
+          <div class="form-group">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+      </div>
+
+
+      <div class="actions row">
+        <%= f.submit "Log in", class: "btn btn-primary btn-block" %>
+      </div>
+    <% end %>
+
+    <%= flash_messages layout_flash: false %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+  <video autoplay  poster="" id="bgvid" loop>
+      <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+    <!-- <source src="//demosthenes.info/assets/videos/polina.webm" type="video/webm"> -->
+    <source src="<%= video_background %>" type="video/mp4">
+  </video>
+</section>
+

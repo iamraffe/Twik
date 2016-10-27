@@ -1,0 +1,19 @@
+//Import bootstrap-sprockets
+@import "bootstrap-sprockets";
+
+// Import cosmo variables
+@import "bootswatch/superhero/variables";
+
+// Then bootstrap itself
+@import "bootstrap";
+@import "font-awesome";
+// Bootstrap body padding for fixed navbar
+// body { padding-top: 60px; }
+
+// And finally bootswatch style itself
+@import "bootswatch/superhero/bootswatch";
+@import "animate";
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Gochi+Hand);
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,700,300);

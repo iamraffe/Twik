@@ -1,0 +1,9 @@
+<section id="menus-index">
+  <header class="container">
+    <h1 class="title"><%= current_account.subdomain %>'s team menus</h1>
+    <hr>
+  </header>
+  <section class="container-fluid">
+    <%= client("TwikGallery", 'tg', {is_creator: policy(:menu).is_creative?, width: 353, height: 256, menus: @menus}) %>
+  </section>
+</section>

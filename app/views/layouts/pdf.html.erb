@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js" %>
+    <%= javascript_include_tag "http://code.jquery.com/jquery-1.10.0.min.js" %>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var fonts = JSON.parse($("#svg--wrapper").attr("data-fonts"))
+        if(fonts.length > 0){
+          WebFont.load({
+            google: {
+              families: fonts
+            }
+          });
+        }
+        var svg = $("#svg--wrapper").attr("data-src")
+        $("#svg--wrapper").html(atob(svg))
+        <% if(@menu.background.nil?) %>
+          $("svg").attr("style", " display: block; background: white; margin: 0 auto !important; padding: 0 !important; ")
+        <% else %>
+          $("svg").attr("style", " display: block; background: <%= @menu.background %>; margin: 0 auto !important; padding: 0 !important; ")
+        <% end %>
+
+
+      }); 
+    </script>
+    <style>
+      html, body{
+        margin:0 !important;
+        padding:0 !important;
+        height: "<%= @menu.height %>"mm;
+        width: "<%= @menu.width %>"mm;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body id="pdf-document">
+      <%= yield %>
+  </body>
+</html>
