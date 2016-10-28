@@ -1,0 +1,8 @@
+[contenteditable=true]:empty:before{
+  content: attr(placeholder);
+  display: block;
+}
+
+// .form-control{
+//   height: auto !important;
+// }

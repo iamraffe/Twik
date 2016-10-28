@@ -1,5 +1,6 @@
 class Menu < ActiveRecord::Base
-  has_many :comments, as: :commentable
+  has_many :sections
+  has_many :archives
   has_many :media, as: :mediable
 
   def fonts
