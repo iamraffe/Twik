@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501153669) do
+ActiveRecord::Schema.define(version: 20161028003943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,14 @@ ActiveRecord::Schema.define(version: 20160501153669) do
   create_table "accounts", force: :cascade do |t|
     t.string   "subdomain"
     t.integer  "owner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "archives", force: :cascade do |t|
+    t.datetime "version"
+    t.string   "name"
+    t.json     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -35,6 +43,15 @@ ActiveRecord::Schema.define(version: 20160501153669) do
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
   end
 
+  create_table "items", force: :cascade do |t|
+    t.string   "text"
+    t.integer  "position"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_items_on_category_id", using: :btree
+  end
+
   create_table "menus", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -44,6 +61,16 @@ ActiveRecord::Schema.define(version: 20160501153669) do
     t.float    "height"
     t.float    "width"
     t.string   "background"
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.integer  "menu_id"
+    t.string   "title"
+    t.text     "text"
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_id"], name: "index_sections_on_menu_id", using: :btree
   end
 
   create_table "uploads", force: :cascade do |t|
