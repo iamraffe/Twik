@@ -10,12 +10,20 @@ class MenuIndex extends React.Component{
   }
 
   render(){
+    const { menus } = this.props
     return(
-      null
+      <ul>
+        {_.map(menus, (m, i)=> {
+          return <li key={i}>{m.name}</li>
+        })}
+      </ul>
     )
   }
 }
 
-MenuIndex.propTypes = {}
+MenuIndex.propTypes = {
+  menus: PropTypes.array.isRequired,
+  is_creator: PropTypes.bool.isRequired
+}
 
 export default MenuIndex

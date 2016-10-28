@@ -10,7 +10,6 @@ import _ from 'lodash'
 import d3 from 'd3'
 import moment from 'moment'
 
-
 const store = configureStore()
 
 // Create an enhanced history that syncs navigation events with the store
