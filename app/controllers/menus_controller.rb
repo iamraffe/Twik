@@ -11,13 +11,11 @@ class MenusController < ApplicationController
 
   def show
     @menu = Menu.find(params[:id])
-    @comments = @menu.comments
     @template = @menu.template
   end
 
   def edit
     @menu = Menu.find(params[:id])
-    @comments = @menu.comments.nil? ? [] : @menu.comments
     @template = @menu.template
   end
 

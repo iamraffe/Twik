@@ -3,6 +3,7 @@ class CreateMenus < ActiveRecord::Migration
     create_table :menus do |t|
       t.string :name
       t.text :description
+      t.string :orientation, :default => "landscape"
       t.json :template, :null => false, :default => "[]"
       t.timestamps null: false
     end

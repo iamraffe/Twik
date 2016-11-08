@@ -14,7 +14,7 @@ class MenuIndex extends React.Component{
     return(
       <ul>
         {_.map(menus, (m, i)=> {
-          return <li key={i}>{m.name}</li>
+          return <li key={i}><a href={`/menus/${m.id}`}>{m.name}</a></li>
         })}
       </ul>
     )

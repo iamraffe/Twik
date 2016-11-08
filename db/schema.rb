@@ -30,19 +30,6 @@ ActiveRecord::Schema.define(version: 20161028003943) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.string   "author"
-    t.text     "body"
-    t.integer  "rank",             default: 0
-    t.string   "commentable_type"
-    t.integer  "commentable_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.string   "ancestry"
-    t.index ["ancestry"], name: "index_comments_on_ancestry", using: :btree
-    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
-  end
-
   create_table "items", force: :cascade do |t|
     t.string   "text"
     t.integer  "position"
@@ -55,9 +42,10 @@ ActiveRecord::Schema.define(version: 20161028003943) do
   create_table "menus", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.json     "template",    default: "[]", null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "orientation", default: "landscape"
+    t.json     "template",    default: "[]",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.float    "height"
     t.float    "width"
     t.string   "background"
@@ -68,8 +56,10 @@ ActiveRecord::Schema.define(version: 20161028003943) do
     t.string   "title"
     t.text     "text"
     t.integer  "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "portrait_positioning"
+    t.string   "landscape_positioning"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.index ["menu_id"], name: "index_sections_on_menu_id", using: :btree
   end
 
