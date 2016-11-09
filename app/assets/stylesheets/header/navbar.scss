@@ -1,0 +1,36 @@
+/*
+
+HEADER
+
+ */
+
+.navbar-default{
+  height: 75px;
+  border-bottom: 5px solid red;
+  .navbar-header{
+    // margin-left: 25px;
+  }
+
+  .navbar-brand{
+      float: left;
+      padding: 0 50px;
+      font-size: 19px;
+      line-height: 21px;
+      height: auto;
+    img{
+      max-height: 40px;
+      margin-top: 12.5px;
+    }
+  }
+  
+  .current-account{
+    float: right;
+    height: 75px;
+
+    .navbar-text{
+      font-family: 'Baloo', cursive;
+      margin-top: 40px;
+      margin-right: 40px;
+    }
+  }
+}

@@ -22,5 +22,8 @@ module Twik
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.autoload_paths += %W(#{config.root}/lib)
+    config.to_prepare do
+      Devise::Mailer.layout "layouts/mailer" # email.haml or email.erb
+    end
   end
 end

@@ -1,7 +1,6 @@
 //Import bootstrap-sprockets
 @import "bootstrap-sprockets";
-$brand-primary: #f6303e !default;
-
+@import "twikables";
 // Import cosmo variables
 @import "bootswatch/cosmo/variables";
 
@@ -21,6 +20,6 @@ $brand-primary: #f6303e !default;
 @import url(https://fonts.googleapis.com/css?family=Baloo);
 
 //Twik Files
-
+@import 'header/navbar';
 @import 'components';
 @import 'accounts';

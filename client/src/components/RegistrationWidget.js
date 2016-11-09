@@ -11,13 +11,21 @@ class RegistrationWidget extends React.Component{
     
     this.state = {
       toggleSignUp: false, 
-      canSubmit: false
+      canSubmit: false, 
+      completed: false, 
+      guessWhat: false
     }
   }
 
   onToggleSignUp = () => {
     this.setState({
       toggleSignUp: !this.state.toggleSignUp
+    })
+  }
+
+  onGuessWhat = () => {
+    this.setState({
+      guessWhat: !this.state.guessWhat
     })
   }
 
@@ -36,6 +44,10 @@ class RegistrationWidget extends React.Component{
         if (response.ok === false) {
             throw Error(response.errors)
         }
+        this.setState({
+          completed: true,
+          toggleSignUp: false
+        })
         toastr.success("Please check your email for instructions", "You're account has been created!")
       })
     }
@@ -66,11 +78,11 @@ class RegistrationWidget extends React.Component{
   }
 
   render(){
-    const { toggleSignUp, canSubmit } = this.state
+    const { toggleSignUp, canSubmit, completed, guessWhat } = this.state
 
     return(
       <div>
-        {!toggleSignUp && 
+        {!toggleSignUp && !completed &&
           <div className="action-buttons">
             <button className="btn btn-primary btn-block">Log In!</button>
             <button className="btn btn-primary btn-block" onClick={(e) => {this.onToggleSignUp()}}>Sign Up</button>
@@ -79,6 +91,9 @@ class RegistrationWidget extends React.Component{
         {toggleSignUp &&
           <div className="sign-up-form">
             <form onSubmit={this.onSignUp}>
+              <header>
+                <h1>Sign up, yeah?</h1>
+              </header>
               <div className="row form-group">
                 <div className="col-xs-12">
                   <div className="input-group">
@@ -89,16 +104,31 @@ class RegistrationWidget extends React.Component{
               </div>
               <div className="row form-group">
                 <div className="col-xs-12">
-                  <input type="email" placeholder="email" name="email" className="form-control" />
+                  <input type="email" placeholder="your email address" name="email" className="form-control" />
                 </div>
               </div>
               <div className="row">
                 <div className="col-xs-12">
-                  <button className="btn btn-primary btn-block" disabled={!canSubmit}>Sign Up</button>
+                  <button className="btn btn-primary btn-block" disabled={!canSubmit}>Let's go</button>
                 </div>
               </div>
             </form>
           </div>
+        }
+        {completed && 
+          <section className="sign-up-completed">
+            <header>
+              <h1>Awesome!</h1>
+              <h2>Now guess what?</h2>
+              <button className="btn btn-primary btn-block" onClick={this.onGuessWhat}>What?</button>
+            </header>
+            {guessWhat &&
+              <div className="guess-what">
+                <p>It's Hamme... erh, email confirmation time.</p>
+                <p>See you on the other side!</p>
+              </div>
+            }
+          </section>
         }
       </div>
     )

@@ -6,6 +6,11 @@ REGISTRATION WIDGET
 
 .sign-up-form{
   form{
+    header{
+      h1{
+        margin-top: 0;
+      }
+    }
     .input-group-addon{
       font-family: 'Baloo', cursive;
       background: none;
@@ -13,5 +18,15 @@ REGISTRATION WIDGET
       font-size: 17px;
       padding: 7.5px;
     }
+  }
+}
+.sign-up-completed{
+  h1{
+    margin-top: 0;
+  }
+  h2{
+    font-size: 14px;
+    color: #4D2423;
+    font-family: 'Baloo', cursive;
   }
 }

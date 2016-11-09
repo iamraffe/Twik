@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title><%= "#{current_account.subdomain} | " unless current_account.nil? %>Twik</title>
+  <%= favicon_link_tag 'twik-robot-red.ico' %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% if !current_account.nil? %>
+    <header>
+      <nav class="navbar navbar-default">
+        <div class="container-full">
+          <div class="navbar-header">
+            <%= link_to root_path, class: "navbar-brand twik" do %>
+              <%= image_tag "twik-logo-word-only-red.png", class: "img-responsive" %>
+            <% end %>
+          </div>
+          <div class="current-account">
+            <p class="navbar-text"><%= current_account.subdomain %>.twik.us</a></p>
+          </div>
+          <% if user_signed_in? %>
+            <ul class="navbar-right nav navbar-nav right-buttons">
+              <li><%= link_to "Menus", menus_path %></li>
+              <li><%= link_to "Team", users_path %></li>
+              <li><%= link_to "Log out", destroy_user_session_path, method: 'delete', class: "" %></li>
+            </ul>
+          <% end %>
+        </div>
+      </nav>
+    </header>
+  <% else %>
+    <header class="container">
+      <div class="row accounts-logo-wrapper">
+        <div class="col-sm-5 col-sm-offset-3">
+          <%= image_tag "twik-logo-horizontal-red.png", class: "landing-logo img-responsive" %>
+        </div>
+      </div>
+    </header>
+  <% end %>
+  <section class="container" id="main-container">
+    <%= flash_messages if show_layout_flash? %>
+    <%= yield %>
+  </section>
+  <% if user_signed_in? %>
+    <footer id="main-footer" class="layout-footer container">
+      <hr>
+      <h1>&copy; Twik, 2016</h1>
+    </footer>
+  <% end %>
+  <div id="loader-wrapper" class="hide">
+    <div id="loader">
+      <div id="top"></div>
+      <div id="bottom"></div>
+      <div id="line"></div>
+    </div>
+  </div>
+  <%= javascript_include_tag 'application' %>
+</body>
+</html>
