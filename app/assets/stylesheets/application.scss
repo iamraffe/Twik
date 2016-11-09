@@ -1,8 +1,11 @@
 //Import bootstrap-sprockets
 @import "bootstrap-sprockets";
+$brand-primary: #f6303e !default;
 
 // Import cosmo variables
-@import "bootswatch/superhero/variables";
+@import "bootswatch/cosmo/variables";
+
+
 
 // Then bootstrap itself
 @import "bootstrap";
@@ -11,9 +14,13 @@
 // body { padding-top: 60px; }
 
 // And finally bootswatch style itself
-@import "bootswatch/superhero/bootswatch";
+@import "bootswatch/cosmo/bootswatch";
 @import "animate";
+@import "toastr/toastr";
 
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-@import url(https://fonts.googleapis.com/css?family=Gochi+Hand);
-@import url(https://fonts.googleapis.com/css?family=Oswald:400,700,300);
+@import url(https://fonts.googleapis.com/css?family=Baloo);
+
+//Twik Files
+
+@import 'components';
+@import 'accounts';

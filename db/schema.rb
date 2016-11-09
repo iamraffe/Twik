@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20161028003943) do
     t.datetime "updated_at",                          null: false
     t.string   "name"
     t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20161028003943) do
     t.integer  "invited_by_id"
     t.integer  "invitations_count",      default: 0
     t.integer  "role"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
     t.index ["invitations_count"], name: "index_users_on_invitations_count", using: :btree

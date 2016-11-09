@@ -12,7 +12,7 @@ class Account < ActiveRecord::Base
 
   belongs_to :owner, class_name: "User"
 
-  validates :owner, presence: true
+  validates :owner, presence: {message: "Owner can't be blank!"}
 
   accepts_nested_attributes_for :owner
 

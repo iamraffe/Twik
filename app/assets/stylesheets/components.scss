@@ -1,0 +1,28 @@
+.landing-logo{
+  max-height: 175px;
+}
+
+.btn{
+  // font-weight: bold !important;
+  font-family: 'Baloo', cursive !important;
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder { @content }
+  &:-moz-placeholder { @content }
+  &::-moz-placeholder { @content }
+  &:-ms-input-placeholder { @content }
+}
+
+input.form-control{
+  border: none;
+  // padding: 0;
+  color: $brand-primary;
+  line-height: 1;
+  background: #4D2423;
+  height: 35px;
+
+  @include placeholder{
+    color: $brand-primary !important;
+  }
+}

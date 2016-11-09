@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:new, :create]
+  skip_before_action :authenticate_user!, only: [:new, :create, :check]
 
   def new
     @account = Account.new
@@ -12,12 +12,16 @@ class AccountsController < ApplicationController
       Apartment::Tenant.create(@account.subdomain)
       Apartment::Tenant.switch!(@account.subdomain)
       @account.save
-      @account.owner.role =  "owner"
+      @account.owner.role = "owner"
       @account.owner.save
-      redirect_to new_user_session_url(subdomain: @account.subdomain)
+      render json: @account.to_json
     else
-      render action: "new"
+      render json: {errors: @account.errors, status: 400, ok: false}, :status => :bad_request
     end
+  end
+
+  def check
+    render json: Account.where(subdomain: params[:subdomain]).count
   end
 
   private

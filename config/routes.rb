@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   constraints(Subdomain) do
     root "menus#index", as: :subdomain_root
-    devise_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations" }
+    as :user do
+        match '/user/confirmation' => 'users/confirmations#update', :via => :patch, :as => :update_user_confirmation
+    end
+    devise_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations", :confirmations => "users/confirmations" }
     resources :users, only: [:index, :destroy, :update]
     resources :menus do
       post "/export", to: "menus#export"
@@ -14,7 +17,7 @@ Rails.application.routes.draw do
 
   constraints(PublicAccess) do
     root "accounts#new"
-
+    get '/accounts/verify', to: "accounts#check"
     resources :accounts
   end
 end

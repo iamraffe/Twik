@@ -1,50 +1,11 @@
-<section id="account-new" class="register-account">
-  <div class="col-md-12 panel panel-default panel-lg">
-    <div class="panel-body">
-      <div class="row">
-        <heaader class="col-md-6 intro">
-          <section>
-            <h1 class="greeting">design. done.</h1>
-          </section>
-          <footer>
-            <h1 class="greeting" style="text-align: right">we are <%= image_tag "twik-logo-vertical-red.png", style: "height: 150px;vertical-align: -15px;" %></h1>
-          </footer>
-        </heaader>
-
-        <footer class="col-md-6">
-          <h1>Create an Account</h1>
-
-          <%= form_for @account do |f| %>
-            <div class="row">
-              <%= f.fields_for :owner do |o| %>
-                <%= form_group_for o, :name do %>
-                  <%= o.text_field :name, class:"form-control" %>
-                <% end %>
-                <%= form_group_for o, :email do %>
-                  <%= o.email_field :email, class:"form-control" %>
-                <% end %>
-                <%= form_group_for o, :password do %>
-                  <%= o.password_field :password, class:"form-control" %>
-                <% end %>
-                <%= form_group_for o, :password_confirmation do %>
-                  <%= o.password_field :password_confirmation, class:"form-control" %>
-                <% end %>
-              <% end %>
-            </div>
-            <div class="row">
-              <%= form_group_for f, :subdomain do %>
-                <div class="input-group">
-                  <%= f.text_field :subdomain, class:"form-control" %>
-                  <span class="input-group-addon">.menustyler.com</span>
-                </div>
-              <% end %>
-            </div>
-            <div class="row">
-              <%= f.submit class: "btn btn-primary" %>
-            </div>
-          <% end %>
-        </footer>
-      </div>
-    </div>
-  </div>
+<section id="account-new" class="register-account row">
+  <header class="col-sm-4 col-sm-offset-4">
+    <h1>Welcome to Twik!</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc augue ex, feugiat eget rhoncus eget, finibus sit amet nibh. Pellentesque vitae sagittis velit. Fusce risus nisi, ultricies non vulputate scelerisque, luctus id mauris. Maecenas congue elit at ante faucibus consectetur. Duis aliquam tincidunt ligula ut dignissim. In commodo nibh ac rhoncus bibendum. Integer scelerisque magna libero, nec lobortis nunc pharetra eget.    
+    </p>
+   </header>
+   <section class="account-auth col-sm-4 col-sm-offset-4">
+     <%= client("RegistrationWidget", 'ccount-registration-widget', {}) %>
+   </section>
 </section>
