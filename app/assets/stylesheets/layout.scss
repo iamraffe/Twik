@@ -1,0 +1,29 @@
+@import "header/navbar.scss";
+
+/*
+
+FOOTER
+
+ */
+
+.layout-footer {
+  hr{
+    border-color: $brand-primary !important;
+    margin-bottom: 0px;
+  }
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  // padding: 1rem;
+  // background-color: #efefef;
+  h1{
+    text-align: center;
+    font-family: 'Baloo', cursive;
+    font-size: 14px;
+    color: $brand-default;
+    margin-bottom: 10px;
+    margin-top: 12.5px;
+  }
+}

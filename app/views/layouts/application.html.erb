@@ -8,34 +8,38 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if !current_account.nil? %>
-    <header>
-      <nav class="navbar navbar-default">
-        <div class="container">
+  <header>
+    <nav class="navbar navbar-default">
+      <div class="container-full">
+        <div class="col-md-12">
           <div class="navbar-header">
             <%= link_to root_path, class: "navbar-brand twik" do %>
-              <%= image_tag "twik-logo.png", class: "img-responsive" %>
+              <%= image_tag "twik-logo-word-only-red.png", class: "img-responsive" %>
             <% end %>
           </div>
-          <% if user_signed_in? %>
-            <ul class="navbar-right nav navbar-nav right-buttons">
-              <li><%= link_to "Menus", menus_path %></li>
-              <li><%= link_to "Team", users_path %></li>
-              <li><%= link_to "Log out", destroy_user_session_path, method: 'delete', class: "" %></li>
-            </ul>
+          <% unless current_account.nil? %>
+            <div class="current-account">
+              <p class="navbar-text"><%= current_account.subdomain %>.twik.us</a></p>
+            </div>
           <% end %>
         </div>
-      </nav>
-    </header>
-  <% else %>
-    <header class="container">
-      <div class="row accounts-logo-wrapper">
-        <div class="col-sm-5 col-sm-offset-3">
-          <%= image_tag "twik-logo-horizontal-red.png", class: "landing-logo img-responsive" %>
-        </div>
       </div>
-    </header>
-  <% end %>
+    </nav>
+    <nav class="navbar navigation-actions">
+      <ul class="nav navbar-nav action-navbar">
+        <% if user_signed_in? %>
+          <li><%= link_to "Create Menu", new_menu_path %> <span class="nav-separator">|</span></li>
+          <li><%= link_to "Manage Team", users_path %> <span class="nav-separator">|</span></li>
+          <li><%= link_to "Search", '#' %> <span class="nav-separator">|</span></li>
+          <li><%= link_to "Log out", destroy_user_session_path, method: 'delete', class: "" %></li>
+        <% else %>
+          <li><%= link_to "About Us", new_menu_path %> <span class="nav-separator">|</span></li>
+          <li><%= link_to "Pricing", users_path %> <span class="nav-separator">|</span></li>
+          <li><%= link_to "Log In", '#' %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </header>
   <section class="container" id="main-container">
     <%= flash_messages if show_layout_flash? %>
     <%= yield %>

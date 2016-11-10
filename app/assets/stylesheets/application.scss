@@ -15,11 +15,13 @@
 // And finally bootswatch style itself
 @import "bootswatch/cosmo/bootswatch";
 @import "animate";
-@import "toastr/toastr";
+@import "lib/toastr/toastr";
 
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 @import url(https://fonts.googleapis.com/css?family=Baloo);
 
 //Twik Files
-@import 'header/navbar';
+@import 'layout';
+@import 'views';
 @import 'components';
-@import 'accounts';
+

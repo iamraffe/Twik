@@ -1,0 +1,20 @@
+.dashboard{
+  &.fresh-user{
+    margin-top: 125px;
+    header{
+      img{
+        width: 125px;
+        margin: 0 auto;
+      }
+    }
+    h1, h2{
+      font-family: 'Baloo', cursive;
+      font-size: 50px;
+      line-height: 30px;
+      color: $brand-primary;
+    }
+    a{
+      margin-top: 25px;
+    }
+  }
+}

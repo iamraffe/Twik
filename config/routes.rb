@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   constraints(Subdomain) do
-    root "menus#index", as: :subdomain_root
+    root "pages#dashboard", as: :subdomain_root
     
     as :user do
         match '/user/confirmation' => 'users/confirmations#update', :via => :patch, :as => :update_user_confirmation

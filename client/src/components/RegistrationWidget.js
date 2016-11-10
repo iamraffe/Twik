@@ -4,6 +4,7 @@ import getFormData from 'get-form-data'
 
 import API from '../api/api'
 import '../styles/registration_widget.scss'
+import twikLogoSrc from '../images/twik-logo-horizontal-red.png';
 
 class RegistrationWidget extends React.Component{
   constructor(props){
@@ -48,11 +49,11 @@ class RegistrationWidget extends React.Component{
           completed: true,
           toggleSignUp: false
         })
-        toastr.success("Please check your email for instructions", "You're account has been created!")
+        toastr.success("Please check your email for instructions", "You're account has been created!", {positionClass: "toast-top-center"})
       })
     }
     else{
-      toastr.error("Please check and try again", "Oops! Email field can't be blank")
+      toastr.error("Please check and try again", "Oops! Email field can't be blank", {positionClass: "toast-top-center"})
     }
   }
 
@@ -65,7 +66,7 @@ class RegistrationWidget extends React.Component{
       return response.json()
     }).then((json) => {
       if(json !== 0){
-        toastr.error('Looks like that subdomain has already been taken been taken', 'Darn it!')
+        toastr.error('Looks like that subdomain has already been taken been taken', 'Darn it!', {positionClass: "toast-top-center"})
       }
       else{
         this.setState({
@@ -73,7 +74,7 @@ class RegistrationWidget extends React.Component{
         })
       }
     }).catch((ex) => {
-      toastr.error(ex)
+      toastr.error(ex, '', {positionClass: "toast-top-center"})
     })
   }
 
@@ -82,39 +83,31 @@ class RegistrationWidget extends React.Component{
 
     return(
       <div>
-        {!toggleSignUp && !completed &&
-          <div className="action-buttons">
-            <button className="btn btn-primary btn-block">Log In!</button>
-            <button className="btn btn-primary btn-block" onClick={(e) => {this.onToggleSignUp()}}>Sign Up</button>
-          </div>
-        }
-        {toggleSignUp &&
-          <div className="sign-up-form">
-            <form onSubmit={this.onSignUp}>
-              <header>
-                <h1>Sign up, yeah?</h1>
-              </header>
-              <div className="row form-group">
-                <div className="col-xs-12">
-                  <div className="input-group">
-                    <input type="text" className="form-control" name="subdomain" placeholder="subdomain" onBlur={this.verifySubdomain} autoFocus={true} />
-                    <div className="input-group-addon text-primary">.twik.us</div>
-                  </div>
+        <div className="col-md-4">
+          <img src="/assets/twik-logo-horizontal-red.png" alt="Twik Logo" className="img-responsive"/>
+        </div>
+        <div className="sign-up-form col-md-8">
+          <form onSubmit={this.onSignUp}>
+            <div className="row form-group">
+              <div className="col-xs-12">
+                <div className="input-group">
+                  <input type="text" className="form-control" name="subdomain" placeholder="subdomain" onBlur={this.verifySubdomain} autoFocus={true} />
+                  <div className="input-group-addon text-primary">.twik.us</div>
                 </div>
               </div>
-              <div className="row form-group">
-                <div className="col-xs-12">
-                  <input type="email" placeholder="your email address" name="email" className="form-control" />
-                </div>
+            </div>
+            <div className="row form-group">
+              <div className="col-xs-12">
+                <input type="email" placeholder="your email address" name="email" className="form-control" />
               </div>
-              <div className="row">
-                <div className="col-xs-12">
-                  <button className="btn btn-primary btn-block" disabled={!canSubmit}>Let's go</button>
-                </div>
+            </div>
+            <div className="row">
+              <div className="col-xs-12">
+                <button className="btn btn-primary btn-block" disabled={!canSubmit}>Let's go</button>
               </div>
-            </form>
-          </div>
-        }
+            </div>
+          </form>
+        </div>
         {completed && 
           <section className="sign-up-completed">
             <header>

@@ -1,0 +1,26 @@
+/*
+
+SHOW
+
+ */
+
+.finish-registration{
+  margin-top: 175px;
+
+  img{
+    max-height: 250px;
+    margin: 0 auto;
+  }
+  form{
+    header{
+      h1{
+        font-family: 'Baloo', cursive;
+        font-size: 14px;
+
+        .user-email{
+          color: $brand-primary;
+        }
+      }
+    }
+  }
+}

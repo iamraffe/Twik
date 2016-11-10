@@ -2,7 +2,7 @@
   <header class="col-sm-4 col-sm-offset-2">
     <%= image_tag "twik-logo-horizontal-red.png", class: "img-responsive" %>
   </header>
-  <div class="col-sm-4 finish-registration-form-wrapper">s
+  <div class="col-sm-4 finish-registration-form-wrapper">
     <%= form_for @user, :url => update_user_confirmation_path({confirmation_token: @user.confirmation_token}), :html => { :method => :patch } do |f| %>
       <header>
         <h1>Welcome <span class="user-email"><%= @user.email %></span></h1>

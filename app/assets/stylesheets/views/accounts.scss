@@ -1,0 +1,42 @@
+/*
+
+ACCOUNTS - NEW
+
+ */
+
+.accounts-logo-wrapper{
+  img{
+    margin-left: 25px;
+    margin-top: 35%;
+  } 
+}
+.register-account{
+  margin-top: 125px;
+
+  > header{
+    margin-bottom: 100px;
+
+    h1{
+      font-size: 45px;
+      color: $brand-primary;
+      font-family: 'Baloo', cursive;
+      text-align: center;
+    }
+  }
+
+
+  p{
+    color: #4D2423;
+    font-size: 12px;
+    font-family: Open Sans;
+    line-height: 1.25;
+  }  
+}
+
+.account-auth{
+  .action-buttons{
+    button{
+      margin-bottom: 15px;
+    }
+  }
+}

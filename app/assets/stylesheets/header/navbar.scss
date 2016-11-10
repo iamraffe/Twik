@@ -6,11 +6,12 @@ HEADER
 
 .navbar-default{
   height: 75px;
-  border-bottom: 5px solid red;
+  border-bottom: 5px solid $brand-primary;
+  margin-bottom: 0;
+
   .navbar-header{
     // margin-left: 25px;
   }
-
   .navbar-brand{
       float: left;
       padding: 0 50px;
@@ -31,6 +32,38 @@ HEADER
       font-family: 'Baloo', cursive;
       margin-top: 40px;
       margin-right: 40px;
+    }
+  }
+}
+
+.navigation-actions{
+  width: 100%;
+  background: $brand-primary;
+  height: 32.5px;
+  min-height: 0;
+  
+  .nav{
+    float: right;
+    margin-right: 52.5px;
+
+    li{
+      a{
+        color: white;
+        font-family: 'Baloo', cursive;
+        margin: 0;
+        padding: 0;
+        display: inline;
+
+        &:hover, &:focus{
+          background: transparent;
+          text-decoration: underline;
+          outline: none !important;
+        }
+      }
+      .nav-separator{
+        margin-right: 10px;
+        margin-left: 10px;
+      }
     }
   }
 }
