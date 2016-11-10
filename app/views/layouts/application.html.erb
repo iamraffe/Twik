@@ -31,6 +31,7 @@
           <li><%= link_to "Create Menu", new_menu_path %> <span class="nav-separator">|</span></li>
           <li><%= link_to "Manage Team", users_path %> <span class="nav-separator">|</span></li>
           <li><%= link_to "Search", '#' %> <span class="nav-separator">|</span></li>
+          <li><%= link_to "Subscription", new_subscription_path %> <span class="nav-separator">|</span></li>
           <li><%= link_to "Log out", destroy_user_session_path, method: 'delete', class: "" %></li>
         <% else %>
           <li><%= link_to "About Us", new_menu_path %> <span class="nav-separator">|</span></li>

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
     devise_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations", :confirmations => "users/confirmations" }
     resources :users, only: [:index, :destroy, :update]
+    resources :subscriptions, only: [:new, :create]
+
     resources :menus do
       post "/export", to: "menus#export"
       resources :uploads
