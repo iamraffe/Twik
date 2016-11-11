@@ -4,16 +4,15 @@ import getFormData from 'get-form-data'
 
 import API from '../api/api'
 import '../styles/registration_widget.scss'
-import twikLogoSrc from '../images/twik-logo-horizontal-red.png';
 
 class RegistrationWidget extends React.Component{
   constructor(props){
     super(props)
-    
+
     this.state = {
-      toggleSignUp: false, 
-      canSubmit: false, 
-      completed: false, 
+      toggleSignUp: false,
+      canSubmit: false,
+      completed: false,
       guessWhat: false
     }
   }
@@ -84,7 +83,7 @@ class RegistrationWidget extends React.Component{
     return(
       <div>
         <div className="col-md-4">
-          <img src="/assets/twik-logo-horizontal-red.png" alt="Twik Logo" className="img-responsive"/>
+          <img src={this.props.logo} alt="Twik Logo" className="img-responsive"/>
         </div>
         <div className="sign-up-form col-md-8">
           <form onSubmit={this.onSignUp}>
@@ -108,7 +107,7 @@ class RegistrationWidget extends React.Component{
             </div>
           </form>
         </div>
-        {completed && 
+        {completed &&
           <section className="sign-up-completed">
             <header>
               <h1>Awesome!</h1>

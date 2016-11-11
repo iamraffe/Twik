@@ -12,8 +12,4 @@ module LayoutHelper
   def show_layout_flash?
     @layout_flash.nil? ? true : @layout_flash
   end
-
-  def video_background
-    ["/videos/mock_up.mp4", "/videos/sketching.mp4"].sample
-  end
 end
