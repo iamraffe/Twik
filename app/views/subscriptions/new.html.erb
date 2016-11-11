@@ -1,76 +1,52 @@
-<!-- <div class="row">
-  <div class="col-md-4 col-md-offset-4">
-    <%= javascript_include_tag "https://js.stripe.com/v2/" %>
-
-    <%= form_tag subscriptions_path, method: 'POST' do %>
-      <% if flash[:error].present? %>
-        <div id="error_explanation">
-          <p><%= flash[:error] %></p>
-        </div>
-      <% end %>
-      <input type="hidden" name="plan_token" value="3290">
-      <div class="row">
-        <div class="col-xs-5">
-          <label>
-            <span>Expiration (MM/YY)</span>
-          </label>
-        </div>
-        <div class="col-xs-3">
-          <input class="form-control" type="text" size="2" data-stripe="exp_month" placeholder="MM"> 
-        </div>
-        <div class="col-xs-1">
-          <span> / </span>
-        </div>
-        <div class="col-xs-3">
-          <input class="form-control" type="text" size="2" data-stripe="exp_year" placeholder="YY">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-9" style="text-align: right;">
-          <label>
-            <span>CVC</span>
-          </label>
-        </div>
-        <div class="col-xs-3">
-          <input class="form-control" type="text" size="4" data-stripe="cvc">
-        </div>
-      </div>
-
-      <div class="row">
-        <input type="submit" class="btn btn-primary btn-block" value="Submit Payment">
-      </div>
-    <% end %>    
+<%= form_tag subscriptions_path, method: 'POST', :id => 'new-subscriptions-form' do %>
+<% if flash[:error].present? %>
+  <div id="error_explanation">
+    <p><%= flash[:error] %></p>
   </div>
-</div> -->
-<section id="course-content">
-  <section id="ruby">
-    <section class="detailed-syllabus">
-      <div class="wrapper-inside">
-        <%= form_tag subscriptions_path, method: 'POST' do %>
-          <div id="flash-messages"></div>
-          <%= javascript_include_tag "https://js.stripe.com/v2/" %>
-          <input type="hidden" name="plan_token" value="3290">
-          <%= label_tag "Card Number", nil, required: true %>
-          <div class="control-group">
-            <div class="controls">
-              <%= text_field_tag :card_number, nil, class: "input-block-level", data: {stripe: "number"} %>
-            </div>
-          </div>
-          <%= label_tag "CVC", nil, required: true %>
-          <div class="control-group">
-            <div class="controls">
-              <%= text_field_tag :card_verification, nil, class: "input-block-level", data: {stripe: "cvc"} %>
-            </div>
-          </div>
-          <%= label_tag "Card Expires", nil, required: true %>
-          <%= select_tag :exp_month, options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: false, data: {stripe: "exp-month"}, class: "span2" %>
-          <%= select_tag :exp_year, options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, data: {stripe: "exp-year"}, class: "span1" %>
-          <div class="actions">
-            <input type="submit" class="btn btn-primary btn-block" value="Submit Payment">
-          </div>
-        <% end %>
-      </div>
-    </section>
-  </section>
-</section>
+<% end %>
+<input type="hidden" name="plan_token" value="3290">
+<%= hidden_field_tag 'stripeToken' %>
+<%= hidden_field_tag 'stripeEmail' %>
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<button id="customButton" class="btn btn-primary" data-plan="3290">I want my subscription</button>
+
+<script>
+var handler = StripeCheckout.configure({
+  key: "<%= Rails.configuration.stripe[:publishable_key] %>",
+  image: "<%= asset_path 'twik-robot-red.png' %>",
+  locale: 'auto',
+  // color: 'black',
+  email: "<%= current_user.email %>",
+  token: function(token, args) {
+    document.getElementById("stripeToken").value = token.id;
+    document.getElementById("stripeEmail").value = token.email;
+    document.getElementById("new-subscriptions-form").submit();
+  }
+  // token: function(token) {
+
+    // var $input = $('<input type=hidden name=stripeToken />').val(token.id);
+    // var emailInput = $("<input type=hidden name=stripeEmail />").val(token.email);
+    // $('form').append($input).append(emailInput).submit();
+    // debugger;
+    // You can access the token ID with `token.id`.
+    // Get the token ID to your server-side code for use.
+  // }
+});
+
+document.getElementById('customButton').addEventListener('click', function(e) {
+  // Open Checkout with further options:
+  handler.open({
+    name: 'Twik',
+    description: 'Basic subscription',
+    amount: 999,
+  });
+  e.preventDefault();
+});
+
+// Close Checkout on page navigation:
+window.addEventListener('popstate', function() {
+  handler.close();
+});
+</script>
+<% end %>
