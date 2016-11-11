@@ -43,8 +43,9 @@ input.form-control{
   // padding: 0;
   color: $brand-primary;
   line-height: 1;
-  background: #4D2423;
+  border-bottom: 1px solid #4D2423;
   height: 35px;
+  box-shadow: none;
 
   @include placeholder{
     color: $brand-primary !important;
@@ -54,6 +55,8 @@ input.form-control{
 .form-control:focus {
     border-color: lighten($brand-primary, 5%);
     outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px lighten($brand-primary, 10%);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px lighten($brand-primary, 10%);
+    -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075), 0 5px 6px -6px #f8616c;
+    box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075), 0 5px 6px -6px #f8616c;
+    // -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px lighten($brand-primary, 10%);
+    // box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px lighten($brand-primary, 10%);
 }
