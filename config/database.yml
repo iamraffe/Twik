@@ -1,4 +1,4 @@
-# PostgreSQL. Versions 9.1 and up are supported.
+# PostgreSQL. Versions 8.2 and up are supported.
 #
 # Install the pg driver:
 #   gem install pg
@@ -14,22 +14,22 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
-default: &default
-  adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   # For details on connection pooling, see rails configuration guide
+#   # http://guides.rubyonrails.org/configuring.html#database-pooling
+#   pool: 5
 
-development:
-  <<: *default
-  database: twik_development
+# development:
+#   <<: *default
+#   database: twik-saas_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: twik
+  #username: twik-saas
 
   # The password associated with the postgres role (username).
   #password:
@@ -55,9 +55,9 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: twik_test
+# test:
+#   <<: *default
+#   database: twik-saas_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -78,8 +78,42 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
+# production:
+#   <<: *default
+#   database: twik-saas_production
+#   username: twik-saas
+#   password: <%= ENV['TWIK-SAAS_DATABASE_PASSWORD'] %>
+
+
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+  host: localhost
+  username: pguser
+  password: 5862
+
+development:
   <<: *default
-  database: twik_production
-  username: twik
-  password: <%= ENV['TWIK_DATABASE_PASSWORD'] %>
+  database: twik-saas_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: twik-saas_test
+
+production:
+  adapter: postgresql
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+  encoding: unicode
+  username: <%= ENV["PGUSER"] %>
+  password: <%= ENV["PGPASSWORD"] %>
+  database: <%= ENV["PGDATABASE"] %>
+  host: localhost
