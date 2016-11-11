@@ -15,7 +15,8 @@ class Canvas extends React.Component{
       zoom: props.zoom,
       structure: props.menu.structure,
       colors: props.menu.colors,
-      fonts: props.menu.fonts
+      fonts: props.menu.fonts,
+      styles: props.menu.styles
     }
   }
 
@@ -25,7 +26,8 @@ class Canvas extends React.Component{
       height: PAPER_SIZES[`${nextProps.size.toUpperCase()}_${nextProps.orientation.toUpperCase()}`].height,
       structure: nextProps.menu.structure,
       colors: nextProps.menu.colors,
-      fonts: nextProps.menu.fonts
+      fonts: nextProps.menu.fonts,
+      styles: nextProps.menu.styles
     })
   }
 
@@ -40,9 +42,34 @@ class Canvas extends React.Component{
     })
   }
 
-  getAttribute = (attr, key) => {
-    console.log(attr, key, this.state[attr][key])
+  getAttribute = (key, attr) => {
+    // console.log(attr,key)
+    // debugger;
+    // console.log(attr, key, this.state[attr+'s'][key])
     return this.state[attr][key]
+  }
+
+  getStyles = (elementType) => {
+    const { styles } = this.state
+    const obj = Object.assign({}, styles)
+    console.log(styles[elementType])
+    // console.log(_.map(styles[elementType], (key, attr) => {
+    //   return this.getAttribute(attr, key)
+    // }))
+    // debugger;
+    // // styles[elementType] // {
+    // //   font: 'primary_font',
+    // //   color: 'color_1',
+    // // }
+    
+    _.each(styles[elementType], (key, index) => {
+      let isFont = key.includes("_font")
+      let attr = isFont ? "fonts" : "colors"
+      obj[elementType][index] = (key.includes("_font") ? this.getAttribute(key, attr) : '#'+this.getAttribute(key, attr))
+    })
+    console.log(obj)
+    // debugger;
+    return obj[elementType]
   }
 
   render(){
@@ -62,7 +89,7 @@ class Canvas extends React.Component{
               <LayoutElement
                 key={i}
                 {...struct}
-                getAttribute={this.getAttribute}
+                getAttribute={this.getStyles}
               />
             )
           })}      
