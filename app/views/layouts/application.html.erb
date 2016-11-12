@@ -41,12 +41,12 @@
       </ul>
     </nav>
   </header>
-  <section class="container" id="main-container">
+  <section class="container-full" id="main-container">
     <%= flash_messages if show_layout_flash? %>
     <%= yield %>
   </section>
   <% if user_signed_in? %>
-    <footer id="main-footer" class="layout-footer container">
+    <footer id="main-footer" class="layout-footer container hide">
       <hr>
       <h1>&copy; Twik, 2016</h1>
     </footer>

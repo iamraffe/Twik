@@ -7,29 +7,31 @@ class MenuTitle extends React.Component{
 
     this.state = {
       content: props.content,
-      styles: props.getAttribute('menu_title')
+      styles: props.getStyles('menu_title')
     }
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      content: nextProps.content
+      content: nextProps.content,
+      styles: nextProps.getStyles('menu_title')
     })
   }
 
-  styleElements = () => {
-    const { styles } = this.state
-    return {
-      fontFamily: styles["font"],
-      color: styles["color"],
-    }
-  }
+  // styleElements = () => {
+  //   const { styles } = this.state
+  //   return {
+  //     fontFamily: styles["font"],
+  //     color: styles["color"],
+  //   }
+  // }
 
   render(){
     const { content, styles } = this.state
+    console.log(styles)
     return (
       <div className="menu-title-element">
-        <h1 className="content" style={{...this.styleElements()}}>
+        <h1 className="content" style={styles}>
           { content }
         </h1>
       </div>

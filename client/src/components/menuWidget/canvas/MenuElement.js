@@ -8,7 +8,7 @@ class MenuElement extends React.Component{
     super(props)
 
     this.state = {}
-    this.getAttribute = props.getAttribute
+    this.getStyles = props.getStyles
   }
 
   componentWillReceiveProps(nextProps){
@@ -26,7 +26,7 @@ class MenuElement extends React.Component{
           <MenuTitle
             content={this.props.content}
             style={this.props.style}
-            getAttribute={this.getAttribute}
+            getStyles={this.getStyles}
           />
         )
       case "DISH":
@@ -36,7 +36,7 @@ class MenuElement extends React.Component{
             description={this.props.description}
             price={this.props.price}
             style={this.props.style}
-            getAttribute={this.getAttribute}
+            getStyles={this.getStyles}
           />
         )
       default:

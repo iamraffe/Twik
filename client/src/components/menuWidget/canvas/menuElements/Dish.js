@@ -9,22 +9,28 @@ class Dish extends React.Component{
       title: props.title,
       description: props.description,
       price: props.price,
-      styles: props.getAttribute('dish')
+      styles: {
+        title: props.getStyles('dish_title'),
+        description: props.getStyles('dish_description'),
+        price: props.getStyles('dish_price')
+      }
     }
   }
 
   componentWillReceiveProps(nextProps){
+    this.setState({
+      title: nextProps.title,
+      description: nextProps.description,
+      price: nextProps.price,
+      styles: {
+        title: nextProps.getStyles('dish_title'),
+        description: nextProps.getStyles('dish_description'),
+        price: nextProps.getStyles('dish_price')
+      }
+    })
   }
 
   componentDidMount(){
-  }
-
-  styleElements = (element) => {
-    const { styles } = this.state
-    return {
-      fontFamily: styles[element+"_font"],
-      color: styles[element+"_color"],
-    }
   }
 
   render(){
@@ -32,9 +38,9 @@ class Dish extends React.Component{
 
     return (
       <article className="dish-element">
-        <h1 className="title" style={{...this.styleElements('title')}}>{title}</h1>
-        <p className="description" style={{...this.styleElements('description')}}>{description}</p>
-        <h2 className="price" style={{...this.styleElements('price')}}>{price}</h2>
+        <h1 className="title" style={styles.title}>{title}</h1>
+        <p className="description" style={styles.description}>{description}</p>
+        <h2 className="price" style={styles.price}>{price}</h2>
       </article>
     )
   }

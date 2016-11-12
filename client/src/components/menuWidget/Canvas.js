@@ -15,7 +15,7 @@ class Canvas extends React.Component{
       zoom: props.zoom,
       structure: props.menu.structure,
       colors: props.menu.colors,
-      fonts: props.menu.fonts,
+      fontFamilies: props.menu.fontFamilies,
       styles: props.menu.styles
     }
   }
@@ -26,7 +26,7 @@ class Canvas extends React.Component{
       height: PAPER_SIZES[`${nextProps.size.toUpperCase()}_${nextProps.orientation.toUpperCase()}`].height,
       structure: nextProps.menu.structure,
       colors: nextProps.menu.colors,
-      fonts: nextProps.menu.fonts,
+      fontFamilies: nextProps.menu.fontFamilies,
       styles: nextProps.menu.styles
     })
   }
@@ -36,40 +36,24 @@ class Canvas extends React.Component{
   componentDidMount(){
   }
 
-  onZoom = (e) => {
+  onZoom = (amount) => {
     this.setState({
-      zoom: e.target.value
+      zoom: this.state.zoom+amount
     })
-  }
-
-  getAttribute = (key, attr) => {
-    // console.log(attr,key)
-    // debugger;
-    // console.log(attr, key, this.state[attr+'s'][key])
-    return this.state[attr][key]
   }
 
   getStyles = (elementType) => {
-    const { styles } = this.state
-    const obj = Object.assign({}, styles)
-    console.log(styles[elementType])
-    // console.log(_.map(styles[elementType], (key, attr) => {
-    //   return this.getAttribute(attr, key)
-    // }))
-    // debugger;
-    // // styles[elementType] // {
-    // //   font: 'primary_font',
-    // //   color: 'color_1',
-    // // }
-    
-    _.each(styles[elementType], (key, index) => {
-      let isFont = key.includes("_font")
-      let attr = isFont ? "fonts" : "colors"
-      obj[elementType][index] = (key.includes("_font") ? this.getAttribute(key, attr) : '#'+this.getAttribute(key, attr))
-    })
-    console.log(obj)
-    // debugger;
-    return obj[elementType]
+    const { styles, fontFamilies, colors, zoom } = this.state
+    return {
+      ...styles[elementType].extra,
+      fontSize: `${styles[elementType].extra.fontSize*zoom/100}pt`,
+      color: `#${colors[styles[elementType].color]}`,
+      fontFamily: fontFamilies[styles[elementType].fontFamily],
+    }
+  }
+
+  onDrag = (e) => {
+    console.log(e)
   }
 
   render(){
@@ -77,22 +61,37 @@ class Canvas extends React.Component{
 
     return (
       <div>
-        <input type="number" onChange={this.onZoom}/>
-        <div
-          style={{
-            border: '1px solid black',
-            width: (width*(zoom/100))+'in',
-            height: (height*(zoom/100))+'in'}}
-        >
-          {_.map(structure, (struct, i) => {
-            return(
-              <LayoutElement
-                key={i}
-                {...struct}
-                getAttribute={this.getStyles}
-              />
-            )
-          })}      
+        <div className="row" style={{maxHeight: 650, overflow: 'auto', maxWidth: '100%'}}>
+          <div
+            style={{
+              border: '1px solid black',
+              margin: '0 auto',
+              width: (width*(zoom/100))+'in',
+              height: (height*(zoom/100))+'in'}}
+              onDrag={this.onDrag}
+          >
+            {_.map(structure, (struct, i) => {
+              return(
+                <LayoutElement
+                  key={i}
+                  {...struct}
+                  getStyles={this.getStyles}
+                />
+              )
+            })}      
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-2 col-xs-offset-4">
+            <button onClick={(e) => {this.onZoom(-5)}}>
+              <span className="fa fa-minus"></span>
+            </button>
+          </div>
+          <div className="col-xs-2">
+            <button onClick={(e) => {this.onZoom(5)}}>
+              <span className="fa fa-plus"></span>
+            </button>
+          </div>
         </div>
       </div>
     )

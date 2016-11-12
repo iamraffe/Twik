@@ -16,7 +16,7 @@ class MenuWidget extends React.Component{
     // console.log(_.map(menuContent.fonts, (f) => {return f}))
     WebFont.load({
       google: {
-        families: _.map(menuContent.fonts, (f) => {return f})
+        families: _.map(menuContent.fontFamilies, (f) => {return f})
       }
     })
   }
@@ -24,14 +24,18 @@ class MenuWidget extends React.Component{
   render(){
     return(
       <div>
-        <TextPanel/>
         <div className="row">
-          <Canvas
-            size={"letter"}
-            orientation={'portrait'}
-            zoom={50}
-            menu={menuContent}
-          />
+          <div className="col-xs-9">
+            <Canvas
+              size={"letter"}
+              orientation={'portrait'}
+              zoom={50}
+              menu={menuContent}
+            />
+          </div>
+          <div className="col-xs-3">
+            <TextPanel/>
+          </div>
         </div>
       </div>
     )
@@ -52,23 +56,55 @@ const menuContent = {
     color_4: '',
     color_5: ''
   },
-  fonts: {
+  fontFamilies: {
     primary_font: 'Oswald',
     secondary_font: 'Roboto',
     alternate_font: ''
   },
   styles: {
     menu_title: {
-      font: 'primary_font',
-      color: 'color_1',
+      fontFamily: 'primary_font',
+      color: 'color_2',
+      extra: {
+        fontSize: 15,
+        textTransform: 'uppercase',
+        textDecoration: 'none',
+        fontWeight: 'bold',
+        fontStyle: 'normal'
+      }
     },
-    dish: {
-      title_font: 'primary_font',
-      description_font: 'primary_font',
-      price_font: 'primary_font',
-      title_color: 'color_1',
-      description_color: 'color_3',
-      price_color: 'color_2',
+    dish_title: {
+      fontFamily: 'primary_font',
+      color: 'color_1',
+      extra: {
+        fontSize: 12,
+        textTransform: 'uppercase',
+        textDecoration: 'underline',
+        fontWeight: 'bold',
+        fontStyle: 'normal',
+      }
+    },
+    dish_description: {
+      fontFamily: 'primary_font',
+      color: 'color_1',
+      extra: {
+        fontSize: 8,
+        textTransform: 'none',
+        textDecoration: 'none',
+        fontWeight: 'normal',
+        fontStyle: 'italic'
+      }
+    },
+    dish_price: {
+      fontFamily: 'primary_font',
+      color: 'color_1',
+      extra: {
+        fontSize: 10,
+        textTransform: 'uppercase',
+        textDecoration: 'none',
+        fontWeight: 'bold',
+        fontStyle: 'normal'
+      }
     }
   },
   structure: [
@@ -76,6 +112,7 @@ const menuContent = {
       type: 'CONTAINER',
       position: 0,
       background: '',
+      span: 1,
       padding: '15px 15px',
       elements: [
         {
@@ -100,7 +137,7 @@ const menuContent = {
           elements: [
             {
               type: "COLUMN",
-              span: 2,
+              span: 0.5,
               elements: [
                 {
                   type: "DISH",

@@ -8,7 +8,7 @@ class LayoutElement extends React.Component{
     super(props)
 
     this.state = {}
-    this.getAttribute = props.getAttribute
+    this.getStyles = props.getStyles
   }
 
   componentWillReceiveProps(nextProps){
@@ -30,7 +30,7 @@ class LayoutElement extends React.Component{
                   key={i}
                   padding={this.props.padding}
                   {...element}
-                  getAttribute={this.getAttribute}
+                  getStyles={this.getStyles}
                 />
               )
             })}
@@ -47,7 +47,7 @@ class LayoutElement extends React.Component{
                   key={i}
                   padding={this.props.padding}
                   {...element}
-                  getAttribute={this.getAttribute}
+                  getStyles={this.getStyles}
                 />
               )
             })}
@@ -56,14 +56,14 @@ class LayoutElement extends React.Component{
       case "COLUMN":
         return (
           <div
-            style={{width: (100/this.props.span)+"%", border: '1px solid green'}}
+            style={{width: (100*this.props.span)+"%", border: '1px solid green'}}
           >
             {_.map(this.props.elements, (element, i) => {
               return (
                 <MenuElement
                   key={i}
                   {...element}
-                  getAttribute={this.getAttribute}
+                  getStyles={this.getStyles}
                 />
               )
             })}
