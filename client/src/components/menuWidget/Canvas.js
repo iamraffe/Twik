@@ -1,45 +1,42 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import { PAPER_SIZES } from '../../lib/utils'
 
-import { LayoutElement } from './canvas'
+import { LayoutElement, ZoomUtility } from './canvas'
 
 class Canvas extends React.Component{
   constructor(props){
     super(props)
 
     this.state = {
-      width: PAPER_SIZES[`${props.size.toUpperCase()}_${props.orientation.toUpperCase()}`].width,
-      height: PAPER_SIZES[`${props.size.toUpperCase()}_${props.orientation.toUpperCase()}`].height,
+      width: PAPER_SIZES[`${props.meta.size.toUpperCase()}_${props.meta.orientation.toUpperCase()}`].width,
+      height: PAPER_SIZES[`${props.meta.size.toUpperCase()}_${props.meta.orientation.toUpperCase()}`].height,
       zoom: props.zoom,
-      structure: props.menu.structure,
-      colors: props.menu.colors,
-      fontFamilies: props.menu.fontFamilies,
-      styles: props.menu.styles
+      structure: props.structure,
+      colors: props.colors,
+      fontFamilies: props.fontFamilies,
+      styles: props.styles
     }
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      width: PAPER_SIZES[`${nextProps.size.toUpperCase()}_${nextProps.orientation.toUpperCase()}`].width,
-      height: PAPER_SIZES[`${nextProps.size.toUpperCase()}_${nextProps.orientation.toUpperCase()}`].height,
-      structure: nextProps.menu.structure,
-      colors: nextProps.menu.colors,
-      fontFamilies: nextProps.menu.fontFamilies,
-      styles: nextProps.menu.styles
+      width: PAPER_SIZES[`${nextProps.meta.size.toUpperCase()}_${nextProps.meta.orientation.toUpperCase()}`].width,
+      height: PAPER_SIZES[`${nextProps.meta.size.toUpperCase()}_${nextProps.meta.orientation.toUpperCase()}`].height,
+      structure: nextProps.structure,
+      colors: nextProps.colors,
+      fontFamilies: nextProps.fontFamilies,
+      styles: nextProps.styles,
+      zoom: nextProps.zoom
     })
   }
 
 
 
   componentDidMount(){
-  }
-
-  onZoom = (amount) => {
-    this.setState({
-      zoom: this.state.zoom+amount
-    })
   }
 
   getStyles = (elementType) => {
@@ -57,11 +54,11 @@ class Canvas extends React.Component{
   }
 
   render(){
-    const { width, height, zoom, menu, colors, fonts, structure } = this.state
+    const { width, height, zoom, colors, fonts, structure } = this.state
 
     return (
       <div>
-        <div className="row" style={{maxHeight: 650, overflow: 'auto', maxWidth: '100%'}}>
+        <div className="row" style={{height: 650, overflow: 'auto', maxWidth: '100%'}}>
           <div
             style={{
               border: '1px solid black',
@@ -75,24 +72,14 @@ class Canvas extends React.Component{
                 <LayoutElement
                   key={i}
                   {...struct}
+                  zoom={zoom}
                   getStyles={this.getStyles}
                 />
               )
             })}      
           </div>
         </div>
-        <div className="row">
-          <div className="col-xs-2 col-xs-offset-4">
-            <button onClick={(e) => {this.onZoom(-5)}}>
-              <span className="fa fa-minus"></span>
-            </button>
-          </div>
-          <div className="col-xs-2">
-            <button onClick={(e) => {this.onZoom(5)}}>
-              <span className="fa fa-plus"></span>
-            </button>
-          </div>
-        </div>
+        <ZoomUtility/>
       </div>
     )
   }
@@ -101,4 +88,21 @@ class Canvas extends React.Component{
 Canvas.propTypes = {
 }
 
-export default Canvas
+function mapStateToProps(state, ownProps){
+  // console.log(state)
+  return {
+    zoom: state.zoom,
+    fontFamilies: state.fontFamilies,
+    structure: state.structure,
+    meta: state.meta,
+    colors: state.colors,
+    styles: state.styles
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Canvas)

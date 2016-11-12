@@ -14,7 +14,7 @@ export default function configureStore(initialState) {
     // Add other middleware on this line...
     applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f // add support for Redux dev tools
-    )
+    ),
   )
 
   return store

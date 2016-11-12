@@ -2,39 +2,51 @@ import React, { PropTypes } from 'react'
 import _ from 'lodash'
 import request from 'superagent'
 import WebFont from 'webfontloader'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-import { TextPanel, Canvas } from './menuWidget'
+import { ToolPanel, Canvas } from './menuWidget'
 
 class MenuWidget extends React.Component{
   constructor(props){
     super(props)
 
-    this.state = {}
+    this.state = {
+      fontFamilies: props.fontFamilies,
+      meta: props.meta
+    }
   }
 
   componentDidMount(){
-    // console.log(_.map(menuContent.fonts, (f) => {return f}))
+    const { fontFamilies } = this.state
+    console.log(_.map(fontFamilies, (f) => {return f}))
     WebFont.load({
       google: {
-        families: _.map(menuContent.fontFamilies, (f) => {return f})
-      }
+        families: _.map(fontFamilies, (f) => {return f})
+      },
+      timeout: 10000
+    })
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps.fontFamilies)
+    this.setState({
+      fontFamilies: nextProps.fontFamilies,
+      meta: nextProps.meta
     })
   }
 
   render(){
+    const { structure, meta } = this.state
+
     return(
       <div>
         <div className="row">
-          <div className="col-xs-9">
-            <Canvas
-              size={"letter"}
-              orientation={'portrait'}
-              zoom={50}
-              menu={menuContent}
-            />
+          <div className={meta.orientation === 'landscape' ? `col-xs-9` : `col-xs-6 col-xs-offset-3`}>
+            <Canvas />
           </div>
           <div className="col-xs-3">
-            <TextPanel/>
+            <ToolPanel/>
           </div>
         </div>
       </div>
@@ -45,111 +57,19 @@ class MenuWidget extends React.Component{
 MenuWidget.propTypes = {
 }
 
-export default MenuWidget
-
-const menuContent = {
-  title: "My Test Menu",
-  colors: {
-    color_1: 'C1F120',
-    color_2: 'C00004',
-    color_3: 'C33331',
-    color_4: '',
-    color_5: ''
-  },
-  fontFamilies: {
-    primary_font: 'Oswald',
-    secondary_font: 'Roboto',
-    alternate_font: ''
-  },
-  styles: {
-    menu_title: {
-      fontFamily: 'primary_font',
-      color: 'color_2',
-      extra: {
-        fontSize: 15,
-        textTransform: 'uppercase',
-        textDecoration: 'none',
-        fontWeight: 'bold',
-        fontStyle: 'normal'
-      }
-    },
-    dish_title: {
-      fontFamily: 'primary_font',
-      color: 'color_1',
-      extra: {
-        fontSize: 12,
-        textTransform: 'uppercase',
-        textDecoration: 'underline',
-        fontWeight: 'bold',
-        fontStyle: 'normal',
-      }
-    },
-    dish_description: {
-      fontFamily: 'primary_font',
-      color: 'color_1',
-      extra: {
-        fontSize: 8,
-        textTransform: 'none',
-        textDecoration: 'none',
-        fontWeight: 'normal',
-        fontStyle: 'italic'
-      }
-    },
-    dish_price: {
-      fontFamily: 'primary_font',
-      color: 'color_1',
-      extra: {
-        fontSize: 10,
-        textTransform: 'uppercase',
-        textDecoration: 'none',
-        fontWeight: 'bold',
-        fontStyle: 'normal'
-      }
-    }
-  },
-  structure: [
-    {
-      type: 'CONTAINER',
-      position: 0,
-      background: '',
-      span: 1,
-      padding: '15px 15px',
-      elements: [
-        {
-          type: "ROW",
-          position: 0,
-          elements: [
-            {
-              type: "COLUMN",
-              span: 1,
-              elements: [
-                {
-                  type: "MENU_TITLE",
-                  content: 'ONE SMORGASBORD'
-                }
-              ]
-            }
-          ]
-        },
-        {
-          type: "ROW",
-          position: 0,
-          elements: [
-            {
-              type: "COLUMN",
-              span: 0.5,
-              elements: [
-                {
-                  type: "DISH",
-                  title: 'MARINARA',
-                  description: 'tomato, garlic, oregano',
-                  price: '$12',
-                }
-              ]
-            }
-          ]
-        },
-      ]
-    }
-  ]
+function mapStateToProps(state, ownProps){
+  // console.log(state)
+  return {
+    fontFamilies: state.fontFamilies,
+    structure: state.structure,
+    meta: state.meta
+  }
 }
+
+function mapDispatchToProps(dispatch){
+  return {
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuWidget)
+

@@ -28,7 +28,7 @@ class MenuTitle extends React.Component{
 
   render(){
     const { content, styles } = this.state
-    console.log(styles)
+    // console.log(styles)
     return (
       <div className="menu-title-element">
         <h1 className="content" style={styles}>

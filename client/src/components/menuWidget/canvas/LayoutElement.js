@@ -28,7 +28,11 @@ class LayoutElement extends React.Component{
               return (
                 <LayoutElement
                   key={i}
-                  padding={this.props.padding}
+                  paddingTop={this.props.paddingTop}
+                  paddingBottom={this.props.paddingBottom}
+                  paddingLeft={this.props.paddingLeft}
+                  paddingRight={this.props.paddingRight}
+                  zoom={this.props.zoom}
                   {...element}
                   getStyles={this.getStyles}
                 />
@@ -37,15 +41,39 @@ class LayoutElement extends React.Component{
           </div>
         )
       case "ROW":
+        // console.log(this.props)
         return (
           <div
-            style={{padding: this.props.padding, border: '1px solid blue'}}
+            style={{
+              paddingTop: (this.props.paddingTop*this.props.zoom/100)+'pt',
+              paddingBottom: (this.props.paddingBottom*this.props.zoom/100)+'pt',
+              paddingLeft: (this.props.paddingLeft*this.props.zoom/100)+'pt',
+              paddingRight: (this.props.paddingRight*this.props.zoom/100)+'pt',
+              border: '1px solid blue'
+            }}
           >
             {_.map(this.props.elements, (element, i) => {
               return (
                 <LayoutElement
                   key={i}
                   padding={this.props.padding}
+                  {...element}
+                  getStyles={this.getStyles}
+                />
+              )
+            })}
+          </div>
+        )
+      case "SECTION":
+        return (
+          <div
+            style={{border: '1px solid yellow'}}
+          >
+            {this.props.title !== '' && <h1 style={this.props.getStyles('section_title')}>{this.props.title}</h1>}
+            {_.map(this.props.elements, (element, i) => {
+              return (
+                <MenuElement
+                  key={i}
                   {...element}
                   getStyles={this.getStyles}
                 />
@@ -60,8 +88,9 @@ class LayoutElement extends React.Component{
           >
             {_.map(this.props.elements, (element, i) => {
               return (
-                <MenuElement
+                <LayoutElement
                   key={i}
+                  padding={this.props.padding}
                   {...element}
                   getStyles={this.getStyles}
                 />
