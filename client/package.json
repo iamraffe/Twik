@@ -44,6 +44,7 @@
     "react-autosuggest": "3.8.0",
     "react-bootstrap": "0.30.0",
     "react-collapse": "2.3.1",
+    "react-color": "2.4.2",
     "react-datepicker": "0.28.1",
     "react-dnd": "2.1.4",
     "react-dnd-html5-backend": "2.1.2",

@@ -19,3 +19,7 @@ export function changeQuaternaryColor(color){
 export function changeQuinaryColor(color){
   return { type: types.CHANGE_QUINARY_COLOR, color }
 }
+
+export function changeColor(color, colorKey){
+  return { type: types.CHANGE_COLOR, color, colorKey }
+}

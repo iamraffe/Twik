@@ -28,6 +28,10 @@ export default function colorReducer(state = initialState.colors, action){
         ...state,
         quinary_color: action.color
       }
+    case types.CHANGE_COLOR:
+      let toChange = {}
+      toChange[action.colorKey] = action.color
+      return _.assign({}, state, toChange)
     default:
       return state
   }

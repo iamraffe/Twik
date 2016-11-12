@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { FontPanel } from './toolPanel'
+import { FontPanel, ColorPanel } from './toolPanel'
 
 class ToolPanel extends React.Component{
   constructor(){
@@ -23,6 +23,12 @@ class ToolPanel extends React.Component{
     
     return(
       <section className="toolpanel">
+        {active !== 'color' && <button className="btn-toolpanel" onClick={(e) => {this.onToggleActive('color')}}>Color</button>}
+        {active === 'color' &&
+          <ColorPanel
+            onClose={(e) => {this.onToggleActive('none')}}
+          />
+        }
         {active !== 'font' && <button className="btn-toolpanel" onClick={(e) => {this.onToggleActive('font')}}>Font</button>}
         {active === 'font' &&
           <FontPanel
