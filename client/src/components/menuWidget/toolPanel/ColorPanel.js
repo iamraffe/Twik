@@ -76,7 +76,7 @@ class ColorPanel extends React.Component{
     }
 
     return (
-      <section className="font-panel">
+      <section className="color-panel">
         <header>
           <h1>Color</h1>
           <span className="fa close-panel fa-times" onClick={this.onClose}></span>

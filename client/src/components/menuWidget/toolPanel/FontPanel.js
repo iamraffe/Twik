@@ -156,7 +156,7 @@ class FontPanel extends React.Component{
     }
     else{
       return (
-        <div>Internal error: Fonts can't be loaded</div>
+        <div>Loading...</div>
       )
     }
   }
