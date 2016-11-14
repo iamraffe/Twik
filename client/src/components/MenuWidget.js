@@ -4,9 +4,12 @@ import request from 'superagent'
 import WebFont from 'webfontloader'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
 import { ToolPanel, Canvas } from './menuWidget'
 
+@DragDropContext(HTML5Backend)
 class MenuWidget extends React.Component{
   constructor(props){
     super(props)
@@ -19,7 +22,7 @@ class MenuWidget extends React.Component{
 
   componentDidMount(){
     const { fontFamilies } = this.state
-    console.log(_.map(fontFamilies, (f) => {return f}))
+    // console.log(_.map(fontFamilies, (f) => {return f}))
     WebFont.load({
       google: {
         families: _.map(fontFamilies, (f) => {return f})

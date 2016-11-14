@@ -2,20 +2,29 @@ import React, { PropTypes } from 'react'
 import _ from 'lodash'
 
 import MenuElement from './MenuElement'
+import { Column } from './layoutElements'
 
 class LayoutElement extends React.Component{
   constructor(props){
     super(props)
 
-    this.state = {}
+    this.state = {
+      // elements: props.elements
+    }
+
     this.getStyles = props.getStyles
   }
 
   componentWillReceiveProps(nextProps){
+    // this.setState({
+    //   elements: nextProps.elements
+    // })
   }
 
   componentDidMount(){
   }
+
+
 
   render(){
     const { type } = this.props
@@ -28,6 +37,7 @@ class LayoutElement extends React.Component{
               return (
                 <LayoutElement
                   key={i}
+                  containerId={this.props.id}
                   paddingTop={this.props.paddingTop}
                   paddingBottom={this.props.paddingBottom}
                   paddingLeft={this.props.paddingLeft}
@@ -56,6 +66,8 @@ class LayoutElement extends React.Component{
               return (
                 <LayoutElement
                   key={i}
+                  containerId={this.props.containerId}
+                  rowId={this.props.id}
                   padding={this.props.padding}
                   {...element}
                   getStyles={this.getStyles}
@@ -69,7 +81,7 @@ class LayoutElement extends React.Component{
           <div
             style={{border: '1px solid yellow'}}
           >
-            {this.props.title !== '' && <h1 style={this.props.getStyles('section_title')}>{this.props.title}</h1>}
+            {this.props.title !== '' && <h1 style={this.props.getStyles(this.props.style)}>{this.props.title}</h1>}
             {_.map(this.props.elements, (element, i) => {
               return (
                 <MenuElement
@@ -83,22 +95,8 @@ class LayoutElement extends React.Component{
         )
       case "COLUMN":
         return (
-          <div
-            style={{width: (100*this.props.span)+"%", border: '1px solid green'}}
-          >
-            {_.map(this.props.elements, (element, i) => {
-              return (
-                <LayoutElement
-                  key={i}
-                  padding={this.props.padding}
-                  {...element}
-                  getStyles={this.getStyles}
-                />
-              )
-            })}
-          </div>
+          <Column {...this.props} />
         )
-
       default:
         return null
     }

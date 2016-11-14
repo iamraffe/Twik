@@ -3,7 +3,10 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { FontPanel, ColorPanel, LayoutPanel } from './toolPanel'
+import {  FontPanel,
+          ColorPanel,
+          LayoutPanel,
+          SectionPanel } from './toolPanel'
 
 class ToolPanel extends React.Component{
   constructor(){
@@ -23,21 +26,27 @@ class ToolPanel extends React.Component{
     
     return(
       <section className="tool-panel">
-        {active !== 'color' && <button className="btn-toolpanel" onClick={(e) => {this.onToggleActive('color')}}>Color</button>}
+        {active !== 'color' && <button className="btn-toolpanel btn-block btn-primary" onClick={(e) => {this.onToggleActive('color')}}>Color</button>}
         {active === 'color' &&
           <ColorPanel
             onClose={(e) => {this.onToggleActive('none')}}
           />
         }
-        {active !== 'font' && <button className="btn-toolpanel" onClick={(e) => {this.onToggleActive('font')}}>Font</button>}
+        {active !== 'font' && <button className="btn-toolpanel btn-block btn-primary" onClick={(e) => {this.onToggleActive('font')}}>Font</button>}
         {active === 'font' &&
           <FontPanel
             onClose={(e) => {this.onToggleActive('none')}}
           />
         }
-        {active !== 'layout' && <button className="btn-toolpanel" onClick={(e) => {this.onToggleActive('layout')}}>Layout</button>}
+        {active !== 'layout' && <button className="btn-toolpanel btn-block btn-primary" onClick={(e) => {this.onToggleActive('layout')}}>Layout</button>}
         {active === 'layout' &&
           <LayoutPanel
+            onClose={(e) => {this.onToggleActive('none')}}
+          />
+        }
+        {active !== 'add-section' && <button className="btn-toolpanel btn-block btn-primary" onClick={(e) => {this.onToggleActive('add-section')}}>Add Section</button>}
+        {active === 'add-section' &&
+          <SectionPanel 
             onClose={(e) => {this.onToggleActive('none')}}
           />
         }

@@ -15,5 +15,8 @@ export const CHANGE_FONT = 'CHANGE_FONT'
 // META
 export const CHANGE_SIZE = 'CHANGE_SIZE'
 
+// STRUCTURE
+export const ADD_SECTION = 'ADD_SECTION'
+
 // ZOOM
 export const APPLY_ZOOM = 'APPLY_ZOOM'

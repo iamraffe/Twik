@@ -85,7 +85,7 @@ class ColorPanel extends React.Component{
           <article>
             <span
               onDoubleClick={(e) => {this.onEditColor('primary_color')}}
-              style={{display: 'block', borderRadius: '50%', width: 15, height: 15, backgroundColor: '#'+primary_color}}
+              style={{display: 'inline-block', width: 15, height: 15, backgroundColor: primary_color}}
             >
             </span>
           </article>
@@ -95,10 +95,10 @@ class ColorPanel extends React.Component{
             <div style={popover}>
               <div style={cover} onClick={this.onChangeComplete}/>
               <SketchPicker
-                color={`#${primary_color}`}
+                color={primary_color}
                 onChange={(color) => {
-                  console.log("onChange", color, color.hex.slice(1))
-                  this.onChange(color.hex.slice(1), "primary_color")
+                  console.log("onChange", color, color.hex)
+                  this.onChange(color.hex, "primary_color")
                 }}
               />
             </div>
@@ -108,28 +108,46 @@ class ColorPanel extends React.Component{
           <article>
             <span
               onDoubleClick={(e) => {this.onEditColor('secondary_color')}}
-              style={{display: 'block', borderRadius: '50%', width: 15, height: 15, backgroundColor: '#'+secondary_color}}
+              style={{display: 'inline-block', width: 15, height: 15, backgroundColor: secondary_color}}
             >
             </span>
           </article>
         }
         {secondary_color && editing === 'secondary_color' && 
           <article>
-          
+            <div style={popover}>
+              <div style={cover} onClick={this.onChangeComplete}/>
+              <SketchPicker
+                color={secondary_color}
+                onChange={(color) => {
+                  console.log("onChange", color, color.hex)
+                  this.onChange(color.hex, "secondary_color")
+                }}
+              />
+            </div>
           </article>
         }
         {terniary_color && editing !== 'terniary_color' &&
           <article>
             <span
               onDoubleClick={(e) => {this.onEditColor('terniary_color')}}
-              style={{display: 'block', borderRadius: '50%', width: 15, height: 15, backgroundColor: '#'+terniary_color}}
+              style={{display: 'inline-block', width: 15, height: 15, backgroundColor: terniary_color}}
             >
             </span>
           </article>
         }
         {terniary_color && editing === 'terniary_color' &&
           <article>
-          
+            <div style={popover}>
+              <div style={cover} onClick={this.onChangeComplete}/>
+              <SketchPicker
+                color={terniary_color}
+                onChange={(color) => {
+                  console.log("onChange", color, color.hex)
+                  this.onChange(color.hex, "terniary_color")
+                }}
+              />
+            </div>
           </article>
         }
       </section>

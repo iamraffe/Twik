@@ -9,7 +9,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import _ from 'lodash'
 import d3 from 'd3'
 import moment from 'moment'
-
+import uuid from 'node-uuid'
 
 
 String.prototype.capitalize = function() {
@@ -33,9 +33,10 @@ window.renderReact = (id, component, props) => {
         editor: props.editor,
         title: menu.title,
         orientation: menu.orientation,
-        size: menu.size
+        size: menu.size,
+        id: menu.id
       },
-      ..._.omit(menu, ['title', 'orientation', 'size'])
+      ..._.omit(menu, ['title', 'orientation', 'size', 'id'])
     })
   }
   else{
@@ -53,12 +54,19 @@ window.renderReact = (id, component, props) => {
   , document.getElementById(id))
 }
 
+const menu_title_id = uuid.v4()
+const section_title_id = uuid.v4()
+const dish_title_id = uuid.v4()
+const dish_description_id = uuid.v4()
+const dish_price_id = uuid.v4()
+
 const menu = {
+  id: uuid.v4(),
   title: "My Test Menu",
   colors: {
-    primary_color: 'C1F120',
-    secondary_color: 'C00004',
-    tertiary_color: 'C33331',
+    primary_color: '#C1F120',
+    secondary_color: '#C00004',
+    tertiary_color: '#C33331',
     quaternary_color: '',
     quinary_color: ''
   },
@@ -69,8 +77,10 @@ const menu = {
   },
   orientation: 'portrait',
   size: 'letter',
-  styles: {
-    menu_title: {
+  styles: [
+    {
+      id: menu_title_id,
+      name: 'menu_title',
       fontFamily: 'primary_font',
       color: 'secondary_color',
       extra: {
@@ -81,7 +91,9 @@ const menu = {
         fontStyle: 'normal'
       }
     },
-    section_title: {
+    {
+      id: section_title_id,
+      name: 'section_title',
       fontFamily: 'primary_font',
       color: 'secondary_color',
       extra: {
@@ -92,7 +104,9 @@ const menu = {
         fontStyle: 'normal'
       }
     },
-    dish_title: {
+    {
+      id: dish_title_id,
+      name: 'dish_title',
       fontFamily: 'primary_font',
       color: 'primary_color',
       extra: {
@@ -103,7 +117,9 @@ const menu = {
         fontStyle: 'normal',
       }
     },
-    dish_description: {
+    {
+      id: dish_description_id,
+      name: 'dish_description',
       fontFamily: 'secondary_font',
       color: 'primary_color',
       extra: {
@@ -114,7 +130,9 @@ const menu = {
         fontStyle: 'italic'
       }
     },
-    dish_price: {
+    {
+      id: dish_price_id,
+      name: 'dish_price',
       fontFamily: 'primary_font',
       color: 'primary_color',
       extra: {
@@ -125,7 +143,7 @@ const menu = {
         fontStyle: 'normal'
       }
     }
-  },
+  ],
   structure: [
     {
       type: 'CONTAINER',
@@ -136,22 +154,28 @@ const menu = {
       paddingBottom: 15,
       paddingLeft: 15,
       paddingRight: 15,
+      id: uuid.v4(),
       elements: [
         {
           type: "ROW",
           position: 0,
+          id: uuid.v4(),
           elements: [
             {
               type: "COLUMN",
               span: 1,
+              id: uuid.v4(),
+              position: 0,
               elements: [
                 {
                   type: "SECTION",
                   title: "",
                   position: 0,
+                  id: uuid.v4(),
                   elements: [
                     {
                       type: "MENU_TITLE",
+                      style: menu_title_id,
                       content: 'ONE SMORGASBORD'
                     }
                   ]
@@ -163,69 +187,173 @@ const menu = {
         {
           type: "ROW",
           position: 0,
+          id: uuid.v4(),
           elements: [
             {
               type: "COLUMN",
               span: 0.5,
+              id: uuid.v4(),
+              position: 0,
               elements: [
                 {
                   type: "SECTION",
                   title: "PIZZA",
+                  style: section_title_id,
+                  id: uuid.v4(),
                   position: 0,
                   elements: [
                     {
                       type: "DISH",
-                      title: 'marinara',
-                      description: 'tomato, garlic, oregano',
-                      price: '$8',
+                      position: 0,
+                      id: uuid.v4(),
+                      title: {
+                        text: 'marinara',
+                        style: dish_title_id
+                      },
+                      description: {
+                        text: 'tomato, garlic, oregano',
+                        style: dish_description_id
+                      },
+                      price: {
+                        text: '$8',
+                        style: dish_price_id
+                      },
                     },
                     {
                       type: "DISH",
-                      title: 'margherita',
-                      description: 'tomato, mozzarella, basil, parm',
-                      price: '$12',
+                      position: 1,
+                      id: uuid.v4(),
+                      title: {
+                        text: 'marinara',
+                        style: dish_title_id
+                      },
+                      description: {
+                        text: 'tomato, garlic, oregano',
+                        style: dish_description_id
+                      },
+                      price: {
+                        text: '$8',
+                        style: dish_price_id
+                      },
                     },
                     {
                       type: "DISH",
-                      title: 'calabrese',
-                      description: 'tomato, mozzarella, salami, serrano, garlic, basil',
-                      price: '$14',
+                      position: 2,
+                      id: uuid.v4(),
+                      title: {
+                        text: 'marinara',
+                        style: dish_title_id
+                      },
+                      description: {
+                        text: 'tomato, garlic, oregano',
+                        style: dish_description_id
+                      },
+                      price: {
+                        text: '$8',
+                        style: dish_price_id
+                      },
                     },
                     {
                       type: "DISH",
-                      title: 'fresca',
-                      description: 'prosciutto piccante, arugula, meyer lemon, mozz, olive oil',
-                      price: '$16',
+                      position: 3,
+                      id: uuid.v4(),
+                      title: {
+                        text: 'marinara',
+                        style: dish_title_id
+                      },
+                      description: {
+                        text: 'tomato, garlic, oregano',
+                        style: dish_description_id
+                      },
+                      price: {
+                        text: '$8',
+                        style: dish_price_id
+                      },
                     },
                     {
                       type: "DISH",
-                      title: 'harissa',
-                      description: 'eggplant, shallot, banana pepper, pistachio, green herbs',
-                      price: '$12',
+                      position: 4,
+                      id: uuid.v4(),
+                      title: {
+                        text: 'marinara',
+                        style: dish_title_id
+                      },
+                      description: {
+                        text: 'tomato, garlic, oregano',
+                        style: dish_description_id
+                      },
+                      price: {
+                        text: '$8',
+                        style: dish_price_id
+                      },
                     },
                     {
                       type: "DISH",
-                      title: 'taleggio',
-                      description: 'sausage, mozzarella, scallion',
-                      price: '$14',
+                      position: 5,
+                      id: uuid.v4(),
+                      title: {
+                        text: 'marinara',
+                        style: dish_title_id
+                      },
+                      description: {
+                        text: 'tomato, garlic, oregano',
+                        style: dish_description_id
+                      },
+                      price: {
+                        text: '$8',
+                        style: dish_price_id
+                      },
                     },
                     {
                       type: "DISH",
-                      title: 'corn & ndjua',
-                      description: 'charred scallion, peppers, mozz, parm cream',
-                      price: '$15',
+                      position: 6,
+                      id: uuid.v4(),
+                      title: {
+                        text: 'marinara',
+                        style: dish_title_id
+                      },
+                      description: {
+                        text: 'tomato, garlic, oregano',
+                        style: dish_description_id
+                      },
+                      price: {
+                        text: '$8',
+                        style: dish_price_id
+                      },
                     },
                     {
                       type: "DISH",
-                      title: 'braised goat',
-                      description: 'garrotxa, mozzarella, herbs, fennel pollen, onion',
-                      price: '$16',
+                      position: 7,
+                      id: uuid.v4(),
+                      title: {
+                        text: 'marinara',
+                        style: dish_title_id
+                      },
+                      description: {
+                        text: 'tomato, garlic, oregano',
+                        style: dish_description_id
+                      },
+                      price: {
+                        text: '$8',
+                        style: dish_price_id
+                      },
                     },
                     {
                       type: "DISH",
-                      title: 'calzone',
-                      description: 'mozz, ricotta, ham, black olive, salami, tomato, basil',
-                      price: '$17',
+                      position: 8,
+                      id: uuid.v4(),
+                      title: {
+                        text: 'marinara',
+                        style: dish_title_id
+                      },
+                      description: {
+                        text: 'tomato, garlic, oregano',
+                        style: dish_description_id
+                      },
+                      price: {
+                        text: '$8',
+                        style: dish_price_id
+                      },
                     },
                   ]
                 }

@@ -2,6 +2,7 @@ export default {
   colors: {},
   fontFamilies: {},
   meta: {
+    id: '',
     editor: true,
     title: '',
     orientation: '',

@@ -4,17 +4,18 @@ import _ from 'lodash'
 class MenuTitle extends React.Component{
   constructor(props){
     super(props)
-
+    // console.log(props)
+    // debugger;
     this.state = {
       content: props.content,
-      styles: props.getStyles('menu_title')
+      styles: props.getStyles(props.style)
     }
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
       content: nextProps.content,
-      styles: nextProps.getStyles('menu_title')
+      styles: nextProps.getStyles(nextProps.style)
     })
   }
 
