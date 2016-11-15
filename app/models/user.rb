@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   # validates :name, presence: true
   has_one :account
+  has_many :images
   
   def password_match?
      self.errors[:password] << "can't be blank" if password.blank?

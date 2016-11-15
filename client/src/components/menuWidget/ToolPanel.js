@@ -6,7 +6,8 @@ import { bindActionCreators } from 'redux'
 import {  FontPanel,
           ColorPanel,
           LayoutPanel,
-          SectionPanel } from './toolPanel'
+          SectionPanel,
+          ImagePanel } from './toolPanel'
 
 class ToolPanel extends React.Component{
   constructor(props){
@@ -70,6 +71,13 @@ class ToolPanel extends React.Component{
         {active !== 'add-section' && <button className="btn-toolpanel btn-block btn-primary" onClick={(e) => {this.onToggleActive('add-section')}}>Add Section</button>}
         {active === 'add-section' &&
           <SectionPanel 
+            onClose={(e) => {this.onToggleActive('none')}}
+            getStyles={this.getStyles}
+          />
+        }
+        {active !== 'image-wiz' && <button className="btn-toolpanel btn-block btn-primary" onClick={(e) => {this.onToggleActive('image-wiz')}}>Image Library</button>}
+        {active === 'image-wiz' &&
+          <ImagePanel 
             onClose={(e) => {this.onToggleActive('none')}}
             getStyles={this.getStyles}
           />

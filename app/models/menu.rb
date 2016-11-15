@@ -1,7 +1,7 @@
 class Menu < ActiveRecord::Base
   has_many :sections
   has_many :archives
-  has_many :media, as: :mediable
+  has_many :images, as: :imageable
 
   def fonts
     template.select{|object| object['type'] == 'text' }.map{|o| o["fontFamily"]}
