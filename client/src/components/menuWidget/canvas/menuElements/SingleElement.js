@@ -4,8 +4,7 @@ import _ from 'lodash'
 class SingleElement extends React.Component{
   constructor(props){
     super(props)
-    // console.log(props)
-    // debugger;
+    
     this.state = {
       text: props.text,
       styles: props.getStyles(props.styles)
@@ -18,14 +17,6 @@ class SingleElement extends React.Component{
       styles: nextProps.getStyles(nextProps.styles)
     })
   }
-
-  // styleElements = () => {
-  //   const { styles } = this.state
-  //   return {
-  //     fontFamily: styles["font"],
-  //     color: styles["color"],
-  //   }
-  // }
 
   render(){
     const { text, styles, type } = this.state

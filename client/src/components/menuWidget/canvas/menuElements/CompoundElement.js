@@ -7,13 +7,11 @@ class Dish extends React.Component{
 
     this.state = {
       elements: _.map(props.elements, (e, i) => {
-        return (
-          {
+        return ({
             type: e.type,
             text: e.text,
             styles: props.getStyles(e.styles)
-          }
-        )
+        })
       })
     }
   }
@@ -21,13 +19,11 @@ class Dish extends React.Component{
   componentWillReceiveProps(nextProps){
     this.setState({
       elements: _.map(nextProps.elements, (e, i) => {
-        return (
-          {
+        return ({
             type: e.type,
             text: e.text,
             styles: nextProps.getStyles(e.styles)
-          }
-        )
+        })
       })
     })
   }
@@ -51,10 +47,6 @@ class Dish extends React.Component{
   }
 }
 
-Dish.propTypes = {
-  // title: PropTypes.object.isRequired,
-  // description: PropTypes.object,
-  // price: PropTypes.object.isRequired
-}
+Dish.propTypes = {}
 
 export default Dish

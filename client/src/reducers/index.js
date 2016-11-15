@@ -9,7 +9,7 @@ import colorReducer from './colorReducer'
 import fontReducer from './fontReducer'
 import sectionReducer from './sectionReducer'
 import structureReducer from './structureReducer'
-import stylesReducer from './stylesReducer'
+import styleReducer from './styleReducer'
 import metaReducer from './metaReducer'
 import zoomReducer from './zoomReducer'
 
@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
   fontFamilies: fontReducer,
   meta: metaReducer,
   structure: structureReducer,
-  styles: stylesReducer,
+  styles: styleReducer,
   zoom: zoomReducer,
   // REACT-ROUTER
   routing: routerReducer
