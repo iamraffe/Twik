@@ -14,7 +14,10 @@ class Section extends React.Component{
     this.state = {
       sections: props.sections,
       elements: props.elements,
-      zoom: props.zoom
+      zoom: props.zoom,
+      fontFamilies: props.fontFamilies,
+      colors: props.colors,
+      structure: props.structure
     }
 
     this.getStyles = props.getStyles
@@ -25,7 +28,10 @@ class Section extends React.Component{
     this.setState({
       sections: nextProps.sections,
       elements: nextProps.elements,
-      zoom: nextProps.zoom
+      zoom: nextProps.zoom,
+      fontFamilies: nextProps.fontFamilies,
+      colors: nextProps.colors,
+      structure: nextProps.structure
     })
   }
 
@@ -35,6 +41,13 @@ class Section extends React.Component{
     const sectionIndex =  _.findIndex(sections, (s) => {return s.id === struct})
     // console.log(this.props, sectionIndex, sections[sectionIndex], sections[sectionIndex].structure)
     this.props.structureActions.addMenuElement(sections[sectionIndex].structure, containerId, rowId, columnId, id)
+  }
+
+  onUpdateMenuElement = (element) => {
+    const { containerId, rowId, columnId, id } = this.props
+    // console.log(element)
+    // debugger;
+    this.props.structureActions.updateMenuElement(element, containerId, rowId, columnId, id)
   }
 
   render(){
@@ -49,6 +62,7 @@ class Section extends React.Component{
             <MenuElement
               key={i}
               {...element}
+              onUpdate={this.onUpdateMenuElement}
               getStyles={this.getStyles}
             />
           )
@@ -63,7 +77,9 @@ function mapStateToProps(state, ownProps){
   return {
     structure: state.structure,
     sections: state.sections,
-    zoom: state.zoom
+    zoom: state.zoom,
+    colors: state.colors,
+    fontFamilies: state.fontFamilies
   }
 }
 

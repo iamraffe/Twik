@@ -278,6 +278,28 @@ const menu = {
                   elements: [
                     {
                       type: "SECTION_ELEMENT",
+                      position: 0,
+                      id: uuid.v4(),
+                      elements: [
+                        {
+                          type: "DISH_TITLE",
+                          text: 'marinara',
+                          styles: dish_title_id
+                        },
+                        {
+                          type: "DISH_DESCRIPTION",
+                          text: 'tomato, garlic, oregano',
+                          styles: dish_description_id
+                        },
+                        {
+                          type: "DISH_PRICE",
+                          text: '$8',
+                          styles: dish_price_id
+                        }
+                      ]
+                    },
+                    {
+                      type: "SECTION_ELEMENT",
                       position: 1,
                       id: uuid.v4(),
                       elements: [
@@ -411,28 +433,6 @@ const menu = {
                     {
                       type: "SECTION_ELEMENT",
                       position: 7,
-                      id: uuid.v4(),
-                      elements: [
-                        {
-                          type: "DISH_TITLE",
-                          text: 'marinara',
-                          styles: dish_title_id
-                        },
-                        {
-                          type: "DISH_DESCRIPTION",
-                          text: 'tomato, garlic, oregano',
-                          styles: dish_description_id
-                        },
-                        {
-                          type: "DISH_PRICE",
-                          text: '$8',
-                          styles: dish_price_id
-                        }
-                      ]
-                    },
-                    {
-                      type: "SECTION_ELEMENT",
-                      position: 8,
                       id: uuid.v4(),
                       elements: [
                         {

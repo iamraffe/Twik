@@ -1,11 +1,14 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
 
-class Dish extends React.Component{
+import InlineEditor from '../../common/InlineEditor'
+
+class CompoundElement extends React.Component{
   constructor(props){
     super(props)
 
     this.state = {
+      editing: 'none',
       elements: _.map(props.elements, (e, i) => {
         return ({
             type: e.type,
@@ -14,6 +17,8 @@ class Dish extends React.Component{
         })
       })
     }
+
+    this.onUpdate = props.onUpdate
   }
 
   componentWillReceiveProps(nextProps){
@@ -31,15 +36,64 @@ class Dish extends React.Component{
   componentDidMount(){
   }
 
+  onToggleEditing = (type) => {
+    console.log(type)
+    this.setState({
+      editing: type
+    })
+  }
+
+  editText = (text, index) => {
+    console.log(text, index, this.props, this.state)
+    this.onUpdate({
+      type: this.props.type,
+      position: this.props.position,
+      elements: [
+        ...this.props.elements.slice(0, index),
+        {
+          styles: this.props.elements[index].styles,
+          type: this.props.elements[index].type,
+          text: text
+        },
+        ...this.props.elements.slice(index+1),
+      ]
+    })
+  }
+
+  toggleEditText = () => {
+    this.setState({
+      editing: 'none'
+    })
+  }
+
   render(){
-    const { elements } = this.state
+    const { elements, editing } = this.state
     const { type } = this.props
     
     return (
       <article className={`${type} compound-element`}>
         {_.map(elements, (e, i) => {
           return (
-            <p key={i} className={e.type} style={e.styles}>{ e.text === '' ? 'Lorem ipsum' : e.text }</p>
+            <span key={i}>
+              {editing !== e.type &&
+                <span
+                  
+                  className={e.type}
+                  style={e.styles}
+                  dangerouslySetInnerHTML={{__html: (e.text === '' ? '<p>Lorem ipsum</p>' : `<p>${e.text}</p>`)}}
+                  onDoubleClick={() => {this.onToggleEditing(e.type)}}
+                />
+              }
+              {editing === e.type &&
+                <InlineEditor
+                  content={e.text === '' ? '<p>Lorem Ipsum</p>' : e.text}
+                  styles={e.styles}
+                  onChange={(text) => {this.editText(text, i)}}
+                  onKeyDown={this.toggleEditText}
+                  fastMode={false}
+                />
+              }
+            </span>
           )
         })}
       </article>
@@ -47,6 +101,6 @@ class Dish extends React.Component{
   }
 }
 
-Dish.propTypes = {}
+CompoundElement.propTypes = {}
 
-export default Dish
+export default CompoundElement
