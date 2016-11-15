@@ -48,7 +48,7 @@ class MenuWidget extends React.Component{
             <Canvas />
           </div>
           <div className="col-xs-3">
-            <ToolPanel/>
+            {this.props.editor && <ToolPanel/>}
           </div>
         </div>
       </div>

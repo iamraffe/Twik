@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
     resources :images
     
+    post '/export', to: "menus#export"
+
     resources :menus do
       post "/export", to: "menus#export"
       resources :uploads

@@ -6,24 +6,24 @@
     <%= javascript_include_tag "http://code.jquery.com/jquery-1.10.0.min.js" %>
     <script type="text/javascript">
       $(document).ready(function(){
-        var fonts = JSON.parse($("#svg--wrapper").attr("data-fonts"))
-        if(fonts.length > 0){
-          WebFont.load({
-            google: {
-              families: fonts
-            }
-          });
-        }
-        var svg = $("#svg--wrapper").attr("data-src")
-        $("#svg--wrapper").html(atob(svg))
-        <% if(@menu.background.nil?) %>
-          $("svg").attr("style", " display: block; background: white; margin: 0 auto !important; padding: 0 !important; ")
-        <% else %>
-          $("svg").attr("style", " display: block; background: <%= @menu.background %>; margin: 0 auto !important; padding: 0 !important; ")
-        <% end %>
+      //   var fonts = JSON.parse($("#svg--wrapper").attr("data-fonts"))
+      //   if(fonts.length > 0){
+      //     WebFont.load({
+      //       google: {
+      //         families: fonts
+      //       }
+      //     });
+      //   }
+      //   var svg = $("#svg--wrapper").attr("data-src")
+      //   $("#svg--wrapper").html(atob(svg))
+      //   <% if(@menu.background.nil?) %>
+      //     $("svg").attr("style", " display: block; background: white; margin: 0 auto !important; padding: 0 !important; ")
+      //   <% else %>
+      //     $("svg").attr("style", " display: block; background: <%= @menu.background %>; margin: 0 auto !important; padding: 0 !important; ")
+      //   <% end %>
 
 
-      }); 
+      // }); 
     </script>
     <style>
       html, body{

@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import request from 'superagent'
 
 import {  FontPanel,
           ColorPanel,
@@ -45,6 +46,19 @@ class ToolPanel extends React.Component{
     }
   }
 
+  onExport = () => {
+    const html = document.getElementById('entry-point').innerHTML
+    const req = request.post(`/export`)
+    req.query({ format: 'json' })
+    req.field('authenticity_token', $('meta[name="csrf-token"]').attr('content') )
+    // req.send({private: false, ...})
+    req.field('html', html)
+    req.end((err, res)=>{
+      console.log(err, res)
+      window.open(res.body.path, "_blank")
+    })
+  }
+
   render(){
     const { active } = this.state
     
@@ -82,6 +96,7 @@ class ToolPanel extends React.Component{
             getStyles={this.getStyles}
           />
         }
+        <button onClick={(e) => {this.onExport()}}>Export</button>
       </section>
     )
   }

@@ -33,14 +33,17 @@ class MenusController < ApplicationController
   end
 
   def export
-    @menu = Menu.find(params[:menu_id])
-    @filename = "#{@menu.name.parameterize}-#{Time.now.to_i}"
-    @fonts = @menu.fonts
-    @svg = params[:export]
-    @orientation = @menu.width > @menu.height ? "Landscape" : "Portrait"
-    pdf = render_to_string pdf: @filename, zoom: 0.97, template: "menus/export.pdf.erb", encoding: "UTF-8", javascript_delay: 50, orientation: @orientation, lowquality: false, no_pdf_compression: true, margin:  { top:0, bottom: 0, left: 0, right: 0 }
+    @html = params[:html]
+    # byebug
+    # @menu = Menu.find(params[:menu_id]) || {}
+    @filename = "#{'@menu.name.parameterize'}-#{Time.now.to_i}"
+    # @fonts = @menu.fonts
+    # @svg = params[:export]
+    # @orientation = @menu.width > @menu.height ? "Landscape" : "Portrait"
+    pdf = render_to_string pdf: @filename, zoom: 0.97, template: "menus/export.pdf.erb", encoding: "UTF-8", javascript_delay: 50, orientation: 'portrait', lowquality: false, no_pdf_compression: true, margin:  { top:0, bottom: 0, left: 0, right: 0 }
     Menu.export(@filename, pdf)
     render json: {path: "/pdf/#{@filename}.pdf"}
+    # redirect_to "/pdf/#{@filename}.pdf"
   end
 
   private
