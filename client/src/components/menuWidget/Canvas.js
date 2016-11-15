@@ -24,7 +24,7 @@ class Canvas extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("RECEIVED PROPS ", nextProps.styles)
+    // console.log("RECEIVED PROPS ", nextProps.styles)
     this.setState({
       width: PAPER_SIZES[`${nextProps.meta.size.toUpperCase()}_${nextProps.meta.orientation.toUpperCase()}`].width,
       height: PAPER_SIZES[`${nextProps.meta.size.toUpperCase()}_${nextProps.meta.orientation.toUpperCase()}`].height,

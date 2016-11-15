@@ -39,6 +39,7 @@ class Column extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
+    // console.log("COLUMN ", nextProps)
     this.setState({
       elements: nextProps.elements
     })
@@ -82,12 +83,12 @@ class Column extends React.Component{
     const { type, canDrop, isOver, connectDropTarget } = this.props
     const isActive = canDrop && isOver
     const backgroundColor = isActive ? 'lightgreen' : '#FFF'
-
+    // console.log("re-render")
     return connectDropTarget(
       <div
         style={{width: (100*this.props.span)+"%", border: '1px solid green', backgroundColor}}
       >
-        {_.map(this.props.elements, (element, i) => {
+        {_.map(this.state.elements, (element, i) => {
           return (
             <LayoutElement
               key={i}

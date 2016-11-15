@@ -12,15 +12,20 @@ class Section extends React.Component{
     super(props)
 
     this.state = {
-      sections: props.sections
+      sections: props.sections,
+      elements: props.elements,
+      zoom: props.zoom
     }
 
     this.getStyles = props.getStyles
   }
 
   componentWillReceiveProps(nextProps){
+    // console.log("SECTION = ", nextProps)
     this.setState({
-      sections: nextProps.sections
+      sections: nextProps.sections,
+      elements: nextProps.elements,
+      zoom: nextProps.zoom
     })
   }
 
@@ -28,12 +33,12 @@ class Section extends React.Component{
     const { sections } = this.state
     const { containerId, rowId, columnId, id, struct } = this.props
     const sectionIndex =  _.findIndex(sections, (s) => {return s.id === struct})
-    console.log(this.props, sectionIndex, sections[sectionIndex], sections[sectionIndex].structure)
+    // console.log(this.props, sectionIndex, sections[sectionIndex], sections[sectionIndex].structure)
     this.props.structureActions.addMenuElement(sections[sectionIndex].structure, containerId, rowId, columnId, id)
   }
 
   render(){
-    const { elements } = this.props
+    const { elements } = this.state
 
     return(
       <div
@@ -57,7 +62,8 @@ class Section extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
     structure: state.structure,
-    sections: state.sections
+    sections: state.sections,
+    zoom: state.zoom
   }
 }
 

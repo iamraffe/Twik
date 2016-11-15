@@ -16,6 +16,7 @@ class LayoutElement extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
+    // console.log("LE => ", nextProps)
     // this.setState({
     //   elements: nextProps.elements
     // })
