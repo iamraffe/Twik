@@ -91,6 +91,9 @@ class Column extends React.Component{
           return (
             <LayoutElement
               key={i}
+              containerId={this.props.containerId}
+              rowId={this.props.rowId}
+              columnId={this.props.id}
               padding={this.props.padding}
               {...element}
               getStyles={this.getStyles}

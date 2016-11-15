@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import _ from 'lodash'
 
 import MenuElement from './MenuElement'
-import { Column } from './layoutElements'
+import { Column, Section } from './layoutElements'
 
 class LayoutElement extends React.Component{
   constructor(props){
@@ -76,22 +76,8 @@ class LayoutElement extends React.Component{
           </div>
         )
       case "SECTION":
-        // console.log(this.props)
-        // debugger;
         return (
-          <div
-            style={{border: '1px solid yellow'}}
-          >
-            {_.map(this.props.elements, (element, i) => {
-              return (
-                <MenuElement
-                  key={i}
-                  {...element}
-                  getStyles={this.getStyles}
-                />
-              )
-            })}
-          </div>
+          <Section {...this.props} />
         )
       case "COLUMN":
         return (
