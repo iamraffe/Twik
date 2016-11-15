@@ -18,7 +18,8 @@ class Canvas extends React.Component{
       structure: props.structure,
       colors: props.colors,
       fontFamilies: props.fontFamilies,
-      styles: props.styles
+      styles: props.styles,
+      sections: props.sections
     }
   }
 
@@ -30,19 +31,18 @@ class Canvas extends React.Component{
       colors: nextProps.colors,
       fontFamilies: nextProps.fontFamilies,
       styles: nextProps.styles,
-      zoom: nextProps.zoom
+      zoom: nextProps.zoom,
+      sections: nextProps.sections
     })
   }
-
-
 
   componentDidMount(){
   }
 
-  getStyles = (styleUUID) => {
+  getStyles = (styleId) => {
     const { styles, fontFamilies, colors, zoom } = this.state
-    const index = _.findIndex(styles, (s, i) => {return s.id === styleUUID})
-    console.log(index, styles[index])
+    const index = _.findIndex(styles, (s, i) => {return s.id === styleId})
+    
     return {
       ...styles[index].extra,
       fontSize: `${styles[index].extra.fontSize*zoom/100}pt`,
@@ -94,6 +94,7 @@ function mapStateToProps(state, ownProps){
   // console.log(state)
   return {
     zoom: state.zoom,
+    sections: state.sections,
     fontFamilies: state.fontFamilies,
     structure: state.structure,
     meta: state.meta,

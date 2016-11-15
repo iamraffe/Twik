@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
 
-import { MenuTitle, Dish } from './menuElements'
+import {  SingleElement,
+          CompoundElement } from './menuElements'
 
 class MenuElement extends React.Component{
   constructor(props){
@@ -18,27 +19,53 @@ class MenuElement extends React.Component{
   }
 
   render(){
-    const { type } = this.props
-
+    const { type, elements, position } = this.props
+    // console.log(this.props)
+    // debugger;
     switch(type){
       case "MENU_TITLE":
+      case "SECTION_TITLE":
         return (
-          <MenuTitle
-            content={this.props.content}
-            style={this.props.style}
+          <SingleElement
+            type={type}
+            position={position}
+            text={elements[0].text}
+            styles={elements[0].styles}
             getStyles={this.getStyles}
           />
         )
-      case "DISH":
+      case "SECTION_ELEMENT":
         return (
-          <Dish
-            title={this.props.title}
-            description={this.props.description}
-            price={this.props.price}
-            style={this.props.style}
+          <CompoundElement
+            type={type}
+            position={position}
+            elements={elements}
             getStyles={this.getStyles}
           />
         )
+      // case "MENU_TITLE":
+      //   return (
+      //     <MenuTitle
+      //       text={this.props.text}
+      //       styles={this.props.styles}
+      //       getStyles={this.getStyles}
+      //     />
+      //   )
+      // case "SECTION_TITLE":
+      //   return (
+      //     <SectionTitle
+      //       text={this.props.text}
+      //       styles={this.props.styles}
+      //       getStyles={this.getStyles}
+      //     />
+      //   )
+      // case "SECTION_ELEMENT":
+      //   return (
+      //     <Dish
+      //       elements={this.props.elements}
+      //       getStyles={this.getStyles}
+      //     />
+      //   )
       default:
         return null
     }

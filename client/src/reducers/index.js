@@ -7,6 +7,7 @@ import { routerReducer } from 'react-router-redux'
 
 import colorReducer from './colorReducer'
 import fontReducer from './fontReducer'
+import sectionReducer from './sectionReducer'
 import structureReducer from './structureReducer'
 import stylesReducer from './stylesReducer'
 import metaReducer from './metaReducer'
@@ -14,6 +15,7 @@ import zoomReducer from './zoomReducer'
 
 const rootReducer = combineReducers({
   colors: colorReducer,
+  sections: sectionReducer,
   fontFamilies: fontReducer,
   meta: metaReducer,
   structure: structureReducer,

@@ -22,7 +22,7 @@ class MenuWidget extends React.Component{
 
   componentDidMount(){
     const { fontFamilies } = this.state
-    // console.log(_.map(fontFamilies, (f) => {return f}))
+    
     WebFont.load({
       google: {
         families: _.map(fontFamilies, (f) => {return f})
@@ -32,7 +32,6 @@ class MenuWidget extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    console.log(nextProps.fontFamilies)
     this.setState({
       fontFamilies: nextProps.fontFamilies,
       meta: nextProps.meta

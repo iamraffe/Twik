@@ -51,7 +51,6 @@ class LayoutElement extends React.Component{
           </div>
         )
       case "ROW":
-        // console.log(this.props)
         return (
           <div
             style={{
@@ -77,11 +76,12 @@ class LayoutElement extends React.Component{
           </div>
         )
       case "SECTION":
+        // console.log(this.props)
+        // debugger;
         return (
           <div
             style={{border: '1px solid yellow'}}
           >
-            {this.props.title !== '' && <h1 style={this.props.getStyles(this.props.style)}>{this.props.title}</h1>}
             {_.map(this.props.elements, (element, i) => {
               return (
                 <MenuElement

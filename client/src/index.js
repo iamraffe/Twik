@@ -59,6 +59,9 @@ const section_title_id = uuid.v4()
 const dish_title_id = uuid.v4()
 const dish_description_id = uuid.v4()
 const dish_price_id = uuid.v4()
+const category_title_id = uuid.v4()
+const menu_title_section_id = uuid.v4()
+const category_dishes_id = uuid.v4()
 
 const menu = {
   id: uuid.v4(),
@@ -144,6 +147,58 @@ const menu = {
       }
     }
   ],
+  sections: [
+    {
+      name: "Menu Title",
+      id: menu_title_section_id,
+      structure: {
+        type: "MENU_TITLE",
+        elements: [
+          {
+            styles: menu_title_id,
+            text: ''
+          }
+        ]
+      }
+    },
+    {
+      name: "Category Title",
+      id: category_title_id,
+      structure: {
+        type: "SECTION_TITLE",
+        elements: [
+          {             
+            styles: section_title_id,
+            text: ''
+          }
+        ]
+      }
+    },
+    {
+      name: "Category Dishes",
+      id: category_dishes_id,
+      structure: {
+        type: "SECTION_ELEMENT",
+        elements: [
+          {
+            type: "DISH_TITLE",
+            text: '',
+            styles: dish_title_id
+          },
+          {
+            type: "DISH_DESCRIPTION",
+            text: '',
+            styles: dish_description_id
+          },
+          {
+            type: "DISH_PRICE",
+            text: '',
+            styles: dish_price_id
+          }
+        ]
+      }
+    }
+  ],
   structure: [
     {
       type: 'CONTAINER',
@@ -169,14 +224,17 @@ const menu = {
               elements: [
                 {
                   type: "SECTION",
-                  title: "",
                   position: 0,
                   id: uuid.v4(),
+                  struct: menu_title_section_id,
                   elements: [
                     {
                       type: "MENU_TITLE",
-                      style: menu_title_id,
-                      content: 'ONE SMORGASBORD'
+                      position: 0,
+                      elements: [{
+                        text: 'ONE SMORGASBORD',
+                        styles: menu_title_id
+                      }]
                     }
                   ]
                 }
@@ -197,163 +255,202 @@ const menu = {
               elements: [
                 {
                   type: "SECTION",
-                  title: "PIZZA",
-                  style: section_title_id,
                   id: uuid.v4(),
                   position: 0,
+                  struct: category_title_id,
                   elements: [
                     {
-                      type: "DISH",
+                      type: "SECTION_TITLE",
+                      
                       position: 0,
-                      id: uuid.v4(),
-                      title: {
-                        text: 'marinara',
-                        style: dish_title_id
-                      },
-                      description: {
-                        text: 'tomato, garlic, oregano',
-                        style: dish_description_id
-                      },
-                      price: {
-                        text: '$8',
-                        style: dish_price_id
-                      },
-                    },
+                      elements: [{
+                        text: "PIZZA",
+                        styles: section_title_id
+                      }]
+                    }
+                  ]
+                },
+                {
+                  type: "SECTION",
+                  id: uuid.v4(),
+                  position: 1,
+                  struct: category_dishes_id,
+                  elements: [
                     {
-                      type: "DISH",
+                      type: "SECTION_ELEMENT",
                       position: 1,
                       id: uuid.v4(),
-                      title: {
-                        text: 'marinara',
-                        style: dish_title_id
-                      },
-                      description: {
-                        text: 'tomato, garlic, oregano',
-                        style: dish_description_id
-                      },
-                      price: {
-                        text: '$8',
-                        style: dish_price_id
-                      },
+                      elements: [
+                        {
+                          type: "DISH_TITLE",
+                          text: 'marinara',
+                          styles: dish_title_id
+                        },
+                        {
+                          type: "DISH_DESCRIPTION",
+                          text: 'tomato, garlic, oregano',
+                          styles: dish_description_id
+                        },
+                        {
+                          type: "DISH_PRICE",
+                          text: '$8',
+                          styles: dish_price_id
+                        }
+                      ]
                     },
                     {
-                      type: "DISH",
+                      type: "SECTION_ELEMENT",
                       position: 2,
                       id: uuid.v4(),
-                      title: {
-                        text: 'marinara',
-                        style: dish_title_id
-                      },
-                      description: {
-                        text: 'tomato, garlic, oregano',
-                        style: dish_description_id
-                      },
-                      price: {
-                        text: '$8',
-                        style: dish_price_id
-                      },
+                      elements: [
+                        {
+                          type: "DISH_TITLE",
+                          text: 'marinara',
+                          styles: dish_title_id
+                        },
+                        {
+                          type: "DISH_DESCRIPTION",
+                          text: 'tomato, garlic, oregano',
+                          styles: dish_description_id
+                        },
+                        {
+                          type: "DISH_PRICE",
+                          text: '$8',
+                          styles: dish_price_id
+                        }
+                      ]
                     },
                     {
-                      type: "DISH",
+                      type: "SECTION_ELEMENT",
                       position: 3,
                       id: uuid.v4(),
-                      title: {
-                        text: 'marinara',
-                        style: dish_title_id
-                      },
-                      description: {
-                        text: 'tomato, garlic, oregano',
-                        style: dish_description_id
-                      },
-                      price: {
-                        text: '$8',
-                        style: dish_price_id
-                      },
+                      elements: [
+                        {
+                          type: "DISH_TITLE",
+                          text: 'marinara',
+                          styles: dish_title_id
+                        },
+                        {
+                          type: "DISH_DESCRIPTION",
+                          text: 'tomato, garlic, oregano',
+                          styles: dish_description_id
+                        },
+                        {
+                          type: "DISH_PRICE",
+                          text: '$8',
+                          styles: dish_price_id
+                        }
+                      ]
                     },
                     {
-                      type: "DISH",
+                      type: "SECTION_ELEMENT",
                       position: 4,
                       id: uuid.v4(),
-                      title: {
-                        text: 'marinara',
-                        style: dish_title_id
-                      },
-                      description: {
-                        text: 'tomato, garlic, oregano',
-                        style: dish_description_id
-                      },
-                      price: {
-                        text: '$8',
-                        style: dish_price_id
-                      },
+                      elements: [
+                        {
+                          type: "DISH_TITLE",
+                          text: 'marinara',
+                          styles: dish_title_id
+                        },
+                        {
+                          type: "DISH_DESCRIPTION",
+                          text: 'tomato, garlic, oregano',
+                          styles: dish_description_id
+                        },
+                        {
+                          type: "DISH_PRICE",
+                          text: '$8',
+                          styles: dish_price_id
+                        }
+                      ]
                     },
                     {
-                      type: "DISH",
+                      type: "SECTION_ELEMENT",
                       position: 5,
                       id: uuid.v4(),
-                      title: {
-                        text: 'marinara',
-                        style: dish_title_id
-                      },
-                      description: {
-                        text: 'tomato, garlic, oregano',
-                        style: dish_description_id
-                      },
-                      price: {
-                        text: '$8',
-                        style: dish_price_id
-                      },
+                      elements: [
+                        {
+                          type: "DISH_TITLE",
+                          text: 'marinara',
+                          styles: dish_title_id
+                        },
+                        {
+                          type: "DISH_DESCRIPTION",
+                          text: 'tomato, garlic, oregano',
+                          styles: dish_description_id
+                        },
+                        {
+                          type: "DISH_PRICE",
+                          text: '$8',
+                          styles: dish_price_id
+                        }
+                      ]
                     },
                     {
-                      type: "DISH",
+                      type: "SECTION_ELEMENT",
                       position: 6,
                       id: uuid.v4(),
-                      title: {
-                        text: 'marinara',
-                        style: dish_title_id
-                      },
-                      description: {
-                        text: 'tomato, garlic, oregano',
-                        style: dish_description_id
-                      },
-                      price: {
-                        text: '$8',
-                        style: dish_price_id
-                      },
+                      elements: [
+                        {
+                          type: "DISH_TITLE",
+                          text: 'marinara',
+                          styles: dish_title_id
+                        },
+                        {
+                          type: "DISH_DESCRIPTION",
+                          text: 'tomato, garlic, oregano',
+                          styles: dish_description_id
+                        },
+                        {
+                          type: "DISH_PRICE",
+                          text: '$8',
+                          styles: dish_price_id
+                        }
+                      ]
                     },
                     {
-                      type: "DISH",
+                      type: "SECTION_ELEMENT",
                       position: 7,
                       id: uuid.v4(),
-                      title: {
-                        text: 'marinara',
-                        style: dish_title_id
-                      },
-                      description: {
-                        text: 'tomato, garlic, oregano',
-                        style: dish_description_id
-                      },
-                      price: {
-                        text: '$8',
-                        style: dish_price_id
-                      },
+                      elements: [
+                        {
+                          type: "DISH_TITLE",
+                          text: 'marinara',
+                          styles: dish_title_id
+                        },
+                        {
+                          type: "DISH_DESCRIPTION",
+                          text: 'tomato, garlic, oregano',
+                          styles: dish_description_id
+                        },
+                        {
+                          type: "DISH_PRICE",
+                          text: '$8',
+                          styles: dish_price_id
+                        }
+                      ]
                     },
                     {
-                      type: "DISH",
+                      type: "SECTION_ELEMENT",
                       position: 8,
                       id: uuid.v4(),
-                      title: {
-                        text: 'marinara',
-                        style: dish_title_id
-                      },
-                      description: {
-                        text: 'tomato, garlic, oregano',
-                        style: dish_description_id
-                      },
-                      price: {
-                        text: '$8',
-                        style: dish_price_id
-                      },
+                      elements: [
+                        {
+                          type: "DISH_TITLE",
+                          text: 'marinara',
+                          styles: dish_title_id
+                        },
+                        {
+                          type: "DISH_DESCRIPTION",
+                          text: 'tomato, garlic, oregano',
+                          styles: dish_description_id
+                        },
+                        {
+                          type: "DISH_PRICE",
+                          text: '$8',
+                          styles: dish_price_id
+                        }
+                      ]
                     },
                   ]
                 }

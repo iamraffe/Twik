@@ -6,7 +6,7 @@ export default function structureReducer(state = initialState.structure, action)
   let containerIndex, rowIndex, columnIndex
 
   switch(action.type){
-    case types.ADD_SECTION:
+    case types.ADD_SECTION_STRUCTURE:
       containerIndex = _.findIndex(state, ['id', action.containerId])
       rowIndex = _.findIndex(state[containerIndex].elements, ['id', action.rowId])
       columnIndex = _.findIndex(state[containerIndex].elements[rowIndex].elements, ['id', action.columnId])

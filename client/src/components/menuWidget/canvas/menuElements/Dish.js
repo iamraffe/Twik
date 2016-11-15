@@ -6,35 +6,29 @@ class Dish extends React.Component{
     super(props)
 
     this.state = {
-      title: {
-        text: props.title.text,
-        style: props.getStyles(props.title.style)
-      },
-      description: {
-        text: props.description.text,
-        style: props.getStyles(props.description.style)
-      },
-      price: {
-        text: props.price.text,
-        style: props.getStyles(props.price.style)
-      }
+      elements: _.map(props.elements, (e, i) => {
+        return (
+          {
+            type: e.type,
+            text: e.text,
+            styles: props.getStyles(e.styles)
+          }
+        )
+      })
     }
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      title: {
-        text: nextProps.title.text,
-        style: nextProps.getStyles(nextProps.title.style)
-      },
-      description: {
-        text: nextProps.description.text,
-        style: nextProps.getStyles(nextProps.description.style)
-      },
-      price: {
-        text: nextProps.price.text,
-        style: nextProps.getStyles(nextProps.price.style)
-      }
+      elements: _.map(nextProps.elements, (e, i) => {
+        return (
+          {
+            type: e.type,
+            text: e.text,
+            styles: nextProps.getStyles(e.styles)
+          }
+        )
+      })
     })
   }
 
@@ -42,22 +36,24 @@ class Dish extends React.Component{
   }
 
   render(){
-    const { title, description, price } = this.state
+    const { elements } = this.state
 
     return (
       <article className="dish-element">
-        <h1 className="title" style={title.style}>{title.text}</h1>
-        <p className="description" style={description.style}>{description.text}</p>
-        <h2 className="price" style={price.style}>{price.text}</h2>
+        {_.map(elements, (e, i) => {
+          return (
+            <p key={i} className={e.type} style={e.styles}>{ e.text === '' ? 'Lorem ipsum' : e.text }</p>
+          )
+        })}
       </article>
     )
   }
 }
 
 Dish.propTypes = {
-  title: PropTypes.object.isRequired,
-  description: PropTypes.object,
-  price: PropTypes.object.isRequired
+  // title: PropTypes.object.isRequired,
+  // description: PropTypes.object,
+  // price: PropTypes.object.isRequired
 }
 
 export default Dish
