@@ -19,7 +19,8 @@ class SingleElement extends React.Component{
   }
 
   render(){
-    const { text, styles, type } = this.state
+    const { text, styles } = this.state
+    const { type } = this.props
     console.log("SINGLE ELEMENT", text, styles)
     return (
       <div className={`${type} single-element`}>

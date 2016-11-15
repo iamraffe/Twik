@@ -7,6 +7,7 @@ import uuid from 'node-uuid'
 
 import * as structureActions from '../../../actions/structureActions'
 import * as styleActions from '../../../actions/styleActions'
+import * as sectionActions from '../../../actions/sectionActions'
 
 import StylesPanel from './StylesPanel'
 
@@ -25,6 +26,23 @@ const sectionSource = {
       if(component.state.newSection){
         const fonts = _.invert(component.state.fontFamilies)
         const colors = _.invert(component.state.colors)
+        // const parsedStructure =  _.map(structure.elements, (element) => {
+        //                           props.styleActions.addSectionStyle({
+        //                             color: colors[element.styles.color],
+        //                             id: element.styles.id,
+        //                             fontFamily: fonts[element.styles.fontFamily],
+        //                             name: element.styles.name,
+        //                             extra:{
+        //                               fontSize: parseFloat(element.styles.fontSize.slice(0, -2))
+        //                             }
+        //                           })
+        //                           // save element style
+        //                           return ({
+        //                             styles: element.styles.id,
+        //                             text: ''
+        //                           })
+        //                         })
+        // console.log(parsedStructure)
         section = {
           id: uuid.v4(),
           type: "SECTION",
@@ -34,24 +52,24 @@ const sectionSource = {
             ...structure,
             position: 0,
             elements: _.map(structure.elements, (element) => {
-                        props.styleActions.addSectionStyle({
-                          color: colors[element.styles.color],
-                          id: element.styles.id,
-                          fontFamily: fonts[element.styles.fontFamily],
-                          name: element.styles.name,
-                          extra:{
-                            fontSize: parseFloat(element.styles.fontSize.slice(0, -2))
-                          }
-                        })
-                        // save element style
-                        return ({
-                          styles: element.styles.id,
-                          text: ''
-                        })
-                      }),            
-            
+                                  props.styleActions.addSectionStyle({
+                                    color: colors[element.styles.color],
+                                    id: element.styles.id,
+                                    fontFamily: fonts[element.styles.fontFamily],
+                                    name: element.styles.name,
+                                    extra:{
+                                      fontSize: parseFloat(element.styles.fontSize.slice(0, -2))
+                                    }
+                                  })
+                                  // save element style
+                                  return ({
+                                    styles: element.styles.id,
+                                    text: ''
+                                  })
+                                })
           }]
         }
+        props.sectionActions.addSectionType({...component.state.sectionStyle, structure: _.omit(section.elements[0], ['position']) })
       }
       else{
         section = {
@@ -70,6 +88,7 @@ const sectionSource = {
 
 
       props.structureActions.addSectionStructure(section, dropResult.containerId, dropResult.rowId, dropResult.columnId)
+      // props.structureActions.addSectionStructure(component.state.sectionStyle)
       component.state.sectionStyle = {}
       component.state.newSection = false
     }
@@ -235,6 +254,7 @@ function mapStateToProps(state, ownProps){
 function mapDispatchToProps(dispatch){
   return {
     structureActions: bindActionCreators(structureActions, dispatch),
+    sectionActions: bindActionCreators(sectionActions, dispatch),
     styleActions: bindActionCreators(styleActions, dispatch)
   }
 }
