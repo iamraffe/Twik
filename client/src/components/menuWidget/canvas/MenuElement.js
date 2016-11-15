@@ -20,10 +20,13 @@ class MenuElement extends React.Component{
 
   render(){
     const { type, elements, position } = this.props
-    
+    if(type === "SINGLE_ELEMENT"){
+      console.log("IS SINGLE", this.props)
+    }
     switch(type){
       case "MENU_TITLE":
       case "SECTION_TITLE":
+      case "SINGLE_ELEMENT":
         return (
           <SingleElement
             type={type}
@@ -34,6 +37,7 @@ class MenuElement extends React.Component{
           />
         )
       case "SECTION_ELEMENT":
+      case "COMPOUND_ELEMENT":
         return (
           <CompoundElement
             type={type}

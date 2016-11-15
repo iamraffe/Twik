@@ -6,6 +6,7 @@ import { DragSource } from 'react-dnd'
 import uuid from 'node-uuid'
 
 import * as structureActions from '../../../actions/structureActions'
+import * as styleActions from '../../../actions/styleActions'
 
 import StylesPanel from './StylesPanel'
 
@@ -16,22 +17,61 @@ const sectionSource = {
   endDrag(props, monitor, component) {
     const item = monitor.getItem()
     const dropResult = monitor.getDropResult()
-
+    console.log(props)
     if (dropResult) {
       const { id, structure } = component.state.sectionStyle
-      // console.log("COMPONENT ", id, structure)
-      const section = {
-        id: uuid.v4(),
-        type: "SECTION",
-        position: dropResult.position,
-        struct: id,
-        elements: [{
-          ...structure,
-          position: 0
-        }]
+      let section = {}
+      console.log("COMPONENT ", component.state, id, structure)
+      if(component.state.newSection){
+        const fonts = _.invert(component.state.fontFamilies)
+        const colors = _.invert(component.state.colors)
+        section = {
+          id: uuid.v4(),
+          type: "SECTION",
+          position: dropResult.position,
+          struct: id,
+          elements: [{
+            ...structure,
+            position: 0,
+            elements: _.map(structure.elements, (element) => {
+                        props.styleActions.addSectionStyle({
+                          color: colors[element.styles.color],
+                          id: element.styles.id,
+                          fontFamily: fonts[element.styles.fontFamily],
+                          name: element.styles.name,
+                          extra:{
+                            fontSize: parseFloat(element.styles.fontSize.slice(0, -2))
+                          }
+                        })
+                        // save element style
+                        return ({
+                          styles: element.styles.id,
+                          text: ''
+                        })
+                      }),            
+            
+          }]
+        }
+      }
+      else{
+        section = {
+          id: uuid.v4(),
+          type: "SECTION",
+          position: dropResult.position,
+          struct: id,
+          elements: [{
+            ...structure,
+            position: 0
+          }]
+        }
       }
 
+      console.log("SECIOTN ", section)
+
+
       props.structureActions.addSectionStructure(section, dropResult.containerId, dropResult.rowId, dropResult.columnId)
+      component.state.sectionStyle = {}
+      component.state.newSection = false
     }
   }
 }
@@ -49,7 +89,9 @@ class SectionPanel extends React.Component{
     this.state = {
       sections: props.sections,
       sectionStyle: {},
-      newSection: false
+      newSection: false,
+      colors: props.colors,
+      fontFamilies: props.fontFamilies
     }
 
     this.onClose = props.onClose
@@ -58,7 +100,9 @@ class SectionPanel extends React.Component{
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      sections: nextProps.sections
+      sections: nextProps.sections,
+      colors: nextProps.colors,
+      fontFamilies: nextProps.fontFamilies
     })
   }
 
@@ -96,10 +140,32 @@ class SectionPanel extends React.Component{
               text: '',
               unsaved: true,
               styles: {
-                ..._.omit(s, ['id'])
+                ...s
               }
             })
           })
+        }
+      }
+    })
+  }
+
+  updateStyle = (styleSelected, updatedStyle) => {
+    this.setState({
+      sectionStyle:{
+        ...this.state.sectionStyle,
+        structure: {
+          ...this.state.sectionStyle.structure,
+          elements: [
+            ...this.state.sectionStyle.structure.elements.slice(0, styleSelected.index),
+            {
+              ...this.state.sectionStyle.structure.elements[styleSelected.index],
+              styles: {
+                ...this.state.sectionStyle.structure.elements[styleSelected.index].styles,
+                ...updatedStyle
+              }
+            },
+             ...this.state.sectionStyle.structure.elements.slice(styleSelected.index+1),
+          ]
         }
       }
     })
@@ -135,6 +201,7 @@ class SectionPanel extends React.Component{
             <div className="row">
               <StylesPanel
                 addNewStyle={this.addNewStyle}
+                updateStyle={this.updateStyle}
               />
             </div>
           </div>
@@ -159,13 +226,16 @@ SectionPanel.propTypes = {}
 
 function mapStateToProps(state, ownProps){
   return {
-    sections: state.sections
+    sections: state.sections,
+    colors: state.colors,
+    fontFamilies: state.fontFamilies
   }
 }
 
 function mapDispatchToProps(dispatch){
   return {
-    structureActions: bindActionCreators(structureActions, dispatch)
+    structureActions: bindActionCreators(structureActions, dispatch),
+    styleActions: bindActionCreators(styleActions, dispatch)
   }
 }
 

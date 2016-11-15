@@ -14,7 +14,7 @@ class ColorPanel extends React.Component{
       editing: 'none',
       primary_color: props.colors.primary_color,
       secondary_color: props.colors.secondary_color,
-      terniary_color: props.colors.terniary_color,
+      tertiary_color: props.colors.tertiary_color,
       quaternary_color: props.colors.quaternary_color,
       quinary_color: props.colors.quinary_color,
     }
@@ -26,7 +26,7 @@ class ColorPanel extends React.Component{
     this.setState({
       primary_color: nextProps.colors.primary_color,
       secondary_color: nextProps.colors.secondary_color,
-      terniary_color: nextProps.colors.terniary_color,
+      tertiary_color: nextProps.colors.tertiary_color,
       quaternary_color: nextProps.colors.quaternary_color,
       quinary_color: nextProps.colors.quinary_color,
     })
@@ -59,7 +59,7 @@ class ColorPanel extends React.Component{
   render(){
     const { primary_color,
             secondary_color,
-            terniary_color,
+            tertiary_color,
             quaternary_color,
             quinary_color,
             editing } = this.state
@@ -127,24 +127,24 @@ class ColorPanel extends React.Component{
             </div>
           </article>
         }
-        {terniary_color && editing !== 'terniary_color' &&
+        {tertiary_color && editing !== 'tertiary_color' &&
           <article>
             <span
-              onDoubleClick={(e) => {this.onEditColor('terniary_color')}}
-              style={{display: 'inline-block', width: 15, height: 15, backgroundColor: terniary_color}}
+              onDoubleClick={(e) => {this.onEditColor('tertiary_color')}}
+              style={{display: 'inline-block', width: 15, height: 15, backgroundColor: tertiary_color}}
             >
             </span>
           </article>
         }
-        {terniary_color && editing === 'terniary_color' &&
+        {tertiary_color && editing === 'tertiary_color' &&
           <article>
             <div style={popover}>
               <div style={cover} onClick={this.onChangeComplete}/>
               <SketchPicker
-                color={terniary_color}
+                color={tertiary_color}
                 onChange={(color) => {
                   console.log("onChange", color, color.hex)
-                  this.onChange(color.hex, "terniary_color")
+                  this.onChange(color.hex, "tertiary_color")
                 }}
               />
             </div>

@@ -24,6 +24,7 @@ class Canvas extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
+    console.log("RECEIVED PROPS ", nextProps.styles)
     this.setState({
       width: PAPER_SIZES[`${nextProps.meta.size.toUpperCase()}_${nextProps.meta.orientation.toUpperCase()}`].width,
       height: PAPER_SIZES[`${nextProps.meta.size.toUpperCase()}_${nextProps.meta.orientation.toUpperCase()}`].height,
@@ -40,9 +41,15 @@ class Canvas extends React.Component{
   }
 
   getStyles = (styleId) => {
+
     const { styles, fontFamilies, colors, zoom } = this.state
     const index = _.findIndex(styles, (s, i) => {return s.id === styleId})
-    
+    console.log("INDEX => ", index, styles, styles[index], styleId, {
+      ...styles[index].extra,
+      fontSize: `${styles[index].extra.fontSize*zoom/100}pt`,
+      color: `${colors[styles[index].color]}`,
+      fontFamily: fontFamilies[styles[index].fontFamily],
+    })
     return {
       ...styles[index].extra,
       fontSize: `${styles[index].extra.fontSize*zoom/100}pt`,
