@@ -86,7 +86,7 @@ class Column extends React.Component{
     // console.log("re-render")
     return connectDropTarget(
       <div
-        style={{width: (100*this.props.span)+"%", border: '1px solid green', backgroundColor}}
+        style={{width: (100*this.props.span)+"%", backgroundColor}}
       >
         {_.map(this.state.elements, (element, i) => {
           return (

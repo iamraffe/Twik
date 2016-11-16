@@ -36,11 +36,11 @@ class Section extends React.Component{
   }
 
   onAddMenuElement = (e) => {
-    const { sections } = this.state
+    const { sections, elements } = this.state
     const { containerId, rowId, columnId, id, struct } = this.props
     const sectionIndex =  _.findIndex(sections, (s) => {return s.id === struct})
     // console.log(this.props, sectionIndex, sections[sectionIndex], sections[sectionIndex].structure)
-    this.props.structureActions.addMenuElement(sections[sectionIndex].structure, containerId, rowId, columnId, id)
+    this.props.structureActions.addMenuElement({...sections[sectionIndex].structure, position: elements.length}, containerId, rowId, columnId, id)
   }
 
   onUpdateMenuElement = (element) => {
@@ -55,7 +55,8 @@ class Section extends React.Component{
 
     return(
       <div
-        style={{border: '1px solid yellow'}}
+        className="section-element"
+        style={{}}
       >
         {_.map(elements, (element, i) => {
           return (

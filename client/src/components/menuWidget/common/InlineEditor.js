@@ -18,6 +18,7 @@ class InlineEditor extends React.Component {
 
   
   _onTab(e) {
+    e.preventDefault()
     this.onSaveContent()
   }
 

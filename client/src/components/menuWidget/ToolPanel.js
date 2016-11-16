@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import request from 'superagent'
 
+import * as zoomActions from '../../actions/zoomActions'
+
 import {  FontPanel,
           ColorPanel,
           LayoutPanel,
@@ -18,7 +20,9 @@ class ToolPanel extends React.Component{
       active: 'none',
       styles: props.styles,
       fontFamilies: props.fontFamilies,
-      colors: props.colors
+      colors: props.colors,
+      meta: props.meta, 
+      zoom: props.zoom
     }
   }
 
@@ -26,7 +30,9 @@ class ToolPanel extends React.Component{
     this.setState({
       colors: nextProps.colors,
       fontFamilies: nextProps.fontFamilies,
-      styles: nextProps.styles
+      styles: nextProps.styles,
+      meta: nextProps.meta,
+      zoom: nextProps.zoom
     })
   }
 
@@ -46,17 +52,28 @@ class ToolPanel extends React.Component{
     }
   }
 
-  onExport = () => {
+  exportCall = () => {
+    const { meta } = this.state
     const html = document.getElementById('entry-point').innerHTML
     const req = request.post(`/export`)
     req.query({ format: 'json' })
     req.field('authenticity_token', $('meta[name="csrf-token"]').attr('content') )
     // req.send({private: false, ...})
     req.field('html', html)
+    req.field('meta', JSON.stringify(meta))
     req.end((err, res)=>{
       console.log(err, res)
       window.open(res.body.path, "_blank")
     })
+  }
+
+  onExport = () => {
+    const { applyZoom } = this.props.zoomActions
+    const { zoom } = this.state
+    applyZoom(100)
+    // this.exportCall()
+    setTimeout(this.exportCall, 100)
+
   }
 
   render(){
@@ -120,6 +137,7 @@ function mapStateToProps(state, ownProps){
 
 function mapDispatchToProps(dispatch){
   return {
+    zoomActions: bindActionCreators(zoomActions, dispatch)
   }
 }
 

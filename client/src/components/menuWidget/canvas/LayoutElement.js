@@ -33,7 +33,7 @@ class LayoutElement extends React.Component{
     switch(type){
       case "CONTAINER":
         return (
-          <div className="canvas-container" style={{border: '1px solid red'}}>
+          <div className="canvas-container" style={{}}>
             {_.map(this.props.elements, (element, i) => {
               return (
                 <LayoutElement
@@ -59,7 +59,7 @@ class LayoutElement extends React.Component{
               paddingBottom: (this.props.paddingBottom*this.props.zoom/100)+'pt',
               paddingLeft: (this.props.paddingLeft*this.props.zoom/100)+'pt',
               paddingRight: (this.props.paddingRight*this.props.zoom/100)+'pt',
-              border: '1px solid blue'
+              // border: '1px solid blue'
             }}
           >
             {_.map(this.props.elements, (element, i) => {

@@ -15,6 +15,12 @@ class ZoomUtility extends React.Component{
     }
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      zoom: nextProps.zoom
+    })
+  }
+
   onZoom = (amount) => {
     const { applyZoom } = this.props.zoomActions
     

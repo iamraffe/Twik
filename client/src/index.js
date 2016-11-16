@@ -79,7 +79,7 @@ const menu = {
     alternate_font: ''
   },
   orientation: 'portrait',
-  size: 'letter',
+  size: 'tabloid',
   styles: [
     {
       id: menu_title_id,
