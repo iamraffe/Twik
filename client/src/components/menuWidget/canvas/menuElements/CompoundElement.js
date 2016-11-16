@@ -83,7 +83,7 @@ class CompoundElement extends React.Component{
                   <span
                     className={e.type}
                     style={e.styles}
-                    dangerouslySetInnerHTML={{__html: (e.text === '' ? '<p>Lorem ipsum</p>' : `<p>${e.text}</p>`)}}
+                    dangerouslySetInnerHTML={{__html: (e.text === '' ? '<p>Lorem ipsum</p>' : `${e.text}`)}}
                     onDoubleClick={() => {
                       if(activeSection){
                         this.onToggleEditing(e.type)

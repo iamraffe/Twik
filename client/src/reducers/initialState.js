@@ -8,6 +8,7 @@ export default {
     orientation: '',
     size: ''
   },
+  section_types: [],
   sections: [],
   structure: [],
   styles: [],

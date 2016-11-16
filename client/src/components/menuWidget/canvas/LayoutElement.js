@@ -34,7 +34,19 @@ class LayoutElement extends React.Component{
     switch(type){
       case "CONTAINER":
         return (
-          <div className="canvas-container" style={{}}>
+          <div
+            className=""
+            style={{
+              border: '1px solid red',
+              width: this.props.span*100+'%',
+              float: 'left',
+              position: 'relative',
+              height: '100%',
+              display: '-webkit-flex',
+              display: 'flex',
+              flexDirection: 'row'
+            }}
+          >
             {_.map(this.props.elements, (element, i) => {
               return (
                 <LayoutElement
@@ -58,12 +70,15 @@ class LayoutElement extends React.Component{
       case "ROW":
         return (
           <div
+            className="row-canvas"
             style={{
               paddingTop: (this.props.paddingTop*this.props.zoom/100)+'pt',
               paddingBottom: (this.props.paddingBottom*this.props.zoom/100)+'pt',
               paddingLeft: (this.props.paddingLeft*this.props.zoom/100)+'pt',
               paddingRight: (this.props.paddingRight*this.props.zoom/100)+'pt',
-              // border: '1px solid blue'
+              border: '1px solid blue',
+              width: '100%',
+              alignSelf: this.props.vertical === 'bottom' ? 'flex-end' : 'flex-start'
             }}
           >
             {_.map(this.props.elements, (element, i) => {

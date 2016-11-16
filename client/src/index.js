@@ -27,17 +27,10 @@ function toUnderscore(str) {
 
 window.renderReact = (id, component, props) => {
   let store = {}
+  // console.log("MENU => ", menu)
+  // debugger;
   if(component === 'MenuWidget'){
-    store = configureStore({
-      meta: {
-        editor: props.editor,
-        title: menu.title,
-        orientation: menu.orientation,
-        size: menu.size,
-        id: menu.id
-      },
-      ..._.omit(menu, ['title', 'orientation', 'size', 'id'])
-    })
+    store = configureStore({...menu, meta: {...menu.meta, ...props}})
   }
   else{
     store = configureStore()
@@ -63,23 +56,26 @@ const category_title_id = uuid.v4()
 const menu_title_section_id = uuid.v4()
 const category_dishes_id = uuid.v4()
 
-const menu = {
+// template_other
+const col_1_id = uuid.v4()
+const col_2_id = uuid.v4()
+const col_3_id = uuid.v4()
+
+
+const template = {
   id: uuid.v4(),
-  title: "My Test Menu",
-  colors: {
-    primary_color: '#C1F120',
-    secondary_color: '#C00004',
-    tertiary_color: '#C33331',
-    quaternary_color: '',
-    quinary_color: ''
+  meta: {
+    orientation: 'portrait',
+    size: 'tabloid',
+  }
+}
+
+const template_other = {
+  id: uuid.v4(),
+  meta: {
+    orientation: 'landscape',
+    size: 'letter',
   },
-  fontFamilies: {
-    primary_font: 'Montserrat',
-    secondary_font: 'Roboto',
-    alternate_font: ''
-  },
-  orientation: 'portrait',
-  size: 'tabloid',
   styles: [
     {
       id: menu_title_id,
@@ -87,10 +83,10 @@ const menu = {
       fontFamily: 'primary_font',
       color: 'secondary_color',
       extra: {
-        fontSize: 15,
+        fontSize: 54<p>.d</p>4,
         textTransform: 'uppercase',
         textDecoration: 'none',
-        fontWeight: 'bold',
+        fontWeight: 'normal',
         fontStyle: 'normal'
       }
     },
@@ -100,10 +96,10 @@ const menu = {
       fontFamily: 'primary_font',
       color: 'secondary_color',
       extra: {
-        fontSize: 13,
+        fontSize: 24,
         textTransform: 'uppercase',
         textDecoration: 'none',
-        fontWeight: 'bold',
+        fontWeight: 'normal',
         fontStyle: 'normal'
       }
     },
@@ -113,10 +109,10 @@ const menu = {
       fontFamily: 'primary_font',
       color: 'primary_color',
       extra: {
-        fontSize: 12,
+        fontSize: 14,
         textTransform: 'uppercase',
         textDecoration: 'underline',
-        fontWeight: 'bold',
+        fontWeight: 'normal',
         fontStyle: 'normal',
       }
     },
@@ -126,7 +122,7 @@ const menu = {
       fontFamily: 'secondary_font',
       color: 'primary_color',
       extra: {
-        fontSize: 8,
+        fontSize: 12,
         textTransform: 'none',
         textDecoration: 'none',
         fontWeight: 'normal',
@@ -139,15 +135,15 @@ const menu = {
       fontFamily: 'primary_font',
       color: 'primary_color',
       extra: {
-        fontSize: 10,
+        fontSize: 12,
         textTransform: 'uppercase',
         textDecoration: 'none',
-        fontWeight: 'bold',
+        fontWeight: 'normal',
         fontStyle: 'normal'
       }
     }
   ],
-  sections: [
+  section_types: [
     {
       name: "Menu Title",
       id: menu_title_section_id,
@@ -204,7 +200,7 @@ const menu = {
       type: 'CONTAINER',
       position: 0,
       background: '',
-      span: 1,
+      span: 0.5,
       paddingTop: 15,
       paddingBottom: 15,
       paddingLeft: 15,
@@ -215,250 +211,476 @@ const menu = {
           type: "ROW",
           position: 0,
           id: uuid.v4(),
+          vertical: 'bottom',
           elements: [
             {
               type: "COLUMN",
               span: 1,
-              id: uuid.v4(),
+              id: col_1_id,
               position: 0,
               elements: [
-                {
-                  type: "SECTION",
-                  position: 0,
-                  id: uuid.v4(),
-                  struct: menu_title_section_id,
-                  elements: [
-                    {
-                      type: "MENU_TITLE",
-                      position: 0,
-                      elements: [{
-                        text: 'ONE SMORGASBORD',
-                        styles: menu_title_id
-                      }]
-                    }
-                  ]
-                }
               ]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      type: 'CONTAINER',
+      position: 0,
+      background: '',
+      span: 0.5,
+      paddingTop: 15,
+      paddingBottom: 15,
+      paddingLeft: 15,
+      paddingRight: 15,
+      id: uuid.v4(),
+      elements: [
         {
           type: "ROW",
           position: 0,
           id: uuid.v4(),
+          vertical: 'top',
           elements: [
             {
               type: "COLUMN",
               span: 0.5,
-              id: uuid.v4(),
+              id: col_2_id,
               position: 0,
               elements: [
-                {
-                  type: "SECTION",
-                  id: uuid.v4(),
-                  position: 0,
-                  struct: category_title_id,
-                  elements: [
-                    {
-                      type: "SECTION_TITLE",
-                      
-                      position: 0,
-                      elements: [{
-                        text: "PIZZA",
-                        styles: section_title_id
-                      }]
-                    }
-                  ]
-                },
-                {
-                  type: "SECTION",
-                  id: uuid.v4(),
-                  position: 1,
-                  struct: category_dishes_id,
-                  elements: [
-                    {
-                      type: "SECTION_ELEMENT",
-                      position: 0,
-                      id: uuid.v4(),
-                      elements: [
-                        {
-                          type: "DISH_TITLE",
-                          text: 'marinara',
-                          styles: dish_title_id
-                        },
-                        {
-                          type: "DISH_DESCRIPTION",
-                          text: 'tomato, garlic, oregano',
-                          styles: dish_description_id
-                        },
-                        {
-                          type: "DISH_PRICE",
-                          text: '$8',
-                          styles: dish_price_id
-                        }
-                      ]
-                    },
-                    {
-                      type: "SECTION_ELEMENT",
-                      position: 1,
-                      id: uuid.v4(),
-                      elements: [
-                        {
-                          type: "DISH_TITLE",
-                          text: 'marinara',
-                          styles: dish_title_id
-                        },
-                        {
-                          type: "DISH_DESCRIPTION",
-                          text: 'tomato, garlic, oregano',
-                          styles: dish_description_id
-                        },
-                        {
-                          type: "DISH_PRICE",
-                          text: '$8',
-                          styles: dish_price_id
-                        }
-                      ]
-                    },
-                    {
-                      type: "SECTION_ELEMENT",
-                      position: 2,
-                      id: uuid.v4(),
-                      elements: [
-                        {
-                          type: "DISH_TITLE",
-                          text: 'marinara',
-                          styles: dish_title_id
-                        },
-                        {
-                          type: "DISH_DESCRIPTION",
-                          text: 'tomato, garlic, oregano',
-                          styles: dish_description_id
-                        },
-                        {
-                          type: "DISH_PRICE",
-                          text: '$8',
-                          styles: dish_price_id
-                        }
-                      ]
-                    },
-                    {
-                      type: "SECTION_ELEMENT",
-                      position: 3,
-                      id: uuid.v4(),
-                      elements: [
-                        {
-                          type: "DISH_TITLE",
-                          text: 'marinara',
-                          styles: dish_title_id
-                        },
-                        {
-                          type: "DISH_DESCRIPTION",
-                          text: 'tomato, garlic, oregano',
-                          styles: dish_description_id
-                        },
-                        {
-                          type: "DISH_PRICE",
-                          text: '$8',
-                          styles: dish_price_id
-                        }
-                      ]
-                    },
-                    {
-                      type: "SECTION_ELEMENT",
-                      position: 4,
-                      id: uuid.v4(),
-                      elements: [
-                        {
-                          type: "DISH_TITLE",
-                          text: 'marinara',
-                          styles: dish_title_id
-                        },
-                        {
-                          type: "DISH_DESCRIPTION",
-                          text: 'tomato, garlic, oregano',
-                          styles: dish_description_id
-                        },
-                        {
-                          type: "DISH_PRICE",
-                          text: '$8',
-                          styles: dish_price_id
-                        }
-                      ]
-                    },
-                    {
-                      type: "SECTION_ELEMENT",
-                      position: 5,
-                      id: uuid.v4(),
-                      elements: [
-                        {
-                          type: "DISH_TITLE",
-                          text: 'marinara',
-                          styles: dish_title_id
-                        },
-                        {
-                          type: "DISH_DESCRIPTION",
-                          text: 'tomato, garlic, oregano',
-                          styles: dish_description_id
-                        },
-                        {
-                          type: "DISH_PRICE",
-                          text: '$8',
-                          styles: dish_price_id
-                        }
-                      ]
-                    },
-                    {
-                      type: "SECTION_ELEMENT",
-                      position: 6,
-                      id: uuid.v4(),
-                      elements: [
-                        {
-                          type: "DISH_TITLE",
-                          text: 'marinara',
-                          styles: dish_title_id
-                        },
-                        {
-                          type: "DISH_DESCRIPTION",
-                          text: 'tomato, garlic, oregano',
-                          styles: dish_description_id
-                        },
-                        {
-                          type: "DISH_PRICE",
-                          text: '$8',
-                          styles: dish_price_id
-                        }
-                      ]
-                    },
-                    {
-                      type: "SECTION_ELEMENT",
-                      position: 7,
-                      id: uuid.v4(),
-                      elements: [
-                        {
-                          type: "DISH_TITLE",
-                          text: 'marinara',
-                          styles: dish_title_id
-                        },
-                        {
-                          type: "DISH_DESCRIPTION",
-                          text: 'tomato, garlic, oregano',
-                          styles: dish_description_id
-                        },
-                        {
-                          type: "DISH_PRICE",
-                          text: '$8',
-                          styles: dish_price_id
-                        }
-                      ]
-                    },
-                  ]
-                }
               ]
+            },
+            {
+              type: "COLUMN",
+              span: 0.5,
+              id: col_3_id,
+              position: 0,
+              elements: [
+              ]
+            },
+          ]
+        }
+      ]
+    },
+  ]
+}
+
+const menu = {
+  meta: {
+    id: uuid.v4(),
+    title: "My Test Menu",
+    ...template.meta,
+    templateId: template_other.id
+  },
+  colors: {
+    primary_color: '#231F20',
+    secondary_color: '#F15B40',
+    tertiary_color: '#fff',
+    quaternary_color: '',
+    quinary_color: ''
+  },
+  fontFamilies: {
+    primary_font: 'Oswald',
+    secondary_font: 'Roboto Condensed',
+    alternate_font: ''
+  },
+  styles: template_other.styles,
+  section_types: template_other.section_types,
+  structure: template_other.structure,
+  sections: [
+    {
+      type: "SECTION",
+      columnId: col_1_id,
+      position: 0,
+      id: uuid.v4(),
+      struct: menu_title_section_id,
+      elements: [
+        {
+          type: "MENU_TITLE",
+          position: 0,
+          elements: [{
+            text: '<p>ONE</p><p>SMORGASBORD</p>',
+            styles: menu_title_id
+          }]
+        }
+      ]
+    },
+    {
+      type: "SECTION",
+      id: uuid.v4(),
+      columnId: col_2_id,
+      position: 0,
+      struct: category_title_id,
+      elements: [
+        {
+          type: "SECTION_TITLE",
+          
+          position: 0,
+          elements: [{
+            text: "PIZZA",
+            styles: section_title_id
+          }]
+        }
+      ]
+    },
+    {
+      type: "SECTION",
+      id: uuid.v4(),
+      columnId: col_2_id,
+      position: 1,
+      struct: category_dishes_id,
+      elements: [
+        {
+          type: "SECTION_ELEMENT",
+          position: 0,
+          id: uuid.v4(),
+          elements: [
+            {
+              type: "DISH_TITLE",
+              text: '<p>marinara</p>',
+              styles: dish_title_id
+            },
+            {
+              type: "DISH_DESCRIPTION",
+              text: '<p>tomato, garlic, oregano</p>',
+              styles: dish_description_id
+            },
+            {
+              type: "DISH_PRICE",
+              text: '<p>$d</p>',
+              styles: dish_price_id
             }
           ]
         },
+        {
+          type: "SECTION_ELEMENT",
+          position: 1,
+          id: uuid.v4(),
+          elements: [
+            {
+              type: "DISH_TITLE",
+              text: '<p>marinara</p>',
+              styles: dish_title_id
+            },
+            {
+              type: "DISH_DESCRIPTION",
+              text: '<p>tomato, garlic, oregano</p>',
+              styles: dish_description_id
+            },
+            {
+              type: "DISH_PRICE",
+              text: '<p>$d</p>',
+              styles: dish_price_id
+            }
+          ]
+        },
+        {
+          type: "SECTION_ELEMENT",
+          position: 2,
+          id: uuid.v4(),
+          elements: [
+            {
+              type: "DISH_TITLE",
+              text: '<p>marinara</p>',
+              styles: dish_title_id
+            },
+            {
+              type: "DISH_DESCRIPTION",
+              text: '<p>tomato, garlic, oregano</p>',
+              styles: dish_description_id
+            },
+            {
+              type: "DISH_PRICE",
+              text: '<p>$d</p>',
+              styles: dish_price_id
+            }
+          ]
+        },
+        {
+          type: "SECTION_ELEMENT",
+          position: 3,
+          id: uuid.v4(),
+          elements: [
+            {
+              type: "DISH_TITLE",
+              text: '<p>marinara</p>',
+              styles: dish_title_id
+            },
+            {
+              type: "DISH_DESCRIPTION",
+              text: '<p>tomato, garlic, oregano</p>',
+              styles: dish_description_id
+            },
+            {
+              type: "DISH_PRICE",
+              text: '<p>$d</p>',
+              styles: dish_price_id
+            }
+          ]
+        }
       ]
     }
   ]
+  // structure: [
+  //   {
+  //     type: 'CONTAINER',
+  //     position: 0,
+  //     background: '',
+  //     span: 1,
+  //     paddingTop: 15,
+  //     paddingBottom: 15,
+  //     paddingLeft: 15,
+  //     paddingRight: 15,
+  //     id: uuid.v4(),
+  //     elements: [
+  //       {
+  //         type: "ROW",
+  //         position: 0,
+  //         id: uuid.v4(),
+  //         elements: [
+  //           {
+  //             type: "COLUMN",
+  //             span: 1,
+  //             id: uuid.v4(),
+  //             position: 0,
+  //             elements: [
+  //               {
+  //                 type: "SECTION",
+  //                 position: 0,
+  //                 id: uuid.v4(),
+  //                 struct: menu_title_section_id,
+  //                 elements: [
+  //                   {
+  //                     type: "MENU_TITLE",
+  //                     position: 0,
+  //                     elements: [{
+  //                       text: '<p>ONE</p><p>SMORGASBORD</p>',
+  //                       styles: menu_title_id
+  //                     }]
+  //                   }
+  //                 ]
+  //               }
+  //             ]
+  //           }
+  //         ]
+  //       },
+  //       {
+  //         type: "ROW",
+  //         position: 0,
+  //         id: uuid.v4(),
+  //         elements: [
+  //           {
+  //             type: "COLUMN",
+  //             span: 0.5,
+  //             id: uuid.v4(),
+  //             position: 0,
+  //             elements: [
+  //               {
+  //                 type: "SECTION",
+  //                 id: uuid.v4(),
+  //                 position: 0,
+  //                 struct: category_title_id,
+  //                 elements: [
+  //                   {
+  //                     type: "SECTION_TITLE",
+                      
+  //                     position: 0,
+  //                     elements: [{
+  //                       text: "PIZZA",
+  //                       styles: section_title_id
+  //                     }]
+  //                   }
+  //                 ]
+  //               },
+  //               {
+  //                 type: "SECTION",
+  //                 id: uuid.v4(),
+  //                 position: 1,
+  //                 struct: category_dishes_id,
+  //                 elements: [
+  //                   {
+  //                     type: "SECTION_ELEMENT",
+  //                     position: 0,
+  //                     id: uuid.v4(),
+  //                     elements: [
+  //                       {
+  //                         type: "DISH_TITLE",
+  //                         text: '<p>marinara</p>',
+  //                         styles: dish_title_id
+  //                       },
+  //                       {
+  //                         type: "DISH_DESCRIPTION",
+  //                         text: '<p>tomato, garlic, oregano</p>',
+  //                         styles: dish_description_id
+  //                       },
+  //                       {
+  //                         type: "DISH_PRICE",
+  //                         text: '<p>$d</p>',
+  //                         styles: dish_price_id
+  //                       }
+  //                     ]
+  //                   },
+  //                   {
+  //                     type: "SECTION_ELEMENT",
+  //                     position: 1,
+  //                     id: uuid.v4(),
+  //                     elements: [
+  //                       {
+  //                         type: "DISH_TITLE",
+  //                         text: '<p>marinara</p>',
+  //                         styles: dish_title_id
+  //                       },
+  //                       {
+  //                         type: "DISH_DESCRIPTION",
+  //                         text: '<p>tomato, garlic, oregano</p>',
+  //                         styles: dish_description_id
+  //                       },
+  //                       {
+  //                         type: "DISH_PRICE",
+  //                         text: '<p>$d</p>',
+  //                         styles: dish_price_id
+  //                       }
+  //                     ]
+  //                   },
+  //                   {
+  //                     type: "SECTION_ELEMENT",
+  //                     position: 2,
+  //                     id: uuid.v4(),
+  //                     elements: [
+  //                       {
+  //                         type: "DISH_TITLE",
+  //                         text: '<p>marinara</p>',
+  //                         styles: dish_title_id
+  //                       },
+  //                       {
+  //                         type: "DISH_DESCRIPTION",
+  //                         text: '<p>tomato, garlic, oregano</p>',
+  //                         styles: dish_description_id
+  //                       },
+  //                       {
+  //                         type: "DISH_PRICE",
+  //                         text: '<p>$d</p>',
+  //                         styles: dish_price_id
+  //                       }
+  //                     ]
+  //                   },
+  //                   {
+  //                     type: "SECTION_ELEMENT",
+  //                     position: 3,
+  //                     id: uuid.v4(),
+  //                     elements: [
+  //                       {
+  //                         type: "DISH_TITLE",
+  //                         text: '<p>marinara</p>',
+  //                         styles: dish_title_id
+  //                       },
+  //                       {
+  //                         type: "DISH_DESCRIPTION",
+  //                         text: '<p>tomato, garlic, oregano</p>',
+  //                         styles: dish_description_id
+  //                       },
+  //                       {
+  //                         type: "DISH_PRICE",
+  //                         text: '<p>$d</p>',
+  //                         styles: dish_price_id
+  //                       }
+  //                     ]
+  //                   },
+  //                   {
+  //                     type: "SECTION_ELEMENT",
+  //                     position: 4,
+  //                     id: uuid.v4(),
+  //                     elements: [
+  //                       {
+  //                         type: "DISH_TITLE",
+  //                         text: '<p>marinara</p>',
+  //                         styles: dish_title_id
+  //                       },
+  //                       {
+  //                         type: "DISH_DESCRIPTION",
+  //                         text: '<p>tomato, garlic, oregano</p>',
+  //                         styles: dish_description_id
+  //                       },
+  //                       {
+  //                         type: "DISH_PRICE",
+  //                         text: '<p>$d</p>',
+  //                         styles: dish_price_id
+  //                       }
+  //                     ]
+  //                   },
+  //                   {
+  //                     type: "SECTION_ELEMENT",
+  //                     position: 5,
+  //                     id: uuid.v4(),
+  //                     elements: [
+  //                       {
+  //                         type: "DISH_TITLE",
+  //                         text: '<p>marinara</p>',
+  //                         styles: dish_title_id
+  //                       },
+  //                       {
+  //                         type: "DISH_DESCRIPTION",
+  //                         text: '<p>tomato, garlic, oregano</p>',
+  //                         styles: dish_description_id
+  //                       },
+  //                       {
+  //                         type: "DISH_PRICE",
+  //                         text: '<p>$d</p>',
+  //                         styles: dish_price_id
+  //                       }
+  //                     ]
+  //                   },
+  //                   {
+  //                     type: "SECTION_ELEMENT",
+  //                     position: 6,
+  //                     id: uuid.v4(),
+  //                     elements: [
+  //                       {
+  //                         type: "DISH_TITLE",
+  //                         text: '<p>marinara</p>',
+  //                         styles: dish_title_id
+  //                       },
+  //                       {
+  //                         type: "DISH_DESCRIPTION",
+  //                         text: '<p>tomato, garlic, oregano</p>',
+  //                         styles: dish_description_id
+  //                       },
+  //                       {
+  //                         type: "DISH_PRICE",
+  //                         text: '<p>$d</p>',
+  //                         styles: dish_price_id
+  //                       }
+  //                     ]
+  //                   },
+  //                   {
+  //                     type: "SECTION_ELEMENT",
+  //                     position: 7,
+  //                     id: uuid.v4(),
+  //                     elements: [
+  //                       {
+  //                         type: "DISH_TITLE",
+  //                         text: '<p>marinara</p>',
+  //                         styles: dish_title_id
+  //                       },
+  //                       {
+  //                         type: "DISH_DESCRIPTION",
+  //                         text: '<p>tomato, garlic, oregano</p>',
+  //                         styles: dish_description_id
+  //                       },
+  //                       {
+  //                         type: "DISH_PRICE",
+  //                         text: '<p>$d</p>',
+  //                         styles: dish_price_id
+  //                       }
+  //                     ]
+  //                   },
+  //                 ]
+  //               }
+  //             ]
+  //           }
+  //         ]
+  //       },
+  //     ]
+  //   }
+  // ]
 }

@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
 import { DropTarget } from 'react-dnd'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import LayoutElement from '../LayoutElement'
 
@@ -17,7 +19,7 @@ const containerTarget = {
       containerId: props.containerId,
       rowId: props.rowId,
       columnId: props.id,
-      position: _.last(props.elements).position+1
+      position: _.last(props.sections).position+1
     }
   }
 }
@@ -30,9 +32,10 @@ const containerTarget = {
 class Column extends React.Component{
   constructor(props){
     super(props)
-
+    console.log(props,  _.filter(props.sections, (section, i) => {return section.columnId === props.id}))
+    // debugger;
     this.state = {
-      elements: props.elements,
+      sections: _.filter(props.sections, (section, i) => {return section.columnId === props.id}),
       activeSection: props.activeSection
     }
 
@@ -44,13 +47,13 @@ class Column extends React.Component{
     // console.log("COLUMN ", nextProps)
     this.setState({
       activeSection: nextProps.activeSection,
-      elements: nextProps.elements
+      sections: _.filter(nextProps.sections, (section, i) => {return section.columnId === nextProps.id})
     })
   }
 
   pushCard = (element) => {
     this.setState(update(this.state, {
-      elements: {
+      sections: {
         $push: [ {
           ...element
         } ]
@@ -60,7 +63,7 @@ class Column extends React.Component{
 
   removeCard = (index) => {
     const newState = update(this.state, {
-      elements: {
+      sections: {
         $splice: [
           [index, 1]
         ]
@@ -69,11 +72,11 @@ class Column extends React.Component{
   }
 
   moveCard = (dragIndex, hoverIndex) => {
-    const { elements } = this.state
-    const dragCard = elements[dragIndex]
+    const { sections } = this.state
+    const dragCard = sections[dragIndex]
 
     this.setState(update(this.state, {
-      elements: {
+      sections: {
         $splice: [
           [dragIndex, 1],
           [hoverIndex, 0, dragCard]
@@ -84,14 +87,15 @@ class Column extends React.Component{
 
   render(){
     const { type, canDrop, isOver, connectDropTarget } = this.props
+    const { sections } = this.state
     const isActive = canDrop && isOver
     const backgroundColor = isActive ? 'lightgreen' : '#FFF'
     // console.log("re-render")
     return connectDropTarget(
       <div
-        style={{width: (100*this.props.span)+"%", backgroundColor}}
+        style={{width: (100*this.props.span)+"%", backgroundColor, border: '1px solid green', minHeight: 50, marginTop: 15, marginBottom: 15}}
       >
-        {_.map(this.state.elements, (element, i) => {
+        {_.map(sections, (element, i) => {
           return (
             <LayoutElement
               key={i}
@@ -112,4 +116,16 @@ class Column extends React.Component{
   }
 }
 
-export default Column
+function mapStateToProps(state, ownProps){
+  // console.log(state)
+  return {
+    sections: state.sections
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Column)

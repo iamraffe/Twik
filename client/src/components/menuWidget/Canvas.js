@@ -43,25 +43,15 @@ class Canvas extends React.Component{
   }
 
   getStyles = (styleId) => {
-
     const { styles, fontFamilies, colors, zoom } = this.state
     const index = _.findIndex(styles, (s, i) => {return s.id === styleId})
-    // console.log("INDEX => ", index, styles, styles[index], styleId, {
-    //   ...styles[index].extra,
-    //   fontSize: `${styles[index].extra.fontSize*zoom/100}pt`,
-    //   color: `${colors[styles[index].color]}`,
-    //   fontFamily: fontFamilies[styles[index].fontFamily],
-    // })
+
     return {
       ...styles[index].extra,
       fontSize: `${styles[index].extra.fontSize*zoom/100}pt`,
       color: `${colors[styles[index].color]}`,
       fontFamily: fontFamilies[styles[index].fontFamily],
     }
-  }
-
-  onDrag = (e) => {
-    console.log(e)
   }
 
   onSectionSelect = (id) => {
@@ -73,7 +63,7 @@ class Canvas extends React.Component{
 
   render(){
     const { width, height, zoom, colors, fonts, structure, hover, activeSection } = this.state
-    // console.log("canvas", hover)
+    console.log("structure", structure)
     return (
       <div>
         <div className="row" style={{height: 650, overflow: 'auto', maxWidth: '100%', marginBottom: 35, borderBottom: '1px solid silver'}}>
@@ -84,7 +74,6 @@ class Canvas extends React.Component{
               margin: '0 auto',
               width: (width*(zoom/100))+'in',
               height: (height*(zoom/100))+'in'}}
-              onDrag={this.onDrag}
               onMouseEnter={(e) => {activeSection === '' ? this.setState({hover: true}) : ''}}
               onMouseLeave={(e) => {activeSection === '' ? this.setState({hover: false}) : ''}}
           >
