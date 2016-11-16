@@ -13,6 +13,7 @@ import structureReducer from './structureReducer'
 import styleReducer from './styleReducer'
 import metaReducer from './metaReducer'
 import zoomReducer from './zoomReducer'
+import templateReducer from './templateReducer'
 
 const rootReducer = combineReducers({
   colors: colorReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   structure: structureReducer,
   styles: styleReducer,
   zoom: zoomReducer,
+  template: templateReducer,
   // REACT-ROUTER
   routing: routerReducer
 })

@@ -8,6 +8,13 @@ export default function metaReducer(state = initialState.meta, action){
         ...state,
         size: action.size
       }
+    case types.CHANGE_LAYOUT:
+      // console.log(state, action)
+      // debugger;
+      return {
+        ...state,
+        orientation: action.orientation
+      }
     default:
       return state
   }

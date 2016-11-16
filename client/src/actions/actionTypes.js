@@ -14,6 +14,7 @@ export const CHANGE_FONT = 'CHANGE_FONT'
 
 // META
 export const CHANGE_SIZE = 'CHANGE_SIZE'
+export const CHANGE_LAYOUT = 'CHANGE_LAYOUT'
 
 // SECTION
 export const ADD_SECTION = 'ADD_SECTION'

@@ -6,8 +6,10 @@ export default {
     editor: true,
     title: '',
     orientation: '',
+    layout: '',
     size: ''
   },
+  template: {},
   section_types: [],
   sections: [],
   structure: [],

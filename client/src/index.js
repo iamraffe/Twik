@@ -30,7 +30,13 @@ window.renderReact = (id, component, props) => {
   // console.log("MENU => ", menu)
   // debugger;
   if(component === 'MenuWidget'){
-    store = configureStore({...menu, meta: {...menu.meta, ...props}})
+    store = configureStore({
+      ..._.omit(template, ['section_types', 'layouts', 'id']),
+      ...menu,
+      structure: _.find(template.layouts, (l) => {return l.name === menu.meta.layout}).structure,
+      template,
+      meta: {...menu.meta, ...props}
+    })
   }
   else{
     store = configureStore()
@@ -64,364 +70,6 @@ const col_3_id = uuid.v4()
 
 const template = {
   id: uuid.v4(),
-  meta: {
-    orientation: 'portrait',
-    size: 'letter',
-  },
-  styles: [
-    {
-      id: menu_title_id,
-      name: 'menu_title',
-      fontFamily: 'primary_font',
-      color: 'secondary_color',
-      extra: {
-        fontSize: 54.84,
-        textTransform: 'uppercase',
-        textDecoration: 'none',
-        fontWeight: 'normal',
-        fontStyle: 'normal'
-      }
-    },
-    {
-      id: section_title_id,
-      name: 'section_title',
-      fontFamily: 'primary_font',
-      color: 'secondary_color',
-      extra: {
-        fontSize: 24,
-        textTransform: 'uppercase',
-        textDecoration: 'none',
-        fontWeight: 'normal',
-        fontStyle: 'normal'
-      }
-    },
-    {
-      id: dish_title_id,
-      name: 'dish_title',
-      fontFamily: 'primary_font',
-      color: 'primary_color',
-      extra: {
-        fontSize: 14,
-        textTransform: 'uppercase',
-        textDecoration: 'underline',
-        fontWeight: 'normal',
-        fontStyle: 'normal',
-      }
-    },
-    {
-      id: dish_description_id,
-      name: 'dish_description',
-      fontFamily: 'secondary_font',
-      color: 'primary_color',
-      extra: {
-        fontSize: 12,
-        textTransform: 'none',
-        textDecoration: 'none',
-        fontWeight: 'normal',
-        fontStyle: 'italic'
-      }
-    },
-    {
-      id: dish_price_id,
-      name: 'dish_price',
-      fontFamily: 'primary_font',
-      color: 'primary_color',
-      extra: {
-        fontSize: 12,
-        textTransform: 'uppercase',
-        textDecoration: 'none',
-        fontWeight: 'normal',
-        fontStyle: 'normal'
-      }
-    }
-  ],
-  section_types: [
-    {
-      name: "Menu Title",
-      id: menu_title_section_id,
-      structure: {
-        type: "MENU_TITLE",
-        elements: [
-          {
-            styles: menu_title_id,
-            text: ''
-          }
-        ]
-      }
-    },
-    {
-      name: "Category Title",
-      id: category_title_id,
-      structure: {
-        type: "SECTION_TITLE",
-        elements: [
-          {             
-            styles: section_title_id,
-            text: ''
-          }
-        ]
-      }
-    },
-    {
-      name: "Category Dishes",
-      id: category_dishes_id,
-      structure: {
-        type: "SECTION_ELEMENT",
-        elements: [
-          {
-            type: "DISH_TITLE",
-            text: '',
-            styles: dish_title_id
-          },
-          {
-            type: "DISH_DESCRIPTION",
-            text: '',
-            styles: dish_description_id
-          },
-          {
-            type: "DISH_PRICE",
-            text: '',
-            styles: dish_price_id
-          }
-        ]
-      }
-    }
-  ],
-  structure: [
-    {
-      type: 'CONTAINER',
-      position: 0,
-      background: '',
-      span: 1,
-      paddingTop: 15,
-      paddingBottom: 15,
-      paddingLeft: 15,
-      paddingRight: 15,
-      id: uuid.v4(),
-      elements: [
-        {
-          type: "ROW",
-          position: 0,
-          id: uuid.v4(),
-          vertical: 'top',
-          elements: [
-            {
-              type: "COLUMN",
-              span: 1,
-              id: col_1_id,
-              position: 0,
-              elements: [
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-
-const template_other = {
-  id: uuid.v4(),
-  meta: {
-    orientation: 'landscape',
-    size: 'letter',
-  },
-  styles: [
-    {
-      id: menu_title_id,
-      name: 'menu_title',
-      fontFamily: 'primary_font',
-      color: 'secondary_color',
-      extra: {
-        fontSize: 54.84,
-        textTransform: 'uppercase',
-        textDecoration: 'none',
-        fontWeight: 'normal',
-        fontStyle: 'normal'
-      }
-    },
-    {
-      id: section_title_id,
-      name: 'section_title',
-      fontFamily: 'primary_font',
-      color: 'secondary_color',
-      extra: {
-        fontSize: 24,
-        textTransform: 'uppercase',
-        textDecoration: 'none',
-        fontWeight: 'normal',
-        fontStyle: 'normal'
-      }
-    },
-    {
-      id: dish_title_id,
-      name: 'dish_title',
-      fontFamily: 'primary_font',
-      color: 'primary_color',
-      extra: {
-        fontSize: 14,
-        textTransform: 'uppercase',
-        textDecoration: 'underline',
-        fontWeight: 'normal',
-        fontStyle: 'normal',
-      }
-    },
-    {
-      id: dish_description_id,
-      name: 'dish_description',
-      fontFamily: 'secondary_font',
-      color: 'primary_color',
-      extra: {
-        fontSize: 12,
-        textTransform: 'none',
-        textDecoration: 'none',
-        fontWeight: 'normal',
-        fontStyle: 'italic'
-      }
-    },
-    {
-      id: dish_price_id,
-      name: 'dish_price',
-      fontFamily: 'primary_font',
-      color: 'primary_color',
-      extra: {
-        fontSize: 12,
-        textTransform: 'uppercase',
-        textDecoration: 'none',
-        fontWeight: 'normal',
-        fontStyle: 'normal'
-      }
-    }
-  ],
-  section_types: [
-    {
-      name: "Menu Title",
-      id: menu_title_section_id,
-      structure: {
-        type: "MENU_TITLE",
-        elements: [
-          {
-            styles: menu_title_id,
-            text: ''
-          }
-        ]
-      }
-    },
-    {
-      name: "Category Title",
-      id: category_title_id,
-      structure: {
-        type: "SECTION_TITLE",
-        elements: [
-          {             
-            styles: section_title_id,
-            text: ''
-          }
-        ]
-      }
-    },
-    {
-      name: "Category Dishes",
-      id: category_dishes_id,
-      structure: {
-        type: "SECTION_ELEMENT",
-        elements: [
-          {
-            type: "DISH_TITLE",
-            text: '',
-            styles: dish_title_id
-          },
-          {
-            type: "DISH_DESCRIPTION",
-            text: '',
-            styles: dish_description_id
-          },
-          {
-            type: "DISH_PRICE",
-            text: '',
-            styles: dish_price_id
-          }
-        ]
-      }
-    }
-  ],
-  structure: [
-    {
-      type: 'CONTAINER',
-      position: 0,
-      background: '',
-      span: 0.5,
-      paddingTop: 15,
-      paddingBottom: 15,
-      paddingLeft: 15,
-      paddingRight: 15,
-      id: uuid.v4(),
-      elements: [
-        {
-          type: "ROW",
-          position: 0,
-          id: uuid.v4(),
-          vertical: 'bottom',
-          elements: [
-            {
-              type: "COLUMN",
-              span: 1,
-              id: col_1_id,
-              position: 0,
-              elements: [
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      type: 'CONTAINER',
-      position: 0,
-      background: '',
-      span: 0.5,
-      paddingTop: 15,
-      paddingBottom: 15,
-      paddingLeft: 15,
-      paddingRight: 15,
-      id: uuid.v4(),
-      elements: [
-        {
-          type: "ROW",
-          position: 0,
-          id: uuid.v4(),
-          vertical: 'top',
-          elements: [
-            {
-              type: "COLUMN",
-              span: 0.5,
-              id: col_2_id,
-              position: 0,
-              elements: [
-              ]
-            },
-            {
-              type: "COLUMN",
-              span: 0.5,
-              id: col_3_id,
-              position: 0,
-              elements: [
-              ]
-            },
-          ]
-        }
-      ]
-    },
-  ]
-}
-
-const menu = {
-  meta: {
-    id: uuid.v4(),
-    title: "My Test Menu",
-    ...template_other.meta,
-    templateId: template_other.id
-  },
   colors: {
     primary_color: '#231F20',
     secondary_color: '#F15B40',
@@ -434,9 +82,249 @@ const menu = {
     secondary_font: 'Roboto Condensed',
     alternate_font: ''
   },
-  styles: template_other.styles,
-  section_types: template_other.section_types,
-  structure: template_other.structure,
+  styles: [
+    {
+      id: menu_title_id,
+      name: 'menu_title',
+      fontFamily: 'primary_font',
+      color: 'secondary_color',
+      extra: {
+        fontSize: 54.84,
+        textTransform: 'uppercase',
+        textDecoration: 'none',
+        fontWeight: 'normal',
+        fontStyle: 'normal'
+      }
+    },
+    {
+      id: section_title_id,
+      name: 'section_title',
+      fontFamily: 'primary_font',
+      color: 'secondary_color',
+      extra: {
+        fontSize: 24,
+        textTransform: 'uppercase',
+        textDecoration: 'none',
+        fontWeight: 'normal',
+        fontStyle: 'normal'
+      }
+    },
+    {
+      id: dish_title_id,
+      name: 'dish_title',
+      fontFamily: 'primary_font',
+      color: 'primary_color',
+      extra: {
+        fontSize: 14,
+        textTransform: 'uppercase',
+        textDecoration: 'underline',
+        fontWeight: 'normal',
+        fontStyle: 'normal',
+      }
+    },
+    {
+      id: dish_description_id,
+      name: 'dish_description',
+      fontFamily: 'secondary_font',
+      color: 'primary_color',
+      extra: {
+        fontSize: 12,
+        textTransform: 'none',
+        textDecoration: 'none',
+        fontWeight: 'normal',
+        fontStyle: 'italic'
+      }
+    },
+    {
+      id: dish_price_id,
+      name: 'dish_price',
+      fontFamily: 'primary_font',
+      color: 'primary_color',
+      extra: {
+        fontSize: 12,
+        textTransform: 'uppercase',
+        textDecoration: 'none',
+        fontWeight: 'normal',
+        fontStyle: 'normal'
+      }
+    }
+  ],
+  section_types: [
+    {
+      name: "Menu Title",
+      id: menu_title_section_id,
+      structure: {
+        type: "MENU_TITLE",
+        elements: [
+          {
+            styles: menu_title_id,
+            text: ''
+          }
+        ]
+      }
+    },
+    {
+      name: "Category Title",
+      id: category_title_id,
+      structure: {
+        type: "SECTION_TITLE",
+        elements: [
+          {             
+            styles: section_title_id,
+            text: ''
+          }
+        ]
+      }
+    },
+    {
+      name: "Category Dishes",
+      id: category_dishes_id,
+      structure: {
+        type: "SECTION_ELEMENT",
+        elements: [
+          {
+            type: "DISH_TITLE",
+            text: '',
+            styles: dish_title_id
+          },
+          {
+            type: "DISH_DESCRIPTION",
+            text: '',
+            styles: dish_description_id
+          },
+          {
+            type: "DISH_PRICE",
+            text: '',
+            styles: dish_price_id
+          }
+        ]
+      }
+    }
+  ],
+  layouts: [
+    {
+      id: uuid.v4(),
+      name: "ONE_COLUMN",
+      structure: [
+        {
+          type: 'CONTAINER',
+          position: 0,
+          background: '',
+          span: 1,
+          paddingTop: 15,
+          paddingBottom: 15,
+          paddingLeft: 15,
+          paddingRight: 15,
+          id: uuid.v4(),
+          elements: [
+            {
+              type: "ROW",
+              position: 0,
+              id: uuid.v4(),
+              vertical: 'top',
+              elements: [
+                {
+                  type: "COLUMN",
+                  span: 1,
+                  id: col_1_id,
+                  position: 0,
+                  elements: [
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: uuid.v4(),
+      name: "TWO_COLUMNS",
+      structure: [
+        {
+          type: 'CONTAINER',
+          position: 0,
+          background: '',
+          span: 0.5,
+          paddingTop: 15,
+          paddingBottom: 15,
+          paddingLeft: 15,
+          paddingRight: 15,
+          id: uuid.v4(),
+          elements: [
+            {
+              type: "ROW",
+              position: 0,
+              id: uuid.v4(),
+              vertical: 'bottom',
+              elements: [
+                {
+                  type: "COLUMN",
+                  span: 1,
+                  id: col_1_id,
+                  position: 0,
+                  elements: [
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          type: 'CONTAINER',
+          position: 0,
+          background: '',
+          span: 0.5,
+          paddingTop: 15,
+          paddingBottom: 15,
+          paddingLeft: 15,
+          paddingRight: 15,
+          id: uuid.v4(),
+          elements: [
+            {
+              type: "ROW",
+              position: 0,
+              id: uuid.v4(),
+              vertical: 'top',
+              elements: [
+                {
+                  type: "COLUMN",
+                  span: 0.5,
+                  id: col_2_id,
+                  position: 0,
+                  elements: [
+                  ]
+                },
+                {
+                  type: "COLUMN",
+                  span: 0.5,
+                  id: col_3_id,
+                  position: 0,
+                  elements: [
+                  ]
+                },
+              ]
+            }
+          ]
+        },
+      ]
+    }
+  ]
+}
+
+const menu = {
+  meta: {
+    id: uuid.v4(),
+    title: "My Test Menu",
+    orientation: 'landscape',
+    size: 'letter',
+    layout: "TWO_COLUMNS",
+    templateId: template.id
+  },
+  section_types: {
+    template: template.section_types,
+    custom: {}
+  },
   sections: [
     {
       type: "SECTION",
@@ -571,266 +459,4 @@ const menu = {
       ]
     }
   ]
-  // structure: [
-  //   {
-  //     type: 'CONTAINER',
-  //     position: 0,
-  //     background: '',
-  //     span: 1,
-  //     paddingTop: 15,
-  //     paddingBottom: 15,
-  //     paddingLeft: 15,
-  //     paddingRight: 15,
-  //     id: uuid.v4(),
-  //     elements: [
-  //       {
-  //         type: "ROW",
-  //         position: 0,
-  //         id: uuid.v4(),
-  //         elements: [
-  //           {
-  //             type: "COLUMN",
-  //             span: 1,
-  //             id: uuid.v4(),
-  //             position: 0,
-  //             elements: [
-  //               {
-  //                 type: "SECTION",
-  //                 position: 0,
-  //                 id: uuid.v4(),
-  //                 struct: menu_title_section_id,
-  //                 elements: [
-  //                   {
-  //                     type: "MENU_TITLE",
-  //                     position: 0,
-  //                     elements: [{
-  //                       text: '<p>ONE</p><p>SMORGASBORD</p>',
-  //                       styles: menu_title_id
-  //                     }]
-  //                   }
-  //                 ]
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       },
-  //       {
-  //         type: "ROW",
-  //         position: 0,
-  //         id: uuid.v4(),
-  //         elements: [
-  //           {
-  //             type: "COLUMN",
-  //             span: 0.5,
-  //             id: uuid.v4(),
-  //             position: 0,
-  //             elements: [
-  //               {
-  //                 type: "SECTION",
-  //                 id: uuid.v4(),
-  //                 position: 0,
-  //                 struct: category_title_id,
-  //                 elements: [
-  //                   {
-  //                     type: "SECTION_TITLE",
-                      
-  //                     position: 0,
-  //                     elements: [{
-  //                       text: "PIZZA",
-  //                       styles: section_title_id
-  //                     }]
-  //                   }
-  //                 ]
-  //               },
-  //               {
-  //                 type: "SECTION",
-  //                 id: uuid.v4(),
-  //                 position: 1,
-  //                 struct: category_dishes_id,
-  //                 elements: [
-  //                   {
-  //                     type: "SECTION_ELEMENT",
-  //                     position: 0,
-  //                     id: uuid.v4(),
-  //                     elements: [
-  //                       {
-  //                         type: "DISH_TITLE",
-  //                         text: '<p>marinara</p>',
-  //                         styles: dish_title_id
-  //                       },
-  //                       {
-  //                         type: "DISH_DESCRIPTION",
-  //                         text: '<p>tomato, garlic, oregano</p>',
-  //                         styles: dish_description_id
-  //                       },
-  //                       {
-  //                         type: "DISH_PRICE",
-  //                         text: '<p>$8</p>',
-  //                         styles: dish_price_id
-  //                       }
-  //                     ]
-  //                   },
-  //                   {
-  //                     type: "SECTION_ELEMENT",
-  //                     position: 1,
-  //                     id: uuid.v4(),
-  //                     elements: [
-  //                       {
-  //                         type: "DISH_TITLE",
-  //                         text: '<p>marinara</p>',
-  //                         styles: dish_title_id
-  //                       },
-  //                       {
-  //                         type: "DISH_DESCRIPTION",
-  //                         text: '<p>tomato, garlic, oregano</p>',
-  //                         styles: dish_description_id
-  //                       },
-  //                       {
-  //                         type: "DISH_PRICE",
-  //                         text: '<p>$8</p>',
-  //                         styles: dish_price_id
-  //                       }
-  //                     ]
-  //                   },
-  //                   {
-  //                     type: "SECTION_ELEMENT",
-  //                     position: 2,
-  //                     id: uuid.v4(),
-  //                     elements: [
-  //                       {
-  //                         type: "DISH_TITLE",
-  //                         text: '<p>marinara</p>',
-  //                         styles: dish_title_id
-  //                       },
-  //                       {
-  //                         type: "DISH_DESCRIPTION",
-  //                         text: '<p>tomato, garlic, oregano</p>',
-  //                         styles: dish_description_id
-  //                       },
-  //                       {
-  //                         type: "DISH_PRICE",
-  //                         text: '<p>$8</p>',
-  //                         styles: dish_price_id
-  //                       }
-  //                     ]
-  //                   },
-  //                   {
-  //                     type: "SECTION_ELEMENT",
-  //                     position: 3,
-  //                     id: uuid.v4(),
-  //                     elements: [
-  //                       {
-  //                         type: "DISH_TITLE",
-  //                         text: '<p>marinara</p>',
-  //                         styles: dish_title_id
-  //                       },
-  //                       {
-  //                         type: "DISH_DESCRIPTION",
-  //                         text: '<p>tomato, garlic, oregano</p>',
-  //                         styles: dish_description_id
-  //                       },
-  //                       {
-  //                         type: "DISH_PRICE",
-  //                         text: '<p>$8</p>',
-  //                         styles: dish_price_id
-  //                       }
-  //                     ]
-  //                   },
-  //                   {
-  //                     type: "SECTION_ELEMENT",
-  //                     position: 4,
-  //                     id: uuid.v4(),
-  //                     elements: [
-  //                       {
-  //                         type: "DISH_TITLE",
-  //                         text: '<p>marinara</p>',
-  //                         styles: dish_title_id
-  //                       },
-  //                       {
-  //                         type: "DISH_DESCRIPTION",
-  //                         text: '<p>tomato, garlic, oregano</p>',
-  //                         styles: dish_description_id
-  //                       },
-  //                       {
-  //                         type: "DISH_PRICE",
-  //                         text: '<p>$8</p>',
-  //                         styles: dish_price_id
-  //                       }
-  //                     ]
-  //                   },
-  //                   {
-  //                     type: "SECTION_ELEMENT",
-  //                     position: 5,
-  //                     id: uuid.v4(),
-  //                     elements: [
-  //                       {
-  //                         type: "DISH_TITLE",
-  //                         text: '<p>marinara</p>',
-  //                         styles: dish_title_id
-  //                       },
-  //                       {
-  //                         type: "DISH_DESCRIPTION",
-  //                         text: '<p>tomato, garlic, oregano</p>',
-  //                         styles: dish_description_id
-  //                       },
-  //                       {
-  //                         type: "DISH_PRICE",
-  //                         text: '<p>$8</p>',
-  //                         styles: dish_price_id
-  //                       }
-  //                     ]
-  //                   },
-  //                   {
-  //                     type: "SECTION_ELEMENT",
-  //                     position: 6,
-  //                     id: uuid.v4(),
-  //                     elements: [
-  //                       {
-  //                         type: "DISH_TITLE",
-  //                         text: '<p>marinara</p>',
-  //                         styles: dish_title_id
-  //                       },
-  //                       {
-  //                         type: "DISH_DESCRIPTION",
-  //                         text: '<p>tomato, garlic, oregano</p>',
-  //                         styles: dish_description_id
-  //                       },
-  //                       {
-  //                         type: "DISH_PRICE",
-  //                         text: '<p>$8</p>',
-  //                         styles: dish_price_id
-  //                       }
-  //                     ]
-  //                   },
-  //                   {
-  //                     type: "SECTION_ELEMENT",
-  //                     position: 7,
-  //                     id: uuid.v4(),
-  //                     elements: [
-  //                       {
-  //                         type: "DISH_TITLE",
-  //                         text: '<p>marinara</p>',
-  //                         styles: dish_title_id
-  //                       },
-  //                       {
-  //                         type: "DISH_DESCRIPTION",
-  //                         text: '<p>tomato, garlic, oregano</p>',
-  //                         styles: dish_description_id
-  //                       },
-  //                       {
-  //                         type: "DISH_PRICE",
-  //                         text: '<p>$8</p>',
-  //                         styles: dish_price_id
-  //                       }
-  //                     ]
-  //                   },
-  //                 ]
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       },
-  //     ]
-  //   }
-  // ]
 }

@@ -11,7 +11,9 @@ class LayoutPanel extends React.Component{
 
     this.state = {
       size: props.meta.size,
-      orientation: props.meta.orientation
+      orientation: props.meta.orientation,
+      layout: props.meta.layout,
+      template: props.template
     }
 
     this.onClose = props.onClose
@@ -20,7 +22,9 @@ class LayoutPanel extends React.Component{
   componentWillReceiveProps(nextProps){
     this.setState({
       size: nextProps.meta.size,
-      orientation: nextProps.meta.orientation
+      orientation: nextProps.meta.orientation,
+      layout: nextProps.meta.layout,
+      template: nextProps.template
     })
   }
 
@@ -29,8 +33,15 @@ class LayoutPanel extends React.Component{
     changeSize(e.target.value)
   }
 
+  onChangeLayout = (e) => {
+    const { template } = this.state
+    const { changeLayout } = this.props.metaActions
+    const values = e.target.value.split("__")
+    changeLayout(values[0], _.find(template.layouts, (l) => {return l.name === values[1]}).structure)
+  }
+
   render(){
-    const { size, orientation } = this.state
+    const { size, orientation, layout } = this.state
 
     return(
       <section className="layout-panel tool-panel-element" style={{paddingBottom: 25}}>
@@ -47,6 +58,14 @@ class LayoutPanel extends React.Component{
                 <option value="tabloid">Tabloid</option>
               </select>
             </div>
+            <div className="col-xs-10 col-xs-offset-1">
+              <select className="form-control" defaultValue={`${orientation}__${layout}`} onChange={(e) => {this.onChangeLayout(e)}}>
+                <option value="portrait__ONE_COLUMN">Portrait & One Column</option>
+                <option value="landscape__ONE_COLUMN">Landscape & One Column</option>
+                <option value="portrait__TWO_COLUMNS">Portrait & Two Columns</option>
+                <option value="landscape__TWO_COLUMNS">Landscape & Two Columns</option>
+              </select>
+            </div>
           </div>
         </section>
       </section>
@@ -61,6 +80,7 @@ LayoutPanel.propTypes = {
 function mapStateToProps(state, ownProps){
   return {
     meta: state.meta,
+    template: state.template
   }
 }
 

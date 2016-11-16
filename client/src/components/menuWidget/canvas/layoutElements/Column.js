@@ -44,7 +44,7 @@ class Column extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("COLUMN NEXT", nextProps.sections)
+    // console.log("COLUMN NEXT", nextProps.sections)
     this.setState({
       activeSection: nextProps.activeSection,
       sections: _.filter(nextProps.sections, (section, i) => {return section.columnId === nextProps.id})

@@ -6,10 +6,17 @@ export default function sectionTypeReducer(state = initialState.section_types, a
     case types.ADD_SECTION_TYPE:
       console.log(state, action.section)
       // debugger;
-      return [
+      return {
         ...state,
-        action.section
-      ]
+        custom: [
+          action.section
+        ]
+      }
+    // case types.CHANGE_LAYOUT:
+    //   return {
+    //     ...state,
+    //     template: _.find(template.layouts, (l) => {return l.name === menu.meta.layout}).structure
+    //   }
     default:
       return state
   }
