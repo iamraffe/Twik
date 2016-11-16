@@ -13,6 +13,7 @@ class LayoutElement extends React.Component{
     }
 
     this.getStyles = props.getStyles
+    this.onSectionSelect = props.onSectionSelect
   }
 
   componentWillReceiveProps(nextProps){
@@ -29,7 +30,7 @@ class LayoutElement extends React.Component{
 
   render(){
     const { type } = this.props
-
+    // console.log(type, this.props.hover)
     switch(type){
       case "CONTAINER":
         return (
@@ -44,8 +45,11 @@ class LayoutElement extends React.Component{
                   paddingLeft={this.props.paddingLeft}
                   paddingRight={this.props.paddingRight}
                   zoom={this.props.zoom}
+                  hover={this.props.hover}
+                  activeSection={this.props.activeSection}
                   {...element}
                   getStyles={this.getStyles}
+                  onSectionSelect={this.onSectionSelect}
                 />
               )
             })}
@@ -69,8 +73,11 @@ class LayoutElement extends React.Component{
                   containerId={this.props.containerId}
                   rowId={this.props.id}
                   padding={this.props.padding}
+                  hover={this.props.hover}
+                  activeSection={this.props.activeSection}
                   {...element}
                   getStyles={this.getStyles}
+                  onSectionSelect={this.onSectionSelect}
                 />
               )
             })}

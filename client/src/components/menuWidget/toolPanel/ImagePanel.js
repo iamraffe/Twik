@@ -120,7 +120,7 @@ class ImagePanel extends React.Component{
     const { active, imageResults, selectedImage, file } = this.state
 
     return(
-      <section className="image-panel">
+      <section className="image-panel tool-panel-element">
         <header>
           <h1>Image Library</h1>
           <span className="fa close-panel fa-times" onClick={this.onClose}></span>
@@ -131,16 +131,18 @@ class ImagePanel extends React.Component{
               <div>
                 {!file.preview &&
                   <div className="row dropzone-wrapper">
-                    <Dropzone
-                      onDrop={this.onMediaDrop}
-                      multiple={false}
-                      className='dropzone-widget'
-                      activeClassName='dropzone-widget active-dropzone-widget'
-                    >
-                      <button className="btn">Select File</button>
-                      <p className="hide-on-active">or drag and drop here</p>
-                      <p className="hide-on-inactive"><span className="fa fa-plus-circle fa-2x fa-inverse"></span></p>
-                    </Dropzone>
+                    <div className="col-xs-10 col-xs-offset-1">
+                      <Dropzone
+                        onDrop={this.onMediaDrop}
+                        multiple={false}
+                        className='dropzone-widget'
+                        activeClassName='dropzone-widget active-dropzone-widget'
+                      >
+                        <button className="btn">Select File</button>
+                        <p className="hide-on-active">or drag and drop here</p>
+                        <p className="hide-on-inactive"><span className="ion ion-ios-plus-outline"></span></p>
+                      </Dropzone>
+                    </div>
                   </div>
                 }
                 {file.preview &&

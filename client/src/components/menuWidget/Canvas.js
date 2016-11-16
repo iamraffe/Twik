@@ -19,7 +19,9 @@ class Canvas extends React.Component{
       colors: props.colors,
       fontFamilies: props.fontFamilies,
       styles: props.styles,
-      sections: props.sections
+      sections: props.sections,
+      hover: false,
+      activeSection: ''
     }
   }
 
@@ -62,9 +64,16 @@ class Canvas extends React.Component{
     console.log(e)
   }
 
-  render(){
-    const { width, height, zoom, colors, fonts, structure } = this.state
+  onSectionSelect = (id) => {
+    // console.log(id)
+    this.setState({
+      activeSection: id
+    })
+  }
 
+  render(){
+    const { width, height, zoom, colors, fonts, structure, hover, activeSection } = this.state
+    // console.log("canvas", hover)
     return (
       <div>
         <div className="row" style={{height: 650, overflow: 'auto', maxWidth: '100%', marginBottom: 35, borderBottom: '1px solid silver'}}>
@@ -76,6 +85,8 @@ class Canvas extends React.Component{
               width: (width*(zoom/100))+'in',
               height: (height*(zoom/100))+'in'}}
               onDrag={this.onDrag}
+              onMouseEnter={(e) => {activeSection === '' ? this.setState({hover: true}) : ''}}
+              onMouseLeave={(e) => {activeSection === '' ? this.setState({hover: false}) : ''}}
           >
             {_.map(structure, (struct, i) => {
               return(
@@ -83,7 +94,10 @@ class Canvas extends React.Component{
                   key={i}
                   {...struct}
                   zoom={zoom}
+                  hover={hover}
+                  activeSection={activeSection}
                   getStyles={this.getStyles}
+                  onSectionSelect={this.onSectionSelect}
                 />
               )
             })}      

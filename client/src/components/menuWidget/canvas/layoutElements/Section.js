@@ -10,28 +10,33 @@ import MenuElement from '../MenuElement'
 class Section extends React.Component{
   constructor(props){
     super(props)
-
+    console.log(props.activeSection, props.id, props.activeSection === props.id)
     this.state = {
+      active: props.activeSection === props.id,
       sections: props.sections,
       elements: props.elements,
       zoom: props.zoom,
       fontFamilies: props.fontFamilies,
       colors: props.colors,
-      structure: props.structure
+      structure: props.structure,
+      hover: props.hover
     }
 
     this.getStyles = props.getStyles
+    this.onSectionSelect = props.onSectionSelect
   }
 
   componentWillReceiveProps(nextProps){
     // console.log("SECTION = ", nextProps)
     this.setState({
+      active: nextProps.activeSection === nextProps.id,
       sections: nextProps.sections,
       elements: nextProps.elements,
       zoom: nextProps.zoom,
       fontFamilies: nextProps.fontFamilies,
       colors: nextProps.colors,
-      structure: nextProps.structure
+      structure: nextProps.structure,
+      hover: nextProps.hover
     })
   }
 
@@ -58,13 +63,16 @@ class Section extends React.Component{
   }
 
   render(){
-    const { elements } = this.state
-
+    const { elements, hover, active } = this.state
+    const { activeSection, id } = this.props
+    console.log("active", active, activeSection)
     return(
       <div
-        className="section-element"
-        style={{}}
+        className={`${hover ? 'section-hover' : '' } section-element`}
+        style={{position: 'relative'}}
+        onClick={(e) => {this.onSectionSelect(id)}}
       >
+        {hover && !active && <div className="section-overlay"></div>}
         {_.map(elements, (element, i) => {
           return (
             <MenuElement
@@ -73,10 +81,11 @@ class Section extends React.Component{
               onUpdate={this.onUpdateMenuElement}
               onDelete={this.onDeleteMenuElement}
               getStyles={this.getStyles}
+              activeSection={active}
             />
           )
         })}
-        <span className="ion ion-ios-plus-outline" onClick={(e) => {this.onAddMenuElement(e)}}></span>
+        {active && <span className="ion ion-ios-plus-outline" onClick={(e) => {this.onAddMenuElement(e)}}></span>}
       </div>
     )
   }

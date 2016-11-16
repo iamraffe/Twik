@@ -71,7 +71,7 @@ class CompoundElement extends React.Component{
 
   render(){
     const { elements, editing } = this.state
-    const { type } = this.props
+    const { type, activeSection } = this.props
     
     return (
       <article className={`${type} compound-element`}>
@@ -84,9 +84,13 @@ class CompoundElement extends React.Component{
                     className={e.type}
                     style={e.styles}
                     dangerouslySetInnerHTML={{__html: (e.text === '' ? '<p>Lorem ipsum</p>' : `<p>${e.text}</p>`)}}
-                    onDoubleClick={() => {this.onToggleEditing(e.type)}}
+                    onDoubleClick={() => {
+                      if(activeSection){
+                        this.onToggleEditing(e.type)
+                      }
+                    }}
                   />
-                  {(i%this.props.elements.length === 0 )&&<span style={{cursor: 'pointer', verticalAlign: '0px', float: 'right'}} className="ion ion-ios-close-outline" onClick={(e) => {this.onDelete(this.props.position)}}></span>}
+                  {activeSection && (i%this.props.elements.length === 0 )&&<span style={{cursor: 'pointer', verticalAlign: '0px', float: 'right'}} className="ion ion-ios-close-outline" onClick={(e) => {this.onDelete(this.props.position)}}></span>}
                 </span>
               }
               {editing === e.type &&

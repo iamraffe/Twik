@@ -19,7 +19,7 @@ class MenuElement extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("ME", nextProps)
+    // console.log("ME", nextProps)
     this.setState({
       elements: nextProps.elements,
       position: nextProps.position
@@ -30,11 +30,9 @@ class MenuElement extends React.Component{
   }
 
   render(){
-    const { type } = this.props
+    const { type, activeSection } = this.props
     const { elements, position } = this.state
-    if(type === "SINGLE_ELEMENT"){
-      console.log("IS SINGLE", this.props)
-    }
+
     switch(type){
       case "MENU_TITLE":
       case "SECTION_TITLE":
@@ -45,6 +43,7 @@ class MenuElement extends React.Component{
             position={position}
             text={elements[0].text}
             styles={elements[0].styles}
+            activeSection={activeSection}
             getStyles={this.getStyles}
             onUpdate={this.onUpdate}
             onDelete={this.onDelete}
@@ -57,6 +56,7 @@ class MenuElement extends React.Component{
             type={type}
             position={position}
             elements={elements}
+            activeSection={activeSection}
             getStyles={this.getStyles}
             onUpdate={this.onUpdate}
             onDelete={this.onDelete}

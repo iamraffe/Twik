@@ -32,15 +32,18 @@ class Column extends React.Component{
     super(props)
 
     this.state = {
-      elements: props.elements
+      elements: props.elements,
+      activeSection: props.activeSection
     }
 
     this.getStyles = props.getStyles
+    this.onSectionSelect = props.onSectionSelect
   }
 
   componentWillReceiveProps(nextProps){
     // console.log("COLUMN ", nextProps)
     this.setState({
+      activeSection: nextProps.activeSection,
       elements: nextProps.elements
     })
   }
@@ -96,8 +99,11 @@ class Column extends React.Component{
               rowId={this.props.rowId}
               columnId={this.props.id}
               padding={this.props.padding}
+              hover={this.props.hover}
+              activeSection={this.state.activeSection}
               {...element}
               getStyles={this.getStyles}
+              onSectionSelect={this.onSectionSelect}
             />
           )
         })}
