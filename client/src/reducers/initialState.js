@@ -11,5 +11,5 @@ export default {
   sections: [],
   structure: [],
   styles: [],
-  zoom: 50,
+  zoom: 100,
 }

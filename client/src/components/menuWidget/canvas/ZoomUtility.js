@@ -41,32 +41,10 @@ class ZoomUtility extends React.Component{
 
     return (
       <div className="row">
-        <div className="col-xs-1 col-xs-offset-3">
-          <button className="btn btn-primary " onClick={(e) => {this.onZoom(zoom-5)}}>
-            <span className="fa fa-minus-circle"></span>
-          </button>
-        </div>
-        <div className="col-xs-2">
-          {!manualZoom && <p className="text-center" onDoubleClick={(e) => {this.onToggleManualZoom(true)}}>{this.state.zoom}%</p>}
-          {manualZoom &&
-            <div className="input-group">
-              <input
-                type="number"
-                className="form-control"
-                onBlur={(e) => {this.onToggleManualZoom(false)}}
-                onChange={(e) => {
-                  this.onZoom(e.target.value === '' ? 100 : e.target.value)
-                }}
-                value={zoom === 100 ? '' : zoom}
-              />
-              <div className="input-group-addon">%</div>
-            </div>
-          }
-        </div>
-        <div className="col-xs-1">
-          <button className="btn btn-primary " onClick={(e) => {this.onZoom(zoom+5)}}>
-            <span className="fa fa-plus-circle"></span>
-          </button>
+        <div className="col-xs-4 col-xs-offset-4" style={{textAlign: 'center'}}>
+          <span className="ion ion-minus-round" style={{cursor: 'pointer', marginRight: 15, fontSize: '0.75em', verticalAlign: '5px'}} onClick={(e) => {this.onZoom(zoom-5)}}></span>
+          <span className="ion ion-android-search" style={{marginRight: 10, fontSize: '1.25em'}}></span>
+          <span className="ion ion-plus-round" style={{cursor: 'pointer', fontSize: '0.75em', verticalAlign: '5px'}} onClick={(e) => {this.onZoom(zoom+5)}}></span>
         </div>
       </div>
     )

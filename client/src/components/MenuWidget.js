@@ -27,7 +27,7 @@ class MenuWidget extends React.Component{
       google: {
         families: _.map(fontFamilies, (f) => {return f})
       },
-      timeout: 10000
+      // timeout: 10000
     })
   }
 
@@ -48,7 +48,7 @@ class MenuWidget extends React.Component{
             <Canvas />
           </div>
           <div className="col-xs-2">
-            {this.props.editor && <ToolPanel/>}
+            {this.props.editor && <ToolPanel logo={this.props.robotLogo}/>}
           </div>
         </div>
       </div>

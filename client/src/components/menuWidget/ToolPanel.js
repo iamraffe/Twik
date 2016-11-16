@@ -82,7 +82,7 @@ class ToolPanel extends React.Component{
     return(
       <section className="tool-panel" style={{padding: 25}}>
         <header>
-          <img src="" alt="Twik Robo Logo" style={{height: 75, margin: '0 auto'}}/>
+          <img src={this.props.logo} alt="Twik Robo Logo" style={{display: 'block', height: 75, margin: '0 auto'}}/>
           <hr style={{marginBottom: 0, borderBottom: '1.5px solid black'}}/>
         </header>
         <div className="row" style={{marginBottom: 100}}>
