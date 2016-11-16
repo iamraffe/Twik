@@ -118,6 +118,45 @@ export default function structureReducer(state = initialState.structure, action)
         },
         ...state.slice(containerIndex+1),
       ])
+    case types.DELETE_MENU_ELEMENT:
+      containerIndex = _.findIndex(state, ['id', action.containerId])
+      rowIndex = _.findIndex(state[containerIndex].elements, ['id', action.rowId])
+      columnIndex = _.findIndex(state[containerIndex].elements[rowIndex].elements, ['id', action.columnId])
+      sectionIndex = _.findIndex(state[containerIndex].elements[rowIndex].elements[columnIndex].elements, ['id', action.sectionId]) 
+      elementIndex = action.position
+      console.log("EI", elementIndex)
+      return ([
+        ...state.slice(0, containerIndex),
+        {
+          ...state[containerIndex],
+          elements: [
+            ...state[containerIndex].elements.slice(0, rowIndex),
+            {
+              ...state[containerIndex].elements[rowIndex],
+              elements: [
+                ...state[containerIndex].elements[rowIndex].elements.slice(0, columnIndex),
+                {
+                  ...state[containerIndex].elements[rowIndex].elements[columnIndex],
+                  elements: [
+                    ...state[containerIndex].elements[rowIndex].elements[columnIndex].elements.slice(0, sectionIndex),
+                    {
+                      ...state[containerIndex].elements[rowIndex].elements[columnIndex].elements[sectionIndex],
+                      elements: [
+                        ...state[containerIndex].elements[rowIndex].elements[columnIndex].elements[sectionIndex].elements.slice(0, elementIndex),
+                        ...state[containerIndex].elements[rowIndex].elements[columnIndex].elements[sectionIndex].elements.slice(elementIndex+1)
+                      ]
+                    },
+                    ...state[containerIndex].elements[rowIndex].elements[columnIndex].elements.slice(sectionIndex+1),
+                  ]
+                },
+                ...state[containerIndex].elements[rowIndex].elements.slice(columnIndex+1),
+              ]
+            },
+            ...state[containerIndex].elements.slice(rowIndex+1),
+          ]
+        },
+        ...state.slice(containerIndex+1),
+      ])
     default:
       return state
   }

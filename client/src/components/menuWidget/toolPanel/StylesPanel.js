@@ -90,17 +90,18 @@ class StylesPanel extends React.Component{
       <section className="styles-panel">
         {styleSelected.id && 
           <div className="style-editor row">
-            <div className="col-xs-4">
+            <div className="col-xs-4" style={{minWidth: 52.5, display: 'block', margin: '3.5px auto'}}>
               {_.map(colors, (c,i) => {
                 return (
                   <article key={i} onClick={(e) => {this.onUpdateStyle('color', c)}}>
                     <span
                       style={{
-                        display: 'inline-block',
-                        width: 15,
-                        height: 15,
+                        float: 'left',
+                        cursor: 'pointer',
+                        width: 17.5,
+                        height: 17.5,
                         backgroundColor: c,
-                        border: c === styleSelected.color ? '1px solid black' : 'none'
+                        border: c === styleSelected.color ? '2px dashed black' : 'none'
                       }}
                     >
                     </span>
@@ -110,18 +111,35 @@ class StylesPanel extends React.Component{
             </div>
             <div className="form-inline col-xs-8">
               <div className="form-group">
-                <label>Size</label>
-                <div className="input-group">
-                  <input type="number" className="form-control" onChange={(e) => {this.onUpdateStyle('fontSize', `${e.target.value}pt`)}} step="0.01" value={parseFloat(styleSelected.fontSize.slice(0, -2))} />
-                  <div className="input-group-addon">pt</div>
+                <label style={{marginTop: 0}}>Size</label>
+                <div className="input-group" style={{maxWidth: '60%', backgroundColor: 'silver', marginLeft: '5%'}}>
+                  <input
+                    type="number"
+                    className="form-control"
+                    onChange={(e) => {this.onUpdateStyle('fontSize', `${e.target.value}pt`)}}
+                    step="0.01"
+                    value={parseFloat(styleSelected.fontSize.slice(0, -2))}
+                    style={{backgroundColor: 'transparent', border: 'none', fontWeight: 500, color: 'black', padding: 5}}
+                  />
+                  <div
+                    className="input-group-addon"
+                    style={{backgroundColor: 'transparent', padding: 5, border: 'none'}}
+                  >
+                    pt
+                  </div>
                 </div>
               </div>
             </div>
             <div className="col-xs-12">
-              <select name="" id="" defaultValue={styleSelected.fontFamily} onChange={(e) => {this.onUpdateStyle('fontFamily', `${e.target.value}`)}}>
+              <select
+                className="form-control"
+                defaultValue={styleSelected.fontFamily}
+                style={{boxShadow: 'none', color: 'black', backgroundColor: 'transparent', border: 'none', width: 'auto', padding: 0, marginBottom: 15}}
+                onChange={(e) => {this.onUpdateStyle('fontFamily', `${e.target.value}`)}}
+              >
                 {_.map(_.filter(fontFamilies, (f) => {return f !== ''}), (font, i) => {
                   return (
-                    <option key={i} value={font}>{font}</option>
+                    <option key={i} value={font} style={{fontFamily: font}}>{font}</option>
                   )
                 })}
               </select>
@@ -132,14 +150,20 @@ class StylesPanel extends React.Component{
           return (
             <div key={i} className="style-item">
               <span style={_.omit(style, ['name'])}>{style.name}</span>
-              <span className="fa fa-edit" onClick={(e) => {this.onEditStyle(i)}}></span>
+              <span
+                className="ion ion-ios-compose-outline"
+                style={{cursor: 'pointer', fontSize: '1.25em', float: 'right'}}
+                onClick={(e) => {this.onEditStyle(i)}}
+              />
               <hr/>
             </div>  
           )
         })}
-        <button onClick={(e) => {this.onAddNewStyle()}}>
-          <span className="fa fa-plus"></span>
-        </button>
+        <span
+          className="ion ion-ios-plus-outline"
+          onClick={(e) => {this.onAddNewStyle()}}
+          style={{cursor: 'pointer', fontSize: '1.5em'}}
+        />
       </section>
     )
   }

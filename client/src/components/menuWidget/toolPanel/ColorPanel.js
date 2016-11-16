@@ -76,80 +76,87 @@ class ColorPanel extends React.Component{
     }
 
     return (
-      <section className="color-panel">
+      <section className="color-panel tool-panel-element">
         <header>
           <h1>Color</h1>
           <span className="fa close-panel fa-times" onClick={this.onClose}></span>
         </header>
-        {primary_color && editing !== 'primary_color' &&
-          <article>
-            <span
-              onDoubleClick={(e) => {this.onEditColor('primary_color')}}
-              style={{display: 'inline-block', width: 15, height: 15, backgroundColor: primary_color}}
-            >
-            </span>
-          </article>
-        }
-        {primary_color && editing === 'primary_color' &&
-          <article>
-            <div style={popover}>
-              <div style={cover} onClick={this.onChangeComplete}/>
-              <SketchPicker
-                color={primary_color}
-                onChange={(color) => {
-                  console.log("onChange", color, color.hex)
-                  this.onChange(color.hex, "primary_color")
-                }}
-              />
-            </div>
-          </article>
-        }
-        {secondary_color && editing !== 'secondary_color' &&
-          <article>
-            <span
-              onDoubleClick={(e) => {this.onEditColor('secondary_color')}}
-              style={{display: 'inline-block', width: 15, height: 15, backgroundColor: secondary_color}}
-            >
-            </span>
-          </article>
-        }
-        {secondary_color && editing === 'secondary_color' && 
-          <article>
-            <div style={popover}>
-              <div style={cover} onClick={this.onChangeComplete}/>
-              <SketchPicker
-                color={secondary_color}
-                onChange={(color) => {
-                  console.log("onChange", color, color.hex)
-                  this.onChange(color.hex, "secondary_color")
-                }}
-              />
-            </div>
-          </article>
-        }
-        {tertiary_color && editing !== 'tertiary_color' &&
-          <article>
-            <span
-              onDoubleClick={(e) => {this.onEditColor('tertiary_color')}}
-              style={{display: 'inline-block', width: 15, height: 15, backgroundColor: tertiary_color}}
-            >
-            </span>
-          </article>
-        }
-        {tertiary_color && editing === 'tertiary_color' &&
-          <article>
-            <div style={popover}>
-              <div style={cover} onClick={this.onChangeComplete}/>
-              <SketchPicker
-                color={tertiary_color}
-                onChange={(color) => {
-                  console.log("onChange", color, color.hex)
-                  this.onChange(color.hex, "tertiary_color")
-                }}
-              />
-            </div>
-          </article>
-        }
+        <div className="swatches row">
+          <div className="" style={{width: 75, display: 'block', margin: '15px auto 0'}}>
+            {primary_color && editing !== 'primary_color' &&
+              <article className="swatch">
+                <span
+                  onDoubleClick={(e) => {this.onEditColor('primary_color')}}
+                  style={{display: 'block', width: 25, height: 25, backgroundColor: primary_color}}
+                >
+                </span>
+              </article>
+            }
+            {secondary_color && editing !== 'secondary_color' &&
+              <article className="swatch">
+                <span
+                  onDoubleClick={(e) => {this.onEditColor('secondary_color')}}
+                  style={{display: 'block', width: 25, height: 25, backgroundColor: secondary_color}}
+                >
+                </span>
+              </article>
+            }
+            {tertiary_color && editing !== 'tertiary_color' &&
+              <article  className="swatch">
+                <span
+                  onDoubleClick={(e) => {this.onEditColor('tertiary_color')}}
+                  style={{display: 'block', width: 25, height: 25, backgroundColor: tertiary_color}}
+                >
+                </span>
+              </article>
+            }
+          </div>
+          {primary_color && editing === 'primary_color' &&
+            <article>
+              <div style={popover}>
+                <div style={cover} onClick={this.onChangeComplete}/>
+                <SketchPicker
+                  color={primary_color}
+                  onChange={(color) => {
+                    console.log("onChange", color, color.hex)
+                    this.onChange(color.hex, "primary_color")
+                  }}
+                />
+              </div>
+            </article>
+          }
+          {secondary_color && editing === 'secondary_color' && 
+            <article>
+              <div style={popover}>
+                <div style={cover} onClick={this.onChangeComplete}/>
+                <SketchPicker
+                  color={secondary_color}
+                  onChange={(color) => {
+                    console.log("onChange", color, color.hex)
+                    this.onChange(color.hex, "secondary_color")
+                  }}
+                />
+              </div>
+            </article>
+          }
+          {tertiary_color && editing === 'tertiary_color' &&
+            <article>
+              <div style={popover}>
+                <div style={cover} onClick={this.onChangeComplete}/>
+                <SketchPicker
+                  color={tertiary_color}
+                  onChange={(color) => {
+                    console.log("onChange", color, color.hex)
+                    this.onChange(color.hex, "tertiary_color")
+                  }}
+                />
+              </div>
+            </article>
+          }
+        </div>
+        <footer>
+          <h1>Pick a color to replace</h1>
+        </footer>
       </section>
     )
     

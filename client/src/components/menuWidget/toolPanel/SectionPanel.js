@@ -195,14 +195,14 @@ class SectionPanel extends React.Component{
     const { isDragging, connectDragSource, connectDragPreview } = this.props
     // console.log(sectionStyle)
     return (
-      <section className="section-panel">
+      <section className="section-panel tool-panel-element">
         <header>
           <h1>Sections</h1>
           <span className="fa close-panel fa-times" onClick={this.onClose}></span>
         </header>
         <div className="row">
-          <div className="col-xs-12">
-            <select name="" id="" defaultValue="default" onChange={this.onSectionStyleSelect}>
+          <div className="col-xs-10 col-xs-offset-1">
+            <select className="form-control" defaultValue="default" onChange={this.onSectionStyleSelect}>
               <option value="default">Choose section style</option>
               {_.map(sections, (section, i) => {
                 return (
@@ -212,21 +212,25 @@ class SectionPanel extends React.Component{
             </select>
           </div>
         </div>
-        {!newSection && <button onClick={(e) => {this.onAddNewSection(e)}}>Add new section</button>}
+        {!newSection && <button className="btn-block btn-toolpanel" onClick={(e) => {this.onAddNewSection(e)}}>Add new section</button>}
         {newSection &&
-          <div className="new-section-widget">
-            {sectionStyle.name}
-            <hr/>
+          <article className="new-section-widget">
+            <header>
+              <h1>{sectionStyle.name}</h1>
+              <hr/>
+            </header>
             <div className="row">
-              <StylesPanel
-                addNewStyle={this.addNewStyle}
-                updateStyle={this.updateStyle}
-              />
+              <div className="col-xs-12">
+                <StylesPanel
+                  addNewStyle={this.addNewStyle}
+                  updateStyle={this.updateStyle}
+                />
+              </div>
             </div>
-          </div>
+          </article>
         }
-        {sectionStyle && connectDragSource(
-          <div className="section-preview">
+        {sectionStyle.structure && connectDragSource(
+          <div className="section-preview" style={{cursor: 'move', marginTop: 25}}>
             {sectionStyle.structure && _.map(sectionStyle.structure.elements, (element, i) => {
               console.log(element)
               return (

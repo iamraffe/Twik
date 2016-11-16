@@ -12,6 +12,7 @@ class SingleElement extends React.Component{
       editing: false
     }
     this.onUpdate = props.onUpdate
+    this.onDelete = props.onDelete
   }
 
   componentWillReceiveProps(nextProps){
@@ -46,12 +47,15 @@ class SingleElement extends React.Component{
     return (
       <div className={`${type} single-element`}>
         {!editing &&
-          <span
-            className="text"
-            style={styles}
-            dangerouslySetInnerHTML={{__html: (text === '' ? 'Lorem Ipsum' : text)}}
-            onDoubleClick={(e) => {return this.setState({editing: !editing})}}
-          />
+          <span>
+            <span
+              className="text"
+              style={styles}
+              dangerouslySetInnerHTML={{__html: (text === '' ? 'Lorem Ipsum' : text)}}
+              onDoubleClick={(e) => {return this.setState({editing: !editing})}}
+            />
+            <span style={{cursor: 'pointer', verticalAlign: '-2.5px', marginLeft: 7.5}} className="ion ion-ios-close-outline" onClick={(e) => {this.onDelete(this.props.position)}}></span>
+          </span>
         }
         {editing &&
           <InlineEditor

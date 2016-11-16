@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import ReactDom from 'react-dom'
 import _ from 'lodash'
 
 import InlineEditor from '../../common/InlineEditor'
@@ -6,7 +7,8 @@ import InlineEditor from '../../common/InlineEditor'
 class CompoundElement extends React.Component{
   constructor(props){
     super(props)
-
+    // console.log(props.elements)
+    // debugger;
     this.state = {
       editing: 'none',
       elements: _.map(props.elements, (e, i) => {
@@ -19,6 +21,7 @@ class CompoundElement extends React.Component{
     }
 
     this.onUpdate = props.onUpdate
+    this.onDelete = props.onDelete
   }
 
   componentWillReceiveProps(nextProps){
@@ -76,13 +79,15 @@ class CompoundElement extends React.Component{
           return (
             <span key={i}>
               {editing !== e.type &&
-                <span
-                  
-                  className={e.type}
-                  style={e.styles}
-                  dangerouslySetInnerHTML={{__html: (e.text === '' ? '<p>Lorem ipsum</p>' : `<p>${e.text}</p>`)}}
-                  onDoubleClick={() => {this.onToggleEditing(e.type)}}
-                />
+                <span>
+                  <span
+                    className={e.type}
+                    style={e.styles}
+                    dangerouslySetInnerHTML={{__html: (e.text === '' ? '<p>Lorem ipsum</p>' : `<p>${e.text}</p>`)}}
+                    onDoubleClick={() => {this.onToggleEditing(e.type)}}
+                  />
+                  {(i%this.props.elements.length === 0 )&&<span style={{cursor: 'pointer', verticalAlign: '0px', float: 'right'}} className="ion ion-ios-close-outline" onClick={(e) => {this.onDelete(this.props.position)}}></span>}
+                </span>
               }
               {editing === e.type &&
                 <InlineEditor

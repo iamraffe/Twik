@@ -11,3 +11,7 @@ export function addMenuElement(element, containerId, rowId, columnId, sectionId)
 export function updateMenuElement(element, containerId, rowId, columnId, sectionId){
   return { type: types.UPDATE_MENU_ELEMENT, element, containerId, rowId, columnId, sectionId }
 }
+
+export function deleteMenuElement(position, containerId, rowId, columnId, sectionId){
+  return { type: types.DELETE_MENU_ELEMENT, position, containerId, rowId, columnId, sectionId }
+}

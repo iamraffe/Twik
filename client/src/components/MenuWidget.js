@@ -44,10 +44,10 @@ class MenuWidget extends React.Component{
     return(
       <div>
         <div className="row">
-          <div className={meta.orientation === 'landscape' ? `col-xs-9` : `col-xs-6 col-xs-offset-3`}>
+          <div className={meta.orientation === 'landscape' ? `col-xs-10` : `col-xs-7 col-xs-offset-3`}>
             <Canvas />
           </div>
-          <div className="col-xs-3">
+          <div className="col-xs-2">
             {this.props.editor && <ToolPanel/>}
           </div>
         </div>

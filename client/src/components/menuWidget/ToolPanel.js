@@ -80,40 +80,59 @@ class ToolPanel extends React.Component{
     const { active } = this.state
     
     return(
-      <section className="tool-panel">
-        {active !== 'color' && <button className="btn-toolpanel btn-block btn-primary" onClick={(e) => {this.onToggleActive('color')}}>Color</button>}
-        {active === 'color' &&
-          <ColorPanel
-            onClose={(e) => {this.onToggleActive('none')}}
-          />
-        }
-        {active !== 'font' && <button className="btn-toolpanel btn-block btn-primary" onClick={(e) => {this.onToggleActive('font')}}>Font</button>}
-        {active === 'font' &&
-          <FontPanel
-            onClose={(e) => {this.onToggleActive('none')}}
-          />
-        }
-        {active !== 'layout' && <button className="btn-toolpanel btn-block btn-primary" onClick={(e) => {this.onToggleActive('layout')}}>Layout</button>}
-        {active === 'layout' &&
-          <LayoutPanel
-            onClose={(e) => {this.onToggleActive('none')}}
-          />
-        }
-        {active !== 'add-section' && <button className="btn-toolpanel btn-block btn-primary" onClick={(e) => {this.onToggleActive('add-section')}}>Add Section</button>}
-        {active === 'add-section' &&
-          <SectionPanel 
-            onClose={(e) => {this.onToggleActive('none')}}
-            getStyles={this.getStyles}
-          />
-        }
-        {active !== 'image-wiz' && <button className="btn-toolpanel btn-block btn-primary" onClick={(e) => {this.onToggleActive('image-wiz')}}>Image Library</button>}
-        {active === 'image-wiz' &&
-          <ImagePanel 
-            onClose={(e) => {this.onToggleActive('none')}}
-            getStyles={this.getStyles}
-          />
-        }
-        <button onClick={(e) => {this.onExport()}}>Export</button>
+      <section className="tool-panel" style={{padding: 25}}>
+        <header>
+          <img src="" alt="Twik Robo Logo" style={{height: 75, margin: '0 auto'}}/>
+          <hr style={{marginBottom: 0, borderBottom: '1.5px solid black'}}/>
+        </header>
+        <div className="row" style={{marginBottom: 100}}>
+          <div className="col-xs-12">
+            {active !== 'color' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('color')}}>Color</button>}
+            {active === 'color' &&
+              <ColorPanel
+                onClose={(e) => {this.onToggleActive('none')}}
+              />
+            }
+            {active !== 'font' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('font')}}>Font</button>}
+            {active === 'font' &&
+              <FontPanel
+                onClose={(e) => {this.onToggleActive('none')}}
+              />
+            }
+            {active !== 'layout' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('layout')}}>Layout</button>}
+            {active === 'layout' &&
+              <LayoutPanel
+                onClose={(e) => {this.onToggleActive('none')}}
+              />
+            }
+            {active !== 'add-section' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('add-section')}}>Add Section</button>}
+            {active === 'add-section' &&
+              <SectionPanel 
+                onClose={(e) => {this.onToggleActive('none')}}
+                getStyles={this.getStyles}
+              />
+            }
+            {active !== 'image-wiz' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('image-wiz')}}>Image Library</button>}
+            {active === 'image-wiz' &&
+              <ImagePanel 
+                onClose={(e) => {this.onToggleActive('none')}}
+                getStyles={this.getStyles}
+              />
+            }
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-6">
+            <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onExport()}}>Save</button>
+          </div>
+          <div className="col-xs-6">
+            <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onExport()}}>Preview</button>
+          </div>
+          <div className="col-xs-12">
+            <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onExport()}}>Export</button>
+          </div>
+        </div>
+        
       </section>
     )
   }

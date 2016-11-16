@@ -67,7 +67,7 @@ class Canvas extends React.Component{
 
     return (
       <div>
-        <div className="row" style={{height: 650, overflow: 'auto', maxWidth: '100%'}}>
+        <div className="row" style={{height: 650, overflow: 'auto', maxWidth: '100%', marginBottom: 35, borderBottom: '1px solid silver'}}>
           <div
             id="entry-point"
             style={{

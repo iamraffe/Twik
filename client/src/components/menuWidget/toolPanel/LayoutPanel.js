@@ -33,21 +33,20 @@ class LayoutPanel extends React.Component{
     const { size, orientation } = this.state
 
     return(
-      <section className="layout-panel">
+      <section className="layout-panel tool-panel-element" style={{paddingBottom: 25}}>
         <header>
           <h1>Layout</h1>
           <span className="fa close-panel fa-times" onClick={this.onClose}></span>
         </header>
         <section>
           <div className="row">
-            <select name="" id="" defaultValue={size} onChange={(e) => {this.onChangeSize(e)}}>
-              <option value="letter">Letter</option>
-              <option value="legal">Legal</option>
-              <option value="tabloid">Tabloid</option>
-            </select>
-          </div>
-          <div className="row">
-          
+            <div className="col-xs-10 col-xs-offset-1">
+              <select className="form-control" defaultValue={size} onChange={(e) => {this.onChangeSize(e)}}>
+                <option value="letter">Letter</option>
+                <option value="legal">Legal</option>
+                <option value="tabloid">Tabloid</option>
+              </select>
+            </div>
           </div>
         </section>
       </section>

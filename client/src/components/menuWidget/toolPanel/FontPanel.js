@@ -74,7 +74,7 @@ class FontPanel extends React.Component{
     const { primary_font, secondary_font, alternate_font, fonts, editing } = this.state
     if(fonts.length > 0){
       return (
-        <section className="font-panel">
+        <section className="font-panel tool-panel-element">
           <header>
             <h1>Font</h1>
             <span className="fa close-panel fa-times" onClick={this.onClose}></span>
@@ -88,7 +88,7 @@ class FontPanel extends React.Component{
           }
           {primary_font && editing === 'primary_font' &&
             <article>
-              <select onChange={(e) => {this.onChange(e, 'primary_font')}} defaultValue={primary_font}>
+              <select className="form-control" onChange={(e) => {this.onChange(e, 'primary_font')}} defaultValue={primary_font}>
                 <option value="default">Choose a font</option>
                 {_.map(fonts, (font, i) => {
                   return (
@@ -112,7 +112,7 @@ class FontPanel extends React.Component{
           }
           {secondary_font && editing === 'secondary_font' && 
             <article>
-              <select onChange={(e) => {this.onChange(e, 'secondary_font')}} defaultValue={secondary_font}>
+              <select className="form-control" onChange={(e) => {this.onChange(e, 'secondary_font')}} defaultValue={secondary_font}>
                 <option value="default">Choose a font</option>
                 {_.map(fonts, (font, i) => {
                   return (
@@ -136,7 +136,7 @@ class FontPanel extends React.Component{
           }
           {alternate_font && editing === 'alternate_font' &&
             <article>
-              <select onChange={(e) => {this.onChange(e, 'alternate_font')}} defaultValue={alternate_font}>
+              <select className="form-control" onChange={(e) => {this.onChange(e, 'alternate_font')}} defaultValue={alternate_font}>
                 <option value="default">Choose a font</option>
                 {_.map(fonts, (font, i) => {
                   return (
@@ -151,6 +151,9 @@ class FontPanel extends React.Component{
               </select>
             </article>
           }
+          <footer>
+            <h1>Pick a font to replace</h1>
+          </footer>
         </section>
       )
     }

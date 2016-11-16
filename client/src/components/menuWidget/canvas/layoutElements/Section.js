@@ -50,6 +50,13 @@ class Section extends React.Component{
     this.props.structureActions.updateMenuElement(element, containerId, rowId, columnId, id)
   }
 
+  onDeleteMenuElement = (position) => {
+    const { containerId, rowId, columnId, id } = this.props
+    // console.log(position)
+    // debugger;
+    this.props.structureActions.deleteMenuElement(position, containerId, rowId, columnId, id)
+  }
+
   render(){
     const { elements } = this.state
 
@@ -64,11 +71,12 @@ class Section extends React.Component{
               key={i}
               {...element}
               onUpdate={this.onUpdateMenuElement}
+              onDelete={this.onDeleteMenuElement}
               getStyles={this.getStyles}
             />
           )
         })}
-        <span className="fa fa-plus" onClick={(e) => {this.onAddMenuElement(e)}}></span>
+        <span className="ion ion-ios-plus-outline" onClick={(e) => {this.onAddMenuElement(e)}}></span>
       </div>
     )
   }

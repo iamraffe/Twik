@@ -10,3 +10,61 @@ NEW & EDIT
     padding: 0 !important;
   }
 }
+
+.tool-panel-element{
+  margin-bottom: 0;
+  border-bottom: 1.5px solid black;
+
+  > header{
+    position: relative;
+
+    h1{
+      font-size: 14px;
+      text-align: center;
+      font-weight: 500;
+    }
+    .close-panel{
+      position: absolute;
+      right: 5px;
+      top: -10px;
+      font-size: 8px;
+      cursor: pointer;
+    }
+  }
+  footer{
+    h1{
+      color: silver;
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+
+  .form-control{
+    height: 30px;
+    font-size: 12px;
+    background: #ccc;
+    color: white;
+    font-weight: bold;
+    padding: 0 18px;
+  }
+}
+
+.color-panel{
+  .swatch{
+    float: left;
+  }
+}
+
+.font-panel, .section-panel{
+  article{
+    > header{
+      position: relative;
+
+      h1{
+        font-size: 18px;
+        text-align: center;
+        font-weight: 500;
+      }
+    }
+  }
+}

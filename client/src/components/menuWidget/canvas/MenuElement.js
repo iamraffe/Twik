@@ -15,6 +15,7 @@ class MenuElement extends React.Component{
     
     this.getStyles = props.getStyles
     this.onUpdate = props.onUpdate
+    this.onDelete = props.onDelete
   }
 
   componentWillReceiveProps(nextProps){
@@ -46,6 +47,7 @@ class MenuElement extends React.Component{
             styles={elements[0].styles}
             getStyles={this.getStyles}
             onUpdate={this.onUpdate}
+            onDelete={this.onDelete}
           />
         )
       case "SECTION_ELEMENT":
@@ -57,6 +59,7 @@ class MenuElement extends React.Component{
             elements={elements}
             getStyles={this.getStyles}
             onUpdate={this.onUpdate}
+            onDelete={this.onDelete}
           />
         )
       default:
