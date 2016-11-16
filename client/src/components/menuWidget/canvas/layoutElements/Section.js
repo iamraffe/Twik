@@ -3,17 +3,18 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import * as structureActions from '../../../../actions/structureActions'
+import * as sectionActions from '../../../../actions/sectionActions'
 
 import MenuElement from '../MenuElement'
 
 class Section extends React.Component{
   constructor(props){
     super(props)
-    console.log(props.activeSection, props.id, props.activeSection === props.id)
+    // console.log(props.activeSection, props.id, props.activeSection === props.id)
     this.state = {
       active: props.activeSection === props.id,
       sections: props.sections,
+      section_types: props.section_types,
       elements: props.elements,
       zoom: props.zoom,
       fontFamilies: props.fontFamilies,
@@ -31,6 +32,7 @@ class Section extends React.Component{
     this.setState({
       active: nextProps.activeSection === nextProps.id,
       sections: nextProps.sections,
+      section_types: nextProps.section_types,
       elements: nextProps.elements,
       zoom: nextProps.zoom,
       fontFamilies: nextProps.fontFamilies,
@@ -41,31 +43,31 @@ class Section extends React.Component{
   }
 
   onAddMenuElement = (e) => {
-    const { sections, elements } = this.state
+    const { section_types, elements } = this.state
     const { containerId, rowId, columnId, id, struct } = this.props
-    const sectionIndex =  _.findIndex(sections, (s) => {return s.id === struct})
+    const sectionIndex =  _.findIndex(section_types, (s) => {return s.id === struct})
     // console.log(this.props, sectionIndex, sections[sectionIndex], sections[sectionIndex].structure)
-    this.props.structureActions.addMenuElement({...sections[sectionIndex].structure, position: elements.length}, containerId, rowId, columnId, id)
+    this.props.sectionActions.addMenuElement({...section_types[sectionIndex].structure, position: elements.length}, id)
   }
 
   onUpdateMenuElement = (element) => {
     const { containerId, rowId, columnId, id } = this.props
     // console.log(element)
     // debugger;
-    this.props.structureActions.updateMenuElement(element, containerId, rowId, columnId, id)
+    this.props.sectionActions.updateMenuElement(element, id)
   }
 
   onDeleteMenuElement = (position) => {
     const { containerId, rowId, columnId, id } = this.props
     // console.log(position)
     // debugger;
-    this.props.structureActions.deleteMenuElement(position, containerId, rowId, columnId, id)
+    this.props.sectionActions.deleteMenuElement(position, id)
   }
 
   render(){
     const { elements, hover, active } = this.state
     const { activeSection, id } = this.props
-    console.log("active", active, activeSection)
+    // console.log("active", active, activeSection)
     return(
       <div
         className={`${hover ? 'section-hover' : '' } section-element`}
@@ -95,6 +97,7 @@ function mapStateToProps(state, ownProps){
   return {
     structure: state.structure,
     sections: state.sections,
+    section_types: state.section_types,
     zoom: state.zoom,
     colors: state.colors,
     fontFamilies: state.fontFamilies
@@ -103,7 +106,7 @@ function mapStateToProps(state, ownProps){
 
 function mapDispatchToProps(dispatch){
   return {
-    structureActions: bindActionCreators(structureActions, dispatch)
+    sectionActions: bindActionCreators(sectionActions, dispatch)
   }
 }
 

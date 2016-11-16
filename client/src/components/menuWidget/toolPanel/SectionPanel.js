@@ -5,9 +5,9 @@ import _ from 'lodash'
 import { DragSource } from 'react-dnd'
 import uuid from 'node-uuid'
 
-import * as structureActions from '../../../actions/structureActions'
-import * as styleActions from '../../../actions/styleActions'
 import * as sectionActions from '../../../actions/sectionActions'
+import * as styleActions from '../../../actions/styleActions'
+import * as sectionTypeActions from '../../../actions/sectionTypeActions'
 
 import StylesPanel from './StylesPanel'
 
@@ -69,7 +69,7 @@ const sectionSource = {
                                 })
           }]
         }
-        props.sectionActions.addSectionType({...component.state.sectionStyle, structure: _.omit(section.elements[0], ['position']) })
+        props.sectionTypeActions.addSectionType({...component.state.sectionStyle, structure: _.omit(section.elements[0], ['position']) })
       }
       else{
         section = {
@@ -84,11 +84,11 @@ const sectionSource = {
         }
       }
 
-      console.log("SECIOTN ", section)
+      // console.log("SECIOTN ", section)
 
 
-      props.structureActions.addSectionStructure(section, dropResult.containerId, dropResult.rowId, dropResult.columnId)
-      // props.structureActions.addSectionStructure(component.state.sectionStyle)
+      props.sectionActions.addSection({...section, columnId: dropResult.columnId})
+      // props.sectionActions.addSectionStructure(component.state.sectionStyle)
       component.state.sectionStyle = {}
       component.state.newSection = false
     }
@@ -106,7 +106,7 @@ class SectionPanel extends React.Component{
     super(props)
 
     this.state = {
-      sections: props.sections,
+      section_types: props.section_types,
       sectionStyle: {},
       newSection: false,
       colors: props.colors,
@@ -119,7 +119,7 @@ class SectionPanel extends React.Component{
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      sections: nextProps.sections,
+      section_types: nextProps.section_types,
       colors: nextProps.colors,
       fontFamilies: nextProps.fontFamilies
     })
@@ -191,7 +191,7 @@ class SectionPanel extends React.Component{
   }
 
   render(){
-    const { sections, sectionStyle, newSection } = this.state
+    const { section_types, sectionStyle, newSection } = this.state
     const { isDragging, connectDragSource, connectDragPreview } = this.props
     // console.log(sectionStyle)
     return (
@@ -204,7 +204,7 @@ class SectionPanel extends React.Component{
           <div className="col-xs-10 col-xs-offset-1">
             <select className="form-control" defaultValue="default" onChange={this.onSectionStyleSelect}>
               <option value="default">Choose section style</option>
-              {_.map(sections, (section, i) => {
+              {_.map(section_types, (section, i) => {
                 return (
                   <option key={i} value={JSON.stringify(section)}>{section.name}</option>
                 )
@@ -249,7 +249,7 @@ SectionPanel.propTypes = {}
 
 function mapStateToProps(state, ownProps){
   return {
-    sections: state.sections,
+    section_types: state.section_types,
     colors: state.colors,
     fontFamilies: state.fontFamilies
   }
@@ -257,8 +257,8 @@ function mapStateToProps(state, ownProps){
 
 function mapDispatchToProps(dispatch){
   return {
-    structureActions: bindActionCreators(structureActions, dispatch),
     sectionActions: bindActionCreators(sectionActions, dispatch),
+    sectionTypeActions: bindActionCreators(sectionTypeActions, dispatch),
     styleActions: bindActionCreators(styleActions, dispatch)
   }
 }

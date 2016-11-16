@@ -63,7 +63,7 @@ class Canvas extends React.Component{
 
   render(){
     const { width, height, zoom, colors, fonts, structure, hover, activeSection } = this.state
-    console.log("structure", structure)
+    // console.log("structure", structure)
     return (
       <div>
         <div className="row" style={{height: 650, overflow: 'auto', maxWidth: '100%', marginBottom: 35, borderBottom: '1px solid silver'}}>

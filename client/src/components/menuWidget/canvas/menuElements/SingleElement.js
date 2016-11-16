@@ -27,6 +27,7 @@ class SingleElement extends React.Component{
     this.onUpdate({
       type: this.props.type,
       position: this.props.position,
+      id: this.props.id,
       elements: [{
         styles: this.props.styles,
         text: text

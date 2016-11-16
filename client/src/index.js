@@ -66,8 +66,158 @@ const template = {
   id: uuid.v4(),
   meta: {
     orientation: 'portrait',
-    size: 'tabloid',
-  }
+    size: 'letter',
+  },
+  styles: [
+    {
+      id: menu_title_id,
+      name: 'menu_title',
+      fontFamily: 'primary_font',
+      color: 'secondary_color',
+      extra: {
+        fontSize: 54.84,
+        textTransform: 'uppercase',
+        textDecoration: 'none',
+        fontWeight: 'normal',
+        fontStyle: 'normal'
+      }
+    },
+    {
+      id: section_title_id,
+      name: 'section_title',
+      fontFamily: 'primary_font',
+      color: 'secondary_color',
+      extra: {
+        fontSize: 24,
+        textTransform: 'uppercase',
+        textDecoration: 'none',
+        fontWeight: 'normal',
+        fontStyle: 'normal'
+      }
+    },
+    {
+      id: dish_title_id,
+      name: 'dish_title',
+      fontFamily: 'primary_font',
+      color: 'primary_color',
+      extra: {
+        fontSize: 14,
+        textTransform: 'uppercase',
+        textDecoration: 'underline',
+        fontWeight: 'normal',
+        fontStyle: 'normal',
+      }
+    },
+    {
+      id: dish_description_id,
+      name: 'dish_description',
+      fontFamily: 'secondary_font',
+      color: 'primary_color',
+      extra: {
+        fontSize: 12,
+        textTransform: 'none',
+        textDecoration: 'none',
+        fontWeight: 'normal',
+        fontStyle: 'italic'
+      }
+    },
+    {
+      id: dish_price_id,
+      name: 'dish_price',
+      fontFamily: 'primary_font',
+      color: 'primary_color',
+      extra: {
+        fontSize: 12,
+        textTransform: 'uppercase',
+        textDecoration: 'none',
+        fontWeight: 'normal',
+        fontStyle: 'normal'
+      }
+    }
+  ],
+  section_types: [
+    {
+      name: "Menu Title",
+      id: menu_title_section_id,
+      structure: {
+        type: "MENU_TITLE",
+        elements: [
+          {
+            styles: menu_title_id,
+            text: ''
+          }
+        ]
+      }
+    },
+    {
+      name: "Category Title",
+      id: category_title_id,
+      structure: {
+        type: "SECTION_TITLE",
+        elements: [
+          {             
+            styles: section_title_id,
+            text: ''
+          }
+        ]
+      }
+    },
+    {
+      name: "Category Dishes",
+      id: category_dishes_id,
+      structure: {
+        type: "SECTION_ELEMENT",
+        elements: [
+          {
+            type: "DISH_TITLE",
+            text: '',
+            styles: dish_title_id
+          },
+          {
+            type: "DISH_DESCRIPTION",
+            text: '',
+            styles: dish_description_id
+          },
+          {
+            type: "DISH_PRICE",
+            text: '',
+            styles: dish_price_id
+          }
+        ]
+      }
+    }
+  ],
+  structure: [
+    {
+      type: 'CONTAINER',
+      position: 0,
+      background: '',
+      span: 1,
+      paddingTop: 15,
+      paddingBottom: 15,
+      paddingLeft: 15,
+      paddingRight: 15,
+      id: uuid.v4(),
+      elements: [
+        {
+          type: "ROW",
+          position: 0,
+          id: uuid.v4(),
+          vertical: 'top',
+          elements: [
+            {
+              type: "COLUMN",
+              span: 1,
+              id: col_1_id,
+              position: 0,
+              elements: [
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
 
 const template_other = {
@@ -83,7 +233,7 @@ const template_other = {
       fontFamily: 'primary_font',
       color: 'secondary_color',
       extra: {
-        fontSize: 54<p>.d</p>4,
+        fontSize: 54.84,
         textTransform: 'uppercase',
         textDecoration: 'none',
         fontWeight: 'normal',
@@ -269,7 +419,7 @@ const menu = {
   meta: {
     id: uuid.v4(),
     title: "My Test Menu",
-    ...template.meta,
+    ...template_other.meta,
     templateId: template_other.id
   },
   colors: {
@@ -347,7 +497,7 @@ const menu = {
             },
             {
               type: "DISH_PRICE",
-              text: '<p>$d</p>',
+              text: '<p>$8</p>',
               styles: dish_price_id
             }
           ]
@@ -369,7 +519,7 @@ const menu = {
             },
             {
               type: "DISH_PRICE",
-              text: '<p>$d</p>',
+              text: '<p>$8</p>',
               styles: dish_price_id
             }
           ]
@@ -391,7 +541,7 @@ const menu = {
             },
             {
               type: "DISH_PRICE",
-              text: '<p>$d</p>',
+              text: '<p>$8</p>',
               styles: dish_price_id
             }
           ]
@@ -413,7 +563,7 @@ const menu = {
             },
             {
               type: "DISH_PRICE",
-              text: '<p>$d</p>',
+              text: '<p>$8</p>',
               styles: dish_price_id
             }
           ]
@@ -515,7 +665,7 @@ const menu = {
   //                       },
   //                       {
   //                         type: "DISH_PRICE",
-  //                         text: '<p>$d</p>',
+  //                         text: '<p>$8</p>',
   //                         styles: dish_price_id
   //                       }
   //                     ]
@@ -537,7 +687,7 @@ const menu = {
   //                       },
   //                       {
   //                         type: "DISH_PRICE",
-  //                         text: '<p>$d</p>',
+  //                         text: '<p>$8</p>',
   //                         styles: dish_price_id
   //                       }
   //                     ]
@@ -559,7 +709,7 @@ const menu = {
   //                       },
   //                       {
   //                         type: "DISH_PRICE",
-  //                         text: '<p>$d</p>',
+  //                         text: '<p>$8</p>',
   //                         styles: dish_price_id
   //                       }
   //                     ]
@@ -581,7 +731,7 @@ const menu = {
   //                       },
   //                       {
   //                         type: "DISH_PRICE",
-  //                         text: '<p>$d</p>',
+  //                         text: '<p>$8</p>',
   //                         styles: dish_price_id
   //                       }
   //                     ]
@@ -603,7 +753,7 @@ const menu = {
   //                       },
   //                       {
   //                         type: "DISH_PRICE",
-  //                         text: '<p>$d</p>',
+  //                         text: '<p>$8</p>',
   //                         styles: dish_price_id
   //                       }
   //                     ]
@@ -625,7 +775,7 @@ const menu = {
   //                       },
   //                       {
   //                         type: "DISH_PRICE",
-  //                         text: '<p>$d</p>',
+  //                         text: '<p>$8</p>',
   //                         styles: dish_price_id
   //                       }
   //                     ]
@@ -647,7 +797,7 @@ const menu = {
   //                       },
   //                       {
   //                         type: "DISH_PRICE",
-  //                         text: '<p>$d</p>',
+  //                         text: '<p>$8</p>',
   //                         styles: dish_price_id
   //                       }
   //                     ]
@@ -669,7 +819,7 @@ const menu = {
   //                       },
   //                       {
   //                         type: "DISH_PRICE",
-  //                         text: '<p>$d</p>',
+  //                         text: '<p>$8</p>',
   //                         styles: dish_price_id
   //                       }
   //                     ]

@@ -32,7 +32,7 @@ const containerTarget = {
 class Column extends React.Component{
   constructor(props){
     super(props)
-    console.log(props,  _.filter(props.sections, (section, i) => {return section.columnId === props.id}))
+    // console.log(props,  _.filter(props.sections, (section, i) => {return section.columnId === props.id}))
     // debugger;
     this.state = {
       sections: _.filter(props.sections, (section, i) => {return section.columnId === props.id}),
@@ -44,7 +44,7 @@ class Column extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    // console.log("COLUMN ", nextProps)
+    console.log("COLUMN NEXT", nextProps.sections)
     this.setState({
       activeSection: nextProps.activeSection,
       sections: _.filter(nextProps.sections, (section, i) => {return section.columnId === nextProps.id})

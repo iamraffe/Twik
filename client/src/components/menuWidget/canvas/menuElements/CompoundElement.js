@@ -47,8 +47,9 @@ class CompoundElement extends React.Component{
   }
 
   editText = (text, index) => {
-    console.log(text, index, this.props, this.state)
+    // console.log(text, index, this.props, this.state)
     this.onUpdate({
+      id: this.props.id,
       type: this.props.type,
       position: this.props.position,
       elements: [

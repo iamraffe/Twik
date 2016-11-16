@@ -30,7 +30,7 @@ class MenuElement extends React.Component{
   }
 
   render(){
-    const { type, activeSection } = this.props
+    const { type, activeSection, id } = this.props
     const { elements, position } = this.state
 
     switch(type){
@@ -40,6 +40,7 @@ class MenuElement extends React.Component{
         return (
           <SingleElement
             type={type}
+            id={id}
             position={position}
             text={elements[0].text}
             styles={elements[0].styles}
@@ -54,6 +55,7 @@ class MenuElement extends React.Component{
         return (
           <CompoundElement
             type={type}
+            id={id}
             position={position}
             elements={elements}
             activeSection={activeSection}
