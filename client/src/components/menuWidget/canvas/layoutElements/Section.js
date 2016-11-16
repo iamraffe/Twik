@@ -46,6 +46,8 @@ class Section extends React.Component{
     const { section_types, elements } = this.state
     const { containerId, rowId, columnId, id, struct } = this.props
     const sectionIndex =  _.findIndex(section_types, (s) => {return s.id === struct})
+    // console.log(section_types, section_types[sectionIndex], sectionIndex)
+    // debugger;
     // console.log(this.props, sectionIndex, sections[sectionIndex], sections[sectionIndex].structure)
     this.props.sectionActions.addMenuElement({...section_types[sectionIndex].structure, position: elements.length}, id)
   }
@@ -97,7 +99,7 @@ function mapStateToProps(state, ownProps){
   return {
     structure: state.structure,
     sections: state.sections,
-    section_types: state.section_types,
+    section_types: [...state.section_types.custom, ...state.section_types.template],
     zoom: state.zoom,
     colors: state.colors,
     fontFamilies: state.fontFamilies

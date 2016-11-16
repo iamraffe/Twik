@@ -249,7 +249,7 @@ SectionPanel.propTypes = {}
 
 function mapStateToProps(state, ownProps){
   return {
-    section_types: {...state.section_types.custom, ...state.section_types.template},
+    section_types: [...state.section_types.custom, ...state.section_types.template],
     colors: state.colors,
     fontFamilies: state.fontFamilies
   }
