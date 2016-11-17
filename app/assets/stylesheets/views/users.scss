@@ -1,0 +1,77 @@
+/*
+
+SHOW
+
+ */
+.user-account{
+  margin-top: 50px;
+  .settings-area-unit{
+    margin-bottom: 75px;
+  }
+  .border-bottom{
+    border-bottom: 1px solid $brand-default;
+  }
+
+  .profile-settings{
+    .border-bottom{
+      padding-top: 15px;
+      padding-bottom: 15px;
+      display: block;
+    }
+  }
+}
+
+.settings-header-stripe{
+    background: $brand-default;
+    margin-bottom: 85px;
+    
+    h1, h2, h3, h4{
+      color: white;
+      font-family: Baloo, cursive;
+      text-align: center;
+      font-size: 20px;
+      margin-top: 10px;
+      margin-bottom: 7.5px;
+    }
+
+  
+
+}
+
+.team-list{
+  li{
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    form{
+      display: inline;
+
+      select.form-control{
+        background: #CCCCCC;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        width: auto;
+        display: inline;
+        padding: 5px 35px;
+      }
+    }
+    .team-user-options{
+      .ion, form{
+        float: right;
+        margin-left: 25px;
+      }
+      .ion-ios-compose-outline{
+        font-size: 3em;
+      }
+      .team-user-delete{
+        font-size: 2.5em;
+        color: $brand-default;
+        
+        .ion{
+          margin-top: 3.5px;
+        }
+      }
+    }
+  }
+}

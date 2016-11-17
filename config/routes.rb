@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     end
 
     devise_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations", :confirmations => "users/confirmations" }
-    resources :users, only: [:index, :destroy, :update]
+    resources :users, only: [:index, :destroy, :update, :show]
     resources :subscriptions, only: [:new, :create]
 
     resources :images

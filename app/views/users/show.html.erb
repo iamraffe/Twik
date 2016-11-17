@@ -1,0 +1,100 @@
+<section class="user-account">
+  <header class="row settings-area-unit">
+    <div class="col-xs-12 settings-header-stripe">
+      <h1>Profile</h1>
+    </div>
+    <div class="col-sm-1 col-sm-offset-1">
+      <button class="btn btn-primary btn-square">
+        Upload<br>Photo
+      </button>
+    </div>
+    <div class="col-sm-6 profile-settings">
+      <div class="row">
+        <form>
+          <div class="col-sm-6">
+            <span class="border-bottom"><%= current_user.name.nil? ? 'Name' : current_user.name %></span>
+          </div>
+          <div class="col-sm-6">
+            <span class="border-bottom">Last Name</span>
+          </div>
+          <div class="col-sm-6">
+            <span class="border-bottom">Title</span>
+          </div>
+          <div class="col-sm-6">
+            <span class="border-bottom">Organization Company</span>
+          </div>
+          <div class="col-sm-6">
+            <span class="border-bottom">
+              <%= current_user.email %>
+              <span class="pull-right ion ion-ios-compose-outline"></span>
+            </span>
+          </div>
+          <div class="col-sm-6">
+            <span class="border-bottom">
+              <%= 'Phone'  %>
+              <span class="pull-right ion ion-ios-compose-outline"></span>
+            </span>
+          </div>
+          <div class="col-sm-6">
+            <span class="border-bottom">
+              Password
+              <span class="pull-right ion ion-ios-compose-outline"></span>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </header>
+  <div class="row settings-area-unit ">
+    <div class="col-xs-12 settings-header-stripe">
+      <h2>Manage Team</h2>
+    </div>
+    <div class="col-sm-8 col-sm-offset-2">
+      <section class="users-panel">
+        <div class="panel-body">
+          <% if current_user.owner? %>
+<!--             <footer class="row invite-user-box">
+              <div class="col-sm-12">
+                <%= form_for(User.new, url: user_invitation_path,
+                                        html: { class: 'form-inline pull-right'}) do |f| %>
+                      <%= form_group_for f, :email, label: false do %>
+                          <%= f.email_field :email, class:"form-control", placeholder: "Email" %>
+                      <% end %>
+                      <%= f.submit "Invite User", class: "btn btn-primary" %>
+                <% end %>
+              </div>
+            </footer> -->
+          <% end %>
+          <ul class="list-unstyled team-list">
+            <% @users.each do |user| %>
+              <li class="row border-bottom">
+                <div class="col-xs-7">
+                  <p><%= user.name %></p>
+                  <p><%= user.email %></p>
+                </div>
+                <div class="col-xs-5 team-user-options">
+                  <a href="<%= user_path(user) %>" class="team-user-delete">
+                    <span class="ion ion-ios-close-outline"></span>
+                  </a>                  <%= form_for(user) do |f| %>
+                  <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}, {}, class: "form-control") %>
+                  <% end %>
+                  <span class="ion ion-ios-compose-outline"></span>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="row settings-header-stripe">
+    <div class="col-xs-12">
+      <h2>Manage Printers</h2>
+    </div>
+  </div>
+  <div class="row settings-header-stripe">
+    <div class="col-xs-12">
+      <h2>Payment Settings</h2>
+    </div>
+  </div>
+</section>
