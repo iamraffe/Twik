@@ -82,46 +82,26 @@ class RegistrationWidget extends React.Component{
 
     return(
       <div>
-        <div className="col-md-4">
-          <img src={this.props.logo} alt="Twik Logo" className="img-responsive"/>
-        </div>
         <div className="sign-up-form col-md-8">
           <form onSubmit={this.onSignUp}>
             <div className="row form-group">
               <div className="col-xs-12">
                 <div className="input-group">
-                  <input type="text" className="form-control" name="subdomain" placeholder="subdomain" onBlur={this.verifySubdomain} autoFocus={true} />
+                  <input type="text" className="form-control" name="subdomain" placeholder="claim your twik name" onBlur={this.verifySubdomain} autoFocus={true} />
                   <div className="input-group-addon text-primary">.twik.us</div>
                 </div>
               </div>
             </div>
             <div className="row form-group">
-              <div className="col-xs-12">
-                <input type="email" placeholder="your email address" name="email" className="form-control" />
+              <div className="col-xs-9">
+                <input type="email" placeholder="email" name="email" className="form-control" />
               </div>
-            </div>
-            <div className="row">
-              <div className="col-xs-12">
-                <button className="btn btn-primary btn-block" disabled={!canSubmit}>Let's go</button>
+              <div className="col-xs-3">
+                <button className="btn btn-primary btn-small" disabled={!canSubmit}>Sign Up</button>
               </div>
             </div>
           </form>
         </div>
-        {completed &&
-          <section className="sign-up-completed">
-            <header>
-              <h1>Awesome!</h1>
-              <h2>Now guess what?</h2>
-              <button className="btn btn-primary btn-block" onClick={this.onGuessWhat}>What?</button>
-            </header>
-            {guessWhat &&
-              <div className="guess-what">
-                <p>It's Hamme... erh, email confirmation time.</p>
-                <p>See you on the other side!</p>
-              </div>
-            }
-          </section>
-        }
       </div>
     )
   }

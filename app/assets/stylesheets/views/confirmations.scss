@@ -3,23 +3,42 @@
 SHOW
 
  */
+@mixin placeholder {
+  &::-webkit-input-placeholder { @content }
+  &:-moz-placeholder { @content }
+  &::-moz-placeholder { @content }
+  &:-ms-input-placeholder { @content }
+}
 
 .finish-registration{
-  margin-top: 175px;
+  margin-top: 125px;
 
   img{
-    max-height: 250px;
+    max-height: 115px;
     margin: 0 auto;
   }
   form{
+    margin-top: 70px;
+
     header{
       h1{
         font-family: 'Baloo', cursive;
         font-size: 14px;
+        border-bottom: 1px solid $brand-default;
+        padding-bottom: 20px;
 
         .user-email{
           color: $brand-primary;
         }
+      }
+    }
+    input.form-control{
+      color: $brand-default;
+      @include placeholder{
+        color: $brand-default;
+        font-weight: 500;
+        // font-size: 30px;
+        // text-align: center;
       }
     }
   }

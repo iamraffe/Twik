@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="all-height">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title><%= "#{current_account.subdomain} | " unless current_account.nil? %>Twik</title>
+  <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+  <%= favicon_link_tag 'twik-robot-red.ico' %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="all-height">
+  <section class="main-landing-section">
+    <header>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12">
+            <nav class="navbar navbar-landing">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="/">
+                    <img alt="Brand" src="<%= asset_path 'twik-logo-horizontal-red.png' %>">
+                  </a>
+                </div>
+                
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">About Us</a> <span class="nav-separator">|</span></li>
+                    <li><a href="#">Pricing</a> <span class="nav-separator">|</span></li>
+                    <li><a href="#">Log in</a></li>
+                  </ul>
+                  <div class='pretty-nav-line navbar-right'></div>
+                </div><!-- /.navbar-collapse -->
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="container twik-deets">
+      <header class="row">
+        <div class="col-md-7 col-md-offset-1">
+          <h1><img src="<%= asset_path 'twik-logo-word-only-red.png' %>" alt="Twik" class="twik-word-only"> enables teams to use and edit designed brand templates directly. The platform automatically applies brand formatting to text and images, saves documents to a cloud archive, and prepares professional, print ready files so you can send them to production right from your page.</h1>
+        </div>
+      </header>
+      <div class="row uses-wrapper">
+        <div class="col-md-7 col-md-offset-1">
+          <p><strong>User Twik for:</strong></p>
+          <ul class="list-unstyled list-inline uses">
+            <li class="text-primary"><strong>Menus</strong></li>
+            <li>/</li>
+            <li class="text-primary"><strong>Proposals &amp; RFP's</strong></li>
+            <li>/</li>
+            <li class="text-primary"><strong>Business cards</strong></li>
+            <li>/</li>
+            <li class="text-primary"><strong>Organization reports</strong></li>
+            <li>/</li>
+            <li class="text-primary"><strong>Letterhead and Invoices</strong></li>
+            <li>/</li>
+            <li class="text-primary"><strong>Flyers and promotional materials</strong></li>
+            <li>/</li>
+            <li class="text-primary"><strong>Presentation slide decks</strong></li>
+            <li>/</li>
+            <li class="text-primary"><strong>Web Banners</strong></li>
+          </ul>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-landing">
+              <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                  <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Teams
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-landing">
+              <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                  <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Multiple Teams and Management Companies
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-landing">
+              <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                  <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Designers (PRO)
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <table class="table pricing-table">
+            <thead>
+              <th></th>
+              <th>Team</th>
+              <th>Team Plus</th>
+              <th>Designer Pro<br><span class="small">Coming Soon</span></th>
+              <th>Studio Pro<br><span class="small">Coming Soon</span></th>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td><strong>$10 / month</strong></td>
+                <td><strong>$25 / month</strong></td>
+                <td><strong>$20 + 5% twik fees / month</strong></td>
+                <td><strong>$15 / designer<br>+ 5% twik fees / month</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Team Pages</strong></td>
+                <td>2</td>
+                <td>3</td>
+                <td>1 designer dashboard <br>5 client pages</td>
+                <td>>3 designer dashboards <br>5 client pages each</td>
+              </tr>
+              <tr>
+                <td><strong>Users / Licenses</strong></td>
+                <td>5 standard</td>
+                <td>3 manager <br>5 standard / team</td>
+                <td>1 designer <br>5 standard / team</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><strong>Templates</strong></td>
+                <td>5</td>
+                <td>5 / team</td>
+                <td>5 / client page</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><strong>Custom subscription-based pages for your clients</strong></td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>5</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><strong>Add Team</strong></td>
+                <td>N/A</td>
+                <td>$5 / team / mo.</td>
+                <td>$2.5 / team / mo.</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+  </section>
+  <%= javascript_include_tag 'application' %>
+</body>
+</html>

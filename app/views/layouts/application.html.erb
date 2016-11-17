@@ -29,15 +29,10 @@
     <nav class="navbar navigation-actions">
       <ul class="nav navbar-nav action-navbar">
         <% if user_signed_in? %>
-          <li><%= link_to "Create Menu", new_menu_path %> <span class="nav-separator">|</span></li>
-          <li><%= link_to "Manage Team", users_path %> <span class="nav-separator">|</span></li>
-          <li><%= link_to "Search", '#' %> <span class="nav-separator">|</span></li>
-          <li><%= link_to "Subscription", new_subscription_path %> <span class="nav-separator">|</span></li>
-          <li><%= link_to "Log out", destroy_user_session_path, method: 'delete', class: "" %></li>
-        <% else %>
-          <li><%= link_to "About Us", new_menu_path %> <span class="nav-separator">|</span></li>
-          <li><%= link_to "Pricing", users_path %> <span class="nav-separator">|</span></li>
-          <li><%= link_to "Log In", '#' %></li>
+          <li><%= link_to "Create New", new_menu_path %> <span class="nav-separator">|</span></li>
+          <li><%= link_to "My Templates", users_path %> <span class="nav-separator">|</span></li>
+          <li><%= link_to "My Account", '#' %> <span class="nav-separator">|</span></li>
+          <li><a href="#"><span class="fa fa-inverse fa-search"></span></a></li>
         <% end %>
       </ul>
     </nav>

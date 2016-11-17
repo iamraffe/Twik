@@ -9,16 +9,16 @@
       </header>
       <%= f.hidden_field :confirmation_token %>
       <%= form_group_for f, :name, {label: false} do %>
-        <%= f.text_field :name, class:"form-control", placeholder: "name" %>
+        <%= f.text_field :name, class:"form-control", placeholder: "Name" %>
       <% end %>
       <%= form_group_for f, :password, {label: false} do %>
-        <%= f.password_field :password, class:"form-control", placeholder: "password" %>
+        <%= f.password_field :password, class:"form-control", placeholder: "Password" %>
       <% end %>
       <%= form_group_for f, :password_confirmation, {label: false} do %>
-        <%= f.password_field :password_confirmation, class:"form-control", placeholder: "confirm password" %>
+        <%= f.password_field :password_confirmation, class:"form-control", placeholder: "Confirm password" %>
       <% end %>
-      <div>
-        <%= f.submit "Log In!", class: "btn btn-primary btn-block" %>
+      <div class="">
+        <%= f.submit "Log In", class: "btn btn-primary btn-small pull-right" %>
       </div>
       <% if devise_mapping.rememberable? -%>
         <div class="form-group">

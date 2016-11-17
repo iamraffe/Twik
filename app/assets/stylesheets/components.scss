@@ -1,6 +1,38 @@
 .landing-logo{
   max-height: 175px;
 }
+.twik-word-only{
+  width: 150px;
+  vertical-align: -5px;
+}
+
+.btn-primary{
+  background-image: asset-url('btn-red.png');
+  border: none;
+  background-size: 100% 100%;
+  color: #f6303e;
+  font-size: 18px;
+  background-color: transparent;
+  outline: none;
+  box-shadow: none;
+
+  &.btn-small{
+    background-repeat: no-repeat;
+    padding: 12.5px 12.5px 0 5px;
+    height: 50px;
+    width: 112.5px;
+    font-size: 18px;
+  }
+
+  &:hover, &:active, &:focus{
+    background-image: asset-url('btn-red.png') !important;
+    background-color: transparent !important;
+    color: $brand-primary !important;
+    border: none !important; 
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
 
 .btn{
   // font-weight: bold !important;
@@ -66,7 +98,7 @@ input.form-control{
   box-shadow: none;
 
   @include placeholder{
-    color: $brand-primary !important;
+    color: $brand-primary;
   }
 }
 

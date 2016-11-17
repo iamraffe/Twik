@@ -4,6 +4,83 @@ ACCOUNTS - NEW
 
  */
 
+@mixin placeholder {
+  &::-webkit-input-placeholder { @content }
+  &:-moz-placeholder { @content }
+  &::-moz-placeholder { @content }
+  &:-ms-input-placeholder { @content }
+}
+
+.all-height{
+  height: 100%;
+}
+
+.pretty-nav-line{
+  width: 45%;
+  height: 15px;
+  border-bottom: 3px solid $brand-primary;
+  display: block;
+  margin: 0 auto;
+  border-radius: 1px;
+}
+
+.navbar-landing{
+  padding-top: 20px;
+
+  .navbar-brand img{
+    height: 125px;
+    margin-left: 50px;
+  }
+
+  .navbar-right{
+    margin-top: 85px;
+    margin-right: 75px;
+
+    li{
+      a{
+        color: white;
+        font-family: 'Baloo', cursive;
+        margin: 0;
+        padding: 0;
+        display: inline;
+        font-size: 18px;
+
+        &:hover, &:focus{
+          background: transparent;
+          text-decoration: underline;
+          outline: none !important;
+        }
+      }
+      .nav-separator{
+        margin-right: 10px;
+        margin-left: 10px;
+        color: $brand-primary;
+      }
+    }
+  }
+}
+
+.main-landing-section{
+  height: 100%;
+
+  > header{
+    background: $brand-default;
+    height: 100%;
+  }
+  .twik-deets{
+    background: white;
+    color: $brand-default;
+    padding-top: 150px;
+
+    > header{
+      margin-bottom: 85px;
+      h1{
+        font-size: 30px;
+      }
+    }
+  }
+}
+
 .accounts-logo-wrapper{
   img{
     margin-left: 25px;
@@ -16,11 +93,20 @@ ACCOUNTS - NEW
   > header{
     margin-bottom: 100px;
 
-    h1{
-      font-size: 45px;
-      color: $brand-primary;
-      font-family: 'Baloo', cursive;
-      text-align: center;
+    h1, h2{
+      font-size: 42.5px;
+      color: white;
+      font-family: Open Sans;
+      text-align: left;
+      font-weight: 900;
+      line-height: 52.5px;
+      
+      .red-background{
+        background: $brand-primary;
+        border-radius: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
     }
   }
 
@@ -30,7 +116,31 @@ ACCOUNTS - NEW
     font-size: 12px;
     font-family: Open Sans;
     line-height: 1.25;
-  }  
+  }
+  
+  .sign-up-form{
+    input.form-control{
+      background: transparent;
+      border: none;
+      color: #f6303e;
+      line-height: 1;
+      border-bottom: 3px solid #f6303e;
+      height: 35px;
+      box-shadow: none;
+      border-radius: 5px;
+
+      &:focus{
+        box-shadow: none;
+      }
+      @include placeholder{
+        color: #704c4c;
+        font-weight: bold;
+        font-size: 30px;
+        text-align: center;
+      }
+    }
+
+  }
 }
 
 .account-auth{
@@ -38,5 +148,74 @@ ACCOUNTS - NEW
     button{
       margin-bottom: 15px;
     }
+  }
+}
+
+.panel-landing{
+  box-shadow: none;
+
+  &:first-child{
+    border-top: 1px solid $brand-default;
+  }
+  .panel-heading{
+    text-align: center;
+    border-bottom: 1px solid $brand-default;
+  }
+  .panel-title{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: inherit;
+  }
+}
+
+.pricing-table{
+  margin-top: 150px;
+  margin-bottom: 250px;
+
+  thead{
+    tr{
+      th{
+        border-bottom: 1.5px solid $brand-default;
+        text-align: center;   
+        height: 75px;
+        vertical-align: middle;
+        font-size: 20px;
+
+        &:first-child{
+          // text-align: right;
+          // max-width: 150px;
+          border-bottom: none;
+        }     
+      }
+    }
+  }
+  tbody{
+    tr{
+      td{
+        border-top: 1.5px solid $brand-default;
+        text-align: center;
+        height: 75px;
+        vertical-align: middle;
+
+        &:first-child{
+          text-align: right;
+          width: 8.33333333%;
+          border-top: none;
+          font-size: 16px;
+
+        }
+      }
+    }
+  }
+  .small{
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+.list-inline.uses{
+  li{
+    font-size: 20px;
   }
 }

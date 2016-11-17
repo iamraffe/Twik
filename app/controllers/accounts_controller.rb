@@ -4,6 +4,7 @@ class AccountsController < ApplicationController
   def new
     @account = Account.new
     @account.build_owner(role: "owner")
+    render template: "accounts/new", layout: 'landing'
   end
 
   def create
