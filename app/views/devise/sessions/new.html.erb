@@ -1,40 +1,60 @@
-<section class="signin">
-  <div class="col-sm-6 col-sm-offset-3 well well-lg">
-    <header>
-      <h1>Log in</h1>
-    </header>
+<section class="row sign-in">
+  <header class="col-sm-4 col-sm-offset-2">
+    <%= image_tag "twik-logo-horizontal-red.png", class: "img-responsive" %>
+  </header>
+  <div class="col-sm-4 finish-registration-form-wrapper">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="row">
-        <%= form_group_for f, :email, label: false do %>
-          <div class="input-group">
+        <div class="col-xs-12">
+          <%= form_group_for f, :email, label: false do %>
             <%= f.email_field :email, class:"form-control", placeholder: "Email" %>
-            <span class="input-group-addon"><span class="fa fa-user"></span></span>
-          </div>
-        <% end %>
-        <%= form_group_for f, :password, label: false do %>
-          <div class="input-group">
+          <% end %>
+          <%= form_group_for f, :password, label: false do %>
             <%= f.password_field :password, class:"form-control", placeholder: "Password" %>
-            <span class="input-group-addon"><span class="fa fa-lock"></span></span>
-          </div>
-        <% end %>
-
-        <% if devise_mapping.rememberable? -%>
-          <div class="form-group">
+          <% end %>
+        </div>
+        <div class="col-xs-7">
+          <% if devise_mapping.rememberable? -%>
             <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
-          </div>
-        <% end %>
-      </div>
-
-
-      <div class="actions row">
-        <%= f.submit "Log in", class: "btn btn-primary btn-block" %>
+            <%= f.label :remember_me, class: 'remember_me' %>
+            <%= render "devise/shared/links" %>
+          <% end %>
+        </div>
+        <div class="col-xs-5">
+          <%= f.submit "Log in", class: "btn btn-primary btn-small pull-right" %>
+        </div>
       </div>
     <% end %>
-
     <%= flash_messages layout_flash: false %>
-
-    <%= render "devise/shared/links" %>
   </div>
 </section>
 
+<section class="row finish-registration">
+
+  <div class="col-sm-4 finish-registration-form-wrapper">
+    <%= form_for @user, :url => update_user_confirmation_path({confirmation_token: @user.confirmation_token}), :html => { :method => :patch } do |f| %>
+      <header>
+        <h1>Welcome <span class="user-email"><%= @user.email %></span></h1>
+      </header>
+      <%= f.hidden_field :confirmation_token %>
+      <%= form_group_for f, :name, {label: false} do %>
+        <%= f.text_field :name, class:"form-control", placeholder: "Name" %>
+      <% end %>
+      <%= form_group_for f, :password, {label: false} do %>
+        <%= f.password_field :password, class:"form-control", placeholder: "Password" %>
+      <% end %>
+      <%= form_group_for f, :password_confirmation, {label: false} do %>
+        <%= f.password_field :password_confirmation, class:"form-control", placeholder: "Confirm password" %>
+      <% end %>
+      <div class="">
+        <%= f.submit "Log In", class: "btn btn-primary btn-small pull-right" %>
+      </div>
+      <% if devise_mapping.rememberable? -%>
+        <div class="form-group">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</section>

@@ -10,7 +10,7 @@ SHOW
   &:-ms-input-placeholder { @content }
 }
 
-.finish-registration{
+.finish-registration, .sign-in{
   margin-top: 125px;
 
   img{
@@ -40,6 +40,9 @@ SHOW
         // font-size: 30px;
         // text-align: center;
       }
+    }
+    .remember_me, .devise-links a{
+      font-size: 14px;
     }
   }
 }
