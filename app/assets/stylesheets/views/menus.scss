@@ -3,6 +3,12 @@
 NEW & EDIT
 
  */
+@mixin placeholder {
+  &::-webkit-input-placeholder { @content }
+  &:-moz-placeholder { @content }
+  &::-moz-placeholder { @content }
+  &:-ms-input-placeholder { @content }
+}
 
 .canvas-container{
   h1, h2, h3, h4, h5, p, a{
@@ -128,4 +134,55 @@ NEW & EDIT
       font-size: 12px;
     }
   }
+}
+
+.meta-step{
+  color: white;
+  background: red;
+  padding: 5.5px 15px;
+  border-radius: 50%;
+  font-family: Baloo;
+  margin-right: 15px;
+}
+
+.meta-form{
+  .react-autosuggest__container{
+    display: inline;
+
+    input{
+      @extends .form-control;
+    }
+  }
+  input{
+    background: $brand-default;
+    border: none;
+    color: $brand-primary;
+    padding: 5px 25px;
+    @extends .form-control;
+    width: auto;
+    display: inline;
+
+    @include placeholder{
+      color: $brand-primary;
+      // color: #f6303e;
+      font-weight: normal;
+      font-size: 14px;
+      /* text-align: center; */
+    }
+  }
+  .meta-row{
+    margin-bottom: 50px;
+  }
+
+  .text-default{
+    // font-weight: bold;
+    color: $brand-default;
+  }
+}
+
+.text-baloo{
+  font-family: Baloo !important;
+}
+.meta-separator{
+  border-top: 1px solid $brand-primary !important;
 }

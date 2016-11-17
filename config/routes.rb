@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :subscriptions, only: [:new, :create]
 
     resources :images
+
+    resources :societies
     
     post '/export', to: "menus#export"
 
