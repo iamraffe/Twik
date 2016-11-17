@@ -1,20 +1,56 @@
 .dashboard{
-  &.fresh-user{
-    margin-top: 125px;
-    header{
-      img{
-        width: 125px;
-        margin: 0 auto;
+  margin-top: 75px;
+
+  .border-bottom{
+    border-bottom: 1px solid $brand-default;
+  }
+  .left-dashboard{
+    h1{
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .action-items{
+      padding: 10px 5px;
+
+      a.text-default{
+        font-weight: bold;
+        color: $brand-default;
+      }
+      .ion-ios-compose-outline{
+        color: $brand-default;
+        font-size: 1.25em;
+        float: right;
       }
     }
-    h1, h2{
-      font-family: 'Baloo', cursive;
-      font-size: 50px;
-      line-height: 30px;
-      color: $brand-primary;
+  }
+  .right-dashboard{
+    margin-top: 100px;
+
+    header{
+      padding-bottom: 25px;
+      h1{
+        font-size: 40px;
+        font-weight: bold;
+        margin-bottom: 0;
+        margin-top: 5px;
+        color: $brand-default;
+      }
+      h2, h3{
+        font-weight: 500;
+        font-size: 40px;
+        margin-bottom: 0;
+        margin-top: 5px;
+        color: $brand-default;
+      }
     }
-    a{
-      margin-top: 25px;
+
+    .action-items{
+      padding: 10px 5px;
+
+      a{
+        font-weight: bold;
+      }
     }
   }
 }

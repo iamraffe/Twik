@@ -24,6 +24,12 @@
     font-size: 18px;
   }
 
+  &.btn-med{
+    width: 150px;
+    padding: 22.4px 15px 10px 7.5px;
+    margin-top: 17.5px;
+  }
+
   &:hover, &:active, &:focus{
     background-image: asset-url('btn-red.png') !important;
     background-color: transparent !important;
@@ -31,6 +37,20 @@
     border: none !important; 
     outline: none !important;
     box-shadow: none !important;
+  }
+
+  &.btn-square{
+    background-image: asset-url('btn-red-square.png') !important;
+    background-repeat: no-repeat;
+    padding: 12.5px 12.5px 0 5px;
+    height: 112.5px;
+    width: 112.5px;
+    font-size: 18px;
+    color: $brand-default;
+    &:hover, &:active, &:focus{
+      background-image: asset-url('btn-red-square.png') !important;
+
+    }
   }
 }
 

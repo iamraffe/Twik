@@ -11,7 +11,7 @@
 <body>
   <header>
     <nav class="navbar navbar-default">
-      <div class="container-full">
+      <div class="container-fluid">
         <div class="col-md-12">
           <div class="navbar-header">
             <%= link_to root_path, class: "navbar-brand twik" do %>
@@ -37,7 +37,7 @@
       </ul>
     </nav>
   </header>
-  <section class="container-full" id="main-container">
+  <section class="container-fluid" id="main-container">
     <%= flash_messages if show_layout_flash? %>
     <%= yield %>
   </section>
