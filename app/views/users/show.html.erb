@@ -82,6 +82,27 @@
                 </div>
               </li>
             <% end %>
+            <li class="row border-bottom invite-user-form-wrapper">
+              <div class="col-xs-7">
+                <span class="ion ion-ios-plus-outline invite-user-trigger"></span>
+                <p>Name</p>
+                <p>email</p>
+              </div>
+            </li>
+            <li class="hide row border-bottom invite-user-form">
+              <%= form_for(User.new, url: user_invitation_path,
+                                      html: { class: 'form-inline'}) do |f| %>
+              <div class="col-xs-7">
+                <span class="ion ion-ios-close-outline invite-user-trigger"></span>
+                <%= form_group_for f, :email, label: false do %>
+                    <%= f.email_field :email, class:"form-control", placeholder: "Email" %>
+                <% end %>
+              </div>
+              <div class="col-xs-5">
+                <%= f.submit "Send", class: "btn pull-right" %>                
+              </div>
+              <% end %>
+            </li>
           </ul>
         </div>
       </section>

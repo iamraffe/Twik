@@ -3,6 +3,12 @@
 SHOW
 
  */
+@mixin placeholder {
+  &::-webkit-input-placeholder { @content }
+  &:-moz-placeholder { @content }
+  &::-moz-placeholder { @content }
+  &:-ms-input-placeholder { @content }
+}
 .user-account{
   margin-top: 50px;
   .settings-area-unit{
@@ -72,6 +78,35 @@ SHOW
           margin-top: 3.5px;
         }
       }
+    }
+  }
+
+  .invite-user-form-wrapper, .invite-user-form{
+    position: relative;
+    
+    p{
+      color: #ccc;
+    }
+    .ion-ios-plus-outline, .ion-ios-close-outline{
+      position: absolute;
+      left: -50px;
+      font-size: 2.5em;
+      cursor: pointer;
+      top: 5px;
+    }
+    input.form-control{
+      color: $brand-default;
+      @include placeholder{
+        color: $brand-default;
+        font-weight: 500;
+        // font-size: 30px;
+        // text-align: center;
+      }
+    }
+    input[type="submit"]{
+      color: white;
+      // font-weight: bold;
+      padding: 10px 40px;
     }
   }
 }
