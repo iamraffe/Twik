@@ -95,6 +95,7 @@ class FontPanel extends React.Component{
                     <option
                       key={i}
                       value={font.family}
+                      style={{fontFamily: font.family}}
                     >
                       {font.family}
                     </option>
