@@ -11,7 +11,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       if @confirmable.has_no_password?
         @confirmable.attempt_set_password(params[:user])
         if @confirmable.valid? and @confirmable.password_match?
-          @confirmable.update_attributes(name: params[:user][:name])
+          @confirmable.update_attributes(name: params[:user][:name], subscribed: true, subscription_end: (Date.today + 1.month))
           do_confirm
         else
           do_show

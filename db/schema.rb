@@ -79,18 +79,6 @@ ActiveRecord::Schema.define(version: 20161115201832) do
     t.index ["menu_id"], name: "index_sections_on_menu_id", using: :btree
   end
 
-  create_table "uploads", force: :cascade do |t|
-    t.string   "mediable_type"
-    t.integer  "mediable_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.string   "mediable_file_name"
-    t.string   "mediable_content_type"
-    t.integer  "mediable_file_size"
-    t.datetime "mediable_updated_at"
-    t.index ["mediable_type", "mediable_id"], name: "index_uploads_on_mediable_type_and_mediable_id", using: :btree
-  end
-
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
@@ -112,6 +100,14 @@ ActiveRecord::Schema.define(version: 20161115201832) do
     t.boolean  "subscribed"
     t.string   "stripe_id"
     t.string   "subscription_id"
+    t.date     "subscription_end"
+    t.string   "phone"
+    t.string   "title"
+    t.string   "organization"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.string   "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"

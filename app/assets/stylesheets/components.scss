@@ -30,6 +30,10 @@
     margin-top: 17.5px;
   }
 
+  &.btn-large{
+    padding: 25px 60px 15px 50px;
+  }
+
   &:hover, &:active, &:focus{
     background-image: asset-url('btn-red.png') !important;
     background-color: transparent !important;
@@ -119,6 +123,20 @@ input.form-control{
 
   @include placeholder{
     color: $brand-primary;
+  }
+
+  &.text-default{
+    color: $brand-default;
+    @include placeholder{
+      color: $brand-default;
+    }
+  }
+  &[readonly]{
+    background: transparent;
+    &:focus, &:active, &:hover{
+      box-shadow: none;
+      border-color: $brand-default;
+    }
   }
 }
 

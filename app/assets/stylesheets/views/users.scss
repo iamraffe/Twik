@@ -9,6 +9,15 @@ SHOW
   &::-moz-placeholder { @content }
   &:-ms-input-placeholder { @content }
 }
+.user-avatar{
+  max-width: 90%;
+  max-height: 90%;
+}
+.update-avatar-trigger{
+  cursor: pointer;
+  color: $brand-default;
+  font-size: 2em;
+}
 .user-account{
   margin-top: 50px;
   .settings-area-unit{
@@ -24,6 +33,12 @@ SHOW
       padding-bottom: 15px;
       display: block;
     }
+  }
+}
+
+.user-update-form{
+  .ion{
+    cursor: pointer;
   }
 }
 
@@ -110,3 +125,40 @@ SHOW
     }
   }
 }
+
+.payment-list{
+  li{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: relative;
+
+    p{
+      color: $brand-default;
+      font-size: 14px;
+    }
+    .edit-payment-method{
+      font-size: 2em;
+      margin-top: 17.5px;
+      cursor: pointer;
+    }
+    .payment-options{
+      position: relative;
+
+      .delete-payment-method{
+        font-size: 1.75em;
+        top: 20px;
+        right: -25px;
+        cursor: pointer;
+        position: absolute;
+      }
+    }
+    .ion-ios-plus-outline{
+      position: absolute;
+      left: -50px;
+      font-size: 2.5em;
+      cursor: pointer;
+      top: 5px;
+    }
+  }
+}
+

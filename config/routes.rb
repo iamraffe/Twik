@@ -14,6 +14,12 @@ Rails.application.routes.draw do
     
     post '/export', to: "menus#export"
 
+    patch '/users/:id/update-payment-method', to: "users#update_payment_method", as: :update_user_payment
+
+    post '/users/:id/add-payment-method', to: "users#add_payment_method", as: :add_user_payment
+
+    delete '/users/:id/delete-payment-method', to: "users#delete_payment_method", as: :delete_user_payment
+
     resources :menus do
       post "/export", to: "menus#export"
       resources :uploads

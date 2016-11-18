@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
   enum role: [:user, :designer, :owner]
   after_initialize :set_default_role, :if => :new_record?
-
+  has_attached_file :avatar
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  
   def set_default_role
     self.role ||= :user
   end
@@ -47,5 +49,9 @@ class User < ActiveRecord::Base
     else
       !password.nil? || !password_confirmation.nil?
     end
+  end
+
+  def renew
+    update_attibutes(subscription_date: (Date.today + 1.month))
   end
 end

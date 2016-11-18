@@ -39,6 +39,13 @@ class AddDeviseToUsers < ActiveRecord::Migration
       t.boolean :subscribed
       t.string :stripe_id 
       t.string :subscription_id
+      t.date :subscription_end
+
+      # MISC
+      t.string :phone
+      t.string :title
+      t.string :organization
+      t.attachment :avatar
     end
 
     add_index :users, :email,                unique: true

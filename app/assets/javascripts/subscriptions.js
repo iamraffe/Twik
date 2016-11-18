@@ -1,36 +1,37 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-jQuery(function ($) {
-  var show_error, stripeResponseHandler;
-  $("#new_registration").submit(function (event) {
-    var $form;
-    $form = $(this);
-    $form.find("input[type=submit]").prop("disabled", true);
-    Stripe.card.createToken($form, stripeResponseHandler);
-    return false;
+
+
+
+/*
+
+EDIT PAYMENT METHOD
+
+ */
+$(document).on('click', '.edit-payment-method', function(e){
+  
+  $("#update-card-form #stripeCard").val($(this).attr('data-pid'))
+  // Open Checkout with further options:
+  editPaymentMethodHadler.open({
+    name: 'Twik',
+    description: 'Edit Credit Card',
   });
+  e.preventDefault();
+});
 
-stripeResponseHandler = function (status, response) {
-    var $form, token;
-    $form = $("#new_registration");
-    if (response.error) {
-      show_error(response.error.message);
-      $form.find("input[type=submit]").prop("disabled", false);
-    } else {
-      token = response.id;
-      $form.append($("<input type=\"hidden\" name=\"registration[card_token]\" />").val(token));
-      $("[data-stripe=number]").remove();
-      $("[data-stripe=cvv]").remove();
-      $("[data-stripe=exp-year]").remove();
-      $("[data-stripe=exp-month]").remove();
-      $form.get(0).submit();
-    }
-    return false;
-  };
+// Close Checkout on page navigation:
+window.addEventListener('popstate', function() {
+  editPaymentMethodHadler.close();
+});
 
-  show_error = function (message) {
-    $("#flash-messages").html('<div class="alert alert-warning"><a class="close" data-dismiss="alert">×</a><div id="flash_alert">' + message + '</div></div>');
-    $('.alert').delay(5000).fadeOut(3000);
-    return false;
-  };
+
+/*
+
+DELETE PAYMENT METHOD
+
+ */
+$(document).on('click', '.delete-payment-method', function(e){
+  // console.log(e)
+  $("#delete-card-form #stripeCard").val($(this).attr('data-pid'))
+  // Open Checkout with further options:
+  $("#delete-card-form").submit()
+  e.preventDefault();
 });

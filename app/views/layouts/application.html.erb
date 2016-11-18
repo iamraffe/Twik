@@ -30,8 +30,8 @@
       <ul class="nav navbar-nav action-navbar">
         <% if user_signed_in? %>
           <li><%= link_to "Create New", new_menu_path %> <span class="nav-separator">|</span></li>
-          <li><%= link_to "My Templates", users_path %> <span class="nav-separator">|</span></li>
-          <li><%= link_to "My Account", '#' %> <span class="nav-separator">|</span></li>
+          <li><%= link_to "My Templates", '#' %> <span class="nav-separator">|</span></li>
+          <li><%= link_to "My Account", user_path(current_user) %> <span class="nav-separator">|</span></li>
           <li><a href="#"><span class="fa fa-inverse fa-search"></span></a></li>
         <% end %>
       </ul>
