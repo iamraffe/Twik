@@ -12,11 +12,11 @@ class SubscriptionsController < ApplicationController
     )
     current_user.update_attributes(stripe_id: customer.id, subscribed: true, subscription_id: customer.subscriptions.first.id, subscription_end: (Date.today + 1.month))
 
-    redirect_to subdomain_root_path
+    redirect_to user_path(current_user)
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
-      redirect_to new_subscription_path
+      redirect_to user_path(current_user)
   end
 
   def update
