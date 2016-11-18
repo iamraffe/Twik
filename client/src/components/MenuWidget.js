@@ -22,10 +22,20 @@ class MenuWidget extends React.Component{
 
   componentDidMount(){
     const { fontFamilies } = this.state
-    
+    // console.log(fontFamilies)
+    // debugger;
     WebFont.load({
       google: {
-        families: _.map(fontFamilies, (f) => {return f})
+        families: _.map(fontFamilies, (f) => {
+          let font = f.fontFamily
+          if(f.fontWeight !== 'normal'){
+            font = font+":"+f.fontWeight
+          }
+          if(f.fontStyle !== 'normal'){
+            font = font + 'italic'
+          }
+          return font
+        })
       },
       // timeout: 10000
     })

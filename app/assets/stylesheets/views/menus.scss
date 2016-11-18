@@ -39,19 +39,39 @@ NEW & EDIT
     }
   }
 
-  .form-control{
-    height: 30px;
-    font-size: 12px;
-    background: #ccc;
-    color: white;
-    font-weight: bold;
-    padding: 0 18px;
+  .form-control:not(input){
+    height: 40px;
+    font-size: 14px;
+    background: transparent;
+    color: $brand-default;
+    font-weight: normal;
+    padding: 5px 14px;
+    // height: 30px;
+    // font-size: 12px;
+    // background: #ccc;
+    // color: white;
+    // font-weight: bold;
+    // padding: 0 18px;
   }
 }
 
 .color-panel{
   .swatch{
     float: left;
+  }
+}
+
+.section-panel{
+  article{
+    > header{
+      position: relative;
+
+      h1{
+        font-size: 18px;
+        text-align: center;
+        font-weight: 500;
+      }
+    }
   }
 }
 
@@ -63,7 +83,7 @@ NEW & EDIT
       h1{
         font-size: 18px;
         text-align: center;
-        font-weight: 500;
+        // font-weight: 500;
       }
     }
   }
@@ -127,5 +147,30 @@ NEW & EDIT
       margin-top: 12.5px;
       font-size: 12px;
     }
+  }
+}
+
+/*
+
+FONT PANEL
+
+ */
+.react-autosuggest__input{
+  @extend .form-control;
+  color: $brand-default;
+  background: transparent;
+  font-weight: normal;
+
+  @include placeholder{
+    color: $brand-default;
+  }
+}
+.react-autosuggest__suggestions-container{
+  padding-left: 0;
+  list-style-type: none;
+
+  li.react-autosuggest__suggestion{
+    line-height: 24pt;
+    cursor: pointer;
   }
 }

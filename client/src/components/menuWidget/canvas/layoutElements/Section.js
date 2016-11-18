@@ -72,11 +72,11 @@ class Section extends React.Component{
     // console.log("active", active, activeSection)
     return(
       <div
-        className={`${hover ? 'section-hover' : '' } section-element`}
+        className={`${hover && !activeSection ? 'section-hover' : '' } section-element`}
         style={{position: 'relative'}}
         onClick={(e) => {this.onSectionSelect(id)}}
       >
-        {hover && !active && <div className="section-overlay"></div>}
+        {hover && !activeSection && !active && <div className="section-overlay"></div>}
         {_.map(elements, (element, i) => {
           return (
             <MenuElement

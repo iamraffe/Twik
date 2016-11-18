@@ -5,7 +5,9 @@
   width: 150px;
   vertical-align: -5px;
 }
-
+.text-default{
+  color: $brand-default !important;
+}
 .btn-primary{
   background-image: asset-url('btn-red.png');
   border: none;
@@ -112,7 +114,7 @@ label{
   &:-ms-input-placeholder { @content }
 }
 
-input.form-control{
+.form-control{
   border: none;
   // padding: 0;
   color: $brand-primary;

@@ -78,9 +78,24 @@ const template = {
     quinary_color: ''
   },
   fontFamilies: {
-    primary_font: 'Oswald',
-    secondary_font: 'Roboto Condensed',
-    alternate_font: ''
+    primary_font: {
+      fontFamily: 'Oswald',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      textTransform: 'none'
+    },
+    secondary_font: {
+      fontFamily: 'Roboto Condensed',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      textTransform: 'none'
+    },
+    alternate_font: {
+      fontFamily: '',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      textTransform: 'none'
+    }
   },
   styles: [
     {
@@ -91,9 +106,7 @@ const template = {
       extra: {
         fontSize: 54.84,
         textTransform: 'uppercase',
-        textDecoration: 'none',
-        fontWeight: 'normal',
-        fontStyle: 'normal'
+        textDecoration: 'none',  
       }
     },
     {
@@ -103,10 +116,7 @@ const template = {
       color: 'secondary_color',
       extra: {
         fontSize: 24,
-        textTransform: 'uppercase',
-        textDecoration: 'none',
-        fontWeight: 'normal',
-        fontStyle: 'normal'
+        textDecoration: 'none',  
       }
     },
     {
@@ -116,10 +126,7 @@ const template = {
       color: 'primary_color',
       extra: {
         fontSize: 14,
-        textTransform: 'uppercase',
-        textDecoration: 'underline',
-        fontWeight: 'normal',
-        fontStyle: 'normal',
+        textDecoration: 'underline',  
       }
     },
     {
@@ -129,10 +136,7 @@ const template = {
       color: 'primary_color',
       extra: {
         fontSize: 12,
-        textTransform: 'none',
-        textDecoration: 'none',
-        fontWeight: 'normal',
-        fontStyle: 'italic'
+        textDecoration: 'none',  
       }
     },
     {
@@ -142,10 +146,7 @@ const template = {
       color: 'primary_color',
       extra: {
         fontSize: 12,
-        textTransform: 'uppercase',
-        textDecoration: 'none',
-        fontWeight: 'normal',
-        fontStyle: 'normal'
+        textDecoration: 'none',  
       }
     }
   ],
