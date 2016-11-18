@@ -5,7 +5,9 @@ class UsersController < ApplicationController
 
   def show 
     @users = User.all
+    # byebug
     @stripe_data = current_user.stripe_id.nil? ? nil : Stripe::Customer.retrieve(current_user.stripe_id)
+    @printers = Printer.all
     # byebug 
   end
 

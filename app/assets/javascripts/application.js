@@ -15,7 +15,3 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-$(document).on('click', '.invite-user-trigger', function(e){
-  $('.invite-user-form-wrapper').toggleClass('hide')
-  $('.invite-user-form').toggleClass('hide')
-})

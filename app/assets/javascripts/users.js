@@ -1,10 +1,27 @@
+/*
+
+USER INVITES
+
+ */
+
+$(document).on('click', '.invite-user-trigger', function(e){
+  $('.invite-user-form-wrapper').toggleClass('hide')
+  $('.invite-user-form').toggleClass('hide')
+})
+
+/*
+
+USER PROFILE
+
+ */
+
 $(document).on('click', '#upload-user-avatar', function(e){
-  console.log(e)
+  // console.log(e)
   $('#avatar-update-form input[type="file"]').focus().trigger('click')
 })
 
 $(document).on('click', '#update-avatar-trigger', function(e){
-  console.log(e)
+  // console.log(e)
   $('#avatar-update-form').submit()
 })
 
@@ -16,12 +33,12 @@ $(document).on('change', '#avatar-update-form input[type="file"]', function(e){
 })
 
 $(document).on('click', '.js-user-edit-trigger.ion-ios-compose-outline', function(e){
-  console.log(e)
+  // console.log(e)
   $(this).removeClass('ion-ios-compose-outline').addClass('ion-ios-checkmark-outline')
   $(this).siblings('input').removeAttr('readonly').focus()
 })
 
 $(document).on('click', '.js-user-edit-trigger.ion-ios-checkmark-outline', function(e){
-  console.log(e)
+  // console.log(e)
   $('#user-update-form').submit()
 })

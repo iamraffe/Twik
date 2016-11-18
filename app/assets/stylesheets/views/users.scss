@@ -126,6 +126,66 @@ SHOW
   }
 }
 
+.printer-list{
+  li{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: relative;
+
+    p{
+      color: $brand-default;
+      font-size: 14px;
+    }
+    .edit-payment-method{
+      font-size: 2em;
+      margin-top: 17.5px;
+      cursor: pointer;
+    }
+    .printer-default{
+      font-size: 2em;
+      padding-top: 30px;
+      color: $brand-primary;
+    }
+    .printer-options{
+      position: relative;
+
+      .delete-printer{
+        font-size: 1.75em;
+        top: 32.5px;
+        right: -25px;
+        cursor: pointer;
+        position: absolute;
+      }
+      .edit-printer{
+        font-size: 2em;
+        margin-top: 30px;
+        cursor: pointer;
+      }
+      a{
+        color: $brand-default;
+      }
+    }
+    .js-new-printer-trigger, .js-update-printer-trigger{
+      position: absolute;
+      left: -50px;
+      font-size: 2.5em;
+      cursor: pointer;
+      top: 5px;
+
+      &.edit-printer{
+        position: relative; 
+        top: 0;
+        left: 0;
+      }
+    }
+    .new-printer-placeholder{
+      p{
+        color: #ccc;
+      }
+    }
+  }
+}
+
 .payment-list{
   li{
     padding-top: 15px;

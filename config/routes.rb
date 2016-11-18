@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
     delete '/users/:id/delete-payment-method', to: "users#delete_payment_method", as: :delete_user_payment
 
+    resources :printers
+
     resources :menus do
       post "/export", to: "menus#export"
       resources :uploads
