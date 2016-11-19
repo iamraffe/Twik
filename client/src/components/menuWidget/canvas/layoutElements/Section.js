@@ -69,7 +69,7 @@ class Section extends React.Component{
   render(){
     const { elements, hover, active } = this.state
     const { activeSection, id } = this.props
-    // console.log("active", active, activeSection)
+    
     return(
       <div
         className={`${hover && !activeSection ? 'section-hover' : '' } section-element`}

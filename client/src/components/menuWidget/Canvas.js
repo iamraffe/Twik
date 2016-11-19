@@ -45,8 +45,7 @@ class Canvas extends React.Component{
   getStyles = (styleId) => {
     const { styles, fontFamilies, colors, zoom } = this.state
     const index = _.findIndex(styles, (s, i) => {return s.id === styleId})
-    // console.log(fontFamilies, styles[index], styles[index].fontFamily, fontFamilies[styles[index].fontFamily])
-    // debugger;
+
     return {
       ...styles[index].extra,
       fontSize: `${styles[index].extra.fontSize*zoom/100}pt`,

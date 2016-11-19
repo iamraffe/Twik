@@ -18,31 +18,15 @@ const sectionSource = {
   endDrag(props, monitor, component) {
     const item = monitor.getItem()
     const dropResult = monitor.getDropResult()
-    console.log(props)
+    // console.log(props)
     if (dropResult) {
       const { id, structure } = component.state.sectionStyle
       let section = {}
-      console.log("COMPONENT ", component.state, id, structure)
+      // console.log("COMPONENT ", component.state, id, structure)
       if(component.state.newSection){
         const fonts = _.invert(component.state.fontFamilies)
         const colors = _.invert(component.state.colors)
-        // const parsedStructure =  _.map(structure.elements, (element) => {
-        //                           props.styleActions.addSectionStyle({
-        //                             color: colors[element.styles.color],
-        //                             id: element.styles.id,
-        //                             fontFamily: fonts[element.styles.fontFamily],
-        //                             name: element.styles.name,
-        //                             extra:{
-        //                               fontSize: parseFloat(element.styles.fontSize.slice(0, -2))
-        //                             }
-        //                           })
-        //                           // save element style
-        //                           return ({
-        //                             styles: element.styles.id,
-        //                             text: ''
-        //                           })
-        //                         })
-        // console.log(parsedStructure)
+
         section = {
           id: uuid.v4(),
           type: "SECTION",
@@ -147,7 +131,8 @@ class SectionPanel extends React.Component{
   }
 
   addNewStyle = (newStyles) => {
-    console.log(newStyles)
+    console.log("SECTION PANEL NEW STYLES => ", newStyles)
+    debugger;
     this.setState({
       sectionStyle:{
         ...this.state.sectionStyle,
@@ -158,7 +143,7 @@ class SectionPanel extends React.Component{
               styles: s.id,
               text: '',
               unsaved: true,
-              styles: {
+              style_data: {
                 ...s
               }
             })
@@ -169,6 +154,25 @@ class SectionPanel extends React.Component{
   }
 
   updateStyle = (styleSelected, updatedStyle) => {
+    const { newSection } = this.state
+    let styles
+    if(newSection){
+      styles = {
+        ...this.state.sectionStyle.structure.elements[styleSelected.index].styles,
+        ...updatedStyle
+      }
+    }
+    else{
+      styles = {
+        ...this.getStyles(this.state.sectionStyle.structure.elements[styleSelected.index].styles),
+        ...updatedStyle
+      }
+    }
+    // console.log(styleSelected, updatedStyle, {
+    //             ...this.state.sectionStyle.structure.elements[styleSelected.index].styles,
+    //             ...updatedStyle
+    //           })
+    // debugger;
     this.setState({
       sectionStyle:{
         ...this.state.sectionStyle,
@@ -178,10 +182,8 @@ class SectionPanel extends React.Component{
             ...this.state.sectionStyle.structure.elements.slice(0, styleSelected.index),
             {
               ...this.state.sectionStyle.structure.elements[styleSelected.index],
-              styles: {
-                ...this.state.sectionStyle.structure.elements[styleSelected.index].styles,
-                ...updatedStyle
-              }
+              edited: true,
+              styles
             },
              ...this.state.sectionStyle.structure.elements.slice(styleSelected.index+1),
           ]
@@ -193,7 +195,7 @@ class SectionPanel extends React.Component{
   render(){
     const { section_types, sectionStyle, newSection } = this.state
     const { isDragging, connectDragSource, connectDragPreview } = this.props
-    // console.log(sectionStyle)
+    console.log("SECTION STYLE => ", sectionStyle)
     return (
       <section className="section-panel tool-panel-element">
         <header>
@@ -212,7 +214,31 @@ class SectionPanel extends React.Component{
             </select>
           </div>
         </div>
-        {!newSection && <button className="btn-block btn-toolpanel" onClick={(e) => {this.onAddNewSection(e)}}>Add new section</button>}
+        {!newSection && sectionStyle.structure &&
+          <article className="old-section-widget">
+            <header>
+              <h1>{sectionStyle.name}</h1>
+              <hr/>
+            </header>
+            <div className="row">
+              <div className="col-xs-12">
+                <StylesPanel
+                  existing={true}
+                  styles={_.map(sectionStyle.structure.elements, (element) => {
+                    let styles = element.edited ? element.styles : this.getStyles(element.styles)
+                    return {
+                      ...styles,
+                      name: (sectionStyle.structure.elements.length === 1) ? sectionStyle.structure.type : element.type,
+                      id: element.styles
+                    }
+                  })}
+                  addNewStyle={this.addNewStyle}
+                  updateStyle={this.updateStyle}
+                />
+              </div>
+            </div>
+          </article>
+        }
         {newSection &&
           <article className="new-section-widget">
             <header>
@@ -222,6 +248,7 @@ class SectionPanel extends React.Component{
             <div className="row">
               <div className="col-xs-12">
                 <StylesPanel
+                  existing={false}
                   addNewStyle={this.addNewStyle}
                   updateStyle={this.updateStyle}
                 />
@@ -232,13 +259,20 @@ class SectionPanel extends React.Component{
         {sectionStyle.structure && connectDragSource(
           <div className="section-preview" style={{cursor: 'move', marginTop: 25}}>
             {sectionStyle.structure && _.map(sectionStyle.structure.elements, (element, i) => {
-              console.log(element)
+              let styles
+              if(!element.edited && !newSection){
+                styles = {
+                  ..._.omit(this.getStyles(element.styles), ['fontFamily']),
+                  ...this.getStyles(element.styles).fontFamily
+                }
+              }
               return (
-                <p key={i} style={element.unsaved ? element.styles : this.getStyles(element.styles)}>Lorem Ipsum</p>
+                <p key={i} style={(element.unsaved || element.edited) ? element.styles : styles}>Lorem Ipsum</p>
               )
             })}
           </div>
         )}
+        {!newSection && <button className="btn-block btn-toolpanel" onClick={(e) => {this.onAddNewSection(e)}}>Add new section</button>}
       </section>
     )
     

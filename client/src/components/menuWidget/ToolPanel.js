@@ -9,7 +9,7 @@ import * as zoomActions from '../../actions/zoomActions'
 import {  FontPanel,
           ColorPanel,
           LayoutPanel,
-          SectionPanel,
+          SectionTypePanel,
           ImagePanel } from './toolPanel'
 
 class ToolPanel extends React.Component{
@@ -41,14 +41,36 @@ class ToolPanel extends React.Component{
   }
 
   getStyles = (styleId) => {
-    const { styles, fontFamilies, colors } = this.state
+    const { styles, fontFamilies, colors, zoom } = this.state
     const index = _.findIndex(styles, (s, i) => {return s.id === styleId})
-    
+    // console.log("F", styleId, styles, index, `${styles[index].extra.fontSize*zoom/100}pt`, zoom)
+    // debugger;
+    // console.log(fontFamilies, styles[index], styles[index].fontFamily, fontFamilies[styles[index].fontFamily])
+    // debugger;
+    // console.log({
+    //   ...styles[index].extra,
+    //   fontSize: `${styles[index].extra.fontSize*zoom/100}pt`,
+    //   color: `${colors[styles[index].color]}`,
+    //   fontFamily: fontFamilies[styles[index].fontFamily].fontFamily,
+    //   fontWeight: fontFamilies[styles[index].fontFamily].fontWeight,
+    //   fontStyle: fontFamilies[styles[index].fontFamily].fontStyle,
+    //   textTransform: fontFamilies[styles[index].fontFamily].textTransform,
+    //   // fontSize: `${styles[index].extra.fontSize}pt`,
+    //   // color: `${colors[styles[index].color]}`,
+    //   // fontFamily: fontFamilies[styles[index].fontFamily],
+    // })
+    // debugger;
     return {
       ...styles[index].extra,
-      fontSize: `${styles[index].extra.fontSize}pt`,
+      fontSize: `${styles[index].extra.fontSize*zoom/100}pt`,
       color: `${colors[styles[index].color]}`,
-      fontFamily: fontFamilies[styles[index].fontFamily],
+      fontFamily: fontFamilies[styles[index].fontFamily].fontFamily,
+      fontWeight: fontFamilies[styles[index].fontFamily].fontWeight,
+      fontStyle: fontFamilies[styles[index].fontFamily].fontStyle,
+      textTransform: fontFamilies[styles[index].fontFamily].textTransform,
+      // fontSize: `${styles[index].extra.fontSize}pt`,
+      // color: `${colors[styles[index].color]}`,
+      // fontFamily: fontFamilies[styles[index].fontFamily],
     }
   }
 
@@ -107,7 +129,7 @@ class ToolPanel extends React.Component{
             }
             {active !== 'add-section' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('add-section')}}>Add Section</button>}
             {active === 'add-section' &&
-              <SectionPanel 
+              <SectionTypePanel 
                 onClose={(e) => {this.onToggleActive('none')}}
                 getStyles={this.getStyles}
               />

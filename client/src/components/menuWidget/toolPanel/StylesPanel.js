@@ -10,9 +10,10 @@ import * as styleActions from '../../../actions/styleActions'
 class StylesPanel extends React.Component{
   constructor(props){
     super(props)
-
+    console.log("PROPS => ", props)
     this.state = {
-      styles: [],
+      existing: props.existing,
+      styles: props.styles ? props.styles : [],
       styleSelected: {},
       colors: props.colors,
       fontFamilies: props.fontFamilies
@@ -25,8 +26,10 @@ class StylesPanel extends React.Component{
 
   componentWillReceiveProps(nextProps){
     this.setState({
+      existing: nextProps.existing,
       colors: nextProps.colors,
-      fontFamilies: nextProps.fontFamilies
+      fontFamilies: nextProps.fontFamilies,
+      styles: nextProps.styles ? nextProps.styles : [],
     })
   }
 
@@ -37,10 +40,15 @@ class StylesPanel extends React.Component{
     const { colors, fontFamilies } = this.props
     const newStyle = {
       name: `Style ${this.state.styles.length+1}`,
-      id: uuid.v4(),
-      color: colors['primary_color'],
-      fontFamily: fontFamilies['primary_font'],
-      fontSize: '12pt'
+      styles: uuid.v4(),
+      style_data: {
+        color: colors['primary_color'],
+        fontFamily: fontFamilies['primary_font'].fontFamily,
+        fontWeight: fontFamilies['primary_font'].fontWeight,
+        fontStyle: fontFamilies['primary_font'].fontStyle,
+        textTransform: fontFamilies['primary_font'].textTransform,
+        fontSize: '12pt',
+      }
     }
     const newState = [
       ...this.state.styles,
@@ -80,12 +88,15 @@ class StylesPanel extends React.Component{
         ...this.state.styles.slice(styleSelected.index+1),
       ]
     })
-    this.updateStyle(styleSelected, updatedStyle)
+    this.updateStyle({
+      ..._.omit(styleSelected, ['fontFamily']),
+      ...styleSelected.fontFamily
+    }, updatedStyle)
   }
 
   render(){
     const { styles, colors, fontFamilies, styleSelected } = this.state
-    console.log(styleSelected, colors)
+    // console.log(styleSelected, colors)
     return (
       <section className="styles-panel">
         {styleSelected.id && 
@@ -134,12 +145,12 @@ class StylesPanel extends React.Component{
               <select
                 className="form-control"
                 defaultValue={styleSelected.fontFamily}
-                style={{boxShadow: 'none', color: 'black', backgroundColor: 'transparent', border: 'none', width: 'auto', padding: 0, marginBottom: 15}}
+                style={{boxShadow: 'none', width: '100%', color: 'black', backgroundColor: 'transparent', border: 'none', width: 'auto', padding: 0, marginBottom: 15}}
                 onChange={(e) => {this.onUpdateStyle('fontFamily', `${e.target.value}`)}}
               >
-                {_.map(_.filter(fontFamilies, (f) => {return f !== ''}), (font, i) => {
+                {_.map(_.filter(fontFamilies, (f) => {return f.fontFamily !== ''}), (font, i) => {
                   return (
-                    <option key={i} value={font} style={{fontFamily: font}}>{font}</option>
+                    <option key={i} value={font} style={{...font}}>{font.fontFamily}</option>
                   )
                 })}
               </select>
