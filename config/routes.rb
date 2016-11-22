@@ -1,17 +1,19 @@
 Rails.application.routes.draw do
   constraints(Subdomain) do
     root "pages#dashboard", as: :subdomain_root
-    
+
     as :user do
         match '/user/confirmation' => 'users/confirmations#update', :via => :patch, :as => :update_user_confirmation
     end
 
-    devise_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations", :confirmations => "users/confirmations" }
+    devise_ios_rails_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations", :confirmations => "users/confirmations" }
+
+    # devise_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations", :confirmations => "users/confirmations" }
     resources :users, only: [:index, :destroy, :update, :show]
     resources :subscriptions, only: [:new, :create]
 
     resources :images
-    
+
     post '/export', to: "menus#export"
 
     patch '/users/:id/update-payment-method', to: "users#update_payment_method", as: :update_user_payment

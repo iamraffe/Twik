@@ -37,7 +37,7 @@ class AddDeviseToUsers < ActiveRecord::Migration
       #
       # STRIPE SUBSCRIPTIONS
       t.boolean :subscribed
-      t.string :stripe_id 
+      t.string :stripe_id
       t.string :subscription_id
       t.date :subscription_end
 
@@ -46,8 +46,10 @@ class AddDeviseToUsers < ActiveRecord::Migration
       t.string :title
       t.string :organization
       t.attachment :avatar
+      t.string :authentication_token
     end
 
+    add_index :users, :authentication_token, unique: true
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
     add_index :users, :confirmation_token,   unique: true

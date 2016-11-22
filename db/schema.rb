@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20161118130310) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "authentication_token"
     t.string   "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
@@ -126,6 +127,7 @@ ActiveRecord::Schema.define(version: 20161118130310) do
     t.integer  "invited_by_id"
     t.integer  "invitations_count",      default: 0
     t.integer  "role"
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
