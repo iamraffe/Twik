@@ -52,6 +52,7 @@ gem 'capistrano-rails-collection'
 gem 'capistrano-rails-console'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'devise-ios-rails', '1.0.2'
+gem 'active_model_serializers', '~> 0.9.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
