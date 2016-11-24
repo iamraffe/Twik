@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = User.all.select(User.attribute_names - ["authentication_token", "invitation_token"])
     respond_to do |format|
       format.html {  }
       format.json { render json: {users: @users} }
@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @users = User.all
+    @users = User.all.select(User.attribute_names - ["authentication_token", "invitation_token"])
     # byebug
     @stripe_data = current_user.stripe_id.nil? ? nil : Stripe::Customer.retrieve(current_user.stripe_id)
     @printers = Printer.all
