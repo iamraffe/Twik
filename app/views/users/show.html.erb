@@ -102,12 +102,16 @@
                                       html: { class: 'form-inline'}) do |f| %>
               <div class="col-xs-7">
                 <span class="ion ion-ios-close-outline invite-user-trigger"></span>
+                <%= form_group_for f, :name, label: false do %>
+                    <%= f.text_field :name, class:"form-control", placeholder: "Name" %>
+                <% end %>
                 <%= form_group_for f, :email, label: false do %>
                     <%= f.email_field :email, class:"form-control", placeholder: "Email" %>
                 <% end %>
               </div>
               <div class="col-xs-5">
-                <%= f.submit "Send", class: "btn pull-right" %>                
+                 <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}, {}, class: "form-control") %>
+                <%= f.submit "Send", class: "btn pull-right" %>
               </div>
               <% end %>
             </li>
@@ -176,7 +180,7 @@
                 </span>
               </div>
               <div class="col-xs-5">
-                
+
               </div>
             </li>
             <li id="new-printer-form-wrapper" class="row border-bottom new-printer-form-wrapper hide">
