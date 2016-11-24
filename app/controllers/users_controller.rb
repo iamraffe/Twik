@@ -1,32 +1,45 @@
 class UsersController < ApplicationController
   def index
     @users = User.all
+    respond_to do |format|
+      format.html {  }
+      format.json { render json: {users: @users} }
+    end
   end
 
-  def show 
+  def show
     @users = User.all
     # byebug
     @stripe_data = current_user.stripe_id.nil? ? nil : Stripe::Customer.retrieve(current_user.stripe_id)
     @printers = Printer.all
-    # byebug 
+    # byebug
   end
 
   def update
     @user = User.find(params[:id])
-    authorize @user
+    # authorize @user
     if @user.update_attributes(user_params)
-      redirect_to user_path(current_user), :notice => "User updated."
+      respond_to do |format|
+        format.html { redirect_to user_path(current_user), :notice => "User updated." }
+        format.json { render json: {user: @user, :message => "User updated.", ok: true, status: 200}, :status => :ok }
+      end
     else
-      redirect_to user_path(current_user), :alert => "Unable to update user."
+      respond_to do |format|
+        format.html { redirect_to user_path(current_user), :alert => "Unable to update user." }
+        format.json { render json: {user: @user, :message => "Unable to update user.", ok: false, status: 422}, :status => :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     @user = User.find(params[:id])
-    authorize @user
+    # authorize @user
     User.destroy(params[:id])
     flash[:notice] = "User deleted successfully"
-    redirect_to users_path
+    respond_to do |format|
+      format.html { redirect_to users_path }
+      format.json { render json: {user: @user, :message => "User updated.", ok: true, status: 200}, :status => :ok }
+    end
   end
 
   def update_payment_method
