@@ -1,5 +1,5 @@
 class PrintersController < ApplicationController
-  acts_as_token_authentication_handler_for User
+  # acts_as_token_authentication_handler_for User
   def index
     @printers = Printer.all
     respond_to do |format|
