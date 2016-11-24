@@ -33,7 +33,7 @@ class PrintersController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to user_path(current_user), alert: "Unable to update printer." }
-        format.json { render json: { printer: @printer, errors: @printer.errors :message => "Unable to update printer.", ok: false, status: 422}, :status => :unprocessable_entity }
+        format.json { render json: { printer: @printer, errors: @printer.errors, :message => "Unable to update printer.", ok: false, status: 422}, :status => :unprocessable_entity }
       end
     end
   end
