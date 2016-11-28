@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
   has_one :account
   has_many :images
 
+  def as_json(options={})
+    super(options.merge({:methods => [:avatar]}))
+  end
+
   def password_match?
      self.errors[:password] << "can't be blank" if password.blank?
      self.errors[:password_confirmation] << "can't be blank" if password_confirmation.blank?
