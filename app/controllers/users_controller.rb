@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # acts_as_token_authentication_handler_for User
+  acts_as_token_authentication_handler_for User
   def index
     @users = User.all.select(User.attribute_names - ["authentication_token", "invitation_token"])
     respond_to do |format|
