@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  # acts_as_token_authenticatable
+  acts_as_token_authenticatable
   enum role: [:user, :designer, :owner]
   after_initialize :set_default_role, :if => :new_record?
   has_attached_file :avatar,

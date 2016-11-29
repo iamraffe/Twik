@@ -7,14 +7,14 @@ Rails.application.routes.draw do
         match '/user/confirmation' => 'users/confirmations#update', :via => :patch, :as => :update_user_confirmation
     end
 
-    # devise_ios_rails_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations", :confirmations => "users/confirmations" }
-    devise_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations", :confirmations => "users/confirmations" }
+    devise_ios_rails_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations", :confirmations => "users/confirmations" }
+    # devise_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations", :confirmations => "users/confirmations" }
     # token auth routes available at /api/v1/auth
-    namespace :api do
-      scope :v1 do
-        mount_devise_token_auth_for 'User', at: 'auth'
-      end
-    end
+    # namespace :api do
+    #   scope :v1 do
+    #     mount_devise_token_auth_for 'User', at: 'auth'
+    #   end
+    # end
 
     resources :users, only: [:index, :destroy, :update, :show]
     resources :subscriptions, only: [:new, :create]
