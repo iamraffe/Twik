@@ -21,7 +21,11 @@ class User < ActiveRecord::Base
   has_many :images
 
   def as_json(options={})
-    super(options.merge({:methods => [:avatar, :invitation_accepted?]}))
+    super(options.merge({:methods => [:avatar, :avatar_thumb_url, :invitation_accepted?]}))
+  end
+
+  def avatar_thumb_url
+    avatar.url(:thumb)
   end
 
   def password_match?
