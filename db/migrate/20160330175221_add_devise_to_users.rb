@@ -47,12 +47,19 @@ class AddDeviseToUsers < ActiveRecord::Migration
       t.string :organization
       t.attachment :avatar
       t.string :authentication_token
+
+      # DEVISE TOKEN AUTH
+      t.string :uid, :null => false, :default => ""
+      t.string :provider, :null => false, :default => "email"
+      ## Tokens
+      t.json :tokens
     end
 
     add_index :users, :authentication_token, unique: true
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
     add_index :users, :confirmation_token,   unique: true
+    add_index :users, [:uid, :provider],     :unique => true
     # add_index :users, :unlock_token,         unique: true
   end
 
