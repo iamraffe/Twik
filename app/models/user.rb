@@ -2,7 +2,11 @@ class User < ActiveRecord::Base
   acts_as_token_authenticatable
   enum role: [:user, :designer, :owner]
   after_initialize :set_default_role, :if => :new_record?
-  has_attached_file :avatar
+  has_attached_file :avatar,
+  :styles => {
+    :thumb => "100x100#" },
+  :convert_options => {
+    :thumb => "-quality 75 -strip" }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   def set_default_role
@@ -17,7 +21,7 @@ class User < ActiveRecord::Base
   has_many :images
 
   def as_json(options={})
-    super(options.merge({:methods => [:avatar]}))
+    super(options.merge({:methods => [:avatar, :invitation_accepted?]}))
   end
 
   def password_match?
