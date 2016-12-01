@@ -3,13 +3,23 @@ class User < ActiveRecord::Base
   enum role: [:user, :designer, :owner]
   after_initialize :set_default_role, :if => :new_record?
   has_attached_file :avatar,
+  :storage => :s3,
+  :s3_credentials => Proc.new{|a| a.instance.s3_credentials }
+      :url => "#{Apartment::Tenant.current}/:image/:id/:style/:basename.:extension",
+      :path => "#{Apartment::Tenant.current}/:image/:id/:style/:basename.:extension"
   # :url => "/system/#{Apartment::Tenant.current}/:style_:filename",
-  :path => ":rails_root/public/system/#{Apartment::Tenant.current}/:style_:filename",
+  # :path => ":rails_root/public/system/#{Apartment::Tenant.current}/:style_:filename",
   :styles => {
     :thumb => "100x100#" },
   :convert_options => {
     :thumb => "-quality 75 -strip" }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
+
+
+  def s3_credentials
+    {:bucket => ENV["S3_BUCKET_NAME"], :access_key_id => ENV["AWS_ACCESS_KEY_ID"], :secret_access_key => ENV["AWS_SECRET_ACCESS_KEY"]}
+  end
 
   def set_default_role
     self.role ||= :user
