@@ -47,7 +47,7 @@ class AddDeviseToUsers < ActiveRecord::Migration
       t.string :organization
       t.attachment :avatar
       t.string :authentication_token
-
+      t.string :subdomain
       # DEVISE TOKEN AUTH
       # t.string :uid, :null => false, :default => ""
       # t.string :provider, :null => false, :default => "email"

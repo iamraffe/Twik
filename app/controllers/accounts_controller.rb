@@ -15,6 +15,7 @@ class AccountsController < ApplicationController
       Apartment::Tenant.switch!(@account.subdomain)
       @account.save
       @account.owner.role = "owner"
+      # @account.owner.
       @account.owner.save
       render json: @account.to_json
     else

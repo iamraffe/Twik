@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 20161118130310) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "authentication_token"
+    t.string   "subdomain"
     t.string   "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
