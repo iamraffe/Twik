@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
   has_attached_file :avatar,
   :storage => :s3,
   :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
-      :url => "#{Apartment::Tenant.current}/:image/:id/:style/:basename.:extension",
-      :path => "#{Apartment::Tenant.current}/:image/:id/:style/:basename.:extension",
+      :url => "/#{Apartment::Tenant.current}/:id-#{Apartment::Tenant.current}/:style/:basename.:extension",
+      :path => "#{Apartment::Tenant.current}/:id-#{Apartment::Tenant.current}/:style/:basename.:extension",
   # :url => "/system/#{Apartment::Tenant.current}/:style_:filename",
   # :path => ":rails_root/public/system/#{Apartment::Tenant.current}/:style_:filename",
   :styles => {
