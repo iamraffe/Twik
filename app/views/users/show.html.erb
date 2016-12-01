@@ -100,6 +100,7 @@
             <li class="hide row border-bottom invite-user-form">
               <%= form_for(User.new, url: user_invitation_path,
                                       html: { class: 'form-inline'}) do |f| %>
+              <%= f.hidden_field :subdomain, value: current_account.subdomain %>
               <div class="col-xs-7">
                 <span class="ion ion-ios-close-outline invite-user-trigger"></span>
                 <%= form_group_for f, :name, label: false do %>
