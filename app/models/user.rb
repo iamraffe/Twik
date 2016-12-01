@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, :if => :new_record?
   has_attached_file :avatar,
   :storage => :s3,
-  :s3_credentials => Proc.new{|a| a.instance.s3_credentials }
+  :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
       :url => "#{Apartment::Tenant.current}/:image/:id/:style/:basename.:extension",
       :path => "#{Apartment::Tenant.current}/:image/:id/:style/:basename.:extension",
   # :url => "/system/#{Apartment::Tenant.current}/:style_:filename",
