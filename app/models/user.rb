@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   :storage => :s3,
   :s3_credentials => Proc.new{|a| a.instance.s3_credentials }
       :url => "#{Apartment::Tenant.current}/:image/:id/:style/:basename.:extension",
-      :path => "#{Apartment::Tenant.current}/:image/:id/:style/:basename.:extension"
+      :path => "#{Apartment::Tenant.current}/:image/:id/:style/:basename.:extension",
   # :url => "/system/#{Apartment::Tenant.current}/:style_:filename",
   # :path => ":rails_root/public/system/#{Apartment::Tenant.current}/:style_:filename",
   :styles => {
