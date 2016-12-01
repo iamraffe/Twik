@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   end
 
   def set_default_role
-    self.subdomain = Apartment::Tenant.current
+    # self.subdomain = Apartment::Tenant.current
     self.role ||= :user
   end
 
