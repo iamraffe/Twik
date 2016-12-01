@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   enum role: [:user, :designer, :owner]
   after_initialize :set_default_role, :if => :new_record?
   has_attached_file :avatar,
+  :url => "/system/#{Apartment::Tenant.current}/:style_:filename",
+  :path => ':rails_root/public:url',
   :styles => {
     :thumb => "100x100#" },
   :convert_options => {
