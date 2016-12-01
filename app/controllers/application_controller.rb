@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
 
   protected
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:accept_invitation, keys: [:name, :role])
-      devise_parameter_sanitizer.permit(:invite, keys: [:name, :role])
+      devise_parameter_sanitizer.permit(:accept_invitation, keys: [:name, :role, :subdomain])
+      devise_parameter_sanitizer.permit(:invite, keys: [:name, :role, :subdomain])
     end
 
   private
