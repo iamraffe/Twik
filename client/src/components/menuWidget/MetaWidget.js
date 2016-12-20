@@ -13,7 +13,8 @@ class MetaWidget extends React.Component{
     this.state = {
       societies: [],
       society: {},
-      value: ''
+      value: '',
+      paperSettings: 'size'
     }
   }
 
@@ -35,6 +36,10 @@ class MetaWidget extends React.Component{
         console.log("ERROR => ", err)
       }
     })
+  }
+
+  onChangePaperSettings = (e) => {
+    this.setState({paperSettings: e.target.value})
   }
 
   getSuggestions = (value) => {
@@ -91,7 +96,7 @@ class MetaWidget extends React.Component{
   }
 
   render(){
-    const { societies, society, value } = this.state
+    const { societies, society, value, paperSettings } = this.state
     const inputProps = {
       placeholder: 'Restaurant Name',
       value,
@@ -99,137 +104,113 @@ class MetaWidget extends React.Component{
     }
     return (
       <section className="meta-settings">
-        <header className="row">
-          <div className="col-xs-12">
-            <img src={this.props.logo} alt="Twik Robot" style={{display: 'block', margin: '0 auto', maxHeight: 75}}/>
-          </div>
-          <form className="meta-form" onSubmit={this.onSubmit}>
-            <div className="col-xs-12">
-              <div className="row meta-row">
-                <div className="col-sm-4 col-sm-offset-4">
-                  <div className="row">
-                    <div className="col-xs-1">
-                      <span className="meta-step">1</span>
-                    </div>
-                    <div className="col-xs-11">
-                      <Autosuggest
-                        suggestions={societies}
-                        onSuggestionsUpdateRequested={this.onSuggestionsUpdateRequested}
-                        getSuggestionValue={this.getSuggestionValue}
-                        renderSuggestion={this.renderSuggestion}
-                        inputProps={inputProps}
-                        onSuggestionSelected={this.onSuggestionSelected}
-                      />
-                    </div>
-                  </div>
+        <form className="meta-form" onSubmit={this.onSubmit}>
+          <header className="row meta-row settings-area-unit">
+            <div className="col-xs-12 settings-header-stripe">
+              <h1>Step 1</h1>
+            </div>
+            <div className="col-sm-6 col-sm-push-3">
+              <div className="row">
+                <div className="col-sm-6">
+                  <Autosuggest
+                    suggestions={societies}
+                    onSuggestionsUpdateRequested={this.onSuggestionsUpdateRequested}
+                    getSuggestionValue={this.getSuggestionValue}
+                    renderSuggestion={this.renderSuggestion}
+                    inputProps={inputProps}
+                    onSuggestionSelected={this.onSuggestionSelected}
+                  />
+                </div>
+                <div className="col-sm-6">
+                  <input type="text" placeholder="Menu Name" name="menu_name" />
+                </div>
+                <div className="col-sm-12">
+                  <span className="border-bottom">How will you print this file?</span>
                 </div>
               </div>
             </div>
-            <div className="col-xs-12">
-              <div className="row meta-row">
-                <div className="col-sm-4 col-sm-offset-4">
-                  <div className="row">
-                    <div className="col-xs-1">
-                      <span className="meta-step">2</span>
-                    </div>
-                    <div className="col-xs-11">
-                      <input type="text" placeholder="Menu Name" className="form-control" />
-                    </div>
-                  </div>
+          </header>
+          <div className="row meta-row settings-area-unit">
+            <div className="col-xs-12 settings-header-stripe">
+              <h1>Step 2</h1>
+            </div>
+            <div className="col-sm-6 col-sm-push-3">
+              <div className="row">
+                <div className="col-sm-8 col-sm-offset-2">
+                  <select className="form-control" ref="papet_settings" defaultValue="size" onChange={this.onChangePaperSettings}>
+                    <option value="size">Paper Size</option>
+                    <option value="usage">Paper Usage</option>
+                  </select>
                 </div>
               </div>
-            </div>
-            <div className="col-xs-12">
-              <div className="row meta-row">
-                <div className="col-sm-4 col-sm-offset-4">
-                  <div className="row">
-                    <div className="col-xs-1">
-                      <span className="meta-step">3</span>
-                    </div>
-                    <div className="col-xs-11">
-                      <p className="text-default text-baloo">How will this menu be printed?</p>
-                      <div className="radio">
-                        <label className="text-default text-baloo">
-                          <input type="radio" name="optionsRadios" id="" value="option1" />
-                          Home Printer
+              {paperSettings === 'size' &&
+                <div className="row">
+                  <div className="col-sm-8 col-sm-push-2">
+                    <div className="row">
+                      <div className="col-xs-4">
+                        <label className="text-default">
+                          <input type="radio" name="paper_size" value="letter" /><br/> Letter <br/> 8.5 x 11 in
                         </label>
                       </div>
-                      <div className="radio">
-                        <label className="text-default text-baloo">
-                          <input type="radio" name="optionsRadios" id="" value="option2" />
-                          Professional Printer
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <hr className="meta-separator"/>
-            </div>
-            <div className="col-xs-12">
-              <div className="row meta-row">
-                <div className="col-sm-4 col-sm-offset-4">
-                  <div className="row">
-                    <div className="col-xs-1">
-                      <span className="meta-step">4</span>
-                    </div>
-                    <div className="col-xs-11">
-                      <p className="text-default text-baloo">Paper Size</p>
-                      <label className="text-default radio-inline">
-                        <input type="radio" name="paper_size" value="letter" /><br/> Letter <br/> 8.5 x 11 in
-                      </label>
-                      <label className="text-default radio-inline">
+                      <div className="col-xs-4">
+                      <label className="text-default">
                         <input type="radio" name="paper_size" value="legal" /><br/> Legal <br/> 8.5 x 14 in
                       </label>
-                      <label className="text-default radio-inline">
-                        <input type="radio" name="paper_size" value="tabloid" /><br/> Tabloid <br/> 11 x 17 in
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-xs-12">
-              <div className="row meta-row">
-                <div className="col-sm-4 col-sm-offset-4">
-                  <div className="row">
-                    <div className="col-xs-1">
-                      <span className="meta-step">5</span>
-                    </div>
-                    <div className="col-xs-11">
-                      <p className="text-default text-baloo">Paper Usage:</p>
-                      <div className="row">
-                        <div className="col-xs-12">
-                          <label className="text-default radio-inline">
-                            <input type="radio" name="paper_size" value="portrait__ONE_COLUMN" /><br/> One Side Vertical
-                          </label>
-                          <label className="text-default radio-inline">
-                            <input type="radio" name="paper_size" value="portrait__ONE_COLUMN_BOTH" disabled/><br/> Front & Back Vertical
-                          </label>
-                          <label className="text-default radio-inline">
-                            <input type="radio" name="paper_size" value="portrait__TWO_COLUMNS" disabled/><br/> Folded <br/>Front & Back (4 Pages)
-                          </label>
-                        </div>
-                        <div className="col-xs-12">
-                          <label className="text-default radio-inline">
-                            <input type="radio" name="paper_size" value="landscape__ONE_COLUMN" /><br/> One Side Horizontal
-                          </label>
-                          <label className="text-default radio-inline">
-                            <input type="radio" name="paper_size" value="landscape__ONE_COLUMN_BOTH" disabled/><br/> Front & Back Horizontal
-                          </label>
-                          <label className="text-default radio-inline">
-                            <input type="radio" name="paper_size" value="landscape__TWO_COLUMNS" disabled/><br/> Folded <br/>Front & Back (4 Pages)
-                          </label>
-                        </div>
+                      </div>
+                      <div className="col-xs-4">
+                        <label className="text-default">
+                          <input type="radio" name="paper_size" value="tabloid" /><br/> Tabloid <br/> 11 x 17 in
+                        </label>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <hr className="meta-separator"/>
+              }
+              {paperSettings === 'usage' &&
+                <div className="row">
+                  <div className="col-sm-8 col-sm-push-2">
+                    <div className="row">
+                      <div className="col-xs-4">
+                        <label className="text-default">
+                          <input type="radio" name="paper_size" value="portrait__ONE_COLUMN" /><br/> One Side Vertical
+                        </label>
+                      </div>
+                      <div className="col-xs-4">
+                        <label className="text-default">
+                          <input type="radio" name="paper_size" value="portrait__ONE_COLUMN_BOTH" disabled/><br/> Front & Back Vertical
+                        </label>
+                      </div>
+                      <div className="col-xs-4">
+                        <label className="text-default">
+                          <input type="radio" name="paper_size" value="portrait__TWO_COLUMNS" disabled/><br/> Folded <br/>Front & Back (4 Pages)
+                        </label>
+                      </div>
+                    </div>
+                  </div>                
+                  <div className="col-sm-8 col-sm-push-2">
+                    <div className="row">
+                      <div className="col-xs-4">
+                        <label className="text-default">
+                          <input type="radio" name="paper_size" value="landscape__ONE_COLUMN" /><br/> One Side Horizontal
+                        </label>
+                      </div>
+                      <div className="col-xs-4">
+                        <label className="text-default">
+                          <input type="radio" name="paper_size" value="landscape__ONE_COLUMN_BOTH" disabled/><br/> Front & Back Horizontal
+                        </label>
+                      </div>
+                      <div className="col-xs-4">
+                        <label className="text-default">
+                          <input type="radio" name="paper_size" value="landscape__TWO_COLUMNS" disabled/><br/> Folded <br/>Front & Back (4 Pages)
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
             </div>
-          </form>
-        </header>
+          </div>
+        </form>
       </section>
     )
   }

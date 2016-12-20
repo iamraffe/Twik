@@ -85,18 +85,6 @@ ActiveRecord::Schema.define(version: 20161117123124) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "uploads", force: :cascade do |t|
-    t.string   "mediable_type"
-    t.integer  "mediable_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.string   "mediable_file_name"
-    t.string   "mediable_content_type"
-    t.integer  "mediable_file_size"
-    t.datetime "mediable_updated_at"
-    t.index ["mediable_type", "mediable_id"], name: "index_uploads_on_mediable_type_and_mediable_id", using: :btree
-  end
-
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
