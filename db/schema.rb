@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161117123124) do
+ActiveRecord::Schema.define(version: 20161220214033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,13 +58,14 @@ ActiveRecord::Schema.define(version: 20161117123124) do
   create_table "menus", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "orientation", default: "landscape"
-    t.json     "template",    default: "[]",        null: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.json     "meta"
+    t.integer  "template_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.float    "height"
     t.float    "width"
     t.string   "background"
+    t.index ["template_id"], name: "index_menus_on_template_id", using: :btree
   end
 
   create_table "sections", force: :cascade do |t|
@@ -81,6 +82,15 @@ ActiveRecord::Schema.define(version: 20161117123124) do
 
   create_table "societies", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string   "name"
+    t.json     "structure"
+    t.boolean  "canon"
+    t.uuid     "ext"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
