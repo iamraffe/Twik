@@ -15,6 +15,18 @@ export default function metaReducer(state = initialState.meta, action){
         ...state,
         orientation: action.orientation
       }
+    case "SET_META_INFO":
+      console.log(state, action)
+
+      // debugger;
+      return {
+        ...state,
+        title: action.menu_name,
+        orientation: action.paper_usage.split('__')[0],
+        layout: action.paper_usage.split('__')[1],
+        size: action.paper_size,
+        name: action.menu_name
+      }
     default:
       return state
   }

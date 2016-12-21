@@ -2,12 +2,12 @@ export default {
   colors: {},
   fontFamilies: {},
   meta: {
-    id: '',
     editor: true,
-    title: '',
+    name: '',
     orientation: '',
     layout: '',
-    size: ''
+    size: '',
+    name: ''
   },
   template: {},
   section_types: [],

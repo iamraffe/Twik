@@ -42,13 +42,18 @@ class MenuWidget extends React.Component{
     })
   }
 
+  onSetStep = (step) => {
+    this.setState({step})
+  }
+
   render(){
     const { structure, meta, step } = this.state
+    const { templates } = this.props
 
     return(
       <div>
         {step === 'meta' &&
-          <MetaWidget logo={this.props.robotLogo} />
+          <MetaWidget templates={templates} onSetStep={this.onSetStep} />
         }
         {step === 'widget' &&
           <div className="row">
