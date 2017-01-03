@@ -63,6 +63,7 @@
     "redux": "3.5.2",
     "redux-thunk": "2.0.1",
     "superagent": "2.3.0",
+    "tinycolor2": "1.4.1",
     "toastr": "2.1.2",
     "webfontloader": "1.6.26",
     "whatwg-fetch": "1.0.0"
