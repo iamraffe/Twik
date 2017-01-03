@@ -193,15 +193,20 @@ class MetaWidget extends React.Component{
                   <div className="row">
                     <div className="col-xs-4">
                       <label className="text-default">
-                        <input type="radio" name="paper_usage" value="portrait__ONE_COLUMN" /><br/> One Side Vertical
+                        <input type="radio" name="paper_usage" value="portrait__ONE_COLUMN" /><br/> One Side Vertical (One Column)
                       </label>
                     </div>
                     <div className="col-xs-4">
                       <label className="text-default">
+                        <input type="radio" name="paper_usage" value="portrait__TWO_COLUMNS" /><br/> One Side Vertical (Two Columns)
+                      </label>
+                    </div>
+                    <div className="col-xs-4 hide">
+                      <label className="text-default">
                         <input type="radio" name="paper_usage" value="portrait__ONE_COLUMN_BOTH" disabled/><br/> Front & Back Vertical
                       </label>
                     </div>
-                    <div className="col-xs-4">
+                    <div className="col-xs-4 hide">
                       <label className="text-default">
                         <input type="radio" name="paper_usage" value="portrait__TWO_COLUMNS" disabled/><br/> Folded <br/>Front & Back (4 Pages)
                       </label>
@@ -212,15 +217,20 @@ class MetaWidget extends React.Component{
                   <div className="row">
                     <div className="col-xs-4">
                       <label className="text-default">
-                        <input type="radio" name="paper_usage" value="landscape__ONE_COLUMN" /><br/> One Side Horizontal
+                        <input type="radio" name="paper_usage" value="landscape__ONE_COLUMN" /><br/> One Side Horizontal (One Column)
                       </label>
                     </div>
                     <div className="col-xs-4">
                       <label className="text-default">
+                        <input type="radio" name="paper_usage" value="landscape__TWO_COLUMNS" /><br/> One Side Horizontal (Two Columns)
+                      </label>
+                    </div>
+                    <div className="col-xs-4 hide">
+                      <label className="text-default">
                         <input type="radio" name="paper_usage" value="landscape__ONE_COLUMN_BOTH" disabled/><br/> Front & Back Horizontal
                       </label>
                     </div>
-                    <div className="col-xs-4">
+                    <div className="col-xs-4 hide">
                       <label className="text-default">
                         <input type="radio" name="paper_usage" value="landscape__TWO_COLUMNS" disabled/><br/> Folded <br/>Front & Back (4 Pages)
                       </label>
