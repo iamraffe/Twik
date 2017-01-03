@@ -3,6 +3,8 @@ import initialState from './initialState'
 
 export default function fontReducer(state = initialState.fontFamilies, action){
   switch(action.type){
+    case "SET_META_INFO":
+      return JSON.parse(action.template).structure.fontFamilies
     case types.CHANGE_PRIMARY_FONT:
       return {
         ...state,

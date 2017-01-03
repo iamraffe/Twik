@@ -4,6 +4,10 @@ class MenusController < ApplicationController
     @menus = Menu.all
   end
 
+  def new
+    @templates = Template.all
+  end
+
   def create
     authorize Menu
     @menu = Menu.create(menu_params)

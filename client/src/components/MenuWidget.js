@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
-import { ToolPanel, Canvas } from './menuWidget'
+import { ToolPanel, Canvas, MetaWidget } from './menuWidget'
 
 @DragDropContext(HTML5Backend)
 class MenuWidget extends React.Component{
@@ -16,14 +16,18 @@ class MenuWidget extends React.Component{
 
     this.state = {
       fontFamilies: props.fontFamilies,
-      meta: props.meta
+      meta: props.meta,
+      step: 'meta'
     }
   }
 
   componentDidMount(){
+
+  }
+
+  loadFonts = () => {
     const { fontFamilies } = this.state
-    // console.log(fontFamilies)
-    // debugger;
+    
     WebFont.load({
       google: {
         families: _.map(fontFamilies, (f) => {
@@ -37,7 +41,6 @@ class MenuWidget extends React.Component{
           return font
         })
       },
-      // timeout: 10000
     })
   }
 
@@ -48,19 +51,29 @@ class MenuWidget extends React.Component{
     })
   }
 
+  onSetStep = (step) => {
+    this.setState({step})
+  }
+
   render(){
-    const { structure, meta } = this.state
+    const { structure, meta, step } = this.state
+    const { templates } = this.props
 
     return(
       <div>
-        <div className="row">
-          <div className={meta.orientation === 'landscape' ? `col-xs-10` : `col-xs-7 col-xs-offset-3`}>
-            <Canvas />
+        {step === 'meta' &&
+          <MetaWidget templates={templates} onSetStep={this.onSetStep} />
+        }
+        {step === 'widget' &&
+          <div className="row">
+            <div className={meta.orientation === 'landscape' ? `col-xs-10` : `col-xs-7 col-xs-offset-3`}>
+              <Canvas />
+            </div>
+            <div className="col-xs-2">
+              {this.props.editor && <ToolPanel logo={this.props.robotLogo}/>}
+            </div>
           </div>
-          <div className="col-xs-2">
-            {this.props.editor && <ToolPanel logo={this.props.robotLogo}/>}
-          </div>
-        </div>
+        }
       </div>
     )
   }

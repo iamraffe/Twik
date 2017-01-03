@@ -7,3 +7,7 @@ export function changeSize(size){
 export function changeLayout(orientation, layoutStructure){
   return { type: types.CHANGE_LAYOUT, orientation, layoutStructure }
 }
+
+export function setMetaInfo(metaInfo){
+  return { type: "SET_META_INFO", ...metaInfo }
+}

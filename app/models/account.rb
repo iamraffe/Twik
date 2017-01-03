@@ -14,10 +14,19 @@ class Account < ActiveRecord::Base
 
   validates :owner, presence: {message: "Owner can't be blank!"}
 
+  after_create :copy_templates
+
   accepts_nested_attributes_for :owner
 
   private
     def downcase_subdomain
       self.subdomain = self.subdomain.downcase
+    end
+
+    def copy_templates
+      Apartment::Tenant.switch!('public')
+      @canon_templates = Template.where(canon: true).load
+      Apartment::Tenant.switch!(self.subdomain)
+      Template.create(@canon_templates.to_a.map(&:serializable_hash))
     end
 end

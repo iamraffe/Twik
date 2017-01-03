@@ -2,7 +2,8 @@ class Menu < ActiveRecord::Base
   has_many :sections
   has_many :archives
   has_many :images, as: :imageable
-
+  belongs_to :template
+  
   def fonts
     template.select{|object| object['type'] == 'text' }.map{|o| o["fontFamily"]}
   end

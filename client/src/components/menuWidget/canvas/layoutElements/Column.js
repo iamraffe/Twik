@@ -93,7 +93,7 @@ class Column extends React.Component{
     // console.log("re-render")
     return connectDropTarget(
       <div
-        style={{width: (100*this.props.span)+"%", backgroundColor, border: '1px solid green', minHeight: 50, marginTop: 15, marginBottom: 15}}
+        style={{width: (100*this.props.span)+"%", backgroundColor, border: '1px solid green', minHeight: 50, marginTop: 15, marginBottom: 15, display: 'inline-block'}}
       >
         {_.map(sections, (element, i) => {
           return (

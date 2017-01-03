@@ -3,6 +3,8 @@ import initialState from './initialState'
 
 export default function sectionTypeReducer(state = initialState.section_types, action){
   switch(action.type){
+    case "SET_META_INFO":
+      return JSON.parse(action.template).structure.section_types
     case types.ADD_SECTION_TYPE:
       console.log(state, action.section)
       // debugger;
@@ -12,11 +14,6 @@ export default function sectionTypeReducer(state = initialState.section_types, a
           action.section
         ]
       }
-    // case types.CHANGE_LAYOUT:
-    //   return {
-    //     ...state,
-    //     template: _.find(template.layouts, (l) => {return l.name === menu.meta.layout}).structure
-    //   }
     default:
       return state
   }
