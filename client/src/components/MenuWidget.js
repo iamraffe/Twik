@@ -27,7 +27,13 @@ class MenuWidget extends React.Component{
 
   loadFonts = () => {
     const { fontFamilies } = this.state
-    
+
+    // WebFont.load({
+    //   google: {
+    //     families: _.map(fontFamilies, (f) => {return f})
+    //   },
+    // })
+
     WebFont.load({
       google: {
         families: _.map(fontFamilies, (f) => {

@@ -32,7 +32,7 @@ class MetaWidget extends React.Component{
       console.log(res)
       if(res.statusCode === 200){
         this.setState({
-          societies: res.body
+          societies: res.body.societies
         })
       }
       else{

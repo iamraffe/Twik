@@ -34,9 +34,24 @@ Template.create({
     quinary_color: ''
   },
   fontFamilies: {
-    primary_font: 'Oswald',
-    secondary_font: 'Roboto Condensed',
-    alternate_font: ''
+    primary_font: {
+      fontFamily: 'Oswald',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      textTransform: 'none'
+    },
+    secondary_font: {
+      fontFamily: 'Roboto Condensed',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      textTransform: 'none'
+    },
+    alternate_font: {
+      fontFamily: '',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      textTransform: 'none'
+    }
   },
   styles: [
     {
