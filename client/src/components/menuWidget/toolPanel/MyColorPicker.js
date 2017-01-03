@@ -123,7 +123,6 @@ class MyColorPicker extends React.Component {
             <div style={ styles.activeColor } />
           </div>
         </div>
-
         <SketchFields
           rgb={ rgb }
           hsl={ hsl }
@@ -131,7 +130,6 @@ class MyColorPicker extends React.Component {
           onChange={ onChange }
           disableAlpha={ disableAlpha }
         />
-        <SketchPresetColors colors={ presetColors } onClick={ onChange } />
       </div>
     )
   }

@@ -57,6 +57,22 @@ class ColorPanel extends React.Component{
     this.setState({editing: 'none'})
   }
 
+  borderCSS = (color) => {
+    let c = color.substring(1)
+    var rgb = parseInt(c, 16);   // convert rrggbb to decimal
+    var r = (rgb >> 16) & 0xff;  // extract red
+    var g = (rgb >>  8) & 0xff;  // extract green
+    var b = (rgb >>  0) & 0xff;  // extract blue
+    var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+
+    if (luma > 40) {
+      return 'none'
+    }
+    else{
+      return '1px solid black'
+    }
+  }
+
   render(){
     const { primary_color,
             secondary_color,
@@ -66,6 +82,7 @@ class ColorPanel extends React.Component{
             editing } = this.state
     const popover = {
       position: 'relative',
+      marginTop: 40,
       zIndex: '2',
     }
     const cover = {
@@ -84,29 +101,29 @@ class ColorPanel extends React.Component{
         </header>
         <div className="swatches row">
           <div className="" style={{width: 75, display: 'block', margin: '15px auto 0'}}>
-            {primary_color && editing !== 'primary_color' &&
+            {primary_color &&
               <article className="swatch">
                 <span
                   onClick={(e) => {this.onEditColor('primary_color')}}
-                  style={{cursor: 'pointer', display: 'block', width: 25, height: 25, backgroundColor: primary_color}}
+                  style={{cursor: 'pointer', display: 'block', width: 25, height: 25, backgroundColor: primary_color, border: this.borderCSS(primary_color)}}
                 >
                 </span>
               </article>
             }
-            {secondary_color && editing !== 'secondary_color' &&
+            {secondary_color &&
               <article className="swatch">
                 <span
                   onClick={(e) => {this.onEditColor('secondary_color')}}
-                  style={{cursor: 'pointer', display: 'block', width: 25, height: 25, backgroundColor: secondary_color}}
+                  style={{cursor: 'pointer', display: 'block', width: 25, height: 25, backgroundColor: secondary_color, border: this.borderCSS(secondary_color)}}
                 >
                 </span>
               </article>
             }
-            {tertiary_color && editing !== 'tertiary_color' &&
+            {tertiary_color &&
               <article  className="swatch">
                 <span
                   onClick={(e) => {this.onEditColor('tertiary_color')}}
-                  style={{cursor: 'pointer', display: 'block', width: 25, height: 25, backgroundColor: tertiary_color}}
+                  style={{cursor: 'pointer', display: 'block', width: 25, height: 25, backgroundColor: tertiary_color, border: this.borderCSS(tertiary_color)}}
                 >
                 </span>
               </article>
