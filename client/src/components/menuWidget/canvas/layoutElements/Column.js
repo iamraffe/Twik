@@ -19,7 +19,7 @@ const containerTarget = {
       containerId: props.containerId,
       rowId: props.rowId,
       columnId: props.id,
-      position: _.last(props.sections).position+1
+      position: props.sections.length > 1 ? _.last(props.sections).position+1 : 1
     }
   }
 }
@@ -93,7 +93,7 @@ class Column extends React.Component{
     // console.log("re-render")
     return connectDropTarget(
       <div
-        style={{width: (100*this.props.span)+"%", backgroundColor, border: '1px solid green', minHeight: 50, marginTop: 15, marginBottom: 15, display: 'inline-block'}}
+        style={{width: (100*this.props.span)+"%", backgroundColor, border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top'}}
       >
         {_.map(sections, (element, i) => {
           return (
@@ -111,6 +111,9 @@ class Column extends React.Component{
             />
           )
         })}
+        {sections.length === 0 &&
+          <p style={{fontFamily: 'Open Sans', fontWeight: 200, fontSize: 12, textAlign: 'center', margin: 5, color: '#310100', border: '1px dashed #f6303e', padding: 5}}>Use the sidebar menu to add sections to this column</p>
+        }
       </div>
     )
   }

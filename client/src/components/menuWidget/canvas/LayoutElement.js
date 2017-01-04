@@ -37,7 +37,7 @@ class LayoutElement extends React.Component{
           <div
             className=""
             style={{
-              border: '1px solid red',
+              border: this.props.span === 1 ? 'none' : '0.5px solid black',
               width: this.props.span*100+'%',
               float: 'left',
               position: 'relative',
@@ -76,7 +76,7 @@ class LayoutElement extends React.Component{
               paddingBottom: (this.props.paddingBottom*this.props.zoom/100)+'pt',
               paddingLeft: (this.props.paddingLeft*this.props.zoom/100)+'pt',
               paddingRight: (this.props.paddingRight*this.props.zoom/100)+'pt',
-              border: '1px solid blue',
+              border: 'none',
               width: '100%',
               alignSelf: this.props.vertical === 'bottom' ? 'flex-end' : 'flex-start'
             }}
