@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails Twik: production" uuid="2fd742f9-7f5d-4e10-a238-063a4e3289bd">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <user-name>&lt;%= ENV[&quot;PGUSER&quot;] %&gt;</user-name>
+      <user-password>df96df8fdf97df8adfefdfe4dffcdff1df88dffadfeddffadfebdff9dff9dffddfe5dff8dfeedf88dff7df8adf8fdf94</user-password>
+    </data-source>
+    <data-source name="Rails Twik: test" uuid="d55c5169-0905-46b1-9e05-2066e4eb8742">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <user-name>santiago</user-name>
+      <user-password>df93df9bdf9bdfdedfdfdfd8dfc8dfc5</user-password>
+    </data-source>
+    <data-source name="Rails Twik: development" uuid="6b37d3d6-c6b2-4ac4-960c-a7caf2503a36">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <first-sync>true</first-sync>
+      <user-name>santiago</user-name>
+      <user-password>df93df9bdf9bdfdedfdfdfd8dfc8dfc5</user-password>
+    </data-source>
+  </component>
+</project>

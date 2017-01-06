@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Rails Twik: production" uuid="2fd742f9-7f5d-4e10-a238-063a4e3289bd">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1/&lt;%= ENV[&quot;PGDATABASE&quot;] %&gt;</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Rails Twik: test" uuid="d55c5169-0905-46b1-9e05-2066e4eb8742">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1/twik-saas_test</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Rails Twik: development" uuid="6b37d3d6-c6b2-4ac4-960c-a7caf2503a36">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1/twik-saas_development</jdbc-url>
+    </data-source>
+  </component>
+</project>
