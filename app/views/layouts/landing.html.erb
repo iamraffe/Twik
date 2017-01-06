@@ -18,18 +18,19 @@
               <div class="container-fluid">
                 <div class="navbar-header">
                   <a class="navbar-brand" href="/">
-                    <img alt="Brand" src="<%= asset_path 'twik-logo-horizontal-red.png' %>">
+                    <img class="col-md-2" id="twik-img-logo" alt="Brand" src="<%= asset_path 'twik-robot-red-white-bg.png' %>">
+                    <img class="col-md-2" id="twik-word-logo" src="<%= asset_path 'twik-logo-word-only-red.png' %>">
                   </a>
                 </div>
-                
+                <div class="col-md-2"></div>
+                <div class='col-md-7 pretty-nav-line '></div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="col-md-4 collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">About Us</a> <span class="nav-separator">|</span></li>
                     <li><a href="#">Pricing</a> <span class="nav-separator">|</span></li>
                     <li><a href="#">Log in</a></li>
                   </ul>
-                  <div class='pretty-nav-line navbar-right'></div>
                 </div><!-- /.navbar-collapse -->
               </div>
             </nav>
@@ -38,7 +39,8 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-md-2"></div>
+          <div class="col-md-10 ">
             <%= yield %>
           </div>
         </div>
@@ -46,32 +48,35 @@
     </header>
     <section class="container twik-deets">
       <header class="row">
-        <div class="col-md-7 col-md-offset-1">
+        <div class="col-md-2">
+          <img class="face-image" src="<%=	 asset_path 'icon-face.png' %>">
+        </div>
+        <div class="col-md-6 ">
           <h1><img src="<%= asset_path 'twik-logo-word-only-red.png' %>" alt="Twik" class="twik-word-only"> enables teams to use and edit designed brand templates directly. The platform automatically applies brand formatting to text and images, saves documents to a cloud archive, and prepares professional, print ready files so you can send them to production right from your page.</h1>
         </div>
       </header>
       <div class="row uses-wrapper">
-        <div class="col-md-7 col-md-offset-1">
-          <p><strong>User Twik for:</strong></p>
+        <div class="col-md-6 col-md-offset-2 uses-list">
+          <p><strong>Use Twik for:</strong></p>
           <ul class="list-unstyled list-inline uses">
             <li class="text-primary"><strong>Menus</strong></li>
-            <li>/</li>
+            <li class="list-dash">/</li>
             <li class="text-primary"><strong>Proposals &amp; RFP's</strong></li>
-            <li>/</li>
+            <li class="list-dash">/</li>
             <li class="text-primary"><strong>Business cards</strong></li>
-            <li>/</li>
+            <li class="list-dash">/</li>
             <li class="text-primary"><strong>Organization reports</strong></li>
-            <li>/</li>
+            <li class="list-dash">/</li>
             <li class="text-primary"><strong>Letterhead and Invoices</strong></li>
-            <li>/</li>
+            <li class="list-dash">/</li>
             <li class="text-primary"><strong>Flyers and promotional materials</strong></li>
-            <li>/</li>
+            <li class="list-dash">/</li>
             <li class="text-primary"><strong>Presentation slide decks</strong></li>
-            <li>/</li>
+            <li class="list-dash">/</li>
             <li class="text-primary"><strong>Web Banners</strong></li>
           </ul>
         </div>
-        <div class="col-md-3 col-md-offset-1">
+        <div style="color:#57090F;" class="col-md-3 col-md-offset-1">
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-landing">
               <div class="panel-heading" role="tab" id="headingOne">
@@ -96,6 +101,12 @@
               </div>
               <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                 <div class="panel-body">
+                  <p class="collapse-text">If you have more than one team to manage, a Multiple Account team gives you
+                    single, dedicated dashboard where you can access and manage all your teams.
+                    This plan gives you up to three regular team pages plus your management
+                    page standard
+                  </p>
+                  <a style="margin-left: 30px" class="box-background">Sign Up For Free Trial</a>
                 </div>
               </div>
             </div>
@@ -115,19 +126,19 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12">
+      <div class="">
+        <div class="">
           <table class="table pricing-table">
             <thead>
               <th></th>
               <th>Team</th>
               <th>Team Plus</th>
-              <th>Designer Pro<br><span class="small">Coming Soon</span></th>
-              <th>Studio Pro<br><span class="small">Coming Soon</span></th>
+              <th style="line-height: 18px; padding-bottom: 20px"><img class="th-crown-icon" src="<%=	 asset_path 'crown-red' %>"><br>Designer Pro<br><span class="small">Coming Soon</span></th>
+              <th style="line-height: 18px">Studio Pro<br><span class="small">Coming Soon</span></th>
             </thead>
             <tbody>
               <tr>
-                <td></td>
+                <td><img class="td-money-icon" src="<%=	 asset_path 'money-icon-red.png' %>"></td>
                 <td><strong>$10 / month</strong></td>
                 <td><strong>$25 / month</strong></td>
                 <td><strong>$20 + 5% twik fees / month</strong></td>
@@ -167,6 +178,13 @@
                 <td>$5 / team / mo.</td>
                 <td>$2.5 / team / mo.</td>
                 <td></td>
+              </tr>
+              <tr>
+                <td> </td>
+                <td><a class="box-background">Sign Up For Free Trial</a></td>
+                <td><a class="box-background">Sign Up For Free Trial</a></td>
+                <td><a class="box-background">Sign Up For Free Trial</a></td>
+                <td><a class="box-background">Sign Up For Free Trial</a></td>
               </tr>
             </tbody>
           </table>
