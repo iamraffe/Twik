@@ -57,14 +57,17 @@ ActiveRecord::Schema.define(version: 20161220214033) do
 
   create_table "menus", force: :cascade do |t|
     t.string   "name"
-    t.text     "description"
+    t.string   "orientation"
+    t.string   "layout"
+    t.string   "size"
+    t.string   "title"
     t.json     "meta"
+    t.json     "sections"
     t.integer  "template_id"
+    t.integer  "society_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.float    "height"
-    t.float    "width"
-    t.string   "background"
+    t.index ["society_id"], name: "index_menus_on_society_id", using: :btree
     t.index ["template_id"], name: "index_menus_on_template_id", using: :btree
   end
 

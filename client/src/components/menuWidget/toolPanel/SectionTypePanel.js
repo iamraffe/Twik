@@ -33,7 +33,7 @@ const sectionSource = {
         }]
       }
       console.log("COMPONENT ", component.state, id, structure, section)
-      debugger;
+      // debugger;
       // if(component.state.newSection){
       // console.log("SECIOTN ", section)
 
@@ -199,7 +199,7 @@ class SectionTypePanel extends React.Component{
                   }
                   <span style={{...styles}}>{sectionStyle.structure.elements.length === 1 ? sectionStyle.structure.type : element.type}</span>
                   <span
-                    className="ion ion-ios-compose-outline"
+                    className="ion hide ion-ios-compose-outline"
                     style={{cursor: 'pointer', fontSize: '1.25em', float: 'right'}}
                     onClick={(e) => {this.onEditStyle(element.styles)}}
                   />

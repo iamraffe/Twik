@@ -100,11 +100,17 @@ class MetaWidget extends React.Component{
   }
 
   onSubmit = (e) => {
-    const { society } = this.state
+    const { society, value } = this.state
+    console.log(society, value)
+    // debugger;
     e.preventDefault()
     const form = e.target
-    console.log({restaurant_name: society,...getFormData(form)})
-    this.props.metaActions.setMetaInfo({restaurant_name: society,...getFormData(form)})
+    let restaurant = {
+      name: society.name ? society.name : value,
+      id: society.id ? society.id : null
+    }
+    console.log("onSubmir", {society: restaurant, ...getFormData(form)})
+    this.props.metaActions.setMetaInfo({society: restaurant, ...getFormData(form)})
     this.props.onSetStep('widget')
   }
 

@@ -7,6 +7,8 @@ import { bindActionCreators } from 'redux'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
+import * as metaActions from '../actions/metaActions'
+
 import { ToolPanel, Canvas, MetaWidget } from './menuWidget'
 
 @DragDropContext(HTML5Backend)
@@ -17,6 +19,8 @@ class MenuWidget extends React.Component{
     this.state = {
       fontFamilies: props.fontFamilies,
       meta: props.meta,
+      sections: props.sections,
+      template: props.template,
       step: 'meta'
     }
   }
@@ -53,12 +57,25 @@ class MenuWidget extends React.Component{
   componentWillReceiveProps(nextProps){
     this.setState({
       fontFamilies: nextProps.fontFamilies,
-      meta: nextProps.meta
+      meta: nextProps.meta,
+      sections: nextProps.sections,
+      template: nextProps.template
     })
   }
 
   onSetStep = (step) => {
     this.setState({step})
+  }
+
+  onSave = (e) => {
+    const { meta, sections, template } = this.state 
+    console.log("on save", meta)
+    this.props.metaActions.saveMenu({
+      ..._.omit(meta, ['editor',  'society']),
+      meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
+      sections: JSON.stringify(sections),
+      template_id: template.id
+    }, meta.society)
   }
 
   render(){
@@ -76,7 +93,7 @@ class MenuWidget extends React.Component{
               <Canvas />
             </div>
             <div className="col-xs-2">
-              {this.props.editor && <ToolPanel logo={this.props.robotLogo}/>}
+              {this.props.editor && <ToolPanel logo={this.props.robotLogo} onSave={this.onSave}/>}
             </div>
           </div>
         }
@@ -93,12 +110,15 @@ function mapStateToProps(state, ownProps){
   return {
     fontFamilies: state.fontFamilies,
     structure: state.structure,
-    meta: state.meta
+    meta: state.meta,
+    sections: state.sections,
+    template: state.template
   }
 }
 
 function mapDispatchToProps(dispatch){
   return {
+    metaActions: bindActionCreators(metaActions, dispatch)
   }
 }
 

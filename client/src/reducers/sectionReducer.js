@@ -7,7 +7,7 @@ export default function sectionReducer(state = initialState.sections, action){
   switch(action.type){
     case types.ADD_SECTION:
       console.log(state, action)
-      debugger;
+      // debugger;
       return [
         ...state,
         action.section

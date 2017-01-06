@@ -25,7 +25,8 @@ export default function metaReducer(state = initialState.meta, action){
         orientation: action.paper_usage.split('__')[0],
         layout: action.paper_usage.split('__')[1],
         size: action.paper_size,
-        name: action.menu_name
+        name: action.menu_name,
+        society: action.society
       }
     default:
       return state

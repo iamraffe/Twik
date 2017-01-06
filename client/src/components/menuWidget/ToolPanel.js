@@ -127,7 +127,7 @@ class ToolPanel extends React.Component{
         </div>
         <div className="row">
           <div className="col-xs-6">
-            <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onExport()}}>Save</button>
+            <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.props.onSave(e)}}>Save</button>
           </div>
           <div className="col-xs-6">
             <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onExport()}}>Preview</button>
