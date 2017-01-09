@@ -37,7 +37,7 @@ class LayoutPanel extends React.Component{
     const { template } = this.state
     const { changeLayout } = this.props.metaActions
     const values = e.target.value.split("__")
-    changeLayout(values[0], _.find(template.layouts, (l) => {return l.name === values[1]}).structure)
+    changeLayout(values[0], _.find(template.structure.layouts, (l) => {return l.name === values[1]}).structure)
   }
 
   render(){

@@ -4,9 +4,21 @@ class MenusController < ApplicationController
     @menus = Menu.all
   end
 
+  def new
+    @templates = Template.all
+  end
+
   def create
-    authorize Menu
+    if(params[:society][:id].nil?)
+      @society = Society.create(society_params)
+    else
+      @society = Society.find(params[:society][:id])
+    end
+    # authorize Menu
     @menu = Menu.create(menu_params)
+    @menu.update_attributes(society_id: @society.id)
+    # byebug
+    render json: @menu
   end
 
   def show
@@ -50,6 +62,10 @@ class MenusController < ApplicationController
 
   private
     def menu_params
-      params.required(:menu).permit(:name, :description, :template, :width, :height, :background)
+      params.required(:menu).permit(:name, :orientation, :template_id, :layout, :size, :title, :meta, :sections)
+    end
+
+    def society_params
+      params.required(:society).permit(:name)
     end
 end

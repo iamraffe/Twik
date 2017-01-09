@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Pea Mystie';
+    src: asset-url('heyyyy-webfont.eot');
+    src: asset-url('heyyyy-webfont.eot?#iefix') format('embedded-opentype'),
+         asset-url('heyyyy-webfont.woff2') format('woff2'),
+         asset-url('heyyyy-webfont.woff') format('woff'),
+         asset-url('heyyyy-webfont.ttf') format('truetype'),
+         asset-url('heyyyy-webfont.svg#pea_mystieregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Avenir Next Condensed Demi';
+    src: asset-url('AvenirNextCondensed-DemiBold.ttf');
+}
+
+@font-face {
+    font-family: 'Avenir Next Condensed';
+    src: asset-url('AvenirNextCondensed-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Universal Std Condensed';
+    src: asset-url('UniversLTStd-Cn.otf');
+}
+
+@font-face {
+    font-family: 'Universal Std Bold';
+    src: asset-url('UniversLTStd-BoldCn.otf');
+}
+@font-face {
+    font-family: 'Futura Std Condensed';
+    src: asset-url('FuturaStd-Condensed.otf');
+}

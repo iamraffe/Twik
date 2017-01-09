@@ -26,17 +26,19 @@ const sectionSource = {
         type: "SECTION",
         position: dropResult.position,
         struct: id,
+        columnId: dropResult.columnId,
         elements: [{
           ...structure,
           position: 0
         }]
       }
-      // console.log("COMPONENT ", component.state, id, structure)
+      console.log("COMPONENT ", component.state, id, structure, section)
+      // debugger;
       // if(component.state.newSection){
       // console.log("SECIOTN ", section)
 
 
-      props.sectionActions.addSection({...section, columnId: dropResult.columnId})
+      props.sectionActions.addSection(section)
       component.state.sectionStyle = {}
       component.state.newSection = false
     }
@@ -103,7 +105,7 @@ class SectionTypePanel extends React.Component{
         </header>
         <div className="row">
           <div className="col-xs-10 col-xs-offset-1" style={{marginBottom: 25}}>
-            <select className="form-control" defaultValue="default" onChange={this.onSectionStyleSelect}>
+            <select className="form-control" value={sectionStyle.name ? sectionStyle.name : 'default'} onChange={this.onSectionStyleSelect}>
               <option value="default">Choose section style</option>
               {_.map(section_types, (section, i) => {
                 return (
@@ -121,83 +123,83 @@ class SectionTypePanel extends React.Component{
               // debugger;
               return (
                 <div key={i} className="style-item" style={{overflowX: 'hidden'}}>
-        {editing === element.styles &&
-          <div className="style-editor row">
-            <div className="col-xs-4" style={{minWidth: 52.5, display: 'block', margin: '3.5px auto'}}>
-              {_.map(colors, (c,i) => {
-                return (
-                  <article key={i} onClick={(e) => {this.onUpdateStyle('color', c)}}>
-                    <span
-                      style={{
-                        float: 'left',
-                        cursor: 'pointer',
-                        width: 17.5,
-                        height: 17.5,
-                        backgroundColor: c,
-                        border: c === styles.color ? '2px dashed black' : 'none'
-                      }}
-                    >
-                    </span>
-                  </article>
-                )
-              })}
-            </div>
-            <div className="form-inline col-xs-8">
-              <div className="form-group">
-                <label style={{marginTop: 0}}>Size</label>
-                <div className="input-group" style={{maxWidth: '60%', backgroundColor: 'silver', marginLeft: '5%'}}>
-                  <input
-                    type="number"
-                    className="form-control"
-                    onChange={(e) => {this.onUpdateStyle('fontSize', `${e.target.value}pt`)}}
-                    step="0.01"
-                    value={parseFloat(styles.fontSize.slice(0, -2))}
-                    style={{backgroundColor: 'transparent', border: 'none', fontWeight: 500, color: 'black', padding: 5}}
-                  />
-                  <div
-                    className="input-group-addon"
-                    style={{backgroundColor: 'transparent', padding: 5, border: 'none'}}
-                  >
-                    pt
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-xs-12">
-              <select
-                className="form-control"
-                defaultValue={JSON.stringify({
-                  fontFamily: styles.fontFamily,
-                  fontStyle: styles.fontStyle,
-                  fontWeight: styles.fontWeight,
-                  textTransform: styles.textTransform,
-                })}
-                style={{boxShadow: 'none', width: '100%', color: 'black', backgroundColor: 'transparent', border: 'none', padding: 0, marginBottom: 15}}
-                onChange={(e) => {this.onUpdateStyle('fontFamily', `${e.target.value}`)}}
-              >
-                {_.map(_.filter(fontFamilies, (f) => {return f.fontFamily !== ''}), (font, i) => {
-                  return (
-                    <option
-                      key={i}
-                      value={JSON.stringify({
-                        fontFamily: font.fontFamily,
-                        fontStyle: font.fontStyle,
-                        fontWeight: font.fontWeight,
-                        textTransform: font.textTransform,
-                      })}
-                      style={{...font}}
-                    >
-                      {font.fontFamily}
-                    </option>
-                  )
-                })}
-              </select>
-            </div>
-          </div>
-        }
+                  {editing === element.styles &&
+                    <div className="style-editor row">
+                      <div className="col-xs-4" style={{minWidth: 52.5, display: 'block', margin: '3.5px auto'}}>
+                        {_.map(colors, (c,i) => {
+                          return (
+                            <article key={i} onClick={(e) => {this.onUpdateStyle('color', c)}}>
+                              <span
+                                style={{
+                                  float: 'left',
+                                  cursor: 'pointer',
+                                  width: 17.5,
+                                  height: 17.5,
+                                  backgroundColor: c,
+                                  border: c === styles.color ? '2px dashed black' : 'none'
+                                }}
+                              >
+                              </span>
+                            </article>
+                          )
+                        })}
+                      </div>
+                      <div className="form-inline col-xs-8">
+                        <div className="form-group">
+                          <label style={{marginTop: 0}}>Size</label>
+                          <div className="input-group" style={{maxWidth: '60%', backgroundColor: 'silver', marginLeft: '5%'}}>
+                            <input
+                              type="number"
+                              className="form-control"
+                              onChange={(e) => {this.onUpdateStyle('fontSize', `${e.target.value}pt`)}}
+                              step="0.01"
+                              value={parseFloat(styles.fontSize.slice(0, -2))}
+                              style={{backgroundColor: 'transparent', border: 'none', fontWeight: 500, color: 'black', padding: 5}}
+                            />
+                            <div
+                              className="input-group-addon"
+                              style={{backgroundColor: 'transparent', padding: 5, border: 'none'}}
+                            >
+                              pt
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-xs-12">
+                        <select
+                          className="form-control"
+                          defaultValue={JSON.stringify({
+                            fontFamily: styles.fontFamily,
+                            fontStyle: styles.fontStyle,
+                            fontWeight: styles.fontWeight,
+                            textTransform: styles.textTransform,
+                          })}
+                          style={{boxShadow: 'none', width: '100%', color: 'black', backgroundColor: 'transparent', border: 'none', padding: 0, marginBottom: 15}}
+                          onChange={(e) => {this.onUpdateStyle('fontFamily', `${e.target.value}`)}}
+                        >
+                          {_.map(_.filter(fontFamilies, (f) => {return f.fontFamily !== ''}), (font, i) => {
+                            return (
+                              <option
+                                key={i}
+                                value={JSON.stringify({
+                                  fontFamily: font.fontFamily,
+                                  fontStyle: font.fontStyle,
+                                  fontWeight: font.fontWeight,
+                                  textTransform: font.textTransform,
+                                })}
+                                style={{...font}}
+                              >
+                                {font.fontFamily}
+                              </option>
+                            )
+                          })}
+                        </select>
+                      </div>
+                    </div>
+                  }
                   <span style={{...styles}}>{sectionStyle.structure.elements.length === 1 ? sectionStyle.structure.type : element.type}</span>
                   <span
-                    className="ion ion-ios-compose-outline"
+                    className="ion hide ion-ios-compose-outline"
                     style={{cursor: 'pointer', fontSize: '1.25em', float: 'right'}}
                     onClick={(e) => {this.onEditStyle(element.styles)}}
                   />
@@ -225,7 +227,7 @@ SectionTypePanel.propTypes = {}
 
 function mapStateToProps(state, ownProps){
   return {
-    section_types: [...state.section_types.custom, ...state.section_types.template],
+    section_types: state.section_types.custom ? [...state.section_types.custom, ...state.section_types.template] : state.section_types,
     colors: state.colors,
     fontFamilies: state.fontFamilies,
     zoom: state.zoom

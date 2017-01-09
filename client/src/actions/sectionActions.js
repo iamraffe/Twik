@@ -1,6 +1,7 @@
 import * as types from './actionTypes'
 
 export function addSection(section){
+  console.log(section)
   return { type: types.ADD_SECTION, section }
 }
 

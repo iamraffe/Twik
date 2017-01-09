@@ -18,9 +18,8 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index, :destroy, :update, :show]
     resources :subscriptions, only: [:new, :create]
-
     resources :images
-
+    resources :societies
     post '/export', to: "menus#export"
 
     patch '/users/:id/update-payment-method', to: "users#update_payment_method", as: :update_user_payment

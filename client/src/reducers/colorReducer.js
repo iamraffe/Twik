@@ -3,6 +3,8 @@ import initialState from './initialState'
 
 export default function colorReducer(state = initialState.colors, action){
   switch(action.type){
+    case "SET_META_INFO":
+      return JSON.parse(action.template).structure.colors
     case types.CHANGE_PRIMARY_FONT:
       return {
         ...state,

@@ -43,23 +43,7 @@ class ToolPanel extends React.Component{
   getStyles = (styleId) => {
     const { styles, fontFamilies, colors, zoom } = this.state
     const index = _.findIndex(styles, (s, i) => {return s.id === styleId})
-    // console.log("F", styleId, styles, index, `${styles[index].extra.fontSize*zoom/100}pt`, zoom)
-    // debugger;
-    // console.log(fontFamilies, styles[index], styles[index].fontFamily, fontFamilies[styles[index].fontFamily])
-    // debugger;
-    // console.log({
-    //   ...styles[index].extra,
-    //   fontSize: `${styles[index].extra.fontSize*zoom/100}pt`,
-    //   color: `${colors[styles[index].color]}`,
-    //   fontFamily: fontFamilies[styles[index].fontFamily].fontFamily,
-    //   fontWeight: fontFamilies[styles[index].fontFamily].fontWeight,
-    //   fontStyle: fontFamilies[styles[index].fontFamily].fontStyle,
-    //   textTransform: fontFamilies[styles[index].fontFamily].textTransform,
-    //   // fontSize: `${styles[index].extra.fontSize}pt`,
-    //   // color: `${colors[styles[index].color]}`,
-    //   // fontFamily: fontFamilies[styles[index].fontFamily],
-    // })
-    // debugger;
+
     return {
       ...styles[index].extra,
       fontSize: `${styles[index].extra.fontSize*zoom/100}pt`,
@@ -68,23 +52,21 @@ class ToolPanel extends React.Component{
       fontWeight: fontFamilies[styles[index].fontFamily].fontWeight,
       fontStyle: fontFamilies[styles[index].fontFamily].fontStyle,
       textTransform: fontFamilies[styles[index].fontFamily].textTransform,
-      // fontSize: `${styles[index].extra.fontSize}pt`,
-      // color: `${colors[styles[index].color]}`,
-      // fontFamily: fontFamilies[styles[index].fontFamily],
     }
   }
 
-  exportCall = () => {
+  exportCall = (zoom) => {
     const { meta } = this.state
+    const { applyZoom } = this.props.zoomActions
     const html = document.getElementById('entry-point').innerHTML
     const req = request.post(`/export`)
     req.query({ format: 'json' })
     req.field('authenticity_token', $('meta[name="csrf-token"]').attr('content') )
-    // req.send({private: false, ...})
     req.field('html', html)
     req.field('meta', JSON.stringify(meta))
     req.end((err, res)=>{
       console.log(err, res)
+      applyZoom(zoom)
       window.open(res.body.path, "_blank")
     })
   }
@@ -94,7 +76,7 @@ class ToolPanel extends React.Component{
     const { zoom } = this.state
     applyZoom(100)
     // this.exportCall()
-    setTimeout(this.exportCall, 100)
+    setTimeout(this.exportCall(zoom), 100)
 
   }
 
@@ -145,7 +127,7 @@ class ToolPanel extends React.Component{
         </div>
         <div className="row">
           <div className="col-xs-6">
-            <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onExport()}}>Save</button>
+            <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.props.onSave(e)}}>Save</button>
           </div>
           <div className="col-xs-6">
             <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onExport()}}>Preview</button>

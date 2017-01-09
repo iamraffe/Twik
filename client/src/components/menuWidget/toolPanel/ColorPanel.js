@@ -2,9 +2,11 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import _ from 'lodash'
-import { SketchPicker } from 'react-color'
+import tinycolor from 'tinycolor2'
 
 import * as colorActions from '../../../actions/colorActions'
+
+import MyColorPicker from './MyColorPicker'
 
 class ColorPanel extends React.Component{
   constructor(props){
@@ -56,6 +58,23 @@ class ColorPanel extends React.Component{
     this.setState({editing: 'none'})
   }
 
+  borderCSS = (color) => {
+    // console.log(color)
+    // let c = color.substring(1)
+    // var rgb = parseInt(c, 16);   // convert rrggbb to decimal
+    // var r = (rgb >> 16) & 0xff;  // extract red
+    // var g = (rgb >>  8) & 0xff;  // extract green
+    // var b = (rgb >>  0) & 0xff;  // extract blue
+    // var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+
+    if (tinycolor(color).isDark()) {
+      return 'none'
+    }
+    else{
+      return '1px solid black'
+    }
+  }
+
   render(){
     const { primary_color,
             secondary_color,
@@ -64,7 +83,8 @@ class ColorPanel extends React.Component{
             quinary_color,
             editing } = this.state
     const popover = {
-      position: 'absolute',
+      position: 'relative',
+      marginTop: 40,
       zIndex: '2',
     }
     const cover = {
@@ -83,29 +103,29 @@ class ColorPanel extends React.Component{
         </header>
         <div className="swatches row">
           <div className="" style={{width: 75, display: 'block', margin: '15px auto 0'}}>
-            {primary_color && editing !== 'primary_color' &&
+            {primary_color &&
               <article className="swatch">
                 <span
-                  onDoubleClick={(e) => {this.onEditColor('primary_color')}}
-                  style={{display: 'block', width: 25, height: 25, backgroundColor: primary_color}}
+                  onClick={(e) => {this.onEditColor('primary_color')}}
+                  style={{cursor: 'pointer', display: 'block', width: 25, height: 25, backgroundColor: primary_color, border: this.borderCSS(primary_color)}}
                 >
                 </span>
               </article>
             }
-            {secondary_color && editing !== 'secondary_color' &&
+            {secondary_color &&
               <article className="swatch">
                 <span
-                  onDoubleClick={(e) => {this.onEditColor('secondary_color')}}
-                  style={{display: 'block', width: 25, height: 25, backgroundColor: secondary_color}}
+                  onClick={(e) => {this.onEditColor('secondary_color')}}
+                  style={{cursor: 'pointer', display: 'block', width: 25, height: 25, backgroundColor: secondary_color, border: this.borderCSS(secondary_color)}}
                 >
                 </span>
               </article>
             }
-            {tertiary_color && editing !== 'tertiary_color' &&
+            {tertiary_color &&
               <article  className="swatch">
                 <span
-                  onDoubleClick={(e) => {this.onEditColor('tertiary_color')}}
-                  style={{display: 'block', width: 25, height: 25, backgroundColor: tertiary_color}}
+                  onClick={(e) => {this.onEditColor('tertiary_color')}}
+                  style={{cursor: 'pointer', display: 'block', width: 25, height: 25, backgroundColor: tertiary_color, border: this.borderCSS(tertiary_color)}}
                 >
                 </span>
               </article>
@@ -115,7 +135,7 @@ class ColorPanel extends React.Component{
             <article>
               <div style={popover}>
                 <div style={cover} onClick={this.onChangeComplete}/>
-                <SketchPicker
+                <MyColorPicker
                   color={primary_color}
                   onChange={(color) => {
                     console.log("onChange", color, color.hex)
@@ -129,7 +149,7 @@ class ColorPanel extends React.Component{
             <article>
               <div style={popover}>
                 <div style={cover} onClick={this.onChangeComplete}/>
-                <SketchPicker
+                <MyColorPicker
                   color={secondary_color}
                   onChange={(color) => {
                     console.log("onChange", color, color.hex)
@@ -143,7 +163,7 @@ class ColorPanel extends React.Component{
             <article>
               <div style={popover}>
                 <div style={cover} onClick={this.onChangeComplete}/>
-                <SketchPicker
+                <MyColorPicker
                   color={tertiary_color}
                   onChange={(color) => {
                     console.log("onChange", color, color.hex)

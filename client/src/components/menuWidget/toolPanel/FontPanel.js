@@ -171,7 +171,7 @@ class FontPanel extends React.Component{
       value,
       onChange: this.onAutosuggestChange
     }
-
+    console.log(primary_font)
     if(allFonts.length > 0){
       return (
         <section className="font-panel tool-panel-element">

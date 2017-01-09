@@ -99,7 +99,7 @@ function mapStateToProps(state, ownProps){
   return {
     structure: state.structure,
     sections: state.sections,
-    section_types: [...state.section_types.custom, ...state.section_types.template],
+    section_types: state.section_types.custom ? [...state.section_types.custom, ...state.section_types.template] : state.section_types,
     zoom: state.zoom,
     colors: state.colors,
     fontFamilies: state.fontFamilies
