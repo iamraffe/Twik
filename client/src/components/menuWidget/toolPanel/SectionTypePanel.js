@@ -209,11 +209,27 @@ class SectionTypePanel extends React.Component{
             })}
             {connectDragSource(
               <div className="section-preview" style={{cursor: 'move', marginTop: 25, overflowX: 'hidden'}}>
-                {sectionStyle.structure && _.map(sectionStyle.structure.elements, (element, i) => {
+                {!sectionStyle.structure.inline && _.map(sectionStyle.structure.elements, (element, i) => {
                   return (
                     <p key={i} style={{...this.getStyles(element.styles)}}>Lorem Ipsum</p>
                   )
                 })}
+                {sectionStyle.structure.inline && 
+                  <p>
+                    {_.map(sectionStyle.structure.elements, (element, i) => {
+                      if(element.type === 'ELEMENT_SEPARATOR'){
+                        return (
+                          <span key={i} style={{...this.getStyles(element.styles)}}>{element.text}</span>
+                        )
+                      }
+                      else{
+                        return (
+                          <span key={i} style={{...this.getStyles(element.styles)}}>Lorem Ipsum</span>
+                        )
+                      }
+                    })}
+                  </p>
+                }
               </div>
             )}
           </section>

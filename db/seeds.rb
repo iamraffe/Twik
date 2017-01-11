@@ -283,3 +283,234 @@ Template.create({
   ]
 }
 })
+## AGAIN FOR BUFALINA TEMPLATE
+
+section_title_id = SecureRandom.uuid
+dish_title_id = SecureRandom.uuid
+dish_description_id = SecureRandom.uuid
+dish_price_id = SecureRandom.uuid
+beverage_title_id = SecureRandom.uuid
+beverage_description_id = SecureRandom.uuid
+beverage_price_id = SecureRandom.uuid
+category_title_id = SecureRandom.uuid
+category_dishes_id = SecureRandom.uuid
+
+# template_other
+col_1_id = SecureRandom.uuid
+col_2_id = SecureRandom.uuid
+col_3_id = SecureRandom.uuid
+
+Template.create({
+  name: "Bufalina",
+  canon: true,
+  ext: SecureRandom.uuid,
+  structure: {
+  id: SecureRandom.uuid,
+  colors: {
+    primary_color: 'black',
+    secondary_color: '',
+    tertiary_color: '',
+    quaternary_color: '',
+    quinary_color: ''
+  },
+  fontFamilies: {
+    primary_font: {
+      fontFamily: 'Pea Mystie',
+      fontWeight: '200',
+      fontStyle: 'normal',
+      textTransform: 'uppercase'
+    },
+    secondary_font: {
+      fontFamily: 'Avenir Next Condensed',
+      fontWeight: '400',
+      fontStyle: 'normal',
+      textTransform: 'lowercase'
+    },
+    alternate_font: {
+      fontFamily: 'Avenir Next Condensed Demi',
+      fontWeight: '600',
+      fontStyle: 'normal',
+      textTransform: 'lowercase'
+    }
+  },
+  styles: [
+    {
+      id: section_title_id,
+      name: 'section_title',
+      fontFamily: 'primary_font',
+      color: 'primary_color',
+      extra: {
+        fontSize: 14.86,
+        textDecoration: 'none',
+      }
+    },
+    {
+      id: dish_title_id,
+      name: 'dish_title',
+      fontFamily: 'alternate_font',
+      color: 'primary_color',
+      extra: {
+        fontSize: 12.36,
+        textDecoration: 'none',
+      }
+    },
+    {
+      id: dish_description_id,
+      name: 'dish_description',
+      fontFamily: 'secondary_font',
+      color: 'primary_color',
+      extra: {
+        fontSize: 12.36,
+        textDecoration: 'none',
+      }
+    },
+    {
+      id: dish_price_id,
+      name: 'dish_price',
+      fontFamily: 'alternate_font',
+      color: 'primary_color',
+      extra: {
+        fontSize: 12.36,
+        textDecoration: 'none',
+      }
+    }
+  ],
+  section_types: [
+    {
+      name: "Menu Title",
+      id: menu_title_section_id,
+      structure: {
+        type: "MENU_TITLE",
+        elements: [
+          {
+            styles: menu_title_id,
+            text: ''
+          }
+        ]
+      }
+    },
+    {
+      name: "Category Title",
+      id: category_title_id,
+      structure: {
+        type: "SECTION_TITLE",
+        elements: [
+          {             
+            styles: section_title_id,
+            text: ''
+          }
+        ]
+      }
+    },
+    {
+      name: "Category Dishes",
+      id: category_dishes_id,
+      structure: {
+        type: "SECTION_ELEMENT",
+        inline: true,
+        elements: [
+          {
+            type: "DISH_TITLE",
+            text: '',
+            styles: dish_title_id
+          },
+          {
+            type: "ELEMENT_SEPARATOR",
+            text: '-',
+            styles: dish_description_id
+          },
+          {
+            type: "DISH_DESCRIPTION",
+            text: '',
+            styles: dish_description_id
+          },
+          {
+            type: "ELEMENT_SEPARATOR",
+            text: '...',
+            styles: dish_description_id
+          },
+          {
+            type: "DISH_PRICE",
+            text: '',
+            styles: dish_price_id
+          }
+        ]
+      }
+    }
+  ],
+  layouts: [
+    {
+      id: SecureRandom.uuid,
+      name: "TWO_COLUMNS",
+      structure: [
+        {
+          type: 'CONTAINER',
+          position: 0,
+          background: '',
+          span: 0.5,
+          paddingTop: 15,
+          paddingBottom: 15,
+          paddingLeft: 15,
+          paddingRight: 15,
+          id: SecureRandom.uuid,
+          elements: [
+            {
+              type: "ROW",
+              position: 0,
+              id: SecureRandom.uuid,
+              vertical: 'top',
+              elements: [
+                {
+                  type: "COLUMN",
+                  span: 1,
+                  id: col_1_id,
+                  position: 0,
+                  elements: [
+                  ]
+                },
+                {
+                  type: "COLUMN",
+                  span: 1,
+                  id: SecureRandom.uuid,
+                  position: 0,
+                  elements: [
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          type: 'CONTAINER',
+          position: 0,
+          background: '',
+          span: 0.5,
+          paddingTop: 15,
+          paddingBottom: 15,
+          paddingLeft: 15,
+          paddingRight: 15,
+          id: SecureRandom.uuid,
+          elements: [
+            {
+              type: "ROW",
+              position: 0,
+              id: SecureRandom.uuid,
+              vertical: 'top',
+              elements: [
+                {
+                  type: "COLUMN",
+                  span: 1,
+                  id: col_2_id,
+                  position: 0,
+                  elements: [
+                  ]
+                },
+              ]
+            }
+          ]
+        },
+      ]
+    }
+  ]
+}
+})
