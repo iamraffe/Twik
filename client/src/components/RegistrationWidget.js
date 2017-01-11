@@ -82,7 +82,7 @@ class RegistrationWidget extends React.Component{
 
     return(
       <div>
-        <div className="sign-up-form col-md-8">
+        <div className="sign-up-form col-md-10">
           <form onSubmit={this.onSignUp}>
             <div className="row form-group">
               <div className="col-xs-12">
@@ -93,11 +93,13 @@ class RegistrationWidget extends React.Component{
               </div>
             </div>
             <div className="row form-group">
-              <div className="col-xs-9">
-                <input type="email" placeholder="email" name="email" className="form-control" />
-              </div>
-              <div className="col-xs-3">
-                <button className="btn btn-primary btn-small" disabled={!canSubmit}>Sign Up</button>
+              <div className="col-xs-12">
+                <div className="input-group email-group">
+                  <input type="email" placeholder="email" name="email" className="form-control" />
+                  <div className="input-group-addon text-primary">
+                    <button className="btn btn-primary btn-large signup-button" disabled={!canSubmit}>Sign Up</button>
+                  </div>
+                </div>
               </div>
             </div>
           </form>
