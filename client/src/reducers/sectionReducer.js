@@ -12,6 +12,8 @@ export default function sectionReducer(state = initialState.sections, action){
         ...state,
         action.section
       ]
+    case types.LOAD_SECTIONS:
+      return action.sections
     case types.ADD_MENU_ELEMENT:
       sectionIndex = _.findIndex(state, (s) => {return s.id === action.sectionId})
       // console.log(sectionIndex, action, state)

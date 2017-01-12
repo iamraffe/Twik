@@ -1,8 +1,11 @@
 import * as types from './actionTypes'
 
 export function addSection(section){
-  console.log(section)
   return { type: types.ADD_SECTION, section }
+}
+
+export function loadSections(sections){
+  return { type: types.LOAD_SECTIONS, sections }
 }
 
 export function addMenuElement(element, sectionId){

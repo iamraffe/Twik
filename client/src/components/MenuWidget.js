@@ -8,6 +8,7 @@ import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
 import * as metaActions from '../actions/metaActions'
+import * as sectionActions from '../actions/sectionActions'
 
 import { ToolPanel, Canvas, MetaWidget } from './menuWidget'
 
@@ -28,6 +29,7 @@ class MenuWidget extends React.Component{
   componentDidMount(){
     const { mode, menu } = this.props
     if(mode === 'edit'){
+      this.props.sectionActions.loadSections(JSON.parse(menu.object.sections))
       this.props.metaActions.setMetaInfo({
         ...JSON.parse(menu.object.meta),
         template: JSON.stringify(menu.template),
@@ -129,7 +131,8 @@ function mapStateToProps(state, ownProps){
 
 function mapDispatchToProps(dispatch){
   return {
-    metaActions: bindActionCreators(metaActions, dispatch)
+    metaActions: bindActionCreators(metaActions, dispatch),
+    sectionActions: bindActionCreators(sectionActions, dispatch)
   }
 }
 
