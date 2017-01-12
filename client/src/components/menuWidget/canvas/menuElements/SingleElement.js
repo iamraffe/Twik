@@ -66,6 +66,7 @@ class SingleElement extends React.Component{
           <InlineEditor
             content={text === '' ? 'Lorem Ipsum' : text}
             styles={styles}
+            inline={false}
             onChange={this.editText}
             onKeyDown={this.toggleEditText}
             fastMode={false}

@@ -104,6 +104,7 @@ class CompoundElement extends React.Component{
                   <InlineEditor
                     content={e.text === '' ? '<span>Lorem Ipsum</span>' : e.text}
                     styles={e.styles}
+                    inline={true}
                     onChange={(text) => {this.editText(text, i)}}
                     onKeyDown={this.toggleEditText}
                     fastMode={false}
@@ -140,6 +141,7 @@ class CompoundElement extends React.Component{
                   <InlineEditor
                     content={e.text === '' ? '<p>Lorem Ipsum</p>' : e.text}
                     styles={e.styles}
+                    inline={false}
                     onChange={(text) => {this.editText(text, i)}}
                     onKeyDown={this.toggleEditText}
                     fastMode={false}

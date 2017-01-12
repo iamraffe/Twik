@@ -2,6 +2,7 @@ import { Editor, EditorState, RichUtils, ContentState, convertFromRaw } from 'dr
 import React from 'react'
 import { stateToHTML } from 'draft-js-export-html'
 import { stateFromHTML } from 'draft-js-import-html'
+import onClickOutside from 'react-onclickoutside'
 
 class InlineEditor extends React.Component {
   constructor(props) {
@@ -19,14 +20,25 @@ class InlineEditor extends React.Component {
   
   _onTab(e) {
     e.preventDefault()
+    // console.log(stateToHTML(this.state.editorState.getCurrentContent()))
+    // debugger;
     this.onSaveContent()
   }
 
   onSaveContent = () => {
     const { editorState } = this.state
     // console.log(stateToHTML(editorState.getCurrentContent()))
-    this.props.onChange(stateToHTML(editorState.getCurrentContent()))
+    let htmlContent = stateToHTML(editorState.getCurrentContent())
+    htmlContent = _.replace(htmlContent,new RegExp("<p>","g"),"<span>")
+    htmlContent = _.replace(htmlContent,new RegExp("</p>","g"),"</span>")
+    // console.log(htmlContent)
+    // debugger;
+    this.props.onChange(htmlContent)
     this.props.onKeyDown()
+  }
+
+  handleClickOutside() {
+    this.onSaveContent()
   }
 
   render() {
@@ -40,7 +52,7 @@ class InlineEditor extends React.Component {
     }
 
     return (
-      <section className="RichEditor-root" style={{marginBottom: 15}}>
+      <section className={`RichEditor-root ${this.props.inline}`}>
         <div className={`${className}`} onClick={this.focus} style={this.props.styles}>
           <Editor
             editorState={editorState}
@@ -55,4 +67,4 @@ class InlineEditor extends React.Component {
   }
 }
 
-export default InlineEditor
+export default onClickOutside(InlineEditor)

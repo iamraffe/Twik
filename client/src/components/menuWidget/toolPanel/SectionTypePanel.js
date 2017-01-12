@@ -119,10 +119,10 @@ class SectionTypePanel extends React.Component{
           <section style={{marginTop: 15}}>
             {_.map(sectionStyle.structure.elements, (element, i) => {
               let styles = this.getStyles(element.styles)
-              console.log(sectionStyle, element, styles)
+              // console.log(sectionStyle, element, styles)
               // debugger;
               return (
-                <div key={i} className="style-item" style={{overflowX: 'hidden'}}>
+                <div key={i} className="style-item hide" style={{overflowX: 'hidden'}}>
                   {editing === element.styles &&
                     <div className="style-editor row">
                       <div className="col-xs-4" style={{minWidth: 52.5, display: 'block', margin: '3.5px auto'}}>
