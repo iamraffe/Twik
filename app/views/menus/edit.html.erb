@@ -1,3 +1,3 @@
-<div><%= client("TwikWidget", 'tw', {is_creator: policy(:menu).is_creative?, background: @menu.background, editor: true, workspaceId: @menu.id, comment: @comments, width: @menu.width, height: @menu.height, menu: @menu}) %></div>
-
-
+<div>
+  <%= client("MenuWidget", 'tw', {editor: true, menu: {object: @menu, restaurant: @menu.society, template: @template}, mode: 'edit'}) %>
+</div>

@@ -21,11 +21,11 @@ export default function metaReducer(state = initialState.meta, action){
       // debugger;
       return {
         ...state,
-        title: action.menu_name,
-        orientation: action.paper_usage.split('__')[0],
-        layout: action.paper_usage.split('__')[1],
-        size: action.paper_size,
-        name: action.menu_name,
+        title: action.name,
+        orientation: action.orientation,
+        layout: action.layout,
+        size: action.size,
+        name: action.name,
         society: action.society
       }
     default:

@@ -21,12 +21,20 @@ class MenuWidget extends React.Component{
       meta: props.meta,
       sections: props.sections,
       template: props.template,
-      step: 'meta'
+      step: props.mode === 'edit' ? 'loading' : 'meta'
     }
   }
 
   componentDidMount(){
-
+    const { mode, menu } = this.props
+    if(mode === 'edit'){
+      this.props.metaActions.setMetaInfo({
+        ...JSON.parse(menu.object.meta),
+        template: JSON.stringify(menu.template),
+        society: _.omit(menu.restaurant, ['created_at', 'updated_at']),
+      })
+      this.onSetStep('widget')
+    }
   }
 
   loadFonts = () => {
@@ -69,13 +77,15 @@ class MenuWidget extends React.Component{
 
   onSave = (e) => {
     const { meta, sections, template } = this.state 
-    console.log("on save", meta)
+    // console.log("on save", meta)
     this.props.metaActions.saveMenu({
       ..._.omit(meta, ['editor',  'society']),
       meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
       sections: JSON.stringify(sections),
       template_id: template.id
-    }, meta.society)
+    },
+    meta.society,
+    document.getElementById('entry-point').innerHTML)
   }
 
   render(){
@@ -97,6 +107,7 @@ class MenuWidget extends React.Component{
             </div>
           </div>
         }
+        {step === 'loading' && <div>Loading...</div>}
       </div>
     )
   }

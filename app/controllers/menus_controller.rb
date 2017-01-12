@@ -1,4 +1,5 @@
 class MenusController < ApplicationController
+  # before_filter :html_preview_to_png, :only => [:create, :update]
 
   def index
     @menus = Menu.all
@@ -16,7 +17,17 @@ class MenusController < ApplicationController
     end
     # authorize Menu
     @menu = Menu.create(menu_params)
-    @menu.update_attributes(society_id: @society.id)
+    # @menu.update_attributes(society_id: @society.id)
+
+   Tempfile.open(["#{@menu.name.parameterize}-#{Time.now.to_i}" , ".png"] , Rails.root.join('tmp')) do |f|
+     # f.binmode
+     f << html_preview_to_png.force_encoding("UTF-8")
+     @menu.preview = f
+     @menu.society_id = @society.id
+     @menu.subdomain = current_user.subdomain
+     @menu.save
+   end
+
     # byebug
     render json: @menu
   end
@@ -34,7 +45,7 @@ class MenusController < ApplicationController
   def update
     @menu = Menu.find(params[:id])
     @menu.update_attributes(menu_params)
-    @menu
+    # @menu
   end
 
   def destroy
@@ -61,6 +72,13 @@ class MenusController < ApplicationController
   end
 
   private
+    def html_preview_to_png
+      kit = IMGKit.new(params[:preview], width: 612, height: 792)
+      # kit.stylesheets << "#{Rails.root}/public/assets/application.scss"
+      # kit.javascripts << "#{Rails.root}/public/assets/application.js"
+      kit.to_img(:png)
+    end
+
     def menu_params
       params.required(:menu).permit(:name, :orientation, :template_id, :layout, :size, :title, :meta, :sections)
     end
