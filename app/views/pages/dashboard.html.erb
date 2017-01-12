@@ -1,56 +1,105 @@
-<section class="dashboard fresh-user">
-  <div class="row">
-    <header class="col-md-2 col-md-offset-2 left-dashboard">
-      <div class="row">
-        <div class="col-xs-12">
-          <button class="btn btn-primary btn-square">
-            Upload<br>Photo
-          </button>
+<% if @menus.count > 0 %>
+  <section class="dashboard">
+    <div class="row">
+      <header class="col-md-2 col-md-offset-2 left-dashboard">
+        <div class="row">
+          <div class="col-xs-12">
+            <button class="btn btn-primary btn-square">
+              Upload<br>Photo
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="action-items col-xs-12 border-bottom">
-        <h1>Welcome back!</h1>
-      </div>
-      <div class="action-items col-xs-12 border-bottom">
-        <span><%= current_user.name.nil? ? "Name" : current_user.name %></span>
-        <a href="/users/<%= current_user.id %>">
-          <span class="align-right ion ion-ios-compose-outline"></span>
-        </a>
-        <% if current_user.name.nil? %>
-          <span class="ion ion-android-alert text-primary"></span>
-        <% end %>
-      </div>
-      <div class="action-items col-xs-12 border-bottom">
-        <a href="/archive" class="btn-link text-default">Template Archive</a>
-      </div>
-      <div class="action-items col-xs-12 border-bottom">
-        <a href="/users/<%= current_user.id %>" class="btn-link text-default">My Account</a>
-      </div>
-      <div class="action-items col-xs-12">
-        <a href="/menus/new" class="btn btn-primary btn-med">Create New</a>
-      </div>
-    </header>
-    <section class="actions right-dashboard col-md-5 col-md-offset-1">
-      <header class="row border-bottom">
-        <h1>Welcome!</h1>
-        <h2>Let's get started.</h2>
-        <h3>What would you like to do?</h3>
+        <div class="action-items col-xs-12 border-bottom">
+          <h1>Welcome back!</h1>
+        </div>
+        <div class="action-items col-xs-12 border-bottom">
+          <span><%= current_user.name.nil? ? "Name" : current_user.name %></span>
+          <a href="/users/<%= current_user.id %>">
+            <span class="align-right ion ion-ios-compose-outline"></span>
+          </a>
+          <% if current_user.name.nil? %>
+            <span class="ion ion-android-alert text-primary"></span>
+          <% end %>
+        </div>
+        <div class="action-items col-xs-12 border-bottom">
+          <a href="/archive" class="btn-link text-default">Template Archive</a>
+        </div>
+        <div class="action-items col-xs-12 border-bottom">
+          <a href="/users/<%= current_user.id %>" class="btn-link text-default">My Account</a>
+        </div>
+        <div class="action-items col-xs-12">
+          <a href="/menus/new" class="btn btn-primary btn-med hide">Create New</a>
+        </div>
       </header>
-      <div class="action-items row border-bottom">
-        <div class="col-xs-12">
-          <a  href="/menus/new" class="btn-link text-primary">Create New Template</a>
+      <section class="actions right-dashboard col-md-5 col-md-offset-1">
+        <header>
+          <h1>Menus</h1>
+        </header>
+        <ul class="list-unstyled">
+          <% @menus.each do |menu| %>
+            <li>
+              <%= menu.name %>
+            </li>
+          <% end %>
+        </ul>
+      </section>
+    </div>
+  </section>
+<% else %>
+  <section class="dashboard fresh-user">
+    <div class="row">
+      <header class="col-md-2 col-md-offset-2 left-dashboard">
+        <div class="row">
+          <div class="col-xs-12">
+            <button class="btn btn-primary btn-square">
+              Upload<br>Photo
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="action-items row border-bottom">
-        <div class="col-xs-12">
-          <a href="/users/<%= current_user.id %>" class="btn-link text-primary">Complete My Profile</a>
+        <div class="action-items col-xs-12 border-bottom">
+          <h1>Welcome back!</h1>
         </div>
-      </div>
-      <div class="action-items row border-bottom">
-        <div class="col-xs-12">
-          <a href="/users" class="btn-link text-primary">Add Team Member</a>
+        <div class="action-items col-xs-12 border-bottom">
+          <span><%= current_user.name.nil? ? "Name" : current_user.name %></span>
+          <a href="/users/<%= current_user.id %>">
+            <span class="align-right ion ion-ios-compose-outline"></span>
+          </a>
+          <% if current_user.name.nil? %>
+            <span class="ion ion-android-alert text-primary"></span>
+          <% end %>
         </div>
-      </div>
-    </section>
-  </div>
-</section>
+        <div class="action-items col-xs-12 border-bottom">
+          <a href="/archive" class="btn-link text-default">Template Archive</a>
+        </div>
+        <div class="action-items col-xs-12 border-bottom">
+          <a href="/users/<%= current_user.id %>" class="btn-link text-default">My Account</a>
+        </div>
+        <div class="action-items col-xs-12">
+          <a href="/menus/new" class="btn btn-primary btn-med">Create New</a>
+        </div>
+      </header>
+      <section class="actions right-dashboard col-md-5 col-md-offset-1">
+        <header class="row border-bottom">
+          <h1>Welcome!</h1>
+          <h2>Let's get started.</h2>
+          <h3>What would you like to do?</h3>
+        </header>
+        <div class="action-items row border-bottom">
+          <div class="col-xs-12">
+            <a  href="/menus/new" class="btn-link text-primary">Create New Template</a>
+          </div>
+        </div>
+        <div class="action-items row border-bottom">
+          <div class="col-xs-12">
+            <a href="/users/<%= current_user.id %>" class="btn-link text-primary">Complete My Profile</a>
+          </div>
+        </div>
+        <div class="action-items row border-bottom">
+          <div class="col-xs-12">
+            <a href="/users" class="btn-link text-primary">Add Team Member</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+<% end %>
