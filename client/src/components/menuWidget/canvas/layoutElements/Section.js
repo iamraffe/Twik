@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import uuid from 'node-uuid'
 
 import * as sectionActions from '../../../../actions/sectionActions'
 
@@ -49,7 +50,7 @@ class Section extends React.Component{
     // console.log(section_types, section_types[sectionIndex], sectionIndex)
     // debugger;
     // console.log(this.props, sectionIndex, sections[sectionIndex], sections[sectionIndex].structure)
-    this.props.sectionActions.addMenuElement({...section_types[sectionIndex].structure, position: elements.length}, id)
+    this.props.sectionActions.addMenuElement({...section_types[sectionIndex].structure, position: elements.length, id: uuid.v4()}, id)
   }
 
   onUpdateMenuElement = (element) => {

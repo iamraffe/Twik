@@ -29,6 +29,7 @@ const sectionSource = {
         columnId: dropResult.columnId,
         elements: [{
           ...structure,
+          id: uuid.v4(),
           position: 0
         }]
       }
@@ -96,7 +97,7 @@ class SectionTypePanel extends React.Component{
   render(){
     const { section_types, sectionStyle, newSection, colors, fontFamilies, editing } = this.state
     const { isDragging, connectDragSource, connectDragPreview } = this.props
-    console.log("rerender")
+    // console.log("rerender")
     return(
       <section className="section-panel tool-panel-element">
         <header>

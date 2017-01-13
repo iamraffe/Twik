@@ -112,7 +112,7 @@ class Column extends React.Component{
           )
         })}
         {sections.length === 0 &&
-          <p style={{fontFamily: 'Open Sans', fontWeight: 200, fontSize: 12, textAlign: 'center', margin: 5, color: '#310100', border: '1px dashed #f6303e', padding: 5}}>Use the sidebar menu to add sections to this column</p>
+          <p className="hide-on-export" style={{fontFamily: 'Open Sans', fontWeight: 200, fontSize: 12, textAlign: 'center', margin: 5, color: '#310100', border: '1px dashed #f6303e', padding: 5}}>Use the sidebar menu to add sections to this column</p>
         }
       </div>
     )

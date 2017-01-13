@@ -20,7 +20,8 @@ Rails.application.routes.draw do
     resources :subscriptions, only: [:new, :create]
     resources :images
     resources :societies
-    post '/export', to: "menus#export"
+
+    post '/menus/export', to: "menus#export"
 
     patch '/users/:id/update-payment-method', to: "users#update_payment_method", as: :update_user_payment
 
@@ -33,9 +34,6 @@ Rails.application.routes.draw do
     resources :menus do
       post "/export", to: "menus#export"
       resources :uploads
-      resources :comments do
-        put 'upvote', to: 'comments#upvote'
-      end
     end
   end
 

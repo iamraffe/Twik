@@ -7,7 +7,7 @@ import InlineEditor from '../../common/InlineEditor'
 class CompoundElement extends React.Component{
   constructor(props){
     super(props)
-    // console.log(props.elements)
+    console.log("compound elements", props)
     // debugger;
     this.state = {
       editing: 'none',
@@ -52,6 +52,7 @@ class CompoundElement extends React.Component{
       id: this.props.id,
       type: this.props.type,
       position: this.props.position,
+      inlind: this.props.inline,
       elements: [
         ...this.props.elements.slice(0, index),
         {
