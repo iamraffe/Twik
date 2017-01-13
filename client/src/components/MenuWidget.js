@@ -42,12 +42,6 @@ class MenuWidget extends React.Component{
   loadFonts = () => {
     const { fontFamilies } = this.state
 
-    // WebFont.load({
-    //   google: {
-    //     families: _.map(fontFamilies, (f) => {return f})
-    //   },
-    // })
-
     WebFont.load({
       google: {
         families: _.map(fontFamilies, (f) => {
@@ -83,15 +77,8 @@ class MenuWidget extends React.Component{
     let preview
     canvas.parentElement.style.height = 'auto'
     html2canvas(canvas).then((render) => {
-      // console.log(preview, render, canvas)
       preview = render.toDataURL()
-      // console.log(preview, render, canvas)
       canvas.parentElement.style.height = '650px'
-      // canvas.appendChild(canvas)
-        // document.getElementById('entry-point').appendChild(canvas)
-      console.log(preview, canvas)
-      debugger;
-      // console.log("on save", meta)
       this.props.metaActions.saveMenu({
         ..._.omit(meta, ['editor',  'society']),
         meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
@@ -103,35 +90,49 @@ class MenuWidget extends React.Component{
     })
   }
 
+  onUpdate = (e) => {
+    const { meta, sections, template } = this.state 
+    const { menu } = this.props
+    let canvas = document.getElementById('entry-point')
+    let preview
+    canvas.parentElement.style.height = 'auto'
+    html2canvas(canvas).then((render) => {
+      preview = render.toDataURL()
+      canvas.parentElement.style.height = '650px'
+      this.props.metaActions.updateMenu({
+        ..._.omit(meta, ['editor',  'society']),
+        meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
+        sections: JSON.stringify(sections),
+        template_id: template.id
+      },
+      meta.society,
+      preview,
+      menu.object)
+    })
+  }
+
   render(){
     const { structure, meta, step } = this.state
     const { templates, mode } = this.props
 
-    if(mode !== 'preview'){
-      return(
-        <div>
-          {step === 'meta' &&
-            <MetaWidget templates={templates} onSetStep={this.onSetStep} />
-          }
-          {step === 'widget' &&
-            <div className="row">
-              <div className={meta.orientation === 'landscape' ? `col-xs-10` : `col-xs-7 col-xs-offset-3`}>
-                <Canvas />
-              </div>
-              <div className="col-xs-2">
-                {this.props.editor && <ToolPanel logo={this.props.robotLogo} onSave={this.onSave}/>}
-              </div>
+    return(
+      <div>
+        {step === 'meta' &&
+          <MetaWidget templates={templates} onSetStep={this.onSetStep} />
+        }
+        {step === 'widget' &&
+          <div className="row">
+            <div className={meta.orientation === 'landscape' ? `col-xs-10` : `col-xs-7 col-xs-offset-3`}>
+              <Canvas />
             </div>
-          }
-          {step === 'loading' && <div>Loading...</div>}
-        </div>
-      )
-    }
-    else{
-      return(
-        <Canvas />
-      )
-    }
+            <div className="col-xs-2">
+              {this.props.editor && <ToolPanel mode={mode} onUpdate={this.onUpdate} onSave={this.onSave}/>}
+            </div>
+          </div>
+        }
+        {step === 'loading' && <div>Loading...</div>}
+      </div>
+    )
   }
 }
 

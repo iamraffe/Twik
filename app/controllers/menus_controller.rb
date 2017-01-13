@@ -23,8 +23,6 @@ class MenusController < ApplicationController
       @menu.subdomain = current_user.subdomain
       @menu.save
     end
-
-    # byebug
     render json: @menu
   end
 
@@ -40,8 +38,13 @@ class MenusController < ApplicationController
 
   def update
     @menu = Menu.find(params[:id])
-    @menu.update_attributes(menu_params)
-    # @menu
+    @menu.assign_attributes(menu_params)
+    Tempfile.open(["#{@menu.name.parameterize}-#{Time.now.to_i}" , ".png"] , Rails.root.join('tmp')) do |f|
+      f << Base64.decode64(params[:preview]['data:image/png;base64,'.length..-1]).force_encoding('UTF-8')
+      @menu.preview = f
+      @menu.save
+    end
+    render json: @menu
   end
 
   def destroy

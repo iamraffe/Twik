@@ -27,3 +27,17 @@ export function saveMenu(menu, society, preview){
     })
   }
 }
+
+export function updateMenu(menu, society, preview, object){
+  // console.log(menu, society, preview)
+  // debugger;
+  return dispatch => {
+    return API.put(`/menus/${object.id}`, {menu, society, preview}).then((menu) =>{
+      console.log(menu)
+      // dispatch(confirmChartSuccess(menu))
+    })
+    .catch((error) => {
+      throw(error)
+    })
+  }
+}
