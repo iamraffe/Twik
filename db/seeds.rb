@@ -32,6 +32,7 @@ if Apartment::Tenant.current == "public"
   beverage_price_id = SecureRandom.uuid
   category_title_id = SecureRandom.uuid
   category_dishes_id = SecureRandom.uuid
+  category_beverages_id = SecureRandom.uuid
 
   # template_other
   col_1_id = SecureRandom.uuid
@@ -116,8 +117,8 @@ if Apartment::Tenant.current == "public"
     ],
     section_types: [
       {
-        name: "Category Title",
-        id: category_title_id,
+        name: "Section Title",
+        id: SecureRandom.uuid,
         structure: {
           type: "SECTION_TITLE",
           elements: [
@@ -129,8 +130,8 @@ if Apartment::Tenant.current == "public"
         }
       },
       {
-        name: "Category Dishes",
-        id: category_dishes_id,
+        name: "Dishes & Beers",
+        id: SecureRandom.uuid,
         structure: {
           type: "SECTION_ELEMENT",
           inline: true,
@@ -157,6 +158,41 @@ if Apartment::Tenant.current == "public"
             },
             {
               type: "DISH_PRICE",
+              text: '',
+              styles: dish_price_id
+            }
+          ]
+        }
+      },
+      {
+        name: "Wines",
+        id: SecureRandom.uuid,
+        structure: {
+          type: "SECTION_ELEMENT",
+          inline: true,
+          elements: [
+            {
+              type: "WINE_DESCRIPTION",
+              text: '',
+              styles: dish_description_id
+            },     
+            {
+              type: "ELEMENT_SEPARATOR",
+              text: ' ',
+              styles: dish_description_id
+            },       
+            {
+              type: "WINE_TITLE",
+              text: '',
+              styles: dish_title_id
+            },
+            {
+              type: "ELEMENT_SEPARATOR",
+              text: '... ',
+              styles: dish_description_id
+            },
+            {
+              type: "WINE_PRICE",
               text: '',
               styles: dish_price_id
             }
@@ -193,6 +229,14 @@ if Apartment::Tenant.current == "public"
                     position: 0,
                     accepts: ['img'],
                     elements: [
+                      {
+                        type: "IMAGE_ELEMENT",
+                        url: 'http://bufalinadue.menustyler.com/img/bufalina-logo-greyscale.png',
+                        styles: {},
+                        hide: true,
+                        position: 0,
+                        id: SecureRandom.uuid,
+                      },
                     ],
                     styles: {
                       # marginTop: '2cm', #While there's no logo
