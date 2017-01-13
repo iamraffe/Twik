@@ -7,7 +7,7 @@ import InlineEditor from '../../common/InlineEditor'
 class CompoundElement extends React.Component{
   constructor(props){
     super(props)
-    console.log("compound elements", props)
+    // console.log("compound elements", props)
     // debugger;
     this.state = {
       editing: 'none',
@@ -47,18 +47,17 @@ class CompoundElement extends React.Component{
   }
 
   editText = (text, index) => {
-    // console.log(text, index, this.props, this.state)
     this.onUpdate({
       id: this.props.id,
       type: this.props.type,
       position: this.props.position,
-      inlind: this.props.inline,
+      inline: this.props.inline,
       elements: [
         ...this.props.elements.slice(0, index),
         {
-          styles: this.props.elements[index].styles,
           type: this.props.elements[index].type,
-          text: text
+          text: text,
+          styles: this.props.elements[index].styles,
         },
         ...this.props.elements.slice(index+1),
       ]
@@ -76,7 +75,8 @@ class CompoundElement extends React.Component{
     const { type, activeSection, inline } = this.props
     if(inline){
       return (
-        <article className={`${type} compound-element`}>
+        <article className={`${type} compound-element`} style={{position: 'relative'}}>
+          {activeSection && <span className="section-element-handle ion ion-ios-drag" style={{position: 'absolute', top: 4, left: -15, cursor: 'move'}}></span>}
           {_.map(elements, (e, i) => {
             return (
               <span key={i}>
@@ -86,7 +86,7 @@ class CompoundElement extends React.Component{
                       className={e.type}
                       style={e.styles}
                       dangerouslySetInnerHTML={{__html: (e.text === '' ? '<span>Lorem ipsum</span>' : `${e.text}`)}}
-                      onDoubleClick={() => {
+                      onClick={() => {
                         if(activeSection){
                           this.onToggleEditing(e.type)
                         }
@@ -119,7 +119,8 @@ class CompoundElement extends React.Component{
     }
     else{
       return (
-        <article className={`${type} compound-element`}>
+        <article className={`${type} compound-element`} style={{position: 'relative'}}>
+          {activeSection && <span className="section-element-handle ion ion-ios-drag" style={{position: 'absolute', top: 4, left: -15, cursor: 'move'}}></span>}
           {_.map(elements, (e, i) => {
             return (
               <span key={i}>
@@ -129,7 +130,7 @@ class CompoundElement extends React.Component{
                       className={e.type}
                       style={e.styles}
                       dangerouslySetInnerHTML={{__html: (e.text === '' ? '<p>Lorem ipsum</p>' : `${e.text}`)}}
-                      onDoubleClick={() => {
+                      onClick={() => {
                         if(activeSection){
                           this.onToggleEditing(e.type)
                         }

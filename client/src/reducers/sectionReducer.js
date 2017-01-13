@@ -28,6 +28,16 @@ export default function sectionReducer(state = initialState.sections, action){
         },
         ...state.slice(sectionIndex+1)
       ]
+    case types.UPDATE_SECTION:
+      sectionIndex = _.findIndex(state, (s) => {return s.id === action.sectionId})
+      return [
+        ...state.slice(0, sectionIndex),
+        {
+          ...state[sectionIndex],
+          ...action.section
+        },
+        ...state.slice(sectionIndex+1)
+      ]
     case types.UPDATE_MENU_ELEMENT:
       sectionIndex = _.findIndex(state, (s) => {return s.id === action.sectionId})
       elementIndex = _.findIndex(state[sectionIndex].elements, (e) => {return e.id === action.element.id})

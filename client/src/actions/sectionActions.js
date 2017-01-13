@@ -8,6 +8,10 @@ export function loadSections(sections){
   return { type: types.LOAD_SECTIONS, sections }
 }
 
+export function updateSection(sectionId, section){
+  return { type: types.UPDATE_SECTION, sectionId, section }
+}
+
 export function addMenuElement(element, sectionId){
   return { type: types.ADD_MENU_ELEMENT, element, sectionId }
 }

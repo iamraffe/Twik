@@ -80,6 +80,7 @@ if Apartment::Tenant.current == "public"
         extra: {
           fontSize: 14.86,
           textDecoration: 'none',
+          letterSpacing: 3.5
         }
       },
       {

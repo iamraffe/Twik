@@ -3,6 +3,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import uuid from 'node-uuid'
+import Sortable from 'react-sortablejs'
 
 import * as sectionActions from '../../../../actions/sectionActions'
 
@@ -74,23 +75,60 @@ class Section extends React.Component{
     return(
       <div
         className={`${hover && !activeSection ? 'section-hover' : '' } section-element`}
-        style={{position: 'relative'}}
+        style={{position: 'relative', marginBottom: 15}}
         onClick={(e) => {this.onSectionSelect(id)}}
       >
-        {hover && !activeSection && !active && <div className="section-overlay"></div>}
-        {_.map(elements, (element, i) => {
-          return (
-            <MenuElement
-              key={i}
-              {...element}
-              onUpdate={this.onUpdateMenuElement}
-              onDelete={this.onDeleteMenuElement}
-              getStyles={this.getStyles}
-              activeSection={active}
-            />
-          )
-        })}
+        <Sortable
+            options={{
+                animation: 150,
+                handle: '.section-element-handle',
+                // group: 'shared',
+                pull: true,
+                ghostClass: "sortable-ghost",
+                put: true,
+            }}
+            onChange={(order, sortable, evt) => {
+              console.log("order", order)
+              // console.log(_.map(order, (element, i) => {
+              //   let parsed = JSON.parse(element)
+              //   return {
+              //     ...parsed,
+              //     position: i
+              //   }
+              // }))
+              // debugger;
+              this.props.sectionActions.updateSection(
+                id,
+                {
+                  elements: _.map(order, (element, i) => {
+                    let parsed = JSON.parse(element)
+                    return {
+                      ...parsed,
+                      position: i
+                    }
+                  })
+                }
+              )
+            }}
+        >
+          {_.map(elements, (element, i) => {
+            console.log("section => ", element)
+            return (
+              <div key={i} data-id={JSON.stringify(element)}>
+                <MenuElement
+                  {...element}
+                  onUpdate={this.onUpdateMenuElement}
+                  onDelete={this.onDeleteMenuElement}
+                  getStyles={this.getStyles}
+                  activeSection={active}
+                />
+              </div>
+            )
+          })}
+          
+        </Sortable>
         {active && <span className="ion ion-ios-plus-outline" onClick={(e) => {this.onAddMenuElement(e)}}></span>}
+        {hover && !activeSection && !active && <div className="section-overlay"></div>}
       </div>
     )
   }

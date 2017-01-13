@@ -106,6 +106,10 @@ NEW & EDIT
   right: 0;
   cursor: pointer;
 }
+.sortable-ghost{
+  opacity: .5;
+  background: #bcbcbc;
+}
 
 .dropzone-wrapper{
   margin-top: 25px;
