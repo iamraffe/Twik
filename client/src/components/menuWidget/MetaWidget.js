@@ -94,6 +94,7 @@ class MetaWidget extends React.Component{
   }
 
   onSuggestionSelected = (event, { suggestion, suggestionValue, sectionIndex, method }) => {
+    console.log("selected", suggestion)
     this.setState({
       society: suggestion
     })

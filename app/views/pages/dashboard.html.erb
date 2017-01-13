@@ -32,17 +32,17 @@
         </div>
       </header>
       <section class="actions right-dashboard col-md-5 col-md-offset-1">
-        <header>
-          <h1>Menus</h1>
+        <header class="row">
+          <h1>Latest Menus</h1>
         </header>
-        <ul class="list-unstyled">
+        <div class="row">
           <% @menus.each do |menu| %>
-            <li>
-              <img src="<%= menu.preview.url(:thumb) %>" alt="<%= menu.name %>" class="img-responsive" style="border: 0.25px solid black">
+            <div class="col-sm-4">
+              <img src="<%= menu.preview.url(:thumb) %>" alt="<%= menu.name %>" class="img-responsive">
               <%= link_to menu.name, edit_menu_path(menu) %>
-            </li>
+            </div>
           <% end %>
-        </ul>
+        </div>
       </section>
     </div>
   </section>
