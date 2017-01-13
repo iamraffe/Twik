@@ -115,7 +115,7 @@ class MetaWidget extends React.Component{
       society: restaurant,
       ..._.omit(formData, ['paper_usage']),
       name: formData.menu_name,
-      size: formData.size,
+      size: formData.paper_size,
       orientation: formData.paper_usage.split('__')[0],
       layout: formData.paper_usage.split('__')[1],
     })

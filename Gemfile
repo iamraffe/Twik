@@ -53,6 +53,7 @@ gem 'capistrano-rails-console'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'devise-ios-rails', '1.0.2'
 gem 'active_model_serializers', '~> 0.9.0'
+gem 'rmagick'
 gem 'imgkit'
 # gem 'devise_token_auth'
 

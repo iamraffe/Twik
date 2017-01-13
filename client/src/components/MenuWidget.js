@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
-
+import html2canvas from 'html2canvas'
 import * as metaActions from '../actions/metaActions'
 import * as sectionActions from '../actions/sectionActions'
 
@@ -28,7 +28,7 @@ class MenuWidget extends React.Component{
 
   componentDidMount(){
     const { mode, menu } = this.props
-    if(mode === 'edit'){
+    if(mode === 'edit' || mode === 'preview'){
       this.props.sectionActions.loadSections(JSON.parse(menu.object.sections))
       this.props.metaActions.setMetaInfo({
         ...JSON.parse(menu.object.meta),
@@ -79,39 +79,59 @@ class MenuWidget extends React.Component{
 
   onSave = (e) => {
     const { meta, sections, template } = this.state 
-    // console.log("on save", meta)
-    this.props.metaActions.saveMenu({
-      ..._.omit(meta, ['editor',  'society']),
-      meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
-      sections: JSON.stringify(sections),
-      template_id: template.id
-    },
-    meta.society,
-    document.getElementById('entry-point').innerHTML)
+    let canvas = document.getElementById('entry-point')
+    let preview
+    canvas.parentElement.style.height = 'auto'
+    html2canvas(canvas).then((render) => {
+      // console.log(preview, render, canvas)
+      preview = render.toDataURL()
+      // console.log(preview, render, canvas)
+      canvas.parentElement.style.height = '650px'
+      // canvas.appendChild(canvas)
+        // document.getElementById('entry-point').appendChild(canvas)
+      console.log(preview, canvas)
+      debugger;
+      // console.log("on save", meta)
+      this.props.metaActions.saveMenu({
+        ..._.omit(meta, ['editor',  'society']),
+        meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
+        sections: JSON.stringify(sections),
+        template_id: template.id
+      },
+      meta.society,
+      preview)
+    })
   }
 
   render(){
     const { structure, meta, step } = this.state
-    const { templates } = this.props
+    const { templates, mode } = this.props
 
-    return(
-      <div>
-        {step === 'meta' &&
-          <MetaWidget templates={templates} onSetStep={this.onSetStep} />
-        }
-        {step === 'widget' &&
-          <div className="row">
-            <div className={meta.orientation === 'landscape' ? `col-xs-10` : `col-xs-7 col-xs-offset-3`}>
-              <Canvas />
+    if(mode !== 'preview'){
+      return(
+        <div>
+          {step === 'meta' &&
+            <MetaWidget templates={templates} onSetStep={this.onSetStep} />
+          }
+          {step === 'widget' &&
+            <div className="row">
+              <div className={meta.orientation === 'landscape' ? `col-xs-10` : `col-xs-7 col-xs-offset-3`}>
+                <Canvas />
+              </div>
+              <div className="col-xs-2">
+                {this.props.editor && <ToolPanel logo={this.props.robotLogo} onSave={this.onSave}/>}
+              </div>
             </div>
-            <div className="col-xs-2">
-              {this.props.editor && <ToolPanel logo={this.props.robotLogo} onSave={this.onSave}/>}
-            </div>
-          </div>
-        }
-        {step === 'loading' && <div>Loading...</div>}
-      </div>
-    )
+          }
+          {step === 'loading' && <div>Loading...</div>}
+        </div>
+      )
+    }
+    else{
+      return(
+        <Canvas />
+      )
+    }
   }
 }
 
