@@ -72,10 +72,10 @@ class LayoutElement extends React.Component{
           <div
             className="row-canvas"
             style={{
-              paddingTop: (this.props.paddingTop*this.props.zoom/100)+'pt',
-              paddingBottom: (this.props.paddingBottom*this.props.zoom/100)+'pt',
-              paddingLeft: (this.props.paddingLeft*this.props.zoom/100)+'pt',
-              paddingRight: (this.props.paddingRight*this.props.zoom/100)+'pt',
+              // paddingTop: (this.props.paddingTop*this.props.zoom/100)+'pt',
+              // paddingBottom: (this.props.paddingBottom*this.props.zoom/100)+'pt',
+              // paddingLeft: (this.props.paddingLeft*this.props.zoom/100)+'pt',
+              // paddingRight: (this.props.paddingRight*this.props.zoom/100)+'pt',
               border: 'none',
               width: '100%',
               alignSelf: this.props.vertical === 'bottom' ? 'flex-end' : 'flex-start'

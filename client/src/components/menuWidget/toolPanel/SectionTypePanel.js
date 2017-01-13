@@ -46,7 +46,7 @@ const sectionSource = {
   }
 }
 
-@DragSource('section-panel', sectionSource, (connect, monitor) => ({
+@DragSource('text', sectionSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging(),
   connectDragPreview: connect.dragPreview()

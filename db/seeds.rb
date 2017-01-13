@@ -189,21 +189,57 @@ if Apartment::Tenant.current == "public"
                   {
                     type: "COLUMN",
                     span: 1,
-                    id: col_1_id,
+                    id: SecureRandom.uuid,
                     position: 0,
+                    accepts: ['img'],
                     elements: [
-                    ]
+                    ],
+                    styles: {
+                      # marginTop: '2cm', #While there's no logo
+                      marginTop: '2.006cm',
+                      marginLeft: '1cm',
+                      marginBottom: '1.202cm'
+                    }
                   },
                   {
                     type: "COLUMN",
                     span: 1,
                     id: SecureRandom.uuid,
-                    position: 0,
+                    position: 1,
+                    accepts: ['text'],
                     elements: [
-                    ]
+                    ],
+                    styles: {
+                      # marginTop: '2cm', #While there's no logo
+                      # marginTop: '2.006cm',
+                      marginLeft: '1cm',
+                      # marginBottom: '1.202cm'
+                    }
                   }
                 ]
-              }
+              },
+              # {
+              #   type: "ROW",
+              #   position: 1,
+              #   id: SecureRandom.uuid,
+              #   vertical: 'top',
+              #   elements: [
+              #     {
+              #       type: "COLUMN",
+              #       span: 1,
+              #       id: SecureRandom.uuid,
+              #       position: 0,
+              #       accepts: ['text'],
+              #       elements: [
+              #       ],
+              #       styles: {
+              #         # marginTop: '2cm', #While there's no logo
+              #         # marginTop: '5.3cm',
+              #         marginLeft: '1cm'
+              #       }
+              #     }
+              #   ]
+              # }
             ]
           },
           {
@@ -228,9 +264,27 @@ if Apartment::Tenant.current == "public"
                     span: 1,
                     id: col_2_id,
                     position: 0,
+                    accepts: ['text'],
                     elements: [
-                    ]
+                    ],
+                    styles: {
+                      marginTop: '2.79cm',
+                      marginLeft: '1cm'
+                    }
                   },
+                  # {
+                  #   type: "COLUMN",
+                  #   span: 1,
+                  #   id: SecureRandom.uuid,
+                  #   position: 0,
+                  #   accepts: ['text'],
+                  #   elements: [
+                  #   ],
+                  #   styles: {
+                  #     marginTop: '2.79cm',
+                  #     marginLeft: '1cm'
+                  #   }
+                  # },
                 ]
               }
             ]

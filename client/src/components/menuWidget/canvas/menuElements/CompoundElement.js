@@ -76,7 +76,7 @@ class CompoundElement extends React.Component{
     if(inline){
       return (
         <article className={`${type} compound-element`} style={{position: 'relative'}}>
-          {activeSection && <span className="section-element-handle ion ion-ios-drag" style={{position: 'absolute', top: 4, left: -15, cursor: 'move'}}></span>}
+          {activeSection && <span className="section-element-handle ion ion-ios-drag" style={{position: 'absolute', top: 2.5, left: -15, cursor: 'move'}}></span>}
           {_.map(elements, (e, i) => {
             return (
               <span key={i}>
@@ -94,7 +94,7 @@ class CompoundElement extends React.Component{
                     />
                     {activeSection && (i%this.props.elements.length === 0 ) &&
                       <span
-                        style={{cursor: 'pointer', verticalAlign: '0px', float: 'right'}}
+                        style={{cursor: 'pointer', position: 'absolute', right: -20, top: 4}}
                         className="ion ion-ios-close-outline"
                         onClick={(e) => {this.onDelete(this.props.position)}}
                       />
@@ -119,8 +119,8 @@ class CompoundElement extends React.Component{
     }
     else{
       return (
-        <article className={`${type} compound-element`} style={{position: 'relative'}}>
-          {activeSection && <span className="section-element-handle ion ion-ios-drag" style={{position: 'absolute', top: 4, left: -15, cursor: 'move'}}></span>}
+        <article className={`${type} compound-element`} style={{position: 'relative', lineHeight: 1}}>
+          {activeSection && <span className="section-element-handle ion ion-ios-drag" style={{position: 'absolute', top: 2.5, left: -15, cursor: 'move'}}></span>}
           {_.map(elements, (e, i) => {
             return (
               <span key={i}>
@@ -136,7 +136,7 @@ class CompoundElement extends React.Component{
                         }
                       }}
                     />
-                    {activeSection && (i%this.props.elements.length === 0 )&&<span style={{cursor: 'pointer', verticalAlign: '0px', float: 'right'}} className="ion ion-ios-close-outline" onClick={(e) => {this.onDelete(this.props.position)}}></span>}
+                    {activeSection && (i%this.props.elements.length === 0 )&&<span style={{cursor: 'pointer', position: 'absolute', right: -20, top: 4}} className="ion ion-ios-close-outline" onClick={(e) => {this.onDelete(this.props.position)}}></span>}
                   </span>
                 }
                 {editing === e.type &&

@@ -24,7 +24,7 @@ const containerTarget = {
   }
 }
 
-@DropTarget(['section-panel'], containerTarget, (connect, monitor) => ({
+@DropTarget((props) => {return props.accepts}, containerTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop()
@@ -86,14 +86,14 @@ class Column extends React.Component{
   }
 
   render(){
-    const { type, canDrop, isOver, connectDropTarget } = this.props
+    const { type, canDrop, isOver, connectDropTarget, styles } = this.props
     const { sections } = this.state
     const isActive = canDrop && isOver
     const backgroundColor = isActive ? 'lightgreen' : '#FFF'
-    // console.log("re-render")
+    console.log("re-render", this.props.span, `calc(${(100*this.props.span)}%-${styles.marginLeft})`)
     return connectDropTarget(
       <div
-        style={{width: (100*this.props.span)+"%", backgroundColor, border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top'}}
+        style={{width: `calc(${(100*this.props.span)}%-${styles.marginLeft})`, backgroundColor, border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles}}
       >
         {_.map(sections, (element, i) => {
           return (

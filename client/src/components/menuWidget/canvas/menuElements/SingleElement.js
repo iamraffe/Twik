@@ -47,8 +47,8 @@ class SingleElement extends React.Component{
     const { type, activeSection } = this.props
     // console.log("SINGLE ELEMENT", text, styles)
     return (
-      <div className={`${type} single-element`} style={{position: 'relative'}}>
-        {activeSection && <span className="section-element-handle ion ion-ios-drag" style={{position: 'absolute', top: 4, left: -15, cursor: 'move'}}></span>}
+      <div className={`${type} single-element`} style={{position: 'relative', lineHeight: 1}}>
+        {activeSection && <span className="section-element-handle ion ion-ios-drag" style={{position: 'absolute', top: 2.5, left: -15, cursor: 'move'}}></span>}
         {!editing &&
           <span>
             <span
@@ -61,7 +61,7 @@ class SingleElement extends React.Component{
                 }
               }}
             />
-            {activeSection && <span style={{cursor: 'pointer', verticalAlign: '-2.5px', marginLeft: 7.5}} className="ion ion-ios-close-outline" onClick={(e) => {this.onDelete(this.props.position)}}></span>}
+            {activeSection && <span style={{cursor: 'pointer', position: 'absolute', right: -20, top: 4}} className="ion ion-ios-close-outline" onClick={(e) => {this.onDelete(this.props.position)}}></span>}
           </span>
         }
         {editing &&

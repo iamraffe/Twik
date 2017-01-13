@@ -127,7 +127,7 @@ class Section extends React.Component{
           })}
           
         </Sortable>
-        {active && <span className="ion ion-ios-plus-outline" onClick={(e) => {this.onAddMenuElement(e)}}></span>}
+        {active && <span className="ion ion-ios-plus-outline" style={{cursor: 'pointer', position: 'absolute', bottom: -25, left: -2.5}} onClick={(e) => {this.onAddMenuElement(e)}}></span>}
         {hover && !activeSection && !active && <div className="section-overlay"></div>}
       </div>
     )
