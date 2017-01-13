@@ -89,7 +89,7 @@ class Column extends React.Component{
     const { type, canDrop, isOver, connectDropTarget, styles } = this.props
     const { sections } = this.state
     const isActive = canDrop && isOver
-    const backgroundColor = isActive ? 'lightgreen' : '#FFF'
+    const backgroundColor = isActive ? 'rgba(192,192,192,0.3)' : '#FFF'
     console.log("re-render", this.props.span, `calc(${(100*this.props.span)}%-${styles.marginLeft})`)
     return connectDropTarget(
       <div
