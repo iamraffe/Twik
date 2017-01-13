@@ -1,4 +1,4 @@
-<% if @menus.count > 0 %>
+<% if @grouped_menus.count > 0 %>
   <section class="dashboard">
     <div class="row">
       <header class="col-md-2 col-md-offset-2 left-dashboard">
@@ -36,10 +36,12 @@
           <h1>Latest Menus</h1>
         </header>
         <div class="row">
-          <% @menus.each do |menu| %>
+          <% @templates.each do |template| %>
             <div class="col-sm-4">
-              <img src="<%= menu.preview.url(:thumb) %>" alt="<%= menu.name %>" class="img-responsive">
-              <%= link_to menu.name, edit_menu_path(menu) %>
+              <img src="<%= @grouped_menus[template.id].first.preview.url(:thumb) %>" alt="<%= @grouped_menus[template.id].first.name %>" class="img-responsive">
+              <%= link_to @grouped_menus[template.id].first.name, edit_menu_path(@grouped_menus[template.id].first) %>
+              <p><%= @grouped_menus[template.id].first.updated_at.strftime("Last edited on %m/%d/%Y,at %I:%M%p") %></p>
+              <a href="#">View all from this template</a>
             </div>
           <% end %>
         </div>
