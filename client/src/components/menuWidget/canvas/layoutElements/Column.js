@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import LayoutElement from '../LayoutElement'
+import MenuElement from '../MenuElement'
 
 const containerTarget = {
   drop(props, monitor, component) {
@@ -24,7 +25,7 @@ const containerTarget = {
   }
 }
 
-@DropTarget(['section-panel'], containerTarget, (connect, monitor) => ({
+@DropTarget((props) => {return props.accepts}, containerTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop()
@@ -32,6 +33,8 @@ const containerTarget = {
 class Column extends React.Component{
   constructor(props){
     super(props)
+    // console.log("column props => ", props)
+
     // console.log(props,  _.filter(props.sections, (section, i) => {return section.columnId === props.id}))
     // debugger;
     this.state = {
@@ -86,15 +89,30 @@ class Column extends React.Component{
   }
 
   render(){
-    const { type, canDrop, isOver, connectDropTarget } = this.props
+    const { type, canDrop, isOver, connectDropTarget, styles } = this.props
     const { sections } = this.state
     const isActive = canDrop && isOver
-    const backgroundColor = isActive ? 'lightgreen' : '#FFF'
-    // console.log("re-render")
+    const backgroundColor = isActive ? 'rgba(192,192,192,0.3)' : '#FFF'
+    // console.log("re-render", this.props.span, `calc(${(100*this.props.span)}%-${styles.marginLeft})`, sections)
+    // console.log("column", sections.length , this.props.elements )
     return connectDropTarget(
       <div
-        style={{width: (100*this.props.span)+"%", backgroundColor, border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top'}}
+        style={{width: `calc(${(100*this.props.span)}%-${styles.marginLeft})`, backgroundColor, border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles}}
       >
+        {_.map(this.props.elements, (element, i) => {
+          // console.log("me on columd => ", element)
+          return (
+            <div key={i} data-id={JSON.stringify(element)}>
+              <MenuElement
+                {...element}
+                onUpdate={this.onUpdateMenuElement}
+                onDelete={this.onDeleteMenuElement}
+                getStyles={this.getStyles}
+                activeSection={this.state.activeSection}
+              />
+            </div>
+          )
+        })}
         {_.map(sections, (element, i) => {
           return (
             <LayoutElement
@@ -111,8 +129,8 @@ class Column extends React.Component{
             />
           )
         })}
-        {sections.length === 0 &&
-          <p style={{fontFamily: 'Open Sans', fontWeight: 200, fontSize: 12, textAlign: 'center', margin: 5, color: '#310100', border: '1px dashed #f6303e', padding: 5}}>Use the sidebar menu to add sections to this column</p>
+        {sections.length === 0 && this.props.elements.length === 0 && 
+          <p className="hide-on-export" style={{fontFamily: 'Open Sans', fontWeight: 200, fontSize: 12, textAlign: 'center', margin: 5, color: '#310100', border: '1px dashed #f6303e', padding: 5}}>Use the sidebar menu to add sections to this column</p>
         }
       </div>
     )

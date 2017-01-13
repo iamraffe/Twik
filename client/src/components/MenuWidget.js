@@ -6,8 +6,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
-
+import html2canvas from 'html2canvas'
 import * as metaActions from '../actions/metaActions'
+import * as sectionActions from '../actions/sectionActions'
 
 import { ToolPanel, Canvas, MetaWidget } from './menuWidget'
 
@@ -21,22 +22,25 @@ class MenuWidget extends React.Component{
       meta: props.meta,
       sections: props.sections,
       template: props.template,
-      step: 'meta'
+      step: props.mode === 'edit' ? 'loading' : 'meta'
     }
   }
 
   componentDidMount(){
-
+    const { mode, menu } = this.props
+    if(mode === 'edit' || mode === 'preview'){
+      this.props.sectionActions.loadSections(JSON.parse(menu.object.sections))
+      this.props.metaActions.setMetaInfo({
+        ...JSON.parse(menu.object.meta),
+        template: JSON.stringify(menu.template),
+        society: _.omit(menu.restaurant, ['created_at', 'updated_at']),
+      })
+      this.onSetStep('widget')
+    }
   }
 
   loadFonts = () => {
     const { fontFamilies } = this.state
-
-    // WebFont.load({
-    //   google: {
-    //     families: _.map(fontFamilies, (f) => {return f})
-    //   },
-    // })
 
     WebFont.load({
       google: {
@@ -69,18 +73,47 @@ class MenuWidget extends React.Component{
 
   onSave = (e) => {
     const { meta, sections, template } = this.state 
-    console.log("on save", meta)
-    this.props.metaActions.saveMenu({
-      ..._.omit(meta, ['editor',  'society']),
-      meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
-      sections: JSON.stringify(sections),
-      template_id: template.id
-    }, meta.society)
+    let canvas = document.getElementById('entry-point')
+    let preview
+    canvas.parentElement.style.height = 'auto'
+    html2canvas(canvas).then((render) => {
+      preview = render.toDataURL()
+      canvas.parentElement.style.height = '650px'
+      this.props.metaActions.saveMenu({
+        ..._.omit(meta, ['editor',  'society']),
+        meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
+        sections: JSON.stringify(sections),
+        template_id: template.id
+      },
+      meta.society,
+      preview)
+    })
+  }
+
+  onUpdate = (e) => {
+    const { meta, sections, template } = this.state 
+    const { menu } = this.props
+    let canvas = document.getElementById('entry-point')
+    let preview
+    canvas.parentElement.style.height = 'auto'
+    html2canvas(canvas).then((render) => {
+      preview = render.toDataURL()
+      canvas.parentElement.style.height = '650px'
+      this.props.metaActions.updateMenu({
+        ..._.omit(meta, ['editor',  'society']),
+        meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
+        sections: JSON.stringify(sections),
+        template_id: template.id
+      },
+      meta.society,
+      preview,
+      menu.object)
+    })
   }
 
   render(){
     const { structure, meta, step } = this.state
-    const { templates } = this.props
+    const { templates, mode } = this.props
 
     return(
       <div>
@@ -93,10 +126,11 @@ class MenuWidget extends React.Component{
               <Canvas />
             </div>
             <div className="col-xs-2">
-              {this.props.editor && <ToolPanel logo={this.props.robotLogo} onSave={this.onSave}/>}
+              {this.props.editor && <ToolPanel mode={mode} onUpdate={this.onUpdate} onSave={this.onSave}/>}
             </div>
           </div>
         }
+        {step === 'loading' && <div>Loading...</div>}
       </div>
     )
   }
@@ -118,7 +152,8 @@ function mapStateToProps(state, ownProps){
 
 function mapDispatchToProps(dispatch){
   return {
-    metaActions: bindActionCreators(metaActions, dispatch)
+    metaActions: bindActionCreators(metaActions, dispatch),
+    sectionActions: bindActionCreators(sectionActions, dispatch)
   }
 }
 

@@ -8,6 +8,8 @@ class CreateMenus < ActiveRecord::Migration
       t.string :title
       t.json :meta
       t.json :sections
+      t.attachment :preview
+      t.string :subdomain
       t.references :template, index: true
       t.references :society, index: true
       t.timestamps null: false

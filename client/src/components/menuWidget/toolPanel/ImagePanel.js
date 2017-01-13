@@ -154,6 +154,19 @@ class ImagePanel extends React.Component{
                         <input type="text" className="form-control" placeholder="Add Image Title" name="title"/>
                       </div>
                       <div className="row">
+                        <span className="border-bottom">
+                          Hide on print/preview?
+                          <label className="text-default" style={{marginLeft: 50}}>
+                            <input type="radio" name="print_option" value="visible" style={{verticalAlign: -4, marginRight: 10}} />
+                            Yes
+                          </label>
+                          <label className="text-default" style={{marginLeft: 50}}>
+                            <input type="radio" name="print_option" value="hidden" style={{verticalAlign: -4, marginRight: 10}} />
+                            No
+                          </label>
+                        </span>
+                      </div>
+                      <div className="row">
                         <button className="btn btn-block btn-slim btn-light">
                           Save
                         </button>

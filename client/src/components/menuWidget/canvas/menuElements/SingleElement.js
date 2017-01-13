@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
+
 import InlineEditor from '../../common/InlineEditor'
 
 class SingleElement extends React.Component{
@@ -23,14 +24,14 @@ class SingleElement extends React.Component{
   }
 
   editText = (text) => {
-    console.log(text, this.props, this.state)
+    // console.log(text, this.props, this.state)
     this.onUpdate({
       type: this.props.type,
       position: this.props.position,
       id: this.props.id,
       elements: [{
-        styles: this.props.styles,
-        text: text
+        text: text,
+        styles: this.props.styles
       }]
     })
   }
@@ -46,26 +47,28 @@ class SingleElement extends React.Component{
     const { type, activeSection } = this.props
     // console.log("SINGLE ELEMENT", text, styles)
     return (
-      <div className={`${type} single-element`}>
+      <div className={`${type} single-element`} style={{position: 'relative', lineHeight: 1}}>
+        {activeSection && <span className="section-element-handle ion ion-ios-drag" style={{position: 'absolute', top: 2.5, left: -15, cursor: 'move'}}></span>}
         {!editing &&
           <span>
             <span
               className="text"
               style={styles}
               dangerouslySetInnerHTML={{__html: (text === '' ? 'Lorem Ipsum' : text)}}
-              onDoubleClick={(e) => {
+              onClick={(e) => {
                 if(activeSection){
                   this.setState({editing: !editing})
                 }
               }}
             />
-            {activeSection && <span style={{cursor: 'pointer', verticalAlign: '-2.5px', marginLeft: 7.5}} className="ion ion-ios-close-outline" onClick={(e) => {this.onDelete(this.props.position)}}></span>}
+            {activeSection && <span style={{cursor: 'pointer', position: 'absolute', right: -20, top: 4}} className="ion ion-ios-close-outline" onClick={(e) => {this.onDelete(this.props.position)}}></span>}
           </span>
         }
         {editing &&
           <InlineEditor
             content={text === '' ? 'Lorem Ipsum' : text}
             styles={styles}
+            inline={false}
             onChange={this.editText}
             onKeyDown={this.toggleEditText}
             fastMode={false}

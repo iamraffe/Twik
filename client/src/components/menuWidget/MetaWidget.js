@@ -94,6 +94,7 @@ class MetaWidget extends React.Component{
   }
 
   onSuggestionSelected = (event, { suggestion, suggestionValue, sectionIndex, method }) => {
+    console.log("selected", suggestion)
     this.setState({
       society: suggestion
     })
@@ -101,7 +102,7 @@ class MetaWidget extends React.Component{
 
   onSubmit = (e) => {
     const { society, value } = this.state
-    console.log(society, value)
+    // console.log(society, value)
     // debugger;
     e.preventDefault()
     const form = e.target
@@ -109,8 +110,16 @@ class MetaWidget extends React.Component{
       name: society.name ? society.name : value,
       id: society.id ? society.id : null
     }
+    const formData = getFormData(form)
     console.log("onSubmir", {society: restaurant, ...getFormData(form)})
-    this.props.metaActions.setMetaInfo({society: restaurant, ...getFormData(form)})
+    this.props.metaActions.setMetaInfo({
+      society: restaurant,
+      ..._.omit(formData, ['paper_usage']),
+      name: formData.menu_name,
+      size: formData.paper_size,
+      orientation: formData.paper_usage.split('__')[0],
+      layout: formData.paper_usage.split('__')[1],
+    })
     this.props.onSetStep('widget')
   }
 

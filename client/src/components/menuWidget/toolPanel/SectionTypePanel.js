@@ -29,6 +29,7 @@ const sectionSource = {
         columnId: dropResult.columnId,
         elements: [{
           ...structure,
+          id: uuid.v4(),
           position: 0
         }]
       }
@@ -45,7 +46,7 @@ const sectionSource = {
   }
 }
 
-@DragSource('section-panel', sectionSource, (connect, monitor) => ({
+@DragSource('text', sectionSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging(),
   connectDragPreview: connect.dragPreview()
@@ -96,7 +97,7 @@ class SectionTypePanel extends React.Component{
   render(){
     const { section_types, sectionStyle, newSection, colors, fontFamilies, editing } = this.state
     const { isDragging, connectDragSource, connectDragPreview } = this.props
-    console.log("rerender")
+    // console.log("rerender")
     return(
       <section className="section-panel tool-panel-element">
         <header>
@@ -119,10 +120,10 @@ class SectionTypePanel extends React.Component{
           <section style={{marginTop: 15}}>
             {_.map(sectionStyle.structure.elements, (element, i) => {
               let styles = this.getStyles(element.styles)
-              console.log(sectionStyle, element, styles)
+              // console.log(sectionStyle, element, styles)
               // debugger;
               return (
-                <div key={i} className="style-item" style={{overflowX: 'hidden'}}>
+                <div key={i} className="style-item hide" style={{overflowX: 'hidden'}}>
                   {editing === element.styles &&
                     <div className="style-editor row">
                       <div className="col-xs-4" style={{minWidth: 52.5, display: 'block', margin: '3.5px auto'}}>
@@ -209,11 +210,27 @@ class SectionTypePanel extends React.Component{
             })}
             {connectDragSource(
               <div className="section-preview" style={{cursor: 'move', marginTop: 25, overflowX: 'hidden'}}>
-                {sectionStyle.structure && _.map(sectionStyle.structure.elements, (element, i) => {
+                {!sectionStyle.structure.inline && _.map(sectionStyle.structure.elements, (element, i) => {
                   return (
                     <p key={i} style={{...this.getStyles(element.styles)}}>Lorem Ipsum</p>
                   )
                 })}
+                {sectionStyle.structure.inline && 
+                  <p>
+                    {_.map(sectionStyle.structure.elements, (element, i) => {
+                      if(element.type === 'ELEMENT_SEPARATOR'){
+                        return (
+                          <span key={i} style={{...this.getStyles(element.styles)}}>{element.text}</span>
+                        )
+                      }
+                      else{
+                        return (
+                          <span key={i} style={{...this.getStyles(element.styles)}}>Lorem Ipsum</span>
+                        )
+                      }
+                    })}
+                  </p>
+                }
               </div>
             )}
           </section>

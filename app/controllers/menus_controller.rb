@@ -1,4 +1,5 @@
 class MenusController < ApplicationController
+  # before_filter :blob_preview_to_png, :only => [:create, :update]
 
   def index
     @menus = Menu.all
@@ -14,10 +15,14 @@ class MenusController < ApplicationController
     else
       @society = Society.find(params[:society][:id])
     end
-    # authorize Menu
     @menu = Menu.create(menu_params)
-    @menu.update_attributes(society_id: @society.id)
-    # byebug
+    Tempfile.open(["#{@menu.name.parameterize}-#{Time.now.to_i}" , ".png"] , Rails.root.join('tmp')) do |f|
+      f << Base64.decode64(params[:preview]['data:image/png;base64,'.length..-1]).force_encoding('UTF-8')
+      @menu.preview = f
+      @menu.society_id = @society.id
+      @menu.subdomain = current_user.subdomain
+      @menu.save
+    end
     render json: @menu
   end
 
@@ -33,8 +38,13 @@ class MenusController < ApplicationController
 
   def update
     @menu = Menu.find(params[:id])
-    @menu.update_attributes(menu_params)
-    @menu
+    @menu.assign_attributes(menu_params)
+    Tempfile.open(["#{@menu.name.parameterize}-#{Time.now.to_i}" , ".png"] , Rails.root.join('tmp')) do |f|
+      f << Base64.decode64(params[:preview]['data:image/png;base64,'.length..-1]).force_encoding('UTF-8')
+      @menu.preview = f
+      @menu.save
+    end
+    render json: @menu
   end
 
   def destroy
@@ -54,7 +64,7 @@ class MenusController < ApplicationController
     # @fonts = @menu.fonts
     # @svg = params[:export]
     # @orientation = @menu.width > @menu.height ? "Landscape" : "Portrait"
-    pdf = render_to_string pdf: @filename, zoom: 0.97, template: "menus/export.pdf.erb", page_size: @meta['size'], encoding: "UTF-8", javascript_delay: 50, orientation: @meta['orientation'], lowquality: false, no_pdf_compression: true, margin:  { top:0, bottom: 0, left: 0, right: 0 }
+    pdf = render_to_string pdf: @filename, zoom: 1.00, template: "menus/export.pdf.erb", layout: 'layouts/pdf.html.erb', page_size: @meta['size'], encoding: "UTF-8", javascript_delay: 50, orientation: @meta['orientation'], lowquality: false, no_pdf_compression: true, margin:  { top:0, bottom: 0, left: 0, right: 0 }
     Menu.export(@filename, pdf)
     render json: {path: "/pdf/#{@filename}.pdf"}
     # redirect_to "/pdf/#{@filename}.pdf"

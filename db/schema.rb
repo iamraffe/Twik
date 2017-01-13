@@ -63,10 +63,15 @@ ActiveRecord::Schema.define(version: 20161220214033) do
     t.string   "title"
     t.json     "meta"
     t.json     "sections"
+    t.string   "preview_file_name"
+    t.string   "preview_content_type"
+    t.integer  "preview_file_size"
+    t.datetime "preview_updated_at"
+    t.string   "subdomain"
     t.integer  "template_id"
     t.integer  "society_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.index ["society_id"], name: "index_menus_on_society_id", using: :btree
     t.index ["template_id"], name: "index_menus_on_template_id", using: :btree
   end

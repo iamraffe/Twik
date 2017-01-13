@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react'
 import _ from 'lodash'
 
 import {  SingleElement,
-          CompoundElement } from './menuElements'
+          CompoundElement,
+          ImageElement } from './menuElements'
 
 class MenuElement extends React.Component{
   constructor(props){
@@ -30,9 +31,9 @@ class MenuElement extends React.Component{
   }
 
   render(){
-    const { type, activeSection, id } = this.props
+    const { type, activeSection, id, inline } = this.props
     const { elements, position } = this.state
-
+    // console.log(type, this.props)
     switch(type){
       case "MENU_TITLE":
       case "SECTION_TITLE":
@@ -50,6 +51,21 @@ class MenuElement extends React.Component{
             onDelete={this.onDelete}
           />
         )
+      case "IMAGE_ELEMENT":
+        return (
+          <ImageElement
+            type={type}
+            id={id}
+            position={position}
+            url={this.props.url}
+            hide={this.props.hide}
+            // styles={elements[0].styles}
+            activeSection={activeSection}
+            getStyles={this.getStyles}
+            onUpdate={this.onUpdate}
+            onDelete={this.onDelete}
+          />
+        )
       case "SECTION_ELEMENT":
       case "COMPOUND_ELEMENT":
         return (
@@ -58,6 +74,7 @@ class MenuElement extends React.Component{
             id={id}
             position={position}
             elements={elements}
+            inline={inline}
             activeSection={activeSection}
             getStyles={this.getStyles}
             onUpdate={this.onUpdate}
