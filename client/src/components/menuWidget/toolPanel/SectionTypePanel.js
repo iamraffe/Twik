@@ -101,13 +101,13 @@ class SectionTypePanel extends React.Component{
     return(
       <section className="section-panel tool-panel-element">
         <header>
-          <h1>Sections</h1>
+          <h1>Components</h1>
           <span className="fa close-panel fa-times" onClick={this.onClose}></span>
         </header>
         <div className="row">
           <div className="col-xs-10 col-xs-offset-1" style={{marginBottom: 25}}>
             <select className="form-control" value={sectionStyle.name ? sectionStyle.name : 'default'} onChange={this.onSectionStyleSelect}>
-              <option value="default">Choose section style</option>
+              <option value="default">Choose component</option>
               {_.map(section_types, (section, i) => {
                 return (
                   <option key={i} value={JSON.stringify(section)}>{section.name}</option>

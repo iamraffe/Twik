@@ -29,13 +29,13 @@ class MenuWidget extends React.Component{
   componentDidMount(){
     const { mode, menu } = this.props
     if(mode === 'edit' || mode === 'preview'){
-      this.props.sectionActions.loadSections(JSON.parse(menu.object.sections))
       this.props.metaActions.setMetaInfo({
         ...JSON.parse(menu.object.meta),
         template: JSON.stringify(menu.template),
         society: _.omit(menu.restaurant, ['created_at', 'updated_at']),
       })
       this.onSetStep('widget')
+      this.props.sectionActions.loadSections(JSON.parse(menu.object.sections))
     }
   }
 

@@ -9,13 +9,12 @@ export default function sectionReducer(state = initialState.sections, action){
       let layouts = JSON.parse(action.template).structure.layouts
       return _.find(layouts, (layout) => {return layout.name === action.layout}).sections
     case types.ADD_SECTION:
-      // console.log(state, action)
-      // debugger;
       return [
         ...state,
         action.section
       ]
     case types.LOAD_SECTIONS:
+      console.log("action, secctions", action.sections)
       return action.sections
     case types.ADD_MENU_ELEMENT:
       sectionIndex = _.findIndex(state, (s) => {return s.id === action.sectionId})

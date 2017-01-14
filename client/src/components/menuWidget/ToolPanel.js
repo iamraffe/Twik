@@ -109,7 +109,7 @@ class ToolPanel extends React.Component{
                 onClose={(e) => {this.onToggleActive('none')}}
               />
             }
-            {active !== 'add-section' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('add-section')}}>Add Section</button>}
+            {active !== 'add-section' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('add-section')}}>Add Component</button>}
             {active === 'add-section' &&
               <SectionTypePanel 
                 onClose={(e) => {this.onToggleActive('none')}}

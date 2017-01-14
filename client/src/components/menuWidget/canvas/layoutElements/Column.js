@@ -106,8 +106,7 @@ class Column extends React.Component{
     const { sections } = this.state
     const isActive = canDrop && isOver
     const backgroundColor = isActive ? 'rgba(192,192,192,0.3)' : '#FFF'
-    console.log("re-render", this.calculateWidth())
-    // console.log("column", sections.length , this.props.elements )
+    
     return connectDropTarget(
       <div
         style={{width: this.calculateWidth(), backgroundColor, border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles}}

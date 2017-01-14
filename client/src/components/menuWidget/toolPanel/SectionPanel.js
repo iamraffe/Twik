@@ -195,7 +195,7 @@ class SectionPanel extends React.Component{
   render(){
     const { section_types, sectionStyle, newSection } = this.state
     const { isDragging, connectDragSource, connectDragPreview } = this.props
-    console.log("SECTION STYLE => ", sectionStyle)
+    
     return (
       <section className="section-panel tool-panel-element">
         <header>
