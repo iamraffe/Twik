@@ -75,7 +75,7 @@ class CompoundElement extends React.Component{
     const { type, activeSection, inline } = this.props
     if(inline){
       return (
-        <article className={`${type} compound-element`} style={{position: 'relative'}}>
+        <article className={`${type} compound-element`} style={{position: 'relative', lineHeight: 1}}>
           {activeSection && <span className="section-element-handle ion ion-ios-drag" style={{position: 'absolute', top: 2.5, left: -15, cursor: 'move'}}></span>}
           {_.map(elements, (e, i) => {
             return (

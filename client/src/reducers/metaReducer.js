@@ -16,7 +16,7 @@ export default function metaReducer(state = initialState.meta, action){
         orientation: action.orientation
       }
     case "SET_META_INFO":
-      console.log(state, action)
+      // console.log(state, action)
 
       // debugger;
       return {

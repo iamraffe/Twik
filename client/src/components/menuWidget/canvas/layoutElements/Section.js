@@ -25,6 +25,9 @@ class Section extends React.Component{
       hover: props.hover
     }
 
+    console.log("structure", props)
+    // debugger;
+
     this.getStyles = props.getStyles
     this.onSectionSelect = props.onSectionSelect
   }
@@ -75,7 +78,7 @@ class Section extends React.Component{
     return(
       <div
         className={`${hover && !activeSection ? 'section-hover' : '' } section-element`}
-        style={{position: 'relative', marginBottom: 15}}
+        style={{position: 'relative'}}
         onClick={(e) => {this.onSectionSelect(id)}}
       >
         <Sortable
@@ -88,15 +91,6 @@ class Section extends React.Component{
                 put: true,
             }}
             onChange={(order, sortable, evt) => {
-              console.log("order", order)
-              // console.log(_.map(order, (element, i) => {
-              //   let parsed = JSON.parse(element)
-              //   return {
-              //     ...parsed,
-              //     position: i
-              //   }
-              // }))
-              // debugger;
               this.props.sectionActions.updateSection(
                 id,
                 {

@@ -4,9 +4,9 @@ import _ from 'lodash'
 class ImageElement extends React.Component{
   constructor(props){
     super(props)
-    // console.log(props)
+    console.log("img props => ", props)
     this.state = {
-      url: props.url,
+      url: props.url
       // styles: props.getStyles(props.styles),
       // editing: false
     }
@@ -16,7 +16,7 @@ class ImageElement extends React.Component{
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      url: nextProps.url,
+      url: nextProps.url
       // styles: nextProps.getStyles(nextProps.styles)
     })
   }
@@ -42,11 +42,11 @@ class ImageElement extends React.Component{
 
   render(){
     const { url } = this.state
-    const { type, activeSection } = this.props
+    const { type, activeSection, styles } = this.props
     // console.log("iamge ELEMENT", url)
     return (
-      <div className={`${type} single-element ${this.props.hide ? 'visibility-none-export' : ''}`} style={{position: 'relative', lineHeight: 1}}>
-        <img src={url} alt="Logo"/>
+      <div className={`${type} image-element ${this.props.hide ? 'visibility-none-export' : ''}`} style={{position: 'relative', lineHeight: 1}}>
+        <img src={url} alt="Logo" style={{...styles}} />
       </div>
     )
   }

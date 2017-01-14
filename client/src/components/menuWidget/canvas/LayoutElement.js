@@ -37,7 +37,7 @@ class LayoutElement extends React.Component{
           <div
             className=""
             style={{
-              border: this.props.span === 1 ? 'none' : '0.5px solid black',
+              // border: this.props.span === 1 ? 'none' : '0.5px solid black',
               width: this.props.span*100+'%',
               float: 'left',
               position: 'relative',

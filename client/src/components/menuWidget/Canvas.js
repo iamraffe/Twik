@@ -42,9 +42,9 @@ class Canvas extends React.Component{
   componentDidMount(){
   }
 
-  convertToMM = (fontSize) => {
-    return fontSize/72
-  }
+  // convertToMM = (fontSize) => {
+  //   return fontSize/72
+  // }
 
   getStyles = (styleId) => {
     const { styles, fontFamilies, colors, zoom } = this.state
@@ -52,7 +52,7 @@ class Canvas extends React.Component{
 
     return {
       ...styles[index].extra,
-      fontSize: `${this.convertToMM(styles[index].extra.fontSize*zoom/100)}in`,
+      fontSize: (styles[index].extra.fontSize*zoom/100),
       color: `${colors[styles[index].color]}`,
       fontFamily: fontFamilies[styles[index].fontFamily].fontFamily,
       fontWeight: fontFamilies[styles[index].fontFamily].fontWeight,

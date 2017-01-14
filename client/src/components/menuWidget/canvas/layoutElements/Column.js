@@ -88,31 +88,30 @@ class Column extends React.Component{
     }))
   }
 
+  calculateWidth = () => {
+    const { span, styles } = this.props
+    let width = `${span*100}%`
+    if(styles.marginLeft){
+      width += ` - ${styles.marginLeft}`
+    }
+    if(styles.marginRight){
+      width += ` - ${styles.marginRight}`
+    }
+
+    return `calc(${width})`
+  }
+
   render(){
     const { type, canDrop, isOver, connectDropTarget, styles } = this.props
     const { sections } = this.state
     const isActive = canDrop && isOver
     const backgroundColor = isActive ? 'rgba(192,192,192,0.3)' : '#FFF'
-    // console.log("re-render", this.props.span, `calc(${(100*this.props.span)}%-${styles.marginLeft})`, sections)
+    console.log("re-render", this.calculateWidth())
     // console.log("column", sections.length , this.props.elements )
     return connectDropTarget(
       <div
-        style={{width: `calc(${(100*this.props.span)}%-${styles.marginLeft})`, backgroundColor, border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles}}
+        style={{width: this.calculateWidth(), backgroundColor, border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles}}
       >
-        {_.map(this.props.elements, (element, i) => {
-          // console.log("me on columd => ", element)
-          return (
-            <div key={i} data-id={JSON.stringify(element)}>
-              <MenuElement
-                {...element}
-                onUpdate={this.onUpdateMenuElement}
-                onDelete={this.onDeleteMenuElement}
-                getStyles={this.getStyles}
-                activeSection={this.state.activeSection}
-              />
-            </div>
-          )
-        })}
         {_.map(sections, (element, i) => {
           return (
             <LayoutElement
@@ -129,7 +128,7 @@ class Column extends React.Component{
             />
           )
         })}
-        {sections.length === 0 && this.props.elements.length === 0 && 
+        {sections.length === 0 && 
           <p className="hide-on-export" style={{fontFamily: 'Open Sans', fontWeight: 200, fontSize: 12, textAlign: 'center', margin: 5, color: '#310100', border: '1px dashed #f6303e', padding: 5}}>Use the sidebar menu to add sections to this column</p>
         }
       </div>

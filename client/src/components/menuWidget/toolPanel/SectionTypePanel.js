@@ -25,7 +25,7 @@ const sectionSource = {
         id: uuid.v4(),
         type: "SECTION",
         position: dropResult.position,
-        struct: id,
+        // struct: id,
         columnId: dropResult.columnId,
         elements: [{
           ...structure,

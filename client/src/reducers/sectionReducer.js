@@ -5,8 +5,11 @@ import _ from 'lodash'
 export default function sectionReducer(state = initialState.sections, action){
   let sectionIndex, elementIndex
   switch(action.type){
+    case "SET_META_INFO":
+      let layouts = JSON.parse(action.template).structure.layouts
+      return _.find(layouts, (layout) => {return layout.name === action.layout}).sections
     case types.ADD_SECTION:
-      console.log(state, action)
+      // console.log(state, action)
       // debugger;
       return [
         ...state,

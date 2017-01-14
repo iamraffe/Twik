@@ -52,14 +52,15 @@ class MenuElement extends React.Component{
           />
         )
       case "IMAGE_ELEMENT":
+        console.log("ung ek => ", this.props)
         return (
           <ImageElement
             type={type}
             id={id}
+            styles={this.props.styles}
             position={position}
             url={this.props.url}
             hide={this.props.hide}
-            // styles={elements[0].styles}
             activeSection={activeSection}
             getStyles={this.getStyles}
             onUpdate={this.onUpdate}
