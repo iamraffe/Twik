@@ -64,7 +64,7 @@ class MenusController < ApplicationController
     # @fonts = @menu.fonts
     # @svg = params[:export]
     # @orientation = @menu.width > @menu.height ? "Landscape" : "Portrait"
-    pdf = render_to_string pdf: @filename, template: "menus/export.pdf.erb", layout: 'layouts/pdf.html.erb', page_size: @meta['size'], encoding: "UTF-8", javascript_delay: 50, orientation: @meta['orientation'], lowquality: false, no_pdf_compression: true, margin:  { top:0, bottom: 0, left: 0, right: 0 }, print_media_type: false, disable_smart_shrinking: true
+    pdf = render_to_string pdf: @filename, zoom: 1.0625, dpi: '96', template: "menus/export.pdf.erb", layout: 'layouts/pdf.html.erb', page_size: @meta['size'], encoding: "UTF-8", javascript_delay: 50, orientation: @meta['orientation'], lowquality: false, no_pdf_compression: true, margin:  { top:0, bottom: 0, left: 0, right: 0 }, print_media_type: true, disable_smart_shrinking: true
     Menu.export(@filename, pdf)
     render json: {path: "/pdf/#{@filename}.pdf"}
     # redirect_to "/pdf/#{@filename}.pdf"

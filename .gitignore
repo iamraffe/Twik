@@ -18,6 +18,7 @@
 /client/node_modules
 /public/system
 /public/pdf/*
+!/public/pdf/.gitkeep #adding a gitkeep to have folder available in production
 # Ignore application configuration
 /config/application.yml
 coverage
