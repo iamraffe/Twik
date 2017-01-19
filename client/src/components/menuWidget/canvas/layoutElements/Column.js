@@ -3,6 +3,7 @@ import _ from 'lodash'
 import { DropTarget } from 'react-dnd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import $ from 'jquery'
 
 import LayoutElement from '../LayoutElement'
 import MenuElement from '../MenuElement'
@@ -54,6 +55,20 @@ class Column extends React.Component{
     })
   }
 
+  componentDidMount(){
+    const { id, span, styles } = this.props
+    $(`#${id}`).css('width', `${span*100}%`)
+    if(styles.marginLeft){
+      $(`#${id}`).css('width', `-=${styles.marginLeft}`)
+      // width += ` - ${styles.marginLeft}`
+    }
+    if(styles.marginRight){
+      $(`#${id}`).css('width', `-=${styles.marginRight}`)
+      // width += ` - ${styles.marginRight}`
+    }
+    // console.log(this.refs.column)
+  }
+
   pushCard = (element) => {
     this.setState(update(this.state, {
       sections: {
@@ -102,14 +117,15 @@ class Column extends React.Component{
   }
 
   render(){
-    const { type, canDrop, isOver, connectDropTarget, styles } = this.props
+    const { type, canDrop, isOver, connectDropTarget, styles, span } = this.props
     const { sections } = this.state
     const isActive = canDrop && isOver
     const backgroundColor = isActive ? 'rgba(192,192,192,0.3)' : '#FFF'
-    
+
     return connectDropTarget(
       <div
-        style={{width: this.calculateWidth(), backgroundColor, border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles}}
+        id={this.props.id}
+        style={{backgroundColor, border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles}}
       >
         {_.map(sections, (element, i) => {
           return (
@@ -127,7 +143,7 @@ class Column extends React.Component{
             />
           )
         })}
-        {sections.length === 0 && 
+        {sections.length === 0 &&
           <p className="hide-on-export" style={{fontFamily: 'Open Sans', fontWeight: 200, fontSize: 12, textAlign: 'center', margin: 5, color: '#310100', border: '1px dashed #f6303e', padding: 5}}>Use the sidebar menu to add sections to this column</p>
         }
       </div>
