@@ -62,7 +62,7 @@ class Canvas extends React.Component{
   }
 
   onSectionSelect = (id) => {
-    // console.log(id)
+    console.log(id)
     this.setState({
       activeSection: id
     })
@@ -81,8 +81,8 @@ class Canvas extends React.Component{
               margin: '0 auto',
               width: (width*(zoom/100))+'in',
               height: (height*(zoom/100))+'in'}}
-              onMouseEnter={(e) => {activeSection === '' ? this.setState({hover: true}) : ''}}
-              onMouseLeave={(e) => {activeSection === '' ? this.setState({hover: false}) : ''}}
+              onMouseEnter={(e) => {this.setState({hover: true})}}
+              onMouseLeave={(e) => {this.setState({hover: false})}}
           >
             {_.map(structure, (struct, i) => {
               return(

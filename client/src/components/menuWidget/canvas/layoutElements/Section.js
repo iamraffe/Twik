@@ -25,7 +25,7 @@ class Section extends React.Component{
       hover: props.hover
     }
 
-    console.log("structure", props)
+    // console.log("structure", props)
     // debugger;
 
     this.getStyles = props.getStyles
@@ -33,7 +33,7 @@ class Section extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    // console.log("SECTION = ", nextProps)
+    console.log("SECTION = ", nextProps)
     this.setState({
       active: nextProps.activeSection === nextProps.id,
       sections: nextProps.sections,
@@ -71,15 +71,33 @@ class Section extends React.Component{
     this.props.sectionActions.deleteMenuElement(position, id)
   }
 
+  styles = () => {
+    const { elements, hover, active } = this.state
+    let styles = {position: 'relative'}
+    if(hover === true && active === true){
+      styles = {
+        ...styles,
+        outline: 'thick dashed #f6303e',
+        outlineOffset: 25
+      }
+    }
+    return styles
+  }
+
   render(){
     const { elements, hover, active } = this.state
     const { activeSection, id } = this.props
-    
+    // console.log('hover & active', hover, active)
     return(
       <div
-        className={`${hover && !activeSection ? 'section-hover' : '' } section-element`}
-        style={{position: 'relative'}}
-        onClick={(e) => {this.onSectionSelect(id)}}
+        className={`${(hover === true && active === false) ? 'section-hover' : '' } section-element`}
+        style={this.styles()}
+        onClick={(e) => {
+          if(active === false){
+            console.log("section click")
+            this.onSectionSelect(id)
+          }
+        }}
       >
         <Sortable
             options={{
@@ -106,7 +124,7 @@ class Section extends React.Component{
             }}
         >
           {_.map(elements, (element, i) => {
-            console.log("section => ", element)
+            // console.log("section => ", element)
             return (
               <div key={i} data-id={JSON.stringify(element)}>
                 <MenuElement
@@ -114,15 +132,14 @@ class Section extends React.Component{
                   onUpdate={this.onUpdateMenuElement}
                   onDelete={this.onDeleteMenuElement}
                   getStyles={this.getStyles}
-                  activeSection={active}
+                  activeSection={hover === true && active === true}
                 />
               </div>
             )
           })}
-          
         </Sortable>
-        {active && <span className="ion ion-ios-plus-outline" style={{cursor: 'pointer', position: 'absolute', bottom: -25, left: -2.5}} onClick={(e) => {this.onAddMenuElement(e)}}></span>}
-        {hover && !activeSection && !active && <div className="section-overlay"></div>}
+        {(hover === true && active === true) && <span className="ion ion-ios-plus-outline" style={{cursor: 'pointer', position: 'absolute', bottom: -25, left: -2.5}} onClick={(e) => {this.onAddMenuElement(e)}}></span>}
+        {(hover === true && active === false) && <div className="section-overlay"></div>}
       </div>
     )
   }

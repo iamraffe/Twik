@@ -1,4 +1,4 @@
-import { Editor, EditorState, RichUtils, ContentState, convertFromRaw } from 'draft-js'
+import { Editor, EditorState, RichUtils, ContentState, convertFromRaw, SelectionState } from 'draft-js'
 import React from 'react'
 import { stateToHTML } from 'draft-js-export-html'
 import { stateFromHTML } from 'draft-js-import-html'
@@ -7,9 +7,9 @@ import onClickOutside from 'react-onclickoutside'
 class InlineEditor extends React.Component {
   constructor(props) {
     super(props)
-
+    let editorState = EditorState.createWithContent(stateFromHTML(props.content))
     this.state = {
-      editorState: EditorState.createWithContent(stateFromHTML(props.content))
+      editorState: EditorState.moveSelectionToEnd(editorState)
     }
 
     this.focus = () => this.refs.editor.focus()
@@ -17,7 +17,12 @@ class InlineEditor extends React.Component {
     this.onTab = (e) => this._onTab(e)
   }
 
-  
+  componentDidMount(){
+    const { editorState } = this.state
+    this.focus()
+    // console.log(editorState.getCurrentContent().getBlockMap().first().getKey(), editorState.getCurrentContent().moveSelectionToEnd())
+  }
+ 
   _onTab(e) {
     e.preventDefault()
     // console.log(stateToHTML(this.state.editorState.getCurrentContent()))
@@ -53,7 +58,7 @@ class InlineEditor extends React.Component {
 
     return (
       <section className={`RichEditor-root ${this.props.inline}`}>
-        <div className={`${className}`} onClick={this.focus} style={this.props.styles}>
+        <div className={`${className}`} style={this.props.styles}>
           <Editor
             editorState={editorState}
             onChange={this.onChange}
