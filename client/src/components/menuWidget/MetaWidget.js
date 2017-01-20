@@ -18,7 +18,8 @@ class MetaWidget extends React.Component{
       society: {},
       value: '',
       paperSettings: 'size', 
-      templates: props.templates
+      templates: props.templates,
+      filteredTemplates: props.templates
     }
   }
 
@@ -94,37 +95,58 @@ class MetaWidget extends React.Component{
   }
 
   onSuggestionSelected = (event, { suggestion, suggestionValue, sectionIndex, method }) => {
-    console.log("selected", suggestion)
     this.setState({
       society: suggestion
     })
   }
 
   onSubmit = (e) => {
-    const { society, value } = this.state
-    // console.log(society, value)
-    // debugger;
     e.preventDefault()
+    const { society, value } = this.state    
     const form = e.target
     let restaurant = {
       name: society.name ? society.name : value,
       id: society.id ? society.id : null
     }
     const formData = getFormData(form)
-    console.log("onSubmir", {society: restaurant, ...getFormData(form)})
-    this.props.metaActions.setMetaInfo({
+
+    console.log("onSubmir", {
       society: restaurant,
-      ..._.omit(formData, ['paper_usage']),
+      ..._.omit(formData, ['paper_usage', 'paper_size']),
       name: formData.menu_name,
       size: formData.paper_size,
       orientation: formData.paper_usage.split('__')[0],
       layout: formData.paper_usage.split('__')[1],
+      multiPage: formData.paper_usage.split('__')[2],
+    })
+    this.props.metaActions.setMetaInfo({
+      society: restaurant,
+      ..._.omit(formData, ['paper_usage', 'paper_size']),
+      name: formData.menu_name,
+      size: formData.paper_size,
+      orientation: formData.paper_usage.split('__')[0],
+      layout: formData.paper_usage.split('__')[1],
+      multiPage: formData.paper_usage.split('__')[2],
     })
     this.props.onSetStep('widget')
   }
 
+  filterTemplates = (value) => {
+    const orientation = value.split('__')[0]
+    const layout = value.split('__')[1]
+    const multiPage = value.split('__')[2]
+    const { templates } = this.state
+    this.setState({
+      filteredTemplates:  _.filter(templates, (template) => {
+                            return _.find(template.structure.layouts, (l) => {
+                              return l.name === layout && l.multiPage.toString() === multiPage
+                            })
+                          })
+    })
+  }
+
   render(){
-    const { societies, society, value, paperSettings, templates } = this.state
+    const { societies, society, value, paperSettings, templates, filteredTemplates } = this.state
     const inputProps = {
       placeholder: 'Restaurant Name',
       value,
@@ -206,48 +228,48 @@ class MetaWidget extends React.Component{
               <div className={`row ${paperSettings !== 'size' ? '' : 'hide'}`}>
                 <div className="col-sm-8 col-sm-push-2">
                   <div className="row">
-                    <div className="col-xs-4">
+                    <div className="col-xs-3">
                       <label className="text-default">
-                        <input type="radio" name="paper_usage" value="portrait__ONE_COLUMN" /><br/> One Side Vertical (One Column)
+                        <input onClick={(e) => {this.filterTemplates(e.target.value)}} type="radio" name="paper_usage" value="portrait__ONE_COLUMN__false" /><br/> One Side Vertical (One Column)
                       </label>
                     </div>
-                    <div className="col-xs-4">
+                    <div className="col-xs-3">
                       <label className="text-default">
-                        <input type="radio" name="paper_usage" value="portrait__TWO_COLUMNS" /><br/> One Side Vertical (Two Columns)
+                        <input onClick={(e) => {this.filterTemplates(e.target.value)}} type="radio" name="paper_usage" value="portrait__TWO_COLUMNS__false" /><br/> One Side Vertical (Two Columns)
                       </label>
                     </div>
-                    <div className="col-xs-4 hide">
+                    <div className="col-xs-3">
                       <label className="text-default">
-                        <input type="radio" name="paper_usage" value="portrait__ONE_COLUMN_BOTH" disabled/><br/> Front & Back Vertical
+                        <input onClick={(e) => {this.filterTemplates(e.target.value)}} type="radio" name="paper_usage" value="portrait__ONE_COLUMN__true"/><br/> Front & Back Vertical
                       </label>
                     </div>
-                    <div className="col-xs-4 hide">
+                    <div className="col-xs-3">
                       <label className="text-default">
-                        <input type="radio" name="paper_usage" value="portrait__TWO_COLUMNS" disabled/><br/> Folded <br/>Front & Back (4 Pages)
+                        <input onClick={(e) => {this.filterTemplates(e.target.value)}} type="radio" name="paper_usage" value="portrait__TWO_COLUMNS__true"/><br/> Folded <br/>Front & Back (4 Pages)
                       </label>
                     </div>
                   </div>
                 </div>                
                 <div className="col-sm-8 col-sm-push-2">
                   <div className="row">
-                    <div className="col-xs-4">
+                    <div className="col-xs-3">
                       <label className="text-default">
-                        <input type="radio" name="paper_usage" value="landscape__ONE_COLUMN" /><br/> One Side Horizontal (One Column)
+                        <input onClick={(e) => {this.filterTemplates(e.target.value)}} type="radio" name="paper_usage" value="landscape__ONE_COLUMN__false" /><br/> One Side Horizontal (One Column)
                       </label>
                     </div>
-                    <div className="col-xs-4">
+                    <div className="col-xs-3">
                       <label className="text-default">
-                        <input type="radio" name="paper_usage" value="landscape__TWO_COLUMNS" /><br/> One Side Horizontal (Two Columns)
+                        <input onClick={(e) => {this.filterTemplates(e.target.value)}} type="radio" name="paper_usage" value="landscape__TWO_COLUMNS__false" /><br/> One Side Horizontal (Two Columns)
                       </label>
                     </div>
-                    <div className="col-xs-4 hide">
+                    <div className="col-xs-3">
                       <label className="text-default">
-                        <input type="radio" name="paper_usage" value="landscape__ONE_COLUMN_BOTH" disabled/><br/> Front & Back Horizontal
+                        <input onClick={(e) => {this.filterTemplates(e.target.value)}} type="radio" name="paper_usage" value="landscape__ONE_COLUMN__true"/><br/> Front & Back Horizontal
                       </label>
                     </div>
-                    <div className="col-xs-4 hide">
+                    <div className="col-xs-3">
                       <label className="text-default">
-                        <input type="radio" name="paper_usage" value="landscape__TWO_COLUMNS" disabled/><br/> Folded <br/>Front & Back (4 Pages)
+                        <input onClick={(e) => {this.filterTemplates(e.target.value)}} type="radio" name="paper_usage" value="landscape__TWO_COLUMNS__true"/><br/> Folded <br/>Front & Back (4 Pages)
                       </label>
                     </div>
                   </div>
@@ -259,9 +281,9 @@ class MetaWidget extends React.Component{
             <div className="col-xs-12 settings-header-stripe">
               <h1>Step 3</h1>
             </div>
-            <div className="col-sm-8 col-sm-push-4">
+            <div className="col-sm-6 col-sm-push-3">
               <div className="row">
-                {_.map(templates, (template, i) => {
+                {_.map(filteredTemplates, (template, i) => {
                   const className = (i % 2 === 0) ? 'col-sm-5' : 'col-sm-5 col-sm-push-2'
                   return(
                     <div className={className} key={i}>
@@ -274,11 +296,21 @@ class MetaWidget extends React.Component{
                     </div>
                   )
                 })}
+                {filteredTemplates.length === 0 &&
+                  <div className="col-sm-12">
+                    <p className="text-center">
+                      There are no templates with the selected configuration.
+                    </p>
+                    <p className="text-center">
+                      Please, choose a different configuration.
+                    </p>
+                  </div>
+                }
               </div>
             </div>
           </div>
           <button className="btn btn-link" style={{outline: 'none', fontSize: 40, display: 'block', margin: '0 auto'}}>
-            <span className="ion ion-ios-checkmark-outline"></span>
+            {filteredTemplates.length > 0 && <span className="ion ion-ios-checkmark-outline"></span>}
           </button>
         </form>
       </section>

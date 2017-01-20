@@ -26,7 +26,8 @@ export default function metaReducer(state = initialState.meta, action){
         layout: action.layout,
         size: action.size,
         name: action.name,
-        society: action.society
+        society: action.society,
+        multiPage: action.multiPage
       }
     default:
       return state
