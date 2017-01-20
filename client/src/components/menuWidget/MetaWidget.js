@@ -127,6 +127,7 @@ class MetaWidget extends React.Component{
       orientation: formData.paper_usage.split('__')[0],
       layout: formData.paper_usage.split('__')[1],
       multiPage: formData.paper_usage.split('__')[2],
+      allows: JSON.parse(formData.template).allows
     })
     this.props.onSetStep('widget')
   }
@@ -139,7 +140,8 @@ class MetaWidget extends React.Component{
     this.setState({
       filteredTemplates:  _.filter(templates, (template) => {
                             return _.find(template.structure.layouts, (l) => {
-                              return l.name === layout && l.multiPage.toString() === multiPage
+                              // console.log(l.name, layout, l.multiPage.toString(), multiPage, l.orientation, orientation)
+                              return l.name === layout && l.multiPage.toString() === multiPage && l.orientation === orientation
                             })
                           })
     })

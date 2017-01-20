@@ -108,8 +108,9 @@ ActiveRecord::Schema.define(version: 20161220214033) do
     t.json     "structure"
     t.boolean  "canon"
     t.uuid     "ext"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "allows",     default: [],              array: true
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "users", force: :cascade do |t|

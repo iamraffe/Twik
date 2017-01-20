@@ -106,6 +106,24 @@ class LayoutElement extends React.Component{
         return (
           <Column {...this.props} />
         )
+      case "PAGE":
+        return(
+          <div>
+            {_.map(this.props.elements, (element, i) => {
+              return(
+                <LayoutElement
+                  key={i}
+                  {...element}
+                  zoom={this.props.zoom}
+                  hover={this.props.hover}
+                  activeSection={this.props.activeSection}
+                  getStyles={this.getStyles}
+                  onSectionSelect={this.onSectionSelect}
+                />
+              )
+            })}
+          </div>
+        )
       default:
         return null
     }

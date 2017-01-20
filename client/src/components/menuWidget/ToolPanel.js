@@ -81,8 +81,8 @@ class ToolPanel extends React.Component{
   }
 
   render(){
-    const { active } = this.state
-    
+    const { active, meta } = this.state
+    console.log(meta, meta.allows, _.findIndex(meta.allows, (f) => { return f === 'component' }))
     return(
       <section className="tool-panel" style={{padding: 25}}>
         <header>
@@ -91,32 +91,32 @@ class ToolPanel extends React.Component{
         </header>
         <div className="row" style={{marginBottom: 100}}>
           <div className="col-xs-12">
-            {active !== 'color' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('color')}}>Color</button>}
+            {active !== 'color' && _.findIndex(meta.allows, (f) => { return f === 'color' }) !== -1 && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('color')}}>Color</button>}
             {active === 'color' &&
               <ColorPanel
                 onClose={(e) => {this.onToggleActive('none')}}
               />
             }
-            {active !== 'font' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('font')}}>Font</button>}
-            {active === 'font' &&
+            {active !== 'font' && _.findIndex(meta.allows, (f) => { return f === 'font' }) !== -1 && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('font')}}>Font</button>}
+            {active === 'font' && 
               <FontPanel
                 onClose={(e) => {this.onToggleActive('none')}}
               />
             }
-            {active !== 'layout' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('layout')}}>Layout</button>}
+            {active !== 'layout' && _.findIndex(meta.allows, (f) => { return f === 'layout' }) !== -1 && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('layout')}}>Layout</button>}
             {active === 'layout' &&
               <LayoutPanel
                 onClose={(e) => {this.onToggleActive('none')}}
               />
             }
-            {active !== 'add-section' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('add-section')}}>Add Component</button>}
+            {active !== 'add-section' && _.findIndex(meta.allows, (f) => { return f === 'component' }) !== -1 && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('add-section')}}>Add Component</button>}
             {active === 'add-section' &&
               <SectionTypePanel 
                 onClose={(e) => {this.onToggleActive('none')}}
                 getStyles={this.getStyles}
               />
             }
-            {active !== 'image-wiz' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('image-wiz')}}>Image Library</button>}
+            {active !== 'image-wiz' && _.findIndex(meta.allows, (f) => { return f === 'image' }) !== -1 && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('image-wiz')}}>Image Library</button>}
             {active === 'image-wiz' &&
               <ImagePanel 
                 onClose={(e) => {this.onToggleActive('none')}}

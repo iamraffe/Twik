@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import { PAPER_SIZES } from '../../lib/utils'
 
-import { LayoutElement, ZoomUtility } from './canvas'
+import { LayoutElement, ZoomUtility, PageIndex } from './canvas'
 
 class Canvas extends React.Component{
   constructor(props){
@@ -20,6 +20,7 @@ class Canvas extends React.Component{
       fontFamilies: props.fontFamilies,
       styles: props.styles,
       sections: props.sections,
+      activePage: props.structure[0],
       hover: false,
       activeSection: ''
     }
@@ -68,37 +69,47 @@ class Canvas extends React.Component{
     })
   }
 
+  onPageSelected = (index) => {
+    this.setState({
+      activePage: this.state.structure[index]
+    })
+  }
+
   render(){
-    const { width, height, zoom, colors, fonts, structure, hover, activeSection } = this.state
+    const { width, height, zoom, colors, fonts, structure, hover, activeSection, activePage } = this.state
     // console.log("structure", structure)
     return (
       <div>
-        <div className="row" style={{height: 650, overflow: 'auto', maxWidth: '100%', marginBottom: 35, borderBottom: '1px solid silver'}}>
-          <div
-            id="entry-point"
-            style={{
-              border: '1px solid black',
-              margin: '0 auto',
-              width: (width*(zoom/100))+'in',
-              height: (height*(zoom/100))+'in'}}
+        <div className="row" style={{height: 650, overflow: 'auto', maxWidth: '100%', marginBottom: 0, borderBottom: '1px solid silver'}}>
+          <div className="col-xs-12">
+            <div
+              id="entry-point"
+              style={{
+                border: '1px solid black',
+                margin: '0 auto',
+                width: (width*(zoom/100))+'in',
+                height: (height*(zoom/100))+'in'
+              }}
               onMouseEnter={(e) => {this.setState({hover: true})}}
               onMouseLeave={(e) => {this.setState({hover: false})}}
-          >
-            {_.map(structure, (struct, i) => {
-              return(
-                <LayoutElement
-                  key={i}
-                  {...struct}
-                  zoom={zoom}
-                  hover={hover}
-                  activeSection={activeSection}
-                  getStyles={this.getStyles}
-                  onSectionSelect={this.onSectionSelect}
-                />
-              )
-            })}      
+            >
+              <LayoutElement
+                {...activePage}
+                zoom={zoom}
+                hover={hover}
+                activeSection={activeSection}
+                getStyles={this.getStyles}
+                onSectionSelect={this.onSectionSelect}
+              />    
+            </div>
           </div>
         </div>
+        <PageIndex
+          pages={structure}
+          hidden={true}
+          onPageSelected={this.onPageSelected}
+          getStyles={this.getStyles}
+        />
         <ZoomUtility/>
       </div>
     )
