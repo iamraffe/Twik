@@ -6,6 +6,7 @@ import { routerReducer } from 'react-router-redux'
  // export default combineReducers
 
 import colorReducer from './colorReducer'
+import componentReducer from './componentReducer'
 import fontReducer from './fontReducer'
 import sectionReducer from './sectionReducer'
 import sectionTypeReducer from './sectionTypeReducer'
@@ -17,6 +18,7 @@ import templateReducer from './templateReducer'
 
 const rootReducer = combineReducers({
   colors: colorReducer,
+  components: componentReducer,
   sections: sectionReducer,
   section_types: sectionTypeReducer,
   fontFamilies: fontReducer,

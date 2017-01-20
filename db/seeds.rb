@@ -39,288 +39,7 @@ if Apartment::Tenant.current == "public"
   col_2_id = SecureRandom.uuid
   col_3_id = SecureRandom.uuid
   col_logo_id = SecureRandom.uuid
-
-  # Template.create({
-  #   name: "Bufalina",
-  #   canon: true,
-  #   ext: SecureRandom.uuid,
-  #   allows: ['component'],
-  #   structure: {
-  #     colors: {
-  #       primary_color: 'black',
-  #       secondary_color: '',
-  #       tertiary_color: '',
-  #       quaternary_color: '',
-  #       quinary_color: ''
-  #     },
-  #     fontFamilies: {
-  #       primary_font: {
-  #         fontFamily: 'Pea Mystie',
-  #         fontWeight: '200',
-  #         fontStyle: 'normal',
-  #         textTransform: 'uppercase'
-  #       },
-  #       secondary_font: {
-  #         fontFamily: 'Avenir Next Condensed',
-  #         fontWeight: '400',
-  #         fontStyle: 'normal',
-  #         textTransform: 'lowercase'
-  #       },
-  #       alternate_font: {
-  #         fontFamily: 'Avenir Next Condensed Demi',
-  #         fontWeight: '600',
-  #         fontStyle: 'normal',
-  #         textTransform: 'lowercase'
-  #       }
-  #     },
-  #     styles: [
-  #       {
-  #         id: section_title_id,
-  #         name: 'section_title',
-  #         fontFamily: 'primary_font',
-  #         color: 'primary_color',
-  #         extra: {
-  #           fontSize: 14.86,
-  #           textDecoration: 'none',
-  #           letterSpacing: 3.5,
-  #           marginBottom: 15
-  #         }
-  #       },
-  #       {
-  #         id: dish_title_id,
-  #         name: 'dish_title',
-  #         fontFamily: 'alternate_font',
-  #         color: 'primary_color',
-  #         extra: {
-  #           fontSize: 12.36,
-  #           textDecoration: 'none',
-  #           letterSpacing: 0.1,
-  #           lineHeight: 1
-  #         }
-  #       },
-  #       {
-  #         id: dish_description_id,
-  #         name: 'dish_description',
-  #         fontFamily: 'secondary_font',
-  #         color: 'primary_color',
-  #         extra: {
-  #           fontSize: 12.36,
-  #           textDecoration: 'none',
-  #           letterSpacing: 0.1,
-  #           lineHeight: 1
-  #         }
-  #       },
-  #       {
-  #         id: dish_price_id,
-  #         name: 'dish_price',
-  #         fontFamily: 'alternate_font',
-  #         color: 'primary_color',
-  #         extra: {
-  #           fontSize: 12.36,
-  #           textDecoration: 'none',
-  #           letterSpacing: 0.1,
-  #           lineHeight: 1
-  #         }
-  #       }
-  #     ],
-  #     section_types: [
-  #       {
-  #         name: "Section Title",
-  #         id: SecureRandom.uuid,
-  #         structure: {
-  #           type: "SECTION_TITLE",
-  #           elements: [
-  #             {             
-  #               styles: section_title_id,
-  #               text: ''
-  #             }
-  #           ]
-  #         }
-  #       },
-  #       {
-  #         name: "Dishes & Beers",
-  #         id: SecureRandom.uuid,
-  #         structure: {
-  #           type: "SECTION_ELEMENT",
-  #           inline: true,
-  #           elements: [
-  #             {
-  #               type: "DISH_TITLE",
-  #               text: '',
-  #               styles: dish_title_id
-  #             },
-  #             {
-  #               type: "ELEMENT_SEPARATOR",
-  #               text: ' - ',
-  #               styles: dish_description_id
-  #             },
-  #             {
-  #               type: "DISH_DESCRIPTION",
-  #               text: '',
-  #               styles: dish_description_id
-  #             },
-  #             {
-  #               type: "ELEMENT_SEPARATOR",
-  #               text: '... ',
-  #               styles: dish_description_id
-  #             },
-  #             {
-  #               type: "DISH_PRICE",
-  #               text: '',
-  #               styles: dish_price_id
-  #             }
-  #           ]
-  #         }
-  #       },
-  #       {
-  #         name: "Wines",
-  #         id: SecureRandom.uuid,
-  #         structure: {
-  #           type: "SECTION_ELEMENT",
-  #           inline: true,
-  #           elements: [
-  #             {
-  #               type: "WINE_DESCRIPTION",
-  #               text: '',
-  #               styles: dish_description_id
-  #             },     
-  #             {
-  #               type: "ELEMENT_SEPARATOR",
-  #               text: ' ',
-  #               styles: dish_description_id
-  #             },       
-  #             {
-  #               type: "WINE_TITLE",
-  #               text: '',
-  #               styles: dish_title_id
-  #             },
-  #             {
-  #               type: "ELEMENT_SEPARATOR",
-  #               text: '... ',
-  #               styles: dish_description_id
-  #             },
-  #             {
-  #               type: "WINE_PRICE",
-  #               text: '',
-  #               styles: dish_price_id
-  #             }
-  #           ]
-  #         }
-  #       }
-  #     ],
-  #     layouts: [
-  #       {
-  #         id: SecureRandom.uuid,
-  #         name: "TWO_COLUMNS",
-  #         multiPage: false,
-  #         structure: [
-  #           {
-  #             type: 'CONTAINER',
-  #             position: 0,
-  #             background: '',
-  #             span: 0.5,
-  #             paddingTop: 15,
-  #             paddingBottom: 15,
-  #             paddingLeft: 15,
-  #             paddingRight: 15,
-  #             id: SecureRandom.uuid,
-  #             elements: [
-  #               {
-  #                 type: "ROW",
-  #                 position: 0,
-  #                 id: SecureRandom.uuid,
-  #                 vertical: 'top',
-  #                 elements: [
-  #                   {
-  #                     type: "COLUMN",
-  #                     span: 1,
-  #                     id: col_logo_id,
-  #                     position: 0,
-  #                     accepts: ['img'],
-  #                     elements: [],
-  #                     styles: {
-  #                       # marginTop: '2cm', #While there's no logo
-  #                       marginTop: '2.006cm',
-  #                       marginLeft: '1cm',
-  #                       marginRight: '1cm',
-  #                       marginBottom: '1.202cm'
-  #                     }
-  #                   },
-  #                   {
-  #                     type: "COLUMN",
-  #                     span: 1,
-  #                     id: SecureRandom.uuid,
-  #                     position: 1,
-  #                     accepts: ['text'],
-  #                     elements: [],
-  #                     styles: {
-  #                       marginLeft: '1cm',
-  #                       marginRight: '1cm',
-  #                     }
-  #                   }
-  #                 ]
-  #               },
-  #             ]
-  #           },
-  #           {
-  #             type: 'CONTAINER',
-  #             position: 0,
-  #             background: '',
-  #             span: 0.5,
-  #             paddingTop: 15,
-  #             paddingBottom: 15,
-  #             paddingLeft: 15,
-  #             paddingRight: 15,
-  #             id: SecureRandom.uuid,
-  #             elements: [
-  #               {
-  #                 type: "ROW",
-  #                 position: 0,
-  #                 id: SecureRandom.uuid,
-  #                 vertical: 'top',
-  #                 elements: [
-  #                   {
-  #                     type: "COLUMN",
-  #                     span: 1,
-  #                     id: SecureRandom.uuid,
-  #                     position: 0,
-  #                     accepts: ['text'],
-  #                     elements: [
-  #                     ],
-  #                     styles: {
-  #                       marginTop: '2.79cm',
-  #                       marginLeft: '1cm',
-  #                       marginRight: '1cm',
-  #                     }
-  #                   },
-  #                 ]
-  #               }
-  #             ]
-  #           },
-  #         ],
-  #         sections: [
-  #           {
-  #             id: SecureRandom.uuid,
-  #             type: "SECTION",
-  #             position: 0,
-  #             columnId: col_logo_id,
-  #             elements: [{
-  #                 type: "IMAGE_ELEMENT",
-  #                 url: 'http://bufalinadue.menustyler.com/img/bufalina-logo-greyscale.png',
-  #                 styles: {
-  #                   height: 61,
-  #                   width: 66
-  #                 },
-  #                 hide: true,
-  #                 position: 0,
-  #                 id: SecureRandom.uuid
-  #             }]
-  #           }
-  #         ]
-  #       }
-  #     ]
-  #   }
-  # })
+  section_id = SecureRandom.uuid
 
   Template.create({
     name: "Bufalina",
@@ -410,7 +129,7 @@ if Apartment::Tenant.current == "public"
           name: "Section Title",
           id: SecureRandom.uuid,
           structure: {
-            type: "SECTION_TITLE",
+            type: "SINGLE_ELEMENT",
             elements: [
               {             
                 styles: section_title_id,
@@ -423,7 +142,7 @@ if Apartment::Tenant.current == "public"
           name: "Dishes & Beers",
           id: SecureRandom.uuid,
           structure: {
-            type: "SECTION_ELEMENT",
+            type: "COMPOUND_ELEMENT",
             inline: true,
             elements: [
               {
@@ -458,7 +177,7 @@ if Apartment::Tenant.current == "public"
           name: "Wines",
           id: SecureRandom.uuid,
           structure: {
-            type: "SECTION_ELEMENT",
+            type: "COMPOUND_ELEMENT",
             inline: true,
             elements: [
               {
@@ -521,10 +240,7 @@ if Apartment::Tenant.current == "public"
                           span: 1,
                           id: col_logo_id,
                           position: 0,
-                          accepts: ['img'],
-                          elements: [],
                           styles: {
-                            # marginTop: '2cm', #While there's no logo
                             marginTop: '2.006cm',
                             marginLeft: '1cm',
                             marginRight: '1cm',
@@ -536,8 +252,6 @@ if Apartment::Tenant.current == "public"
                           span: 1,
                           id: SecureRandom.uuid,
                           position: 1,
-                          accepts: ['text'],
-                          elements: [],
                           styles: {
                             marginLeft: '1cm',
                             marginRight: '1cm',
@@ -569,9 +283,6 @@ if Apartment::Tenant.current == "public"
                           span: 1,
                           id: SecureRandom.uuid,
                           position: 0,
-                          accepts: ['text'],
-                          elements: [
-                          ],
                           styles: {
                             marginTop: '2.79cm',
                             marginLeft: '1cm',
@@ -587,21 +298,25 @@ if Apartment::Tenant.current == "public"
           ],
           sections: [
             {
-              id: SecureRandom.uuid,
+              id: section_id,
               type: "SECTION",
               position: 0,
               columnId: col_logo_id,
-              elements: [{
-                  type: "IMAGE_ELEMENT",
-                  url: 'http://bufalinadue.menustyler.com/img/bufalina-logo-greyscale.png',
-                  styles: {
-                    height: 61,
-                    width: 66
-                  },
-                  hide: true,
-                  position: 0,
-                  id: SecureRandom.uuid
-              }]
+              accepts: ['img']
+            }
+          ],
+          components: [
+            {
+              sectionId: section_id,
+              type: "IMAGE_ELEMENT",
+              url: 'http://bufalinadue.menustyler.com/img/bufalina-logo-greyscale.png',
+              styles: {
+                height: 61,
+                width: 66
+              },
+              hide: true,
+              position: 0,
+              id: SecureRandom.uuid
             }
           ]
         },
@@ -635,8 +350,6 @@ if Apartment::Tenant.current == "public"
                           span: 1,
                           id: col_logo_id,
                           position: 0,
-                          accepts: ['img'],
-                          elements: [],
                           styles: {
                             # marginTop: '2cm', #While there's no logo
                             marginTop: '2.006cm',
@@ -650,8 +363,6 @@ if Apartment::Tenant.current == "public"
                           span: 1,
                           id: SecureRandom.uuid,
                           position: 1,
-                          accepts: ['text'],
-                          elements: [],
                           styles: {
                             marginLeft: '1cm',
                             marginRight: '1cm',
@@ -679,9 +390,6 @@ if Apartment::Tenant.current == "public"
                           span: 1,
                           id: SecureRandom.uuid,
                           position: 0,
-                          accepts: ['text'],
-                          elements: [
-                          ],
                           styles: {
                             marginTop: '2.79cm',
                             marginLeft: '1cm',
@@ -718,8 +426,6 @@ if Apartment::Tenant.current == "public"
                           span: 1,
                           id: SecureRandom.uuid,
                           position: 1,
-                          accepts: ['text'],
-                          elements: [],
                           styles: {
                             marginLeft: '1cm',
                             marginRight: '1cm',
@@ -751,9 +457,6 @@ if Apartment::Tenant.current == "public"
                           span: 1,
                           id: SecureRandom.uuid,
                           position: 0,
-                          accepts: ['text'],
-                          elements: [
-                          ],
                           styles: {
                             marginTop: '2.79cm',
                             marginLeft: '1cm',
@@ -769,21 +472,25 @@ if Apartment::Tenant.current == "public"
           ],
           sections: [
             {
-              id: SecureRandom.uuid,
+              id: section_id,
               type: "SECTION",
               position: 0,
               columnId: col_logo_id,
-              elements: [{
-                  type: "IMAGE_ELEMENT",
-                  url: 'http://bufalinadue.menustyler.com/img/bufalina-logo-greyscale.png',
-                  styles: {
-                    height: 61,
-                    width: 66
-                  },
-                  hide: true,
-                  position: 0,
-                  id: SecureRandom.uuid
-              }]
+              accepts: ['img']
+            }
+          ],
+          components: [
+            {
+              sectionId: section_id,
+              type: "IMAGE_ELEMENT",
+              url: 'http://bufalinadue.menustyler.com/img/bufalina-logo-greyscale.png',
+              styles: {
+                height: 61,
+                width: 66
+              },
+              hide: true,
+              position: 0,
+              id: SecureRandom.uuid
             }
           ]
         }

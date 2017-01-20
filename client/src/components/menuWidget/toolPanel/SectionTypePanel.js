@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { DragSource } from 'react-dnd'
 import uuid from 'node-uuid'
 
-import * as sectionActions from '../../../actions/sectionActions'
+import * as componentActions from '../../../actions/componentActions'
 import * as styleActions from '../../../actions/styleActions'
 import * as sectionTypeActions from '../../../actions/sectionTypeActions'
 
@@ -18,28 +18,24 @@ const sectionSource = {
     const dropResult = monitor.getDropResult()
     // console.log(props)
     if (dropResult) {
-      console.log("SECTION TYPE PANEL DROP RESULT!")
+      // console.log("SECTION TYPE PANEL DROP RESULT!")
       const { id, structure } = component.state.sectionStyle
-      let section = {}
-      section = {
+      // console.log(component.state.sectionStyle)
+      // debugger;
+      let newComponent = {
+        ...structure,
         id: uuid.v4(),
-        type: "SECTION",
+        // type: "SECTION",
         position: dropResult.position,
-        // struct: id,
-        columnId: dropResult.columnId,
-        elements: [{
-          ...structure,
-          id: uuid.v4(),
-          position: 0
-        }]
+        sectionId: dropResult.sectionId
       }
-      console.log("COMPONENT ", component.state, id, structure, section)
+      // console.log("COMPONENT ", component.state, id, structure, component)
       // debugger;
       // if(component.state.newSection){
       // console.log("SECIOTN ", section)
 
 
-      props.sectionActions.addSection(section)
+      props.componentActions.addComponent(newComponent)
       component.state.sectionStyle = {}
       component.state.newSection = false
     }
@@ -253,7 +249,7 @@ function mapStateToProps(state, ownProps){
 
 function mapDispatchToProps(dispatch){
   return {
-    sectionActions: bindActionCreators(sectionActions, dispatch),
+    componentActions: bindActionCreators(componentActions, dispatch),
     sectionTypeActions: bindActionCreators(sectionTypeActions, dispatch),
     styleActions: bindActionCreators(styleActions, dispatch)
   }

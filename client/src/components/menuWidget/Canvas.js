@@ -77,7 +77,7 @@ class Canvas extends React.Component{
 
   render(){
     const { width, height, zoom, colors, fonts, structure, hover, activeSection, activePage } = this.state
-    // console.log("structure", structure)
+
     return (
       <div>
         <div className="row" style={{height: 650, overflow: 'auto', maxWidth: '100%', marginBottom: 0, borderBottom: '1px solid silver'}}>
@@ -104,12 +104,14 @@ class Canvas extends React.Component{
             </div>
           </div>
         </div>
-        <PageIndex
-          pages={structure}
-          hidden={true}
-          onPageSelected={this.onPageSelected}
-          getStyles={this.getStyles}
-        />
+        {structure.length > 1 &&
+          <PageIndex
+            pages={structure}
+            hidden={true}
+            onPageSelected={this.onPageSelected}
+            getStyles={this.getStyles}
+          />
+        }
         <ZoomUtility/>
       </div>
     )

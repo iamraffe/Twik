@@ -52,7 +52,7 @@ class MenuElement extends React.Component{
           />
         )
       case "IMAGE_ELEMENT":
-        console.log("ung ek => ", this.props)
+        // console.log("ung ek => ", this.props)
         return (
           <ImageElement
             type={type}

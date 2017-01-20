@@ -1,5 +1,6 @@
 export default {
   colors: {},
+  components: [],
   fontFamilies: {},
   meta: {
     editor: true,

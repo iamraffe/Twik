@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20161220214033) do
     t.string   "size"
     t.string   "title"
     t.json     "meta"
+    t.json     "components"
     t.json     "sections"
     t.string   "preview_file_name"
     t.string   "preview_content_type"

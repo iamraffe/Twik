@@ -3,7 +3,7 @@ import initialState from './initialState'
 
 export default function styleReducer(state = initialState.styles, action){
   switch(action.type){
-    case "SET_META_INFO":
+    case types.SET_META_INFO:
       return JSON.parse(action.template).structure.styles
     case types.ADD_SECTION_STYLE:
       return [
