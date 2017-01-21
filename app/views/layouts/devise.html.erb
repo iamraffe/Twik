@@ -40,7 +40,6 @@
     </header>
   <% end %>
   <section class="container" id="main-container">
-    <%= flash_messages if show_layout_flash? %>
     <%= yield %>
   </section>
   <% if user_signed_in? %>
@@ -57,5 +56,6 @@
     </div>
   </div>
   <%= javascript_include_tag 'application' %>
+  <%= toastr_flash %>
 </body>
 </html>
