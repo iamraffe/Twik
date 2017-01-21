@@ -1,5 +1,4 @@
 export default {
-  id: null,
   colors: {},
   components: [],
   fontFamilies: {},
@@ -10,7 +9,12 @@ export default {
     layout: '',
     size: '',
     name: '',
-  },  
+  },
+  menu: {
+    object: {
+      id: null
+    }
+  },
   saving: false,
   section_types: [],
   sections: [],

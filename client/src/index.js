@@ -41,7 +41,7 @@ window.renderReact = (id, component, props) => {
   // else{
   //   store = configureStore()
   // }
-  store = configureStore()
+  store = configureStore(_.omit(props, ['editor', 'mode']))
 
   // Create an enhanced history that syncs navigation events with the store
   const history = syncHistoryWithStore(browserHistory, store)

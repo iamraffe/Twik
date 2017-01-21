@@ -19,10 +19,10 @@ import templateReducer from './templateReducer'
 import zoomReducer from './zoomReducer'
 
 const rootReducer = combineReducers({
-  id: menuReducer,
   components: componentReducer,
   colors: colorReducer,
   fontFamilies: fontReducer,
+  menu: menuReducer,
   meta: metaReducer,
   saving: backendReducer,
   section_types: sectionTypeReducer,

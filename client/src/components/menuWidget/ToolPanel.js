@@ -159,7 +159,7 @@ ToolPanel.propTypes = {
 function mapStateToProps(state, ownProps){
   // console.log(state)
   return {
-    id: state.id,
+    id: state.menu.object.id,
     colors: state.colors,
     fontFamilies: state.fontFamilies,
     meta: state.meta,

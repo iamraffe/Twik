@@ -22,6 +22,7 @@ class MenuWidget extends React.Component{
 
     this.state = {
       fontFamilies: props.fontFamilies,
+      menu: props.menu,
       meta: props.meta,
       sections: props.sections,
       template: props.template,
@@ -66,6 +67,7 @@ class MenuWidget extends React.Component{
   componentWillReceiveProps(nextProps){
     this.setState({
       fontFamilies: nextProps.fontFamilies,
+      menu: nextProps.menu,
       meta: nextProps.meta,
       sections: nextProps.sections,
       template: nextProps.template,
@@ -98,8 +100,8 @@ class MenuWidget extends React.Component{
   }
 
   onUpdate = (e) => {
-    const { meta, sections, template, components } = this.state 
-    const { menu } = this.props
+    const { meta, sections, template, components, menu } = this.state 
+    // const { menu } = this.props
     let canvas = document.getElementById('entry-point')
     let preview
     canvas.parentElement.style.height = 'auto'
@@ -152,6 +154,7 @@ function mapStateToProps(state, ownProps){
   return {
     fontFamilies: state.fontFamilies,
     structure: state.structure,
+    menu: state.menu,
     meta: state.meta,
     sections: state.sections,
     template: state.template,
