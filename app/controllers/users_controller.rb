@@ -21,12 +21,14 @@ class UsersController < ApplicationController
     # authorize @user
     if @user.update_attributes(user_params)
       respond_to do |format|
-        format.html { redirect_to user_path(current_user), :notice => "User updated." }
+        format.js { }
+        format.html { redirect_to :back , :notice => "User updated." }
         format.json { render json: {user: @user, :message => "User updated.", ok: true, status: 200}, :status => :ok }
       end
     else
       respond_to do |format|
-        format.html { redirect_to user_path(current_user), :alert => "Unable to update user." }
+        format.js { }
+        format.html { redirect_to :back, :alert => "Unable to update user." }
         format.json { render json: {user: @user, :message => "Unable to update user.", ok: false, status: 422}, :status => :unprocessable_entity }
       end
     end

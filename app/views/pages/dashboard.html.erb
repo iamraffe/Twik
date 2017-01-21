@@ -1,24 +1,35 @@
-<% if @grouped_menus.count > 0 %>
+<% if @menus.count > 0 %>
   <section class="dashboard">
     <div class="row">
       <header class="col-md-2 col-md-offset-2 left-dashboard">
         <div class="row">
           <div class="col-xs-12">
-            <button class="btn btn-primary btn-square">
-              Upload<br>Photo
+            <span id="update-avatar-trigger" class="pull-right update-avatar-trigger ion ion-ios-checkmark-outline hide"></span>
+            <button id="upload-user-avatar" class="btn btn-primary btn-square" style="cursor: pointer" data-tooltip="Click to change avatar">
+              <% if current_user.avatar.present? %>
+                <%= image_tag current_user.avatar.url, class: "user-avatar" %>
+              <% else %>
+                Upload<br>Photo
+              <% end %>
             </button>
+            <%= form_for(current_user, html: { id: 'avatar-update-form'}) do |f| %>
+              <div class="hide">
+                 <%= form_group_for f, :avatar, label: false do %>
+                    <%= f.file_field :avatar %>
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </div>
         <div class="action-items col-xs-12 border-bottom">
           <h1>Welcome back!</h1>
         </div>
         <div class="action-items col-xs-12 border-bottom">
-          <span><%= current_user.name.nil? ? "Name" : current_user.name %></span>
-          <a href="/users/<%= current_user.id %>">
-            <span class="align-right ion ion-ios-compose-outline"></span>
-          </a>
-          <% if current_user.name.nil? %>
-            <span class="ion ion-android-alert text-primary"></span>
+          <%= form_for(current_user, html: { id: 'user-update-form', class: 'user-update-form'}) do |f| %>
+            <%= form_group_for f, :name, label: false do %>
+              <span class="pull-right ion js-user-edit-trigger ion-ios-compose-outline"></span>
+              <%= f.text_field :name, class:"form-control text-default", placeholder: "Name", :readonly => true %>
+            <% end %>
           <% end %>
         </div>
         <div class="action-items col-xs-12 border-bottom">
@@ -36,12 +47,12 @@
           <h1>Latest Menus</h1>
         </header>
         <div class="row">
-          <% @templates.each do |template| %>
+          <% @menus.each do |menu| %>
             <div class="col-sm-4">
-              <img src="<%= @grouped_menus[template.id].first.preview.url(:thumb) %>" alt="<%= @grouped_menus[template.id].first.name %>" class="img-responsive">
-              <%= link_to @grouped_menus[template.id].first.name, edit_menu_path(@grouped_menus[template.id].first) %>
-              <p><%= @grouped_menus[template.id].first.updated_at.strftime("Last edited on %m/%d/%Y,at %I:%M%p") %></p>
-              <a href="#">View all from this template</a>
+              <img src="<%= menu.preview.url(:thumb) %>" alt="<%= menu.name %>" class="img-responsive">
+              <%= link_to menu.name, edit_menu_path(menu) %>
+              <p><%= menu.updated_at.strftime("Last edited on %m/%d/%Y,at %I:%M%p") %></p>
+              <a href="/menus/<%= menu.id %>/archives">View menu history</a>
             </div>
           <% end %>
         </div>
@@ -54,9 +65,21 @@
       <header class="col-md-2 col-md-offset-2 left-dashboard">
         <div class="row">
           <div class="col-xs-12">
-            <button class="btn btn-primary btn-square">
-              Upload<br>Photo
+            <span id="update-avatar-trigger" class="pull-right update-avatar-trigger ion ion-ios-checkmark-outline hide"></span>
+            <button id="upload-user-avatar" class="btn btn-primary btn-square" style="cursor: pointer" data-tooltip="Click to change avatar">
+              <% if current_user.avatar.present? %>
+                <%= image_tag current_user.avatar.url, class: "user-avatar" %>
+              <% else %>
+                Upload<br>Photo
+              <% end %>
             </button>
+            <%= form_for(current_user, html: { id: 'avatar-update-form'}) do |f| %>
+              <div class="hide">
+                 <%= form_group_for f, :avatar, label: false do %>
+                    <%= f.file_field :avatar %>
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </div>
         <div class="action-items col-xs-12 border-bottom">

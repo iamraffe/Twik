@@ -17,10 +17,28 @@
         font-weight: bold;
         color: $brand-default;
       }
-      .ion-ios-compose-outline{
+      .ion{
         color: $brand-default;
         font-size: 1.25em;
         float: right;
+      }
+      .user-update-form{
+        .form-group{
+          margin-bottom: -7.5px;
+          margin-top: -7.5px;
+
+          .ion{
+            margin-top: 5px;
+          }
+          .help-block{
+            display: none;
+          }
+        }
+        input.form-control{
+          border-bottom: none;
+          padding: 0;
+          width: 94%;
+        }
       }
     }
   }
