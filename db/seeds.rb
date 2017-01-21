@@ -46,6 +46,8 @@ if Apartment::Tenant.current == "public"
     canon: true,
     ext: SecureRandom.uuid,
     allows: ['component'],
+    accepts: ['text'],
+    printAt: ['home'],
     structure: {
       colors: {
         primary_color: 'black',
@@ -244,17 +246,6 @@ if Apartment::Tenant.current == "public"
                             marginTop: '2.006cm',
                             marginLeft: '1cm',
                             marginRight: '1cm',
-                            marginBottom: '1.202cm'
-                          }
-                        },
-                        {
-                          type: "COLUMN",
-                          span: 1,
-                          id: SecureRandom.uuid,
-                          position: 1,
-                          styles: {
-                            marginLeft: '1cm',
-                            marginRight: '1cm',
                           }
                         }
                       ]
@@ -302,7 +293,11 @@ if Apartment::Tenant.current == "public"
               type: "SECTION",
               position: 0,
               columnId: col_logo_id,
-              accepts: ['img']
+              accepts: ['img'],
+              readOnly: true,
+              styles: {
+                marginBottom: '1.202cm'
+              }
             }
           ],
           components: [
@@ -354,18 +349,7 @@ if Apartment::Tenant.current == "public"
                             # marginTop: '2cm', #While there's no logo
                             marginTop: '2.006cm',
                             marginLeft: '1cm',
-                            marginRight: '1cm',
-                            marginBottom: '1.202cm'
-                          }
-                        },
-                        {
-                          type: "COLUMN",
-                          span: 1,
-                          id: SecureRandom.uuid,
-                          position: 1,
-                          styles: {
-                            marginLeft: '1cm',
-                            marginRight: '1cm',
+                            marginRight: '1cm'
                           }
                         }
                       ]
@@ -476,7 +460,11 @@ if Apartment::Tenant.current == "public"
               type: "SECTION",
               position: 0,
               columnId: col_logo_id,
-              accepts: ['img']
+              accepts: ['img'],
+              readOnly: true,
+              style: {
+                marginBottom: '1.202cm'
+              }
             }
           ],
           components: [

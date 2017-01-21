@@ -1,4 +1,5 @@
 export default {
+  id: null,
   colors: {},
   components: [],
   fontFamilies: {},
@@ -8,12 +9,13 @@ export default {
     orientation: '',
     layout: '',
     size: '',
-    name: ''
-  },
-  template: {},
+    name: '',
+  },  
+  saving: false,
   section_types: [],
   sections: [],
   structure: [],
   styles: [],
+  template: {},
   zoom: 100,
 }

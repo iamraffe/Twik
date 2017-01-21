@@ -22,11 +22,14 @@ const containerTarget = {
       sectionId: props.id,
       position: props.components.length > 0 ? _.last(props.components).position+1 : 0
     }
+  },
+  canDrop(props, monitor){
+    return props.readOnly !== true
   }
 }
 
-// @DropTarget((props) => {return props.accepts}, containerTarget, (connect, monitor) => ({
-@DropTarget(['text'], containerTarget, (connect, monitor) => ({
+@DropTarget((props) => {return props.accepts}, containerTarget, (connect, monitor) => ({
+// @DropTarget(['text'], containerTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop()
@@ -38,7 +41,7 @@ class Section extends React.Component{
     this.state = {
       components: _.filter(props.components, (component, i) => {return component.sectionId === props.id}),
       activeSection: props.activeSection,
-      active: props.activeSection === props.id,
+      active: props.activeSection === props.id && props.readOnly !== true,
       hover: props.hover
     }
 
@@ -48,7 +51,7 @@ class Section extends React.Component{
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      active: nextProps.activeSection === nextProps.id,
+      active: nextProps.activeSection === nextProps.id && nextProps.readOnly !== true,
       activeSection: nextProps.activeSection,
       components: _.filter(nextProps.components, (component, i) => {return component.sectionId === nextProps.id}),
       hover: nextProps.hover
@@ -69,7 +72,7 @@ class Section extends React.Component{
   }
 
   render(){
-    const { type, canDrop, isOver, connectDropTarget, styles, span } = this.props
+    const { type, canDrop, isOver, connectDropTarget, styles, span, id, readOnly } = this.props
     const { components, hover, active } = this.state
     const isActive = canDrop && isOver
     const backgroundColor = isActive ? 'rgba(192,192,192,0.3)' : '#FFF'
@@ -78,7 +81,7 @@ class Section extends React.Component{
       <div
         className={`${(hover === true && active === false) ? 'section-hover' : '' } section-element`}
         id={this.props.id}
-        style={{backgroundColor, border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles, ...this.styles()}}
+        style={{backgroundColor, width: '100%', border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles, ...this.styles()}}
         onClick={(e) => {
           if(active === false){
             console.log("section click")
@@ -133,7 +136,7 @@ class Section extends React.Component{
             Use the sidebar menu to add components to this section
           </p>
         }
-        {(hover === true && active === false) && <div className="section-overlay"></div>}
+        {(hover === true && active === false && this.props.readOnly !== true) && <div className="section-overlay"></div>}
       </div>
     )
   }

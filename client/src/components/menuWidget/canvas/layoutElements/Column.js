@@ -86,7 +86,8 @@ class Column extends React.Component{
                 id: uuid.v4(),
                 type: "SECTION",
                 position: sections.length+1,
-                columnId: this.props.id
+                columnId: this.props.id,
+                accepts: this.props.meta.accepts
               })
             }}
           >
@@ -100,7 +101,8 @@ class Column extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-    sections: state.sections
+    sections: state.sections,
+    meta: state.meta
   }
 }
 

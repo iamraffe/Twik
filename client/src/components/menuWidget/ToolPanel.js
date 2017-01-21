@@ -18,18 +18,22 @@ class ToolPanel extends React.Component{
 
     this.state = {
       active: 'none',
+      id: props.id,
       styles: props.styles,
       fontFamilies: props.fontFamilies,
       colors: props.colors,
       meta: props.meta, 
+      saving: props.saving,
       zoom: props.zoom
     }
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
+      id: nextProps.id,
       colors: nextProps.colors,
       fontFamilies: nextProps.fontFamilies,
+      saving: nextProps.saving,
       styles: nextProps.styles,
       meta: nextProps.meta,
       zoom: nextProps.zoom
@@ -81,7 +85,7 @@ class ToolPanel extends React.Component{
   }
 
   render(){
-    const { active, meta } = this.state
+    const { active, meta, id, saving } = this.state
     console.log(meta, meta.allows, _.findIndex(meta.allows, (f) => { return f === 'component' }))
     return(
       <section className="tool-panel" style={{padding: 25}}>
@@ -128,13 +132,13 @@ class ToolPanel extends React.Component{
         <div className="row">
           <div className="col-xs-6">
             <button className="btn-toolpanel-action btn-block" onClick={(e) => {
-              if(this.props.mode === "edit"){
+              if(this.props.mode === "edit" || id !== null){
                 this.props.onUpdate(e)
               }
               else{
                 this.props.onSave(e)
               }
-            }}>Save</button>
+            }} disabled={saving}>{saving ? 'Saving...' : 'Save'}</button>
           </div>
           <div className="col-xs-6">
             <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onExport()}}>Preview</button>
@@ -155,13 +159,15 @@ ToolPanel.propTypes = {
 function mapStateToProps(state, ownProps){
   // console.log(state)
   return {
-    zoom: state.zoom,
-    sections: state.sections,
-    fontFamilies: state.fontFamilies,
-    structure: state.structure,
-    meta: state.meta,
+    id: state.id,
     colors: state.colors,
-    styles: state.styles
+    fontFamilies: state.fontFamilies,
+    meta: state.meta,
+    saving: state.saving,
+    sections: state.sections,
+    structure: state.structure,    
+    styles: state.styles,
+    zoom: state.zoom,
   }
 }
 

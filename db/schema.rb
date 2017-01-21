@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20161220214033) do
     t.json     "meta"
     t.json     "components"
     t.json     "sections"
+    t.json     "component_styles"
     t.string   "preview_file_name"
     t.string   "preview_content_type"
     t.integer  "preview_file_size"
@@ -110,6 +111,8 @@ ActiveRecord::Schema.define(version: 20161220214033) do
     t.boolean  "canon"
     t.uuid     "ext"
     t.text     "allows",     default: [],              array: true
+    t.text     "accepts",    default: [],              array: true
+    t.text     "printAt",    default: [],              array: true
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end

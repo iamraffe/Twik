@@ -9,6 +9,7 @@ class CreateMenus < ActiveRecord::Migration
       t.json :meta
       t.json :components
       t.json :sections
+      t.json :component_styles
       t.attachment :preview
       t.string :subdomain
       t.references :template, index: true

@@ -7,8 +7,11 @@ import { bindActionCreators } from 'redux'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import html2canvas from 'html2canvas'
+
+import * as backendActions from '../actions/backendActions'
 import * as metaActions from '../actions/metaActions'
 import * as sectionActions from '../actions/sectionActions'
+import * as componentActions from '../actions/componentActions'
 
 import { ToolPanel, Canvas, MetaWidget } from './menuWidget'
 
@@ -22,6 +25,7 @@ class MenuWidget extends React.Component{
       meta: props.meta,
       sections: props.sections,
       template: props.template,
+      components: props.components,
       step: props.mode === 'edit' ? 'loading' : 'meta'
     }
   }
@@ -36,6 +40,7 @@ class MenuWidget extends React.Component{
       })
       this.onSetStep('widget')
       this.props.sectionActions.loadSections(JSON.parse(menu.object.sections))
+      this.props.componentActions.loadComponents(JSON.parse(menu.object.components))
     }
   }
 
@@ -63,7 +68,8 @@ class MenuWidget extends React.Component{
       fontFamilies: nextProps.fontFamilies,
       meta: nextProps.meta,
       sections: nextProps.sections,
-      template: nextProps.template
+      template: nextProps.template,
+      components: nextProps.components
     })
   }
 
@@ -72,17 +78,18 @@ class MenuWidget extends React.Component{
   }
 
   onSave = (e) => {
-    const { meta, sections, template } = this.state 
+    const { meta, sections, template, components } = this.state 
     let canvas = document.getElementById('entry-point')
     let preview
     canvas.parentElement.style.height = 'auto'
     html2canvas(canvas).then((render) => {
       preview = render.toDataURL()
       canvas.parentElement.style.height = '650px'
-      this.props.metaActions.saveMenu({
+      this.props.backendActions.saveMenu({
         ..._.omit(meta, ['editor',  'society']),
         meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
         sections: JSON.stringify(sections),
+        components: JSON.stringify(components),
         template_id: template.id
       },
       meta.society,
@@ -91,7 +98,7 @@ class MenuWidget extends React.Component{
   }
 
   onUpdate = (e) => {
-    const { meta, sections, template } = this.state 
+    const { meta, sections, template, components } = this.state 
     const { menu } = this.props
     let canvas = document.getElementById('entry-point')
     let preview
@@ -99,10 +106,11 @@ class MenuWidget extends React.Component{
     html2canvas(canvas).then((render) => {
       preview = render.toDataURL()
       canvas.parentElement.style.height = '650px'
-      this.props.metaActions.updateMenu({
+      this.props.backendActions.updateMenu({
         ..._.omit(meta, ['editor',  'society']),
         meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
         sections: JSON.stringify(sections),
+        components: JSON.stringify(components),
         template_id: template.id
       },
       meta.society,
@@ -146,14 +154,17 @@ function mapStateToProps(state, ownProps){
     structure: state.structure,
     meta: state.meta,
     sections: state.sections,
-    template: state.template
+    template: state.template,
+    components: state.components
   }
 }
 
 function mapDispatchToProps(dispatch){
   return {
+    backendActions: bindActionCreators(backendActions, dispatch),
     metaActions: bindActionCreators(metaActions, dispatch),
-    sectionActions: bindActionCreators(sectionActions, dispatch)
+    sectionActions: bindActionCreators(sectionActions, dispatch),
+    componentActions: bindActionCreators(componentActions, dispatch)
   }
 }
 

@@ -210,6 +210,22 @@ META SETTINGS
       @extends .form-control;
     }
   }
+  .react-autosuggest__suggestions-container{
+    width: 94%;
+    position: absolute;
+    
+    // left: 0px;
+    z-index: 9;
+    background: white;
+
+    .react-autosuggest__suggestions-list{
+      list-style-type: none;
+      border: 1px solid black;
+      border-top: none;
+      padding-left: 12.5px;
+      margin-bottom: 0;
+    }
+  }
   input:not([type="radio"]){
     border: none;
     // padding: 0;
@@ -259,6 +275,10 @@ META SETTINGS
       }
       &:focus{
         outline: none !important;
+      }
+      &[disabled]{
+        opacity: 0.3;
+        cursor: not-allowed;
       }
   }
 
