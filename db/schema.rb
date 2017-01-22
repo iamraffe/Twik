@@ -23,11 +23,24 @@ ActiveRecord::Schema.define(version: 20161220214033) do
   end
 
   create_table "archives", force: :cascade do |t|
-    t.datetime "version"
     t.string   "name"
-    t.json     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "menu_id"
+    t.json     "meta"
+    t.json     "components"
+    t.json     "sections"
+    t.json     "component_styles"
+    t.string   "preview_file_name"
+    t.string   "preview_content_type"
+    t.integer  "preview_file_size"
+    t.datetime "preview_updated_at"
+    t.string   "subdomain"
+    t.integer  "template_id"
+    t.integer  "society_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["menu_id"], name: "index_archives_on_menu_id", using: :btree
+    t.index ["society_id"], name: "index_archives_on_society_id", using: :btree
+    t.index ["template_id"], name: "index_archives_on_template_id", using: :btree
   end
 
   create_table "images", force: :cascade do |t|
@@ -46,21 +59,11 @@ ActiveRecord::Schema.define(version: 20161220214033) do
     t.index ["user_id"], name: "index_images_on_user_id", using: :btree
   end
 
-  create_table "items", force: :cascade do |t|
-    t.string   "text"
-    t.integer  "position"
-    t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["category_id"], name: "index_items_on_category_id", using: :btree
-  end
-
   create_table "menus", force: :cascade do |t|
     t.string   "name"
     t.string   "orientation"
     t.string   "layout"
     t.string   "size"
-    t.string   "title"
     t.json     "meta"
     t.json     "components"
     t.json     "sections"
@@ -85,18 +88,6 @@ ActiveRecord::Schema.define(version: 20161220214033) do
     t.boolean  "default"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "sections", force: :cascade do |t|
-    t.integer  "menu_id"
-    t.string   "title"
-    t.text     "text"
-    t.integer  "position"
-    t.string   "portrait_positioning"
-    t.string   "landscape_positioning"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.index ["menu_id"], name: "index_sections_on_menu_id", using: :btree
   end
 
   create_table "societies", force: :cascade do |t|

@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     # user.source = params['stripeToken']
     # user.save
 
-    flash[:success] = "Your card details have been updated!"
+    flash[:notice] = "Your card details have been updated!"
     redirect_to user_path(current_user)
 
     rescue Stripe::CardError => e

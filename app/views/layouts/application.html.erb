@@ -26,8 +26,7 @@
                   <span class="caret"></span>
                 </span>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-<!--                   <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li> -->
+                  <li><%= link_to('Sign into different account', '/accounts/signin') %></li>
                   <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
                 </ul>
               </div>

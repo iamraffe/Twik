@@ -5,7 +5,6 @@ class CreateMenus < ActiveRecord::Migration
       t.string :orientation
       t.string :layout
       t.string :size
-      t.string :title
       t.json :meta
       t.json :components
       t.json :sections

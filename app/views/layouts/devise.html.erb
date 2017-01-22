@@ -18,7 +18,15 @@
             <% end %>
           </div>
           <div class="current-account">
-            <p class="navbar-text"><%= current_account.subdomain %>.twik.us</a></p>
+            <div class="dropdown">
+              <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <%= current_account.subdomain %>.twik.us
+                <span class="caret"></span>
+              </span>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><%= link_to('Sign into different account', account_sign_in_url(subdomain: false)) %></li>
+              </ul>
+            </div>
           </div>
           <% if user_signed_in? %>
             <ul class="navbar-right nav navbar-nav right-buttons">
@@ -31,12 +39,19 @@
       </nav>
     </header>
   <% else %>
-    <header class="container">
-      <div class="row accounts-logo-wrapper">
-        <div class="col-sm-5 col-sm-offset-3">
-          <%= image_tag "twik-logo-horizontal-red.png", class: "landing-logo img-responsive" %>
+    <header>
+      <nav class="navbar navbar-default">
+        <div class="container-full">
+          <div class="navbar-header">
+            <%= link_to root_path, class: "navbar-brand twik" do %>
+              <%= image_tag "twik-logo-word-only-red.png", class: "img-responsive" %>
+            <% end %>
+          </div>
+          <div class="current-account">
+            <p class="navbar-text">twik.us</p>
+          </div>
         </div>
-      </div>
+      </nav>
     </header>
   <% end %>
   <section class="container" id="main-container">

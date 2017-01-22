@@ -51,7 +51,7 @@
             <div class="col-sm-4">
               <img src="<%= menu.preview.url(:thumb) %>" alt="<%= menu.name %>" class="img-responsive">
               <%= link_to menu.name, edit_menu_path(menu) %>
-              <p><%= menu.updated_at.strftime("Last edited on %m/%d/%Y,at %I:%M%p") %></p>
+              <p><%= menu.updated_at.strftime("Last edited on %m/%d/%Y, at %I:%M%p") %></p>
               <a href="/menus/<%= menu.id %>/archives">View menu history</a>
             </div>
           <% end %>
