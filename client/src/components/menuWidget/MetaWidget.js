@@ -27,6 +27,8 @@ class MetaWidget extends React.Component{
   componentWillReceiveProps(nextProps){
   }
 
+
+
   componentDidMount(){
     const req = request.get(`/societies`)
     req.query({ format: 'json' })

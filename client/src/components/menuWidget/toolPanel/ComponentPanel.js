@@ -21,6 +21,7 @@ const sectionSource = {
       const { id, structure } = component.state.sectionStyle
       let newComponent = {
         ...structure,
+        structureId: id,
         id: uuid.v4(),
         position: dropResult.position,
         sectionId: dropResult.sectionId

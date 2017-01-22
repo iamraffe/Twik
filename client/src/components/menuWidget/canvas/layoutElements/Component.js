@@ -4,24 +4,25 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import uuid from 'node-uuid'
 
-import * as sectionActions from '../../../../actions/sectionActions'
+import * as componentActions from '../../../../actions/componentActions'
 
 import MenuElement from '../MenuElement'
 
 class Component extends React.Component{
   constructor(props){
     super(props)
-
+    console.log(props)
+    // debugger;
     this.state = {
-      active: props.activeSection === props.id,
-      sections: props.sections,
+      activeSection: props.activeSection,
+      // sections: props.sections,
       section_types: props.section_types,
-      elements: props.elements,
-      zoom: props.zoom,
-      fontFamilies: props.fontFamilies,
-      colors: props.colors,
-      structure: props.structure,
-      hover: props.hover
+      // elements: props.elements,
+      // zoom: props.zoom,
+      // fontFamilies: props.fontFamilies,
+      // colors: props.colors,
+      // structure: props.structure,
+      // hover: props.hover
     }
 
     this.getStyles = props.getStyles
@@ -30,51 +31,55 @@ class Component extends React.Component{
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      active: nextProps.activeSection === nextProps.id,
-      sections: nextProps.sections,
+      activeSection: nextProps.activeSection,
+      // sections: nextProps.sections,
       section_types: nextProps.section_types,
-      elements: nextProps.elements,
-      zoom: nextProps.zoom,
-      fontFamilies: nextProps.fontFamilies,
-      colors: nextProps.colors,
-      structure: nextProps.structure,
-      hover: nextProps.hover
+      // elements: nextProps.elements,
+      // zoom: nextProps.zoom,
+      // fontFamilies: nextProps.fontFamilies,
+      // colors: nextProps.colors,
+      // structure: nextProps.structure,
+      // hover: nextProps.hover
     })
   }
 
-  onAddMenuElement = (e) => {
+  onAddComponent = (e) => {
     const { section_types, elements } = this.state
-    const { containerId, rowId, columnId, id, struct } = this.props
-    const sectionIndex =  _.findIndex(section_types, (s) => {return s.id === struct})
-    this.props.sectionActions.addMenuElement({...section_types[sectionIndex].structure, position: elements.length, id: uuid.v4()}, id)
+    const { sectionId, structureId, nextElementPosition } = this.props
+    const typeIndex =  _.findIndex(section_types, (s) => {return s.id === structureId})
+
+    this.props.componentActions.addComponent({
+      ...section_types[typeIndex].structure,
+      structureId: section_types[typeIndex].id,
+      position: nextElementPosition,
+      id: uuid.v4(),
+      sectionId
+    })
   }
 
-  onUpdateMenuElement = (element) => {
-    const { containerId, rowId, columnId, id } = this.props
-    this.props.sectionActions.updateMenuElement(element, id)
+  onUpdateComponent = (element) => {
+    const { id } = this.props
+    this.props.componentActions.updateComponent(element, id)
   }
 
-  onDeleteMenuElement = (position) => {
-    const { containerId, rowId, columnId, id } = this.props
-    this.props.sectionActions.deleteMenuElement(position, id)
+  onDeleteComponent = (position) => {
+    const { id } = this.props
+    this.props.componentActions.deleteComponent(position, id)
   }
 
   render(){
-    const { elements, hover, active } = this.state
-    const { activeSection, id } = this.props
+    const { elements, activeSection } = this.state
 
     return(
-      <div>
+      <div style={{position: 'relative'}}>
         <MenuElement
           {...this.props}
-          onUpdate={this.onUpdateMenuElement}
-          onDelete={this.onDeleteMenuElement}
+          onAdd={this.onAddComponent}
+          onUpdate={this.onUpdateComponent}
+          onDelete={this.onDeleteComponent}
           getStyles={this.getStyles}
-          activeSection={hover === true && active === true}
-        />        
-        {(hover === true && active === true) &&
-          <span className="ion ion-ios-plus-outline" style={{cursor: 'pointer', position: 'absolute', bottom: -25, left: -2.5}} onClick={(e) => {this.onAddMenuElement(e)}}></span>
-        }
+          activeSection={activeSection}
+        />
       </div>
     )
   }
@@ -82,18 +87,18 @@ class Component extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-    structure: state.structure,
-    sections: state.sections,
+    // structure: state.structure,
+    // sections: state.sections,
     section_types: state.section_types.custom ? [...state.section_types.custom, ...state.section_types.template] : state.section_types,
-    zoom: state.zoom,
-    colors: state.colors,
-    fontFamilies: state.fontFamilies
+    // zoom: state.zoom,
+    // colors: state.colors,
+    // fontFamilies: state.fontFamilies
   }
 }
 
 function mapDispatchToProps(dispatch){
   return {
-    sectionActions: bindActionCreators(sectionActions, dispatch)
+    componentActions: bindActionCreators(componentActions, dispatch)
   }
 }
 

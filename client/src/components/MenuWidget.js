@@ -27,11 +27,26 @@ class MenuWidget extends React.Component{
       sections: props.sections,
       template: props.template,
       components: props.components,
-      step: props.mode === 'edit' ? 'loading' : 'meta'
+      step: props.mode === 'edit' ? 'loading' : 'meta',
+      saving: props.saving
     }
   }
 
+  onUnload = (event) => { // the method that will be used for both add and remove event
+    // CHECK FOR CHANGES IF THERE ARE ANY THEN GO AHEAD AND CONFIRM
+    // event.preventDefault()
+    // event.returnValue = true
+    // return true
+  }
+
+  componentWillUnmount() {
+    // window.removeEventListener("onbeforeunload", this.onUnload)
+    window.removeEventListener("beforeunload", this.onUnload)
+  }
+  
   componentDidMount(){
+    window.addEventListener("beforeunload", this.onUnload)
+    // window.addEventListener("onbeforeunload", this.onUnload)
     const { mode, menu } = this.props
     if(mode === 'edit' || mode === 'preview'){
       this.props.metaActions.setMetaInfo({
@@ -71,7 +86,8 @@ class MenuWidget extends React.Component{
       meta: nextProps.meta,
       sections: nextProps.sections,
       template: nextProps.template,
-      components: nextProps.components
+      components: nextProps.components,
+      saving: nextProps.saving
     })
   }
 
@@ -122,7 +138,7 @@ class MenuWidget extends React.Component{
   }
 
   render(){
-    const { structure, meta, step } = this.state
+    const { structure, meta, step, saving } = this.state
     const { templates, mode } = this.props
 
     return(
@@ -132,7 +148,24 @@ class MenuWidget extends React.Component{
         }
         {step === 'widget' &&
           <div className="row">
-            <div className={meta.orientation === 'landscape' ? `col-xs-10` : `col-xs-7 col-xs-offset-3`}>
+            <div
+              className={meta.orientation === 'landscape' ? `col-xs-10` : `col-xs-7 col-xs-offset-3`}
+              style={{opacity: saving ? 0.2 : 1, position: 'relative'}}
+            >
+              {saving &&
+                <div
+                  style={{
+                    background: 'transparent',
+                    cursor: 'not-allowed',
+                    width: '100%',
+                    height: '100%',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    zIndex: 999
+                  }}
+                />
+              }
               <Canvas />
             </div>
             <div className="col-xs-2">
@@ -158,7 +191,8 @@ function mapStateToProps(state, ownProps){
     meta: state.meta,
     sections: state.sections,
     template: state.template,
-    components: state.components
+    components: state.components,
+    saving: state.saving
   }
 }
 

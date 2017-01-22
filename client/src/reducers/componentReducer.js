@@ -3,6 +3,7 @@ import initialState from './initialState'
 import _ from 'lodash'
 
 export default function sectionReducer(state = initialState.components, action){
+  let componentIndex
   switch(action.type){
     case types.SET_META_INFO:
       let layouts = JSON.parse(action.template).structure.layouts
@@ -14,54 +15,28 @@ export default function sectionReducer(state = initialState.components, action){
         ...state,
         action.component
       ]
-    // case types.ADD_MENU_ELEMENT:
-    //   sectionIndex = _.findIndex(state, (s) => {return s.id === action.sectionId})
-    //   // console.log(sectionIndex, action, state)
-    //   return [
-    //     ...state.slice(0, sectionIndex),
-    //     {
-    //       ...state[sectionIndex],
-    //       elements: [
-    //         ...state[sectionIndex].elements,
-    //         action.element
-    //       ]
-    //     },
-    //     ...state.slice(sectionIndex+1)
-    //   ]
-    // case types.UPDATE_MENU_ELEMENT:
-    //   sectionIndex = _.findIndex(state, (s) => {return s.id === action.sectionId})
-    //   elementIndex = _.findIndex(state[sectionIndex].elements, (e) => {return e.id === action.element.id})
-    //   console.log(sectionIndex, action, state, elementIndex)
-    //   return [
-    //     ...state.slice(0, sectionIndex),
-    //     {
-    //       ...state[sectionIndex],
-    //       elements: [
-    //         ...state[sectionIndex].elements.slice(0, elementIndex),
-    //         {
-    //           ...state[sectionIndex].elements[elementIndex],
-    //           ...action.element
-    //         },
-    //         ...state[sectionIndex].elements.slice(elementIndex+1),
-    //       ]
-    //     },
-    //     ...state.slice(sectionIndex+1)
-    //   ]
-    // case types.DELETE_MENU_ELEMENT:
-    //   sectionIndex = _.findIndex(state, (s) => {return s.id === action.sectionId})
-    //   elementIndex = _.findIndex(state[sectionIndex].elements, (e) => {return e.position === action.position})
-    //   // console.log(sectionIndex, action, state, elementIndex)
-    //   return [
-    //     ...state.slice(0, sectionIndex),
-    //     {
-    //       ...state[sectionIndex],
-    //       elements: [
-    //         ...state[sectionIndex].elements.slice(0, elementIndex),
-    //         ...state[sectionIndex].elements.slice(elementIndex+1),
-    //       ]
-    //     },
-    //     ...state.slice(sectionIndex+1)
-    //   ]
+    case types.UPDATE_COMPONENT:
+      componentIndex = _.findIndex(state, (s) => {return s.id === action.componentId})
+      return [
+        ...state.slice(0, componentIndex),
+        {
+          ...state[componentIndex],
+          ...action.component
+        },
+        ...state.slice(componentIndex+1)
+      ]
+    case types.DELETE_COMPONENT:
+      componentIndex = _.findIndex(state, (s) => {return s.id === action.componentId})
+      return [
+        ...state.slice(0, componentIndex),
+        ...state.slice(componentIndex+1)
+      ]
+    case types.DELETE_SECTION:
+      return [
+        ..._.filter(state, (component) => {
+            return component.sectionId !== action.sectionId;
+        })
+      ]
     default:
       return state
   }

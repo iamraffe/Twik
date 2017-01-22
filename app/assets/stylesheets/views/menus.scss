@@ -110,6 +110,18 @@ NEW & EDIT
   opacity: .5;
   background: #bcbcbc;
 }
+.sortable-chosen{
+  .ion:not(.ion-ios-drag){
+    display: none !important;
+  }
+}
+.sortable-drag{
+  background: red
+}
+.empty-sortable{
+  width: 100%;
+  height: 10px;
+}
 
 .dropzone-wrapper{
   margin-top: 25px;

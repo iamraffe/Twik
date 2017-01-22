@@ -25,6 +25,12 @@ export default function sectionReducer(state = initialState.sections, action){
         },
         ...state.slice(sectionIndex+1)
       ]
+    case types.DELETE_SECTION:
+      sectionIndex = _.findIndex(state, (s) => {return s.id === action.sectionId})
+      return [
+        ...state.slice(0, sectionIndex),
+        ...state.slice(sectionIndex+1)
+      ]
     default:
       return state
   }

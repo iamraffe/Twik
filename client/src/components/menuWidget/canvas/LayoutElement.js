@@ -55,10 +55,6 @@ class LayoutElement extends React.Component{
                 <LayoutElement
                   key={i}
                   containerId={this.props.id}
-                  paddingTop={this.props.paddingTop}
-                  paddingBottom={this.props.paddingBottom}
-                  paddingLeft={this.props.paddingLeft}
-                  paddingRight={this.props.paddingRight}
                   zoom={this.props.zoom}
                   hover={this.props.hover}
                   activeSection={this.props.activeSection}

@@ -19,6 +19,7 @@ class CompoundElement extends React.Component{
       })
     }
 
+    this.onAdd = props.onAdd
     this.onUpdate = props.onUpdate
     this.onDelete = props.onDelete
   }
@@ -74,31 +75,57 @@ class CompoundElement extends React.Component{
 
     if(inline){
       return (
-        <article className={`${type} compound-element`} style={{position: 'relative', lineHeight: 1}}>
-          {activeSection && <span className="section-element-handle ion ion-ios-drag" style={{position: 'absolute', top: 2.5, left: -15, cursor: 'move'}}></span>}
+        <article className={`${type} compound-element`} style={{position: 'relative', display: 'block'}}>
           {_.map(elements, (e, i) => {
             return (
               <span key={i}>
-                {editing !== e.type &&
+                {editing === 'none' &&
                   <span>
-                    <span
-                      className={e.type}
-                      style={e.styles}
-                      dangerouslySetInnerHTML={{__html: (e.text === '' ? '<span>Lorem ipsum</span>' : `${e.text}`)}}
-                      onClick={() => {
-                        if(activeSection){
-                          this.onToggleEditing(e.type)
-                        }
-                      }}
-                    />
-                    {activeSection && (i%this.props.elements.length === 0 ) &&
+                    {activeSection && (i%this.props.elements.length === 0) && 
                       <span
-                        style={{cursor: 'pointer', position: 'absolute', right: -20, top: 4}}
+                        data-toggle="tooltip"
+                        title="DRAG TO REODER ELEMENTS"
+                        className="section-element-handle ion ion-ios-drag"
+                        style={{position: 'absolute', top: 2.5, left: -25, cursor: 'move'}}
+                      />
+                    }
+                    {activeSection && (i%this.props.elements.length === 0) &&
+                      <span
+                        style={{cursor: 'pointer', position: 'absolute', right: -32.5, top: 4, color: 'red'}}
                         className="ion ion-ios-close-outline"
-                        onClick={(e) => {this.onDelete(this.props.position)}}
+                        data-toggle="tooltip"
+                        title="CLICK TO DELETE ELEMENT"
+                        onClick={(e) => {
+                          if (window.confirm("Are you sure you want to delete this item?")){  
+                            this.onDelete(this.props.position)
+                          }
+                        }}
+                      />
+                    }
+                    {activeSection && (i%this.props.elements.length === 0) &&
+                      <span
+                        className="ion ion-ios-plus-outline"
+                        data-toggle="tooltip"
+                        title="CLICK TO ADD ELEMENT"
+                        style={{cursor: 'pointer', position: 'absolute', top: 4, right: -12.5}}
+                        onClick={(e) => {
+                          this.onAdd(e)
+                        }}
                       />
                     }
                   </span>
+                }
+                {editing !== e.type &&
+                  <span
+                    className={e.type}
+                    style={e.styles}
+                    dangerouslySetInnerHTML={{__html: (e.text === '' ? '<span>Lorem ipsum</span>' : `${e.text}`)}}
+                    onClick={(event) => {
+                      if(activeSection){
+                        this.onToggleEditing(e.type)
+                      }
+                    }}
+                  />
                 }
                 {editing === e.type &&
                   <InlineEditor
@@ -118,11 +145,18 @@ class CompoundElement extends React.Component{
     }
     else{
       return (
-        <article className={`${type} compound-element`} style={{position: 'relative', lineHeight: 1}}>
-          {activeSection && <span className="section-element-handle ion ion-ios-drag" style={{position: 'absolute', top: 2.5, left: -15, cursor: 'move'}}></span>}
+        <article className={`${type} compound-element`} style={{position: 'relative', display: 'block'}}>
+          {activeSection &&
+            <span
+              data-toggle="tooltip"
+              title="DRAG TO REODER ELEMENTS"
+              className="section-element-handle ion ion-ios-drag"
+              style={{position: 'absolute', top: 2.5, left: -25, cursor: 'move'}}
+            />
+          }
           {_.map(elements, (e, i) => {
             return (
-              <span key={i}>
+              <span key={i} style={{display: 'block'}}>
                 {editing !== e.type &&
                   <span>
                     <span
@@ -135,7 +169,19 @@ class CompoundElement extends React.Component{
                         }
                       }}
                     />
-                    {activeSection && (i%this.props.elements.length === 0 )&&<span style={{cursor: 'pointer', position: 'absolute', right: -20, top: 4}} className="ion ion-ios-close-outline" onClick={(e) => {this.onDelete(this.props.position)}}></span>}
+                    {activeSection && (i%this.props.elements.length === 0) &&
+                      <span
+                        data-toggle="tooltip"
+                        title="CLICK TO DELETE ELEMENT"
+                        style={{cursor: 'pointer', position: 'absolute', right: -32.5, top: 4, color: 'red'}}
+                        className="ion ion-ios-close-outline"
+                        onClick={(e) => {
+                          if(window.confirm("Are you sure you want to delete this item?")){
+                            this.onDelete(this.props.position)
+                          }
+                        }}
+                      />
+                    }
                   </span>
                 }
                 {editing === e.type &&

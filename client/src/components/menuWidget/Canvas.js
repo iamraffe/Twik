@@ -27,7 +27,6 @@ class Canvas extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    // console.log("RECEIVED PROPS ", nextProps.styles)
     this.setState({
       width: PAPER_SIZES[`${nextProps.meta.size.toUpperCase()}_${nextProps.meta.orientation.toUpperCase()}`].width,
       height: PAPER_SIZES[`${nextProps.meta.size.toUpperCase()}_${nextProps.meta.orientation.toUpperCase()}`].height,
@@ -39,13 +38,6 @@ class Canvas extends React.Component{
       sections: nextProps.sections
     })
   }
-
-  componentDidMount(){
-  }
-
-  // convertToMM = (fontSize) => {
-  //   return fontSize/72
-  // }
 
   getStyles = (styleId) => {
     const { styles, fontFamilies, colors, zoom } = this.state
@@ -74,6 +66,10 @@ class Canvas extends React.Component{
     })
   }
 
+  // shouldComponentUpdate(nextProps, nextState){
+  //   return nextState.hover !== this.state.hover
+  // }
+
   render(){
     const { width, height, zoom, colors, fonts, structure, hover, activeSection, activePage } = this.state
 
@@ -89,8 +85,15 @@ class Canvas extends React.Component{
                 width: (width*(zoom/100))+'in',
                 height: (height*(zoom/100))+'in'
               }}
-              onMouseEnter={(e) => {this.setState({hover: true})}}
-              onMouseLeave={(e) => {this.setState({hover: false})}}
+              onMouseEnter={(e) => {
+                this.setState({hover: true})
+              }}
+              onMouseMove={(e) => {
+                this.setState({hover: true})
+              }}
+              onMouseLeave={(e) => {
+                this.setState({hover: false})
+              }}
             >
               <LayoutElement
                 {...activePage}

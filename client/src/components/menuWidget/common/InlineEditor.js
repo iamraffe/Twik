@@ -33,6 +33,10 @@ class InlineEditor extends React.Component {
     
     htmlContent = _.replace(htmlContent,new RegExp("<p>","g"),"<span>")
     htmlContent = _.replace(htmlContent,new RegExp("</p>","g"),"</span>")
+
+    if(htmlContent === '<span><br></span>'){
+      htmlContent = '<span>&nbsp;</span>'
+    }
     this.props.onChange(htmlContent)
     this.props.onKeyDown()
   }
