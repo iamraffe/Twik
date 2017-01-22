@@ -20,24 +20,19 @@ class InlineEditor extends React.Component {
   componentDidMount(){
     const { editorState } = this.state
     this.focus()
-    // console.log(editorState.getCurrentContent().getBlockMap().first().getKey(), editorState.getCurrentContent().moveSelectionToEnd())
   }
  
   _onTab(e) {
     e.preventDefault()
-    // console.log(stateToHTML(this.state.editorState.getCurrentContent()))
-    // debugger;
     this.onSaveContent()
   }
 
   onSaveContent = () => {
     const { editorState } = this.state
-    // console.log(stateToHTML(editorState.getCurrentContent()))
     let htmlContent = stateToHTML(editorState.getCurrentContent())
+    
     htmlContent = _.replace(htmlContent,new RegExp("<p>","g"),"<span>")
     htmlContent = _.replace(htmlContent,new RegExp("</p>","g"),"</span>")
-    // console.log(htmlContent)
-    // debugger;
     this.props.onChange(htmlContent)
     this.props.onKeyDown()
   }

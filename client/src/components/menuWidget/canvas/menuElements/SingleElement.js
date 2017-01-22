@@ -24,7 +24,6 @@ class SingleElement extends React.Component{
   }
 
   editText = (text) => {
-    // console.log(text, this.props, this.state)
     this.onUpdate({
       type: this.props.type,
       position: this.props.position,
@@ -45,7 +44,7 @@ class SingleElement extends React.Component{
   render(){
     const { text, styles, editing } = this.state
     const { type, activeSection } = this.props
-    // console.log("SINGLE ELEMENT", text, styles)
+    
     return (
       <div className={`${type} single-element`} style={{position: 'relative', lineHeight: 1}}>
         {!editing &&

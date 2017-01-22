@@ -13,11 +13,7 @@ const containerTarget = {
   drop(props, monitor, component) {
     const { index } = props
     const { element } = monitor.getItem()
-
-    // if ( element && index !== element.containerIndex ){
-    //   component.pushCard(element)
-    // }
-
+    
     return {
       sectionId: props.id,
       position: props.components.length > 0 ? _.last(props.components).position+1 : 0
@@ -29,7 +25,6 @@ const containerTarget = {
 }
 
 @DropTarget((props) => {return props.accepts}, containerTarget, (connect, monitor) => ({
-// @DropTarget(['text'], containerTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop()
@@ -61,6 +56,7 @@ class Section extends React.Component{
   styles = () => {
     const { elements, hover, active } = this.state
     let styles = {position: 'relative'}
+
     if(hover === true && active === true){
       styles = {
         ...styles,
@@ -76,7 +72,7 @@ class Section extends React.Component{
     const { components, hover, active } = this.state
     const isActive = canDrop && isOver
     const backgroundColor = isActive ? 'rgba(192,192,192,0.3)' : '#FFF'
-    console.log("structure on section", this.props, this.state)
+
     return connectDropTarget(
       <div
         className={`${(hover === true && active === false) ? 'section-hover' : '' } section-element`}
@@ -84,7 +80,6 @@ class Section extends React.Component{
         style={{backgroundColor, width: '100%', border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles, ...this.styles()}}
         onClick={(e) => {
           if(active === false){
-            console.log("section click")
             this.onSectionSelect(id)
           }
         }}

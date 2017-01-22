@@ -41,7 +41,6 @@ class LayoutElement extends React.Component{
           <div
             className=""
             style={{
-              // border: this.props.span === 1 ? 'none' : '0.5px solid black',
               width: this.props.span*100+'%',
               float: 'left',
               position: 'relative',
@@ -106,8 +105,6 @@ class LayoutElement extends React.Component{
           <Section {...this.props} />
         )
       default:
-        console.log("structure on component", this.props, this.state)
-        // debugger;
         return (
           <Component {...this.props} />
         )

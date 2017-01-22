@@ -11,7 +11,7 @@ import MenuElement from '../MenuElement'
 class Component extends React.Component{
   constructor(props){
     super(props)
-    // console.log(props.activeSection, props.id, props.activeSection === props.id)
+
     this.state = {
       active: props.activeSection === props.id,
       sections: props.sections,
@@ -24,15 +24,11 @@ class Component extends React.Component{
       hover: props.hover
     }
 
-    // console.log("structure", props)
-    // debugger;
-
     this.getStyles = props.getStyles
     this.onSectionSelect = props.onSectionSelect
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("Component = ", nextProps)
     this.setState({
       active: nextProps.activeSection === nextProps.id,
       sections: nextProps.sections,
@@ -50,16 +46,11 @@ class Component extends React.Component{
     const { section_types, elements } = this.state
     const { containerId, rowId, columnId, id, struct } = this.props
     const sectionIndex =  _.findIndex(section_types, (s) => {return s.id === struct})
-    // console.log(section_types, section_types[sectionIndex], sectionIndex)
-    // debugger;
-    // console.log(this.props, sectionIndex, sections[sectionIndex], sections[sectionIndex].structure)
     this.props.sectionActions.addMenuElement({...section_types[sectionIndex].structure, position: elements.length, id: uuid.v4()}, id)
   }
 
   onUpdateMenuElement = (element) => {
     const { containerId, rowId, columnId, id } = this.props
-    // console.log(element)
-    // debugger;
     this.props.sectionActions.updateMenuElement(element, id)
   }
 

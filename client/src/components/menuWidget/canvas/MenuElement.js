@@ -33,7 +33,7 @@ class MenuElement extends React.Component{
   render(){
     const { type, activeSection, id, inline } = this.props
     const { elements, position } = this.state
-    // console.log(type, this.props)
+
     switch(type){
       case "MENU_TITLE":
       case "SECTION_TITLE":
@@ -52,7 +52,6 @@ class MenuElement extends React.Component{
           />
         )
       case "IMAGE_ELEMENT":
-        // console.log("ung ek => ", this.props)
         return (
           <ImageElement
             type={type}
@@ -82,8 +81,8 @@ class MenuElement extends React.Component{
             onDelete={this.onDelete}
           />
         )
-      default:
-        return null
+      // default:
+      //   return null
     }
   }
 }

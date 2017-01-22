@@ -31,7 +31,6 @@ class MetaWidget extends React.Component{
     const req = request.get(`/societies`)
     req.query({ format: 'json' })
     req.end((err, res)=>{
-      console.log(res)
       if(res.statusCode === 200){
         this.setState({
           societies: res.body.societies
@@ -122,7 +121,6 @@ class MetaWidget extends React.Component{
   }
 
   onSuggestionSelected = (event, { suggestion, suggestionValue, sectionIndex, method }) => {
-    console.log("SuggestionSelected", suggestion)
     this.setState({
       society: suggestion
     })
@@ -144,7 +142,7 @@ class MetaWidget extends React.Component{
       id: society.id ? society.id : null
     }
     const formData = getFormData(form)
-    console.log('onSubmit', formData)
+    
     this.props.metaActions.setMetaInfo({
       society: restaurant,
       ..._.omit(formData, ['paperUsage']),

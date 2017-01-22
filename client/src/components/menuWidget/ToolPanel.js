@@ -10,7 +10,8 @@ import {  FontPanel,
           ColorPanel,
           LayoutPanel,
           SectionTypePanel,
-          ImagePanel } from './toolPanel'
+          ImagePanel,
+          ComponentPanel } from './toolPanel'
 
 class ToolPanel extends React.Component{
   constructor(props){
@@ -69,7 +70,6 @@ class ToolPanel extends React.Component{
     req.field('html', html)
     req.field('meta', JSON.stringify(meta))
     req.end((err, res)=>{
-      console.log(err, res)
       applyZoom(zoom)
       window.open(res.body.path, "_blank")
     })
@@ -78,15 +78,14 @@ class ToolPanel extends React.Component{
   onExport = () => {
     const { applyZoom } = this.props.zoomActions
     const { zoom } = this.state
+    
     applyZoom(100)
-    // this.exportCall()
     setTimeout(this.exportCall(zoom), 100)
-
   }
 
   render(){
     const { active, meta, id, saving } = this.state
-    console.log(meta, meta.allows, _.findIndex(meta.allows, (f) => { return f === 'component' }))
+
     return(
       <section className="tool-panel" style={{padding: 25}}>
         <header>
@@ -115,7 +114,7 @@ class ToolPanel extends React.Component{
             }
             {active !== 'add-section' && _.findIndex(meta.allows, (f) => { return f === 'component' }) !== -1 && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('add-section')}}>Add Component</button>}
             {active === 'add-section' &&
-              <SectionTypePanel 
+              <ComponentPanel 
                 onClose={(e) => {this.onToggleActive('none')}}
                 getStyles={this.getStyles}
               />

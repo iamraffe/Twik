@@ -75,13 +75,14 @@ class Column extends React.Component{
             textAlign: 'left',
           }}
         >
-          <span style={{
+          <span
+            className="hide-on-export"
+            style={{
               cursor: 'pointer',
               fontSize: 12,
               textDecoration: 'underline'
             }}
             onClick={(e) => {
-              console.log("clicked adding section!")
               this.props.sectionActions.addSection({
                 id: uuid.v4(),
                 type: "SECTION",

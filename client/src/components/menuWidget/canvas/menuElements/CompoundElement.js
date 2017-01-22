@@ -7,8 +7,7 @@ import InlineEditor from '../../common/InlineEditor'
 class CompoundElement extends React.Component{
   constructor(props){
     super(props)
-    // console.log("compound elements", props)
-    // debugger;
+
     this.state = {
       editing: 'none',
       elements: _.map(props.elements, (e, i) => {
@@ -40,7 +39,6 @@ class CompoundElement extends React.Component{
   }
 
   onToggleEditing = (type) => {
-    console.log(type)
     this.setState({
       editing: type
     })
@@ -73,6 +71,7 @@ class CompoundElement extends React.Component{
   render(){
     const { elements, editing } = this.state
     const { type, activeSection, inline } = this.props
+
     if(inline){
       return (
         <article className={`${type} compound-element`} style={{position: 'relative', lineHeight: 1}}>

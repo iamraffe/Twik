@@ -60,7 +60,7 @@ class MenusController < ApplicationController
     # byebug
     # byebug
     # @menu = Menu.find(params[:menu_id]) || {}
-    @filename = "#{@meta['title'].parameterize}-#{@meta['id']}-#{Time.now.to_i}"
+    @filename = "#{@meta['name'].parameterize}-#{@meta['id']}-#{Time.now.to_i}"
     # @fonts = @menu.fonts
     # @svg = params[:export]
     # @orientation = @menu.width > @menu.height ? "Landscape" : "Portrait"
@@ -72,7 +72,7 @@ class MenusController < ApplicationController
 
   private
     def menu_params
-      params.required(:menu).permit(:name, :orientation, :template_id, :layout, :size, :title, :meta, :sections, :components)
+      params.required(:menu).permit(:name, :orientation, :template_id, :layout, :size, :meta, :sections, :components)
     end
 
     def society_params

@@ -14,7 +14,6 @@ export default function sectionReducer(state = initialState.sections, action){
         action.section
       ]
     case types.LOAD_SECTIONS:
-      console.log("action, secctions", action.sections)
       return action.sections
     case types.UPDATE_SECTION:
       sectionIndex = _.findIndex(state, (s) => {return s.id === action.sectionId})

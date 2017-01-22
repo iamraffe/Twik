@@ -63,7 +63,6 @@ class Canvas extends React.Component{
   }
 
   onSectionSelect = (id) => {
-    console.log(id)
     this.setState({
       activeSection: id
     })
