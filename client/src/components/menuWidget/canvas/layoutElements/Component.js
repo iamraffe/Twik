@@ -11,7 +11,7 @@ import MenuElement from '../MenuElement'
 class Component extends React.Component{
   constructor(props){
     super(props)
-    console.log(props)
+    // console.log(props)
     // debugger;
     this.state = {
       activeSection: props.activeSection,

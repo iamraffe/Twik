@@ -160,6 +160,12 @@ class Section extends React.Component{
         {(hover === true && active === false && this.props.readOnly !== true) && <div className="section-overlay"></div>}
         {(hover === true && active === true && this.props.readOnly !== true) &&
           <span>
+              <span
+                data-toggle="tooltip"
+                title="DRAG TO REODER SECTION"
+                className="column-element-handle ion ion-arrow-move" 
+                style={{position: 'absolute', top: -27.5, left: -25, cursor: 'move', zIndex: 99999}}
+              />
              <span
               data-toggle="tooltip"
               title="CLICK TO DELETE SECTION"
@@ -170,12 +176,6 @@ class Section extends React.Component{
                   this.onDeleteSection()
               }}}
             />
-          <span
-            data-toggle="tooltip"
-            title="DRAG TO REODER SECTION"
-            className="column-element-handle ion ion-arrow-move" 
-            style={{position: 'absolute', top: -27.5, left: -25, cursor: 'move'}}
-          />
           </span>
         }
       </div>

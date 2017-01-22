@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import $ from 'jquery'
 import uuid from 'node-uuid'
+import Sortable from 'react-sortablejs'
 
 import * as sectionActions from '../../../../actions/sectionActions'
 
@@ -42,29 +43,73 @@ class Column extends React.Component{
   }
 
   render(){
-    const { type, styles, span } = this.props
-    const { sections } = this.state
+    const { type, styles, span, id, hover, rowId, containerId } = this.props
+    const { sections, activeSection } = this.state
 
     return(
       <div
         id={this.props.id}
         style={{border: 'none', position: 'relative', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles}}
       >
-        {_.map(sections, (element, i) => {
-          return (
-            <LayoutElement
-              key={i}
-              containerId={this.props.containerId}
-              rowId={this.props.rowId}
-              columnId={this.props.id}
-              hover={this.props.hover}
-              activeSection={this.state.activeSection}
-              {...element}
-              getStyles={this.getStyles}
-              onSectionSelect={this.onSectionSelect}
-            />
-          )
-        })}
+        <Sortable
+          options={{
+              animation: 150,
+              handle: '.column-element-handle',
+              group: 'shared-sections',
+              pull: true,
+              filter: ".read-only",
+              ghostClass: "sortable-section-ghost",
+              chosenClass: "sortable-section-chosen",
+              put: true,
+              delay: 0,
+              onStart: (evt) => {
+                _.each(document.querySelectorAll('.section-overlay'), overlay => {
+                  overlay.style.display = 'none'
+                })
+              },
+              onEnd: (evt) => {
+                _.each(document.querySelectorAll('.section-overlay'), overlay => {
+                  overlay.style.display = 'block'
+                })
+              },
+          }}
+          className={sections.length === 0 ? 'empty-sortable' : ''}
+          onChange={(order, sortable, evt) => {
+            _.each(order, (element, i) => {
+              let parsed = JSON.parse(element)
+              if(parsed.position !== i){
+                this.props.sectionActions.updateSection(parsed.id, {
+                  ...parsed,
+                  position: i
+                })
+              }
+              if(parsed.columnId !== id){
+                this.props.sectionActions.updateSection(parsed.id, {
+                  ...parsed,
+                  columnId: id
+                })
+              }
+            })
+          }}
+        >
+          {_.map(_.orderBy(sections, ['position']), (element, i) => {
+            return (
+              <div key={i} data-id={JSON.stringify(element)} className={element.readOnly === true ? 'read-only' : 'draggable-section-ok'}>
+                <LayoutElement
+                  key={i}
+                  containerId={containerId}
+                  rowId={rowId}
+                  columnId={id}
+                  hover={hover}
+                  activeSection={activeSection}
+                  {...element}
+                  getStyles={this.getStyles}
+                  onSectionSelect={this.onSectionSelect}
+                />
+              </div>
+            )
+          })}
+        </Sortable>
         <div
           style={{
             border: 'none',
