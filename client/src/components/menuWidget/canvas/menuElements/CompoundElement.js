@@ -121,7 +121,7 @@ class CompoundElement extends React.Component{
                     style={e.styles}
                     dangerouslySetInnerHTML={{__html: (e.text === '' ? '<span>Lorem ipsum</span>' : `${e.text}`)}}
                     onClick={(event) => {
-                      if(activeSection){
+                      if(activeSection && e.type !== "ELEMENT_SEPARATOR"){
                         this.onToggleEditing(e.type)
                       }
                     }}
