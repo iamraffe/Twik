@@ -24,6 +24,8 @@ class ToolPanel extends React.Component{
       fontFamilies: props.fontFamilies,
       colors: props.colors,
       meta: props.meta,
+      rendered_pdf: props.rendered_pdf,
+      rendered_pdf_file_name: props.rendered_pdf_file_name,
       saving: props.saving,
       zoom: props.zoom
     }
@@ -34,6 +36,8 @@ class ToolPanel extends React.Component{
       id: nextProps.id,
       colors: nextProps.colors,
       fontFamilies: nextProps.fontFamilies,
+      rendered_pdf: nextProps.rendered_pdf,
+      rendered_pdf_file_name: nextProps.rendered_pdf_file_name,
       saving: nextProps.saving,
       styles: nextProps.styles,
       meta: nextProps.meta,
@@ -85,6 +89,10 @@ class ToolPanel extends React.Component{
 
   onExport = () => {
     console.log("export call")
+    var a = document.createElement('a')
+    a.href = this.state.rendered_pdf
+    a.download = this.state.rendered_pdf_file_name
+    a.click()
   }
 
   render(){
@@ -162,12 +170,15 @@ ToolPanel.propTypes = {
 }
 
 function mapStateToProps(state, ownProps){
-  // console.log(state)
+  console.log(state)
+//  debugger;
   return {
     id: state.menu.object.id,
     colors: state.colors,
     fontFamilies: state.fontFamilies,
     meta: state.meta,
+    rendered_pdf: state.menu.object.rendered_pdf,
+    rendered_pdf_file_name: state.menu.object.rendered_pdf_file_name,
     saving: state.saving,
     sections: state.sections,
     structure: state.structure,

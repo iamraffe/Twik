@@ -39,6 +39,10 @@ class Menu < ActiveRecord::Base
     end
   end
 
+  def as_json(options={})
+    super(options.merge({:methods => [:rendered_pdf]}))
+  end
+
   private
     def record_archive
       Archive.create({
