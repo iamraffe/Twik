@@ -1,7 +1,7 @@
 # Change these
 server '104.236.204.237', port: 22, roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'ssh://git@gitlab.com:raffe/Twik.git'
+set :repo_url,        'git@gitlab.com:raffe/Twik.git'
 set :application,     'twik'
 set :user,            'raffe'
 set :puma_threads,    [4, 16]
