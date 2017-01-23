@@ -1,5 +1,6 @@
 export default {
   colors: {},
+  components: [],
   fontFamilies: {},
   meta: {
     editor: true,
@@ -7,12 +8,18 @@ export default {
     orientation: '',
     layout: '',
     size: '',
-    name: ''
+    name: '',
   },
-  template: {},
+  menu: {
+    object: {
+      id: null
+    }
+  },
+  saving: false,
   section_types: [],
   sections: [],
   structure: [],
   styles: [],
+  template: {},
   zoom: 100,
 }

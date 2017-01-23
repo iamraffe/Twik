@@ -4,18 +4,10 @@ Rails.application.routes.draw do
     root "pages#dashboard", as: :subdomain_root
 
     as :user do
-        match '/user/confirmation' => 'users/confirmations#update', :via => :patch, :as => :update_user_confirmation
+      match '/user/confirmation' => 'users/confirmations#update', :via => :patch, :as => :update_user_confirmation
     end
 
     devise_ios_rails_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations", :confirmations => "users/confirmations" }
-    # devise_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations", :confirmations => "users/confirmations" }
-    # token auth routes available at /api/v1/auth
-    # namespace :api do
-    #   scope :v1 do
-    #     mount_devise_token_auth_for 'User', at: 'auth'
-    #   end
-    # end
-
     resources :users, only: [:index, :destroy, :update, :show]
     resources :subscriptions, only: [:new, :create]
     resources :images
@@ -34,12 +26,15 @@ Rails.application.routes.draw do
     resources :menus do
       post "/export", to: "menus#export"
       resources :uploads
+      resources :archives
     end
   end
 
   constraints(PublicAccess) do
     root "accounts#new"
     get '/accounts/verify', to: "accounts#check"
+    get '/accounts/signin', to: "accounts#signin", as: :account_sign_in
+    post '/accounts/find', to: "accounts#find"
     resources :accounts
   end
 end

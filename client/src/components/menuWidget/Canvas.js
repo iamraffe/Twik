@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import { PAPER_SIZES } from '../../lib/utils'
 
-import { LayoutElement, ZoomUtility } from './canvas'
+import { LayoutElement, ZoomUtility, PageIndex } from './canvas'
 
 class Canvas extends React.Component{
   constructor(props){
@@ -20,13 +20,13 @@ class Canvas extends React.Component{
       fontFamilies: props.fontFamilies,
       styles: props.styles,
       sections: props.sections,
+      activePage: props.structure[0],
       hover: false,
       activeSection: ''
     }
   }
 
   componentWillReceiveProps(nextProps){
-    // console.log("RECEIVED PROPS ", nextProps.styles)
     this.setState({
       width: PAPER_SIZES[`${nextProps.meta.size.toUpperCase()}_${nextProps.meta.orientation.toUpperCase()}`].width,
       height: PAPER_SIZES[`${nextProps.meta.size.toUpperCase()}_${nextProps.meta.orientation.toUpperCase()}`].height,
@@ -38,13 +38,6 @@ class Canvas extends React.Component{
       sections: nextProps.sections
     })
   }
-
-  componentDidMount(){
-  }
-
-  // convertToMM = (fontSize) => {
-  //   return fontSize/72
-  // }
 
   getStyles = (styleId) => {
     const { styles, fontFamilies, colors, zoom } = this.state
@@ -62,43 +55,65 @@ class Canvas extends React.Component{
   }
 
   onSectionSelect = (id) => {
-    // console.log(id)
     this.setState({
       activeSection: id
     })
   }
 
+  onPageSelected = (index) => {
+    this.setState({
+      activePage: this.state.structure[index]
+    })
+  }
+
+  // shouldComponentUpdate(nextProps, nextState){
+  //   return nextState.hover !== this.state.hover
+  // }
+
   render(){
-    const { width, height, zoom, colors, fonts, structure, hover, activeSection } = this.state
-    // console.log("structure", structure)
+    const { width, height, zoom, colors, fonts, structure, hover, activeSection, activePage } = this.state
+
     return (
       <div>
-        <div className="row" style={{height: 650, overflow: 'auto', maxWidth: '100%', marginBottom: 35, borderBottom: '1px solid silver'}}>
-          <div
-            id="entry-point"
-            style={{
-              border: '1px solid black',
-              margin: '0 auto',
-              width: (width*(zoom/100))+'in',
-              height: (height*(zoom/100))+'in'}}
-              onMouseEnter={(e) => {activeSection === '' ? this.setState({hover: true}) : ''}}
-              onMouseLeave={(e) => {activeSection === '' ? this.setState({hover: false}) : ''}}
-          >
-            {_.map(structure, (struct, i) => {
-              return(
-                <LayoutElement
-                  key={i}
-                  {...struct}
-                  zoom={zoom}
-                  hover={hover}
-                  activeSection={activeSection}
-                  getStyles={this.getStyles}
-                  onSectionSelect={this.onSectionSelect}
-                />
-              )
-            })}      
+        <div className="row" style={{height: 650, overflow: 'auto', maxWidth: '100%', marginBottom: 0, borderBottom: '1px solid silver'}}>
+          <div className="col-xs-12">
+            <div
+              id="entry-point"
+              style={{
+                border: '1px solid black',
+                margin: '0 auto',
+                width: (width*(zoom/100))+'in',
+                height: (height*(zoom/100))+'in'
+              }}
+              onMouseEnter={(e) => {
+                this.setState({hover: true})
+              }}
+              onMouseMove={(e) => {
+                this.setState({hover: true})
+              }}
+              onMouseLeave={(e) => {
+                this.setState({hover: false})
+              }}
+            >
+              <LayoutElement
+                {...activePage}
+                zoom={zoom}
+                hover={hover}
+                activeSection={activeSection}
+                getStyles={this.getStyles}
+                onSectionSelect={this.onSectionSelect}
+              />    
+            </div>
           </div>
         </div>
+        {structure.length > 1 &&
+          <PageIndex
+            pages={structure}
+            hidden={true}
+            onPageSelected={this.onPageSelected}
+            getStyles={this.getStyles}
+          />
+        }
         <ZoomUtility/>
       </div>
     )

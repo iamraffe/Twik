@@ -5,10 +5,12 @@ class CreateMenus < ActiveRecord::Migration
       t.string :orientation
       t.string :layout
       t.string :size
-      t.string :title
       t.json :meta
+      t.json :components
       t.json :sections
+      t.json :component_styles
       t.attachment :preview
+      t.attachment :rendered_pdf
       t.string :subdomain
       t.references :template, index: true
       t.references :society, index: true

@@ -1,10 +1,20 @@
 <section id="account-new" class="register-account row">
-  <header class="">
-    <h1 class="col-md-6"><span class="red-background">Indestructible</span> templates so you can edit and collaborate directly on fully designed documents.</h1>
-    <h2 class="col-md-8">Stop formatting and <span class="arrow-background">start making.</span></h2>
-   </header>
-   <section class="account-auth">
-     <%= client("RegistrationWidget", 'account-registration-widget', {logo: (asset_path 'twik-logo-horizontal-red.png')}) %>
-   </section>
+  <header class="col-xs-12">
+    <div class="row">
+      <div class="col-md-6 col-xs-offset-1 col-xs-10">
+        <h1>
+          <span class="red-background">Indestructible</span> templates so you can edit and collaborate directly on fully designed documents.
+        </h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-xs-offset-1 col-xs-10">
+        <h2>Stop formatting and <span class="arrow-background">start making.</span></h2>
+      </div>
+    </div>
+  </header>
+  <section class="account-auth">
+    <%= client("RegistrationWidget", 'account-registration-widget', {}) %>
+  </section>
 </section>
 

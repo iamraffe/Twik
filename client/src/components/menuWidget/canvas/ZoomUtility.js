@@ -40,12 +40,10 @@ class ZoomUtility extends React.Component{
     const { zoom, manualZoom } = this.state
 
     return (
-      <div className="row">
-        <div className="col-xs-4 col-xs-offset-4" style={{textAlign: 'center'}}>
-          <span className="ion ion-minus-round" style={{cursor: 'pointer', marginRight: 15, fontSize: '0.75em', verticalAlign: '5px'}} onClick={(e) => {this.onZoom(zoom-5)}}></span>
-          <span className="ion ion-android-search" style={{marginRight: 10, fontSize: '1.25em'}}></span>
-          <span className="ion ion-plus-round" style={{cursor: 'pointer', fontSize: '0.75em', verticalAlign: '5px'}} onClick={(e) => {this.onZoom(zoom+5)}}></span>
-        </div>
+      <div className="row" style={{maxWidth: '100%', textAlign: 'center', marginTop: 10}}>
+        <span className="ion ion-minus-round" style={{cursor: 'pointer', marginRight: 15, fontSize: '0.75em', verticalAlign: '5px'}} onClick={(e) => {this.onZoom(zoom-5)}}></span>
+        <span className="ion ion-ios-search" style={{marginRight: 10, fontSize: '1.25em'}}></span>
+        <span className="ion ion-plus-round" style={{cursor: 'pointer', fontSize: '0.75em', verticalAlign: '5px'}} onClick={(e) => {this.onZoom(zoom+5)}}></span>
       </div>
     )
   }

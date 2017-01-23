@@ -14,24 +14,38 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-xs-12">
-            <nav class="navbar navbar-landing">
-              <div class="">
-                <div class="navbar-header">
-                  <a class="navbar-brand" href="/">
-                    <img class="col-md-2 col-xs-4" id="twik-img-logo" alt="Brand" src="<%= asset_path 'twik-robot-red-white-bg.png' %>">
-                    <img class="col-md-2 col-xs-4" id="twik-word-logo" src="<%= asset_path 'twik-logo-word-only-red.png' %>">
-                  </a>
+            <nav class="navbar navbar-landing row">
+              <div class="container-fluid">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                  <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                    <a class="navbar-brand" href="/">
+                      <img alt="Brand" src="<%= asset_path 'twik-logo-horizontal-red-white-background.png' %>">
+                    </a>
+                  </div>
                 </div>
-                <div class="col-md-2"></div>
-                <div class='col-md-7 pretty-nav-line hidden-md hidden-sm hidden-xs'></div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="col-md-4 collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">About Us</a> <span class="nav-separator">|</span></li>
-                    <li><a href="#">Pricing</a> <span class="nav-separator">|</span></li>
-                    <li><a href="#">Log in</a></li>
-                  </ul>
-                </div><!-- /.navbar-collapse -->
+                <div class="col-lg-6 col-md-4 hidden-xs hidden-sm">
+                  <div class='pretty-nav-line'></div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                  <!-- Collect the nav links, forms, and other content for toggling -->
+                  <div class="collapse navbar-collapse" id="nbar">
+                    <ul class="nav navbar-nav mobile-nav">
+                      <li><a href="#about">About Us</a></li>
+                      <li><a href="#pricing">Pricing</a></li>
+                      <li><a href="/accounts/signin">Log in</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right hidden-xs">
+                      <li><a href="#about">About Us</a> <span class="nav-separator">|</span></li>
+                      <li><a href="#pricing">Pricing</a> <span class="nav-separator">|</span></li>
+                      <li><a href="/accounts/signin">Log in</a></li>
+                    </ul>
+                  </div><!-- /.navbar-collapse -->
+                </div>
               </div>
             </nav>
           </div>
@@ -47,11 +61,11 @@
       </div>
     </header>
     <section class="container twik-deets">
-      <header class="row">
+      <header id="about" class="row">
         <div class="col-md-2">
-          <img class="face-image" src="<%=	 asset_path 'icon-face.png' %>">
+          <img class="face-image hidden-sm hidden-xs" src="<%=  asset_path 'icon-face.png' %>">
         </div>
-        <div class="col-md-6 ">
+        <div class="col-md-6">
           <h1><img src="<%= asset_path 'twik-logo-word-only-red.png' %>" alt="Twik" class="twik-word-only"> enables teams to use and edit designed brand templates directly. The platform automatically applies brand formatting to text and images, saves documents to a cloud archive, and prepares professional, print ready files so you can send them to production right from your page.</h1>
         </div>
       </header>
@@ -138,68 +152,119 @@
           </div>
         </div>
       </div>
-      <div class="">
-        <div class="">
-          <table class="table pricing-table">
-            <thead>
-              <th></th>
-              <th>Team</th>
-              <th>Team Plus</th>
-              <th style="line-height: 18px; padding-bottom: 20px"><img class="th-crown-icon" src="<%=	 asset_path 'crown-red.png' %>"><br>Designer Pro<br><span class="small">Coming Soon</span></th>
-              <th style="line-height: 18px">Studio Pro<br><span class="small">Coming Soon</span></th>
-            </thead>
-            <tbody>
-              <tr>
-                <td><img class="td-money-icon" src="<%=	 asset_path 'money-icon-red.png' %>"></td>
-                <td><strong>$10 / month</strong></td>
-                <td><strong>$25 / month</strong></td>
-                <td><strong>$20 + 5% twik fees / month</strong></td>
-                <td><strong>$15 / designer<br>+ 5% twik fees / month</strong></td>
-              </tr>
-              <tr>
-                <td><strong>Team Pages</strong></td>
-                <td>2</td>
-                <td>3</td>
-                <td>1 designer dashboard <br>5 client pages</td>
-                <td>>3 designer dashboards <br>5 client pages each</td>
-              </tr>
-              <tr>
-                <td><strong>Users / Licenses</strong></td>
-                <td>5 standard</td>
-                <td>3 manager <br>5 standard / team</td>
-                <td>1 designer <br>5 standard / team</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><strong>Templates</strong></td>
-                <td>5</td>
-                <td>5 / team</td>
-                <td>5 / client page</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><strong>Custom subscription-based pages for your clients</strong></td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>5</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><strong>Add Team</strong></td>
-                <td>N/A</td>
-                <td>$5 / team / mo.</td>
-                <td>$2.5 / team / mo.</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td> </td>
-                <td><a class="box-background">Sign Up For Free Trial</a></td>
-                <td><a class="box-background">Sign Up For Free Trial</a></td>
-                <td><a class="box-background">Sign Up For Free Trial</a></td>
-                <td><a class="box-background">Sign Up For Free Trial</a></td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="row hidden-xs hidden-sm">
+        <table id="pricing" class="table pricing-table">
+          <thead>
+            <th></th>
+            <th>Team</th>
+            <th>Team Plus</th>
+            <th style="line-height: 18px; padding-bottom: 20px"><img class="th-crown-icon" src="<%=  asset_path 'crown-red.png' %>"><br>Designer Pro<br><span class="small">Coming Soon</span></th>
+            <th style="line-height: 18px">Studio Pro<br><span class="small">Coming Soon</span></th>
+          </thead>
+          <tbody>
+            <tr>
+              <td><img class="td-money-icon" src="<%=  asset_path 'money-icon-red.png' %>"></td>
+              <td><strong>$10 / month</strong></td>
+              <td><strong>$25 / month</strong></td>
+              <td><strong>$20 + 5% twik fees / month</strong></td>
+              <td><strong>$15 / designer<br>+ 5% twik fees / month</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Team Pages</strong></td>
+              <td>2</td>
+              <td>3</td>
+              <td>1 designer dashboard <br>5 client pages</td>
+              <td>>3 designer dashboards <br>5 client pages each</td>
+            </tr>
+            <tr>
+              <td><strong>Users / Licenses</strong></td>
+              <td>5 standard</td>
+              <td>3 manager <br>5 standard / team</td>
+              <td>1 designer <br>5 standard / team</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><strong>Templates</strong></td>
+              <td>5</td>
+              <td>5 / team</td>
+              <td>5 / client page</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><strong>Custom subscription-based pages for your clients</strong></td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>5</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><strong>Add Team</strong></td>
+              <td>N/A</td>
+              <td>$5 / team / mo.</td>
+              <td>$2.5 / team / mo.</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td> </td>
+              <td><a class="box-background">Sign Up For Free Trial</a></td>
+              <td><a class="box-background">Sign Up For Free Trial</a></td>
+              <td><a class="box-background">Sign Up For Free Trial</a></td>
+              <td><a class="box-background">Sign Up For Free Trial</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="visible-xs visible-sm row">
+        <div id="pricing" class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 pricing-plan">
+              <h1>Team</h1>
+              <ul class="list-unstyled">
+                <li><strong>$10 / month</strong></li>
+                <li><strong>1 Team Page</strong></li>
+                <li><strong>5 standard licenses</strong></li>
+                <li><strong>5 Document template types</strong></li>
+              </ul>
+              <div class="col-sm-6 col-sm-offset-3">
+                <button class="btn btn-block btn-primary btn-large">
+                  Sign Up For Free Trial
+                </button>
+              </div>
+            </div>
+            <div class="col-xs-12 pricing-plan">
+              <h1>Team Plus</h1>
+              <ul class="list-unstyled">
+                <li><strong>$25 / month</strong></li>
+                <li><strong>3 Team Pages</strong></li>
+                <li><strong>5 standard licenses / page</strong></li>
+                <li><strong>5 Document template types / page</strong></li>
+              </ul>
+              <div class="col-sm-6 col-sm-offset-3">
+                <button class="btn btn-block btn-primary btn-large">
+                  Sign Up For Free Trial
+                </button>
+              </div>
+            </div>
+            <div class="col-xs-12 pricing-plan">
+              <h1>Designer (Pro)</h1>
+              <ul class="list-unstyled">
+                <li><strong>$20 / month</strong></li>
+                <li><strong>+ 5% client charges</strong></li>
+                <li><strong>1 Designer dash and</strong></li>
+                <li><strong>+ 3 Client Pages</strong></li>
+                <li><strong>1 designer license</strong></li>
+                <li><strong>+ 5 standard licenses / page</strong></li>
+                <li><strong>5 Document template types / page</strong></li>
+                <li><strong>Secure recurring service billing to clients</strong></li>
+              </ul>
+              <p class="disclaimer">Designer accounts are not yet available, but you can still sign up for free "Teams" trial</p>
+              <div class="col-sm-6 col-sm-offset-3">
+                <button class="btn btn-block btn-primary btn-large">
+                  Sign Up For Free Trial
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

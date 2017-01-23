@@ -7,8 +7,11 @@ import { bindActionCreators } from 'redux'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import html2canvas from 'html2canvas'
+
+import * as backendActions from '../actions/backendActions'
 import * as metaActions from '../actions/metaActions'
 import * as sectionActions from '../actions/sectionActions'
+import * as componentActions from '../actions/componentActions'
 
 import { ToolPanel, Canvas, MetaWidget } from './menuWidget'
 
@@ -19,14 +22,31 @@ class MenuWidget extends React.Component{
 
     this.state = {
       fontFamilies: props.fontFamilies,
+      menu: props.menu,
       meta: props.meta,
       sections: props.sections,
       template: props.template,
-      step: props.mode === 'edit' ? 'loading' : 'meta'
+      components: props.components,
+      step: props.mode === 'edit' ? 'loading' : 'meta',
+      saving: props.saving
     }
   }
 
+  onUnload = (event) => { // the method that will be used for both add and remove event
+    // CHECK FOR CHANGES IF THERE ARE ANY THEN GO AHEAD AND CONFIRM
+    // event.preventDefault()
+    // event.returnValue = true
+    // return true
+  }
+
+  componentWillUnmount() {
+    // window.removeEventListener("onbeforeunload", this.onUnload)
+    window.removeEventListener("beforeunload", this.onUnload)
+  }
+
   componentDidMount(){
+    window.addEventListener("beforeunload", this.onUnload)
+    // window.addEventListener("onbeforeunload", this.onUnload)
     const { mode, menu } = this.props
     if(mode === 'edit' || mode === 'preview'){
       this.props.metaActions.setMetaInfo({
@@ -36,6 +56,7 @@ class MenuWidget extends React.Component{
       })
       this.onSetStep('widget')
       this.props.sectionActions.loadSections(JSON.parse(menu.object.sections))
+      this.props.componentActions.loadComponents(JSON.parse(menu.object.components))
     }
   }
 
@@ -61,9 +82,12 @@ class MenuWidget extends React.Component{
   componentWillReceiveProps(nextProps){
     this.setState({
       fontFamilies: nextProps.fontFamilies,
+      menu: nextProps.menu,
       meta: nextProps.meta,
       sections: nextProps.sections,
-      template: nextProps.template
+      template: nextProps.template,
+      components: nextProps.components,
+      saving: nextProps.saving
     })
   }
 
@@ -72,47 +96,53 @@ class MenuWidget extends React.Component{
   }
 
   onSave = (e) => {
-    const { meta, sections, template } = this.state 
+    const { meta, sections, template, components } = this.state
     let canvas = document.getElementById('entry-point')
+    // let rendered_pdf = document.getElementById('entry-point')
     let preview
     canvas.parentElement.style.height = 'auto'
     html2canvas(canvas).then((render) => {
       preview = render.toDataURL()
       canvas.parentElement.style.height = '650px'
-      this.props.metaActions.saveMenu({
+      this.props.backendActions.saveMenu({
         ..._.omit(meta, ['editor',  'society']),
         meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
         sections: JSON.stringify(sections),
-        template_id: template.id
-      },
-      meta.society,
-      preview)
-    })
-  }
-
-  onUpdate = (e) => {
-    const { meta, sections, template } = this.state 
-    const { menu } = this.props
-    let canvas = document.getElementById('entry-point')
-    let preview
-    canvas.parentElement.style.height = 'auto'
-    html2canvas(canvas).then((render) => {
-      preview = render.toDataURL()
-      canvas.parentElement.style.height = '650px'
-      this.props.metaActions.updateMenu({
-        ..._.omit(meta, ['editor',  'society']),
-        meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
-        sections: JSON.stringify(sections),
+        components: JSON.stringify(components),
         template_id: template.id
       },
       meta.society,
       preview,
-      menu.object)
+      canvas.innerHTML)
+    })
+  }
+
+  onUpdate = (e) => {
+    const { meta, sections, template, components, menu } = this.state
+    // const { menu } = this.props
+    let canvas = document.getElementById('entry-point')
+    // let rendered_pdf = document.getElementById('entry-point')
+    let preview
+    canvas.parentElement.style.height = 'auto'
+    html2canvas(canvas).then((render) => {
+      preview = render.toDataURL()
+      canvas.parentElement.style.height = '650px'
+      this.props.backendActions.updateMenu({
+        ..._.omit(meta, ['editor',  'society']),
+        meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
+        sections: JSON.stringify(sections),
+        components: JSON.stringify(components),
+        template_id: template.id
+      },
+      meta.society,
+      preview,
+      menu.object,
+      canvas.innerHTML)
     })
   }
 
   render(){
-    const { structure, meta, step } = this.state
+    const { structure, meta, step, saving } = this.state
     const { templates, mode } = this.props
 
     return(
@@ -122,7 +152,24 @@ class MenuWidget extends React.Component{
         }
         {step === 'widget' &&
           <div className="row">
-            <div className={meta.orientation === 'landscape' ? `col-xs-10` : `col-xs-7 col-xs-offset-3`}>
+            <div
+              className={meta.orientation === 'landscape' ? `col-xs-10` : `col-xs-7 col-xs-offset-3`}
+              style={{opacity: saving ? 0.2 : 1, position: 'relative'}}
+            >
+              {saving &&
+                <div
+                  style={{
+                    background: 'transparent',
+                    cursor: 'not-allowed',
+                    width: '100%',
+                    height: '100%',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    zIndex: 999
+                  }}
+                />
+              }
               <Canvas />
             </div>
             <div className="col-xs-2">
@@ -144,16 +191,21 @@ function mapStateToProps(state, ownProps){
   return {
     fontFamilies: state.fontFamilies,
     structure: state.structure,
+    menu: state.menu,
     meta: state.meta,
     sections: state.sections,
-    template: state.template
+    template: state.template,
+    components: state.components,
+    saving: state.saving
   }
 }
 
 function mapDispatchToProps(dispatch){
   return {
+    backendActions: bindActionCreators(backendActions, dispatch),
     metaActions: bindActionCreators(metaActions, dispatch),
-    sectionActions: bindActionCreators(sectionActions, dispatch)
+    sectionActions: bindActionCreators(sectionActions, dispatch),
+    componentActions: bindActionCreators(componentActions, dispatch)
   }
 }
 

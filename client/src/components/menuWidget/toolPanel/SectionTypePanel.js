@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { DragSource } from 'react-dnd'
 import uuid from 'node-uuid'
 
-import * as sectionActions from '../../../actions/sectionActions'
+import * as componentActions from '../../../actions/componentActions'
 import * as styleActions from '../../../actions/styleActions'
 import * as sectionTypeActions from '../../../actions/sectionTypeActions'
 
@@ -16,30 +16,17 @@ const sectionSource = {
   endDrag(props, monitor, component) {
     const item = monitor.getItem()
     const dropResult = monitor.getDropResult()
-    // console.log(props)
+    
     if (dropResult) {
-      console.log("SECTION TYPE PANEL DROP RESULT!")
       const { id, structure } = component.state.sectionStyle
-      let section = {}
-      section = {
+      let newComponent = {
+        ...structure,
         id: uuid.v4(),
-        type: "SECTION",
         position: dropResult.position,
-        // struct: id,
-        columnId: dropResult.columnId,
-        elements: [{
-          ...structure,
-          id: uuid.v4(),
-          position: 0
-        }]
+        sectionId: dropResult.sectionId
       }
-      console.log("COMPONENT ", component.state, id, structure, section)
-      // debugger;
-      // if(component.state.newSection){
-      // console.log("SECIOTN ", section)
 
-
-      props.sectionActions.addSection(section)
+      props.componentActions.addComponent(newComponent)
       component.state.sectionStyle = {}
       component.state.newSection = false
     }
@@ -97,7 +84,7 @@ class SectionTypePanel extends React.Component{
   render(){
     const { section_types, sectionStyle, newSection, colors, fontFamilies, editing } = this.state
     const { isDragging, connectDragSource, connectDragPreview } = this.props
-    // console.log("rerender")
+
     return(
       <section className="section-panel tool-panel-element">
         <header>
@@ -120,8 +107,7 @@ class SectionTypePanel extends React.Component{
           <section style={{marginTop: 15}}>
             {_.map(sectionStyle.structure.elements, (element, i) => {
               let styles = this.getStyles(element.styles)
-              // console.log(sectionStyle, element, styles)
-              // debugger;
+              
               return (
                 <div key={i} className="style-item hide" style={{overflowX: 'hidden'}}>
                   {editing === element.styles &&
@@ -253,7 +239,7 @@ function mapStateToProps(state, ownProps){
 
 function mapDispatchToProps(dispatch){
   return {
-    sectionActions: bindActionCreators(sectionActions, dispatch),
+    componentActions: bindActionCreators(componentActions, dispatch),
     sectionTypeActions: bindActionCreators(sectionTypeActions, dispatch),
     styleActions: bindActionCreators(styleActions, dispatch)
   }

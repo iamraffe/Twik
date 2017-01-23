@@ -1,0 +1,22 @@
+<section class="row sign-in">
+  <header class="col-sm-4 col-sm-offset-2">
+    <%= image_tag "twik-logo-horizontal-red.png", class: "img-responsive" %>
+  </header>
+  <div class="col-sm-4 finish-registration-form-wrapper">
+    <%= form_tag('/accounts/find') do %>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="input-group">
+            <input type="text" class="form-control" name="subdomain" placeholder="twik name">
+            <div class="input-group-addon text-default" style="border: none; background: transparent; font-family: Baloo">.twik.us</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-5 pull-right">
+          <%= submit_tag "Continue", class: "btn btn-primary btn-small pull-right" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

@@ -5,6 +5,9 @@ class CreateTemplates < ActiveRecord::Migration[5.0]
       t.json :structure
       t.boolean :canon
       t.uuid :ext
+      t.text :allows, array: true, default: []
+      t.text :accepts, array: true, default: []
+      t.text :printAt, array: true, default: []
       t.timestamps
     end
   end

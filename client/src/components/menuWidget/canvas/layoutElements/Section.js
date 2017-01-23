@@ -1,147 +1,200 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
+import { DropTarget } from 'react-dnd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import uuid from 'node-uuid'
+import $ from 'jquery'
 import Sortable from 'react-sortablejs'
 
+import * as componentActions from '../../../../actions/componentActions'
 import * as sectionActions from '../../../../actions/sectionActions'
 
+import LayoutElement from '../LayoutElement'
 import MenuElement from '../MenuElement'
 
+const containerTarget = {
+  drop(props, monitor, component) {
+    const { index } = props
+    const { element } = monitor.getItem()
+    const sectionComponents = _.filter(props.components, (component, i) => {return component.sectionId === props.id})
+    
+    return {
+      sectionId: props.id,
+      position: sectionComponents.length  > 0 ? _.last(sectionComponents).position+1 : 0
+    }
+  },
+  canDrop(props, monitor){
+    return props.readOnly !== true
+  }
+}
+
+@DropTarget((props) => {return props.accepts}, containerTarget, (connect, monitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
+  canDrop: monitor.canDrop()
+}))
 class Section extends React.Component{
   constructor(props){
     super(props)
-    // console.log(props.activeSection, props.id, props.activeSection === props.id)
+
     this.state = {
-      active: props.activeSection === props.id,
-      sections: props.sections,
-      section_types: props.section_types,
-      elements: props.elements,
-      zoom: props.zoom,
-      fontFamilies: props.fontFamilies,
-      colors: props.colors,
-      structure: props.structure,
+      components: _.filter(props.components, (component, i) => {return component.sectionId === props.id}),
+      activeSection: props.activeSection,
+      active: props.activeSection === props.id && props.readOnly !== true,
       hover: props.hover
     }
-
-    console.log("structure", props)
-    // debugger;
 
     this.getStyles = props.getStyles
     this.onSectionSelect = props.onSectionSelect
   }
 
   componentWillReceiveProps(nextProps){
-    // console.log("SECTION = ", nextProps)
     this.setState({
-      active: nextProps.activeSection === nextProps.id,
-      sections: nextProps.sections,
-      section_types: nextProps.section_types,
-      elements: nextProps.elements,
-      zoom: nextProps.zoom,
-      fontFamilies: nextProps.fontFamilies,
-      colors: nextProps.colors,
-      structure: nextProps.structure,
+      active: nextProps.activeSection === nextProps.id && nextProps.readOnly !== true,
+      activeSection: nextProps.activeSection,
+      components: _.filter(nextProps.components, (component, i) => {return component.sectionId === nextProps.id}),
       hover: nextProps.hover
     })
   }
 
-  onAddMenuElement = (e) => {
-    const { section_types, elements } = this.state
-    const { containerId, rowId, columnId, id, struct } = this.props
-    const sectionIndex =  _.findIndex(section_types, (s) => {return s.id === struct})
-    // console.log(section_types, section_types[sectionIndex], sectionIndex)
-    // debugger;
-    // console.log(this.props, sectionIndex, sections[sectionIndex], sections[sectionIndex].structure)
-    this.props.sectionActions.addMenuElement({...section_types[sectionIndex].structure, position: elements.length, id: uuid.v4()}, id)
+  styles = () => {
+    const { elements, hover, active } = this.state
+    let styles = {position: 'relative'}
+
+    if(hover === true && active === true){
+      styles = {
+        ...styles,
+        outline: 'thick dashed #f6303e',
+        outlineOffset: 40,
+        zIndex: 9999
+      }
+    }
+    return styles
   }
 
-  onUpdateMenuElement = (element) => {
-    const { containerId, rowId, columnId, id } = this.props
-    // console.log(element)
-    // debugger;
-    this.props.sectionActions.updateMenuElement(element, id)
-  }
-
-  onDeleteMenuElement = (position) => {
-    const { containerId, rowId, columnId, id } = this.props
-    // console.log(position)
-    // debugger;
-    this.props.sectionActions.deleteMenuElement(position, id)
+  onDeleteSection = () => {
+    const { id } = this.props
+    this.props.sectionActions.deleteSection(id)
   }
 
   render(){
-    const { elements, hover, active } = this.state
-    const { activeSection, id } = this.props
-    
-    return(
+    const { type, canDrop, isOver, connectDropTarget, styles, span, id, readOnly } = this.props
+    const { components, hover, active } = this.state
+    const isActive = canDrop && isOver
+    const backgroundColor = isActive ? 'rgba(192,192,192,0.3)' : '#FFF'
+
+    return connectDropTarget(
       <div
-        className={`${hover && !activeSection ? 'section-hover' : '' } section-element`}
-        style={{position: 'relative'}}
-        onClick={(e) => {this.onSectionSelect(id)}}
+        className={`${(hover === true && active === false) ? 'section-hover' : '' } section-element`}
+        id={this.props.id}
+        style={{backgroundColor, width: '100%', border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles, ...this.styles()}}
+        onClick={(e) => {
+          if(active === false && this.props.readOnly !== true){
+            this.onSectionSelect(id)
+          }
+        }}
       >
         <Sortable
-            options={{
-                animation: 150,
-                handle: '.section-element-handle',
-                // group: 'shared',
-                pull: true,
-                ghostClass: "sortable-ghost",
-                put: true,
-            }}
-            onChange={(order, sortable, evt) => {
-              this.props.sectionActions.updateSection(
-                id,
-                {
-                  elements: _.map(order, (element, i) => {
-                    let parsed = JSON.parse(element)
-                    return {
-                      ...parsed,
-                      position: i
-                    }
-                  })
-                }
-              )
-            }}
+          options={{
+              animation: 150,
+              handle: '.section-element-handle',
+              group: 'shared-components',
+              disabled: this.props.readOnly === true,
+              pull: true,
+              ghostClass: "sortable-ghost",
+              chosenClass: "sortable-chosen",
+              put: true,
+              delay: 0,
+              onStart: (evt) => {
+                _.each(document.querySelectorAll('.section-overlay'), overlay => {
+                  overlay.style.display = 'none'
+                })
+              },
+              onEnd: (evt) => {
+                _.each(document.querySelectorAll('.section-overlay'), overlay => {
+                  overlay.style.display = 'block'
+                })
+              },
+          }}
+          className={components.length === 0 ? 'empty-sortable' : ''}
+          onChange={(order, sortable, evt) => {
+            _.each(order, (element, i) => {
+              let parsed = JSON.parse(element)
+              if(parsed.position !== i){
+                this.props.componentActions.updateComponent({
+                  ...parsed,
+                  position: i
+                }, parsed.id)
+              }
+              if(parsed.sectionId !== id){
+                this.props.componentActions.updateComponent({
+                  ...parsed,
+                  sectionId: id
+                }, parsed.id)
+              }
+            })
+            this.onSectionSelect(evt.to.offsetParent.id)
+          }}
         >
-          {_.map(elements, (element, i) => {
-            console.log("section => ", element)
+          {_.map(_.orderBy(components, ['position']), (component, i) => {
             return (
-              <div key={i} data-id={JSON.stringify(element)}>
-                <MenuElement
-                  {...element}
-                  onUpdate={this.onUpdateMenuElement}
-                  onDelete={this.onDeleteMenuElement}
+              <div key={i} data-id={JSON.stringify(component)}>
+                <LayoutElement
+                  key={i}
+                  sectionId={id}
+                  activeSection={active && hover}
+                  {...component}
                   getStyles={this.getStyles}
-                  activeSection={active}
+                  onSectionSelect={this.onSectionSelect}
+                  nextElementPosition={components.length}
                 />
               </div>
             )
           })}
-          
         </Sortable>
-        {active && <span className="ion ion-ios-plus-outline" style={{cursor: 'pointer', position: 'absolute', bottom: -25, left: -2.5}} onClick={(e) => {this.onAddMenuElement(e)}}></span>}
-        {hover && !activeSection && !active && <div className="section-overlay"></div>}
+        {components.length === 0 &&
+          <p className="hide-on-export" style={{fontFamily: 'Open Sans', fontWeight: 200, fontSize: 12, textAlign: 'center', margin: 10, marginTop: 0, color: '#310100', border: '1px dashed #f6303e', padding: 5}}>
+            Use the sidebar menu to add components to this section
+          </p>
+        }
+        {(hover === true && active === false && this.props.readOnly !== true) && <div className="section-overlay"></div>}
+        {(hover === true && active === true && this.props.readOnly !== true) &&
+          <span>
+              <span
+                data-toggle="tooltip"
+                title="DRAG TO REODER SECTION"
+                className="column-element-handle ion ion-arrow-move" 
+                style={{position: 'absolute', top: -27.5, left: -25, cursor: 'move', zIndex: 99999}}
+              />
+             <span
+              data-toggle="tooltip"
+              title="CLICK TO DELETE SECTION"
+              style={{cursor: 'pointer', position: 'absolute', right: -35, top: -35, color: 'red', fontSize: '1.25em'}}
+              className="ion ion-ios-trash-outline"
+              onClick={(e) => {
+                if (window.confirm("Are you sure you want to delete this section?")){
+                  this.onDeleteSection()
+              }}}
+            />
+          </span>
+        }
       </div>
     )
   }
 }
 
 function mapStateToProps(state, ownProps){
+  // console.log(state)
   return {
-    structure: state.structure,
     sections: state.sections,
-    section_types: state.section_types.custom ? [...state.section_types.custom, ...state.section_types.template] : state.section_types,
-    zoom: state.zoom,
-    colors: state.colors,
-    fontFamilies: state.fontFamilies
+    components: state.components
   }
 }
 
 function mapDispatchToProps(dispatch){
   return {
-    sectionActions: bindActionCreators(sectionActions, dispatch)
+    componentActions: bindActionCreators(componentActions, dispatch),
+    sectionActions: bindActionCreators(sectionActions, dispatch),
   }
 }
 

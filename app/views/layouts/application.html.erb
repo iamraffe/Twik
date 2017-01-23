@@ -20,8 +20,19 @@
           </div>
           <% unless current_account.nil? %>
             <div class="current-account">
-              <p class="navbar-text"><%= current_account.subdomain %>.twik.us</p>
-            </div>
+              <div class="dropdown">
+                <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <%= current_account.subdomain %>.twik.us
+                  <span class="caret"></span>
+                </span>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li><%= link_to('Sign into different account', '/accounts/signin') %></li>
+                  <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+                </ul>
+              </div>
+
+                <!-- <p class="navbar-text hide"><%= current_account.subdomain %>.twik.us</p> -->
+              </div>
           <% end %>
         </div>
       </div>
@@ -38,7 +49,6 @@
     </nav>
   </header>
   <section class="container-fluid" id="main-container">
-    <%= flash_messages if show_layout_flash? %>
     <%= yield %>
   </section>
   <% if user_signed_in? %>
@@ -55,5 +65,6 @@
     </div>
   </div>
   <%= javascript_include_tag 'application' %>
+  <%= toastr_flash %>
 </body>
 </html>

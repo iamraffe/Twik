@@ -1,0 +1,20 @@
+  <section class="dashboard">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <% @archives.each do |archive| %>
+          <div class="col-md-6">
+            <img src="<%= archive.preview.url(:thumb) %>" alt="<%= archive.name %>" class="img-responsive">
+            <p><%= archive.name %> (<%= archive.template.name %>)</p>
+            <p><%= archive.created_at.strftime("%m/%d/%Y") %></p>
+            <a href="<%= archive.rendered_pdf %>" target="_blank">View</a>
+            <a href="<%= archive.rendered_pdf %>" download>Download</a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <%= will_paginate @archives, page_links: false %>
+      </div>
+    </div>
+  </section>

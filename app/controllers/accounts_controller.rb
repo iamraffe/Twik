@@ -1,11 +1,26 @@
 class AccountsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:new, :create, :check]
+  skip_before_action :authenticate_user!, only: [:new, :create, :check, :signin, :find]
   # skip_before_action :authenticate_user_from_token!, only: [:new, :create, :check]
 
   def new
     @account = Account.new
     @account.build_owner(role: "owner")
     render template: "accounts/new", layout: 'landing'
+  end
+
+  def signin
+    render template: "accounts/signin", layout: 'devise'
+  end
+
+  def find
+    @account = Account.where(subdomain: params[:subdomain]).first
+    if @account.nil?
+      # flash[:notice] = "User deleted successfully"
+      redirect_to :back , :alert => "Whoops! We can't find a Twik account by that name"
+      #there is no such account
+    else
+      redirect_to new_user_session_url(subdomain: @account.subdomain)
+    end
   end
 
   def create

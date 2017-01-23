@@ -25,13 +25,45 @@ HEADER
   }
   
   .current-account{
+    margin-top: 40px;
     float: right;
-    height: 75px;
+    height: 36px;
 
     .navbar-text{
+      margin-top: 0px;
       font-family: 'Baloo', cursive;
-      margin-top: 40px;
+      color: white;
       margin-right: 40px;
+    }
+    .dropdown-toggle{
+      font-family: 'Baloo', cursive;
+      color: white;
+      margin-right: 40px;
+      cursor: pointer;
+    }
+    .dropdown-menu{
+      margin-top: 5px;
+      left: -40px;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      padding: 0;
+
+      li{
+        font-family: Baloo, cursive;
+        font-size: 14px;
+
+        a{
+          text-align: right;
+          color: #f6303e;
+          border-bottom: 1px solid black;
+          padding: 7.5px 20px;
+
+          &:hover, &:focus{
+            background: white;
+            text-decoration: underline;
+          }
+        }
+      }
     }
   }
 }

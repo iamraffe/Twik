@@ -9,24 +9,22 @@ export default function metaReducer(state = initialState.meta, action){
         size: action.size
       }
     case types.CHANGE_LAYOUT:
-      // console.log(state, action)
-      // debugger;
       return {
         ...state,
         orientation: action.orientation
       }
-    case "SET_META_INFO":
-      // console.log(state, action)
-
-      // debugger;
+    case types.SET_META_INFO:
       return {
         ...state,
-        title: action.name,
         orientation: action.orientation,
         layout: action.layout,
         size: action.size,
         name: action.name,
-        society: action.society
+        society: action.society,
+        multiPage: action.multiPage,
+        allows: action.allows,
+        accepts: action.accepts,
+        printAt: action.printAt
       }
     default:
       return state

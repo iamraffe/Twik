@@ -14,6 +14,7 @@ class MenuElement extends React.Component{
       position: props.position
     }
     
+    this.onAdd = props.onAdd
     this.getStyles = props.getStyles
     this.onUpdate = props.onUpdate
     this.onDelete = props.onDelete
@@ -33,7 +34,7 @@ class MenuElement extends React.Component{
   render(){
     const { type, activeSection, id, inline } = this.props
     const { elements, position } = this.state
-    // console.log(type, this.props)
+
     switch(type){
       case "MENU_TITLE":
       case "SECTION_TITLE":
@@ -47,12 +48,12 @@ class MenuElement extends React.Component{
             styles={elements[0].styles}
             activeSection={activeSection}
             getStyles={this.getStyles}
+            onAdd={this.onAdd}
             onUpdate={this.onUpdate}
             onDelete={this.onDelete}
           />
         )
       case "IMAGE_ELEMENT":
-        console.log("ung ek => ", this.props)
         return (
           <ImageElement
             type={type}
@@ -63,6 +64,7 @@ class MenuElement extends React.Component{
             hide={this.props.hide}
             activeSection={activeSection}
             getStyles={this.getStyles}
+            onAdd={this.onAdd}
             onUpdate={this.onUpdate}
             onDelete={this.onDelete}
           />
@@ -78,12 +80,13 @@ class MenuElement extends React.Component{
             inline={inline}
             activeSection={activeSection}
             getStyles={this.getStyles}
+            onAdd={this.onAdd}
             onUpdate={this.onUpdate}
             onDelete={this.onDelete}
           />
         )
-      default:
-        return null
+      // default:
+      //   return null
     }
   }
 }

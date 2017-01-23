@@ -1,15 +1,12 @@
 module LayoutHelper
-  def flash_messages(opts = {})
-    @layout_flash = opts.fetch(:layout_flash) { true }
-
-    capture do
-      flash.each do |name, msg|
-        concat content_tag(:div, msg, id: "flash_#{name}")
-      end
+  def toastr_flash
+    flash_messages = []
+    flash.each do |type, message|
+      type = 'success' if (type == 'notice' || type == 'success')
+      type = 'error'   if (type == 'alert' || type == 'error')
+      text = "<script>toastr.#{type}('#{message}', '#{type.capitalize}', {positionClass: 'toast-top-center'});</script>"
+      flash_messages << text.html_safe if message
     end
-  end
-
-  def show_layout_flash?
-    @layout_flash.nil? ? true : @layout_flash
+    flash_messages.join("\n").html_safe
   end
 end

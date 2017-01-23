@@ -12,32 +12,3 @@ export function changeLayout(orientation, layoutStructure){
 export function setMetaInfo(metaInfo){
   return { type: "SET_META_INFO", ...metaInfo }
 }
-
-//THUNKS ALWAYS AT THE BOTTOM
-export function saveMenu(menu, society, preview){
-  // console.log(menu, society, preview)
-  // debugger;
-  return dispatch => {
-    return API.post(`/menus`, {menu, society, preview}).then((menu) =>{
-      console.log(menu)
-      // dispatch(confirmChartSuccess(menu))
-    })
-    .catch((error) => {
-      throw(error)
-    })
-  }
-}
-
-export function updateMenu(menu, society, preview, object){
-  // console.log(menu, society, preview)
-  // debugger;
-  return dispatch => {
-    return API.put(`/menus/${object.id}`, {menu, society, preview}).then((menu) =>{
-      console.log(menu)
-      // dispatch(confirmChartSuccess(menu))
-    })
-    .catch((error) => {
-      throw(error)
-    })
-  }
-}

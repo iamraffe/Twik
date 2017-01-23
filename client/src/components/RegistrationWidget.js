@@ -13,7 +13,8 @@ class RegistrationWidget extends React.Component{
       toggleSignUp: false,
       canSubmit: false,
       completed: false,
-      guessWhat: false
+      guessWhat: false,
+      subdomain: ''
     }
   }
 
@@ -48,33 +49,44 @@ class RegistrationWidget extends React.Component{
           completed: true,
           toggleSignUp: false
         })
-        toastr.success("Please check your email for instructions", "You're account has been created!", {positionClass: "toast-top-center"})
+        toastr.success("Please check your email for instructions", "You're account has been created! ", {positionClass: "toast-top-center"})
       })
     }
     else{
-      toastr.error("Please check and try again", "Oops! Email field can't be blank", {positionClass: "toast-top-center"})
+      toastr.error("Please check and try again", "Oops! Email field can't be blank ", {positionClass: "toast-top-center"})
     }
   }
 
   verifySubdomain = (e) => {
-    fetch('/accounts/verify.json?subdomain='+e.target.value)
-    .then((response) => {
-      if (!response.ok) {
-          throw Error(response.statusText);
-      }
-      return response.json()
-    }).then((json) => {
-      if(json !== 0){
-        toastr.error('Looks like that subdomain has already been taken been taken', 'Darn it!', {positionClass: "toast-top-center"})
-      }
-      else{
-        this.setState({
-          canSubmit: true
-        })
-      }
-    }).catch((ex) => {
-      toastr.error(ex, '', {positionClass: "toast-top-center"})
-    })
+    const { subdomain } = this.state
+    const input = e.target.value
+    // console.log("blur", subdomain, input,subdomain !== input)
+    if(subdomain !== input){
+      // console.log("cale")
+      fetch('/accounts/verify.json?subdomain='+input)
+      .then((response) => {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response.json()
+      }).then((json) => {
+        if(json !== 0){
+          toastr.error('Looks like that subdomain has already been taken been taken', 'Darn it! ', {positionClass: "toast-top-center"})
+          this.setState({
+            // canSubmit: true,
+            subdomain: input
+          })
+        }
+        else{
+          this.setState({
+            canSubmit: true,
+            subdomain: input
+          })
+        }
+      }).catch((ex) => {
+        toastr.error(ex, '', {positionClass: "toast-top-center"})
+      })
+    }
   }
 
   render(){
@@ -87,18 +99,22 @@ class RegistrationWidget extends React.Component{
             <div className="row form-group">
               <div className="col-xs-12">
                 <div className="input-group">
-                  <input type="text" className="form-control" name="subdomain" placeholder="claim your twik name" onBlur={this.verifySubdomain} autoFocus={true} />
+                  <input type="text" className="form-control" name="subdomain" placeholder="claim your twik name" onBlur={(e) => {this.verifySubdomain(e)}} autoFocus={true} />
                   <div className="input-group-addon text-primary">.twik.us</div>
                 </div>
               </div>
             </div>
             <div className="row form-group">
               <div className="col-xs-12">
-                <div className="input-group email-group">
+                <div className="input-group email-group hidden-xs">
                   <input type="email" placeholder="email" name="email" className="form-control" />
                   <div className="input-group-addon text-primary">
-                    <button className="btn btn-primary btn-large signup-button" disabled={!canSubmit}>Sign Up</button>
+                    <button className="btn btn-primary btn-small signup-button" disabled={!canSubmit}>Sign Up</button>
                   </div>
+                </div>
+                <div className="visible-xs">
+                  <input type="email" placeholder="email" name="email" className="form-control" />
+                  <button className="btn btn-primary btn-large btn-block signup-button" disabled={!canSubmit}>Sign Up</button>
                 </div>
               </div>
             </div>

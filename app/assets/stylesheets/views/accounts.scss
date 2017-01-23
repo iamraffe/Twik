@@ -16,23 +16,52 @@ ACCOUNTS - NEW
 }
 
 .pretty-nav-line{
-  //width: 45%;
+  width: 100%;
   height: 15px;
   border-bottom: 3px solid $brand-primary;
   display: block;
   margin: 0 auto;
   border-radius: 1px;
-  margin-left: 260px;
+  margin-top: 82px;
 }
 
 .navbar-landing{
-  padding-top: 0px;
+  padding-top: 20px;
 
+  .navbar-brand{
+    height: 155px;
+    @media(max-width: 480px) {
+      height: 100px;
+      padding: 0;
+    }
+
+    img{
+      height: 125px;
+      margin-left: 0px;
+
+      @media(max-width: 480px) {
+        height: 100px;
+      }
+    }
+  }
+  .navbar-toggle{
+    margin-right: 0;
+    margin-top: 25px;
+
+    .icon-bar{
+      background: $brand-primary;
+      display: block;
+      width: 35px;
+      height: 3px;
+      border-radius: 0;
+      margin-bottom: 7.5px;
+    }
+  }
 
   .navbar-right{
-    margin-top: 0px;
-    margin-right: 0;
-    margin-left: 25px;
+    margin-top: 82.5px;
+    margin-right: 15px;
+
     li{
       a{
         color: white;
@@ -40,7 +69,7 @@ ACCOUNTS - NEW
         margin: 0;
         padding: 0;
         display: inline;
-        font-size: 12px;
+        font-size: 18px;
 
         &:hover, &:focus{
           background: transparent;
@@ -52,6 +81,30 @@ ACCOUNTS - NEW
         margin-right: 10px;
         margin-left: 10px;
         color: $brand-primary;
+      }
+    }
+  }
+
+  .mobile-nav{
+    margin-top: 15px;
+    @media(min-width: 480px){
+      display: none;
+    }
+    li{
+      a{
+        color: white;
+        font-family: 'Baloo', cursive;
+        margin: 0;
+        padding: 0;
+        // display: inline;
+        font-size: 18px;
+        // text-align: center
+
+        &:hover, &:focus{
+          background: transparent;
+          text-decoration: underline;
+          outline: none !important;
+        }
       }
     }
   }
@@ -80,11 +133,15 @@ ACCOUNTS - NEW
   }
 
   > header{
-    height: 120% !important;
+    height: 100%;
     background: image_url('background-signup.png');
     background-size: 100% 100%;
     margin-bottom: 0;
 
+    @media(max-width: 480px){
+      background-size: cover;
+      height: 115%;
+    }
   }
   .twik-deets{
     //background: white;
@@ -116,11 +173,14 @@ ACCOUNTS - NEW
   img{
     margin-left: 25px;
     margin-top: 35%;
-  } 
+  }
 }
 .register-account{
   margin-top: 30px;
 
+  @media(max-width: 480px) {
+    margin-top: 0px;
+  }
   > header{
     margin-bottom: 0px;
 
@@ -136,6 +196,11 @@ ACCOUNTS - NEW
         border-radius: 5px;
         padding-left: 5px;
         padding-right: 5px;
+        @media(max-width: 480px) {
+          font-size: 24px;
+          background: transparent;
+          padding: 0px;
+        }
       }
       .arrow-background {
         background: image_url('arrow-red.png');
@@ -145,6 +210,16 @@ ACCOUNTS - NEW
         background-size: 100% 100%;
         padding-bottom: 20px;
         padding-top: 15px;
+        @media(max-width: 480px) {
+          font-size: 24px;
+          background: transparent;
+          padding: 0px;
+        }
+      }
+
+      @media(max-width: 480px) {
+        font-size: 24px;
+        background: transparent;
       }
     }
     h2 {
@@ -163,19 +238,24 @@ ACCOUNTS - NEW
     font-family: Open Sans;
     line-height: 1.25;
   }
-  
+
   .sign-up-form{
     input.form-control{
       background: transparent;
       border: none;
       color: #f6303e;
       line-height: 1;
-      border-bottom: 3px solid #f6303e;
-      height: 35px;
+      border-bottom: 2px solid #f6303e;
+      height: 40px;
       box-shadow: none;
-      border-radius: 5px;
+      border-radius: 0;
       font-size: 30px;
       text-align: center;
+
+      @media(max-width: 480px) {
+        font-size: 18px;
+        background: transparent;
+      }
       &:focus{
         box-shadow: none;
       }
@@ -184,20 +264,28 @@ ACCOUNTS - NEW
         font-weight: bold;
         font-size: 30px;
         text-align: center;
+
+        @media(max-width: 480px) {
+          font-size: 18px;
+          background: transparent;
+        }
       }
     }
     .email-group {
-      width: 92%;
+      width: 100%;
       input {
         margin-top: 15px;
       }
     }
     .signup-button {
-      padding: 0 20px 0 20px !important;
-      height: 120%;
-      width: 190%;
-    }
+      width: 165px;
 
+      @media(max-width: 480px) {
+        width: 100%;
+        padding-top: 17.5px;
+        margin-top: 22.5px;
+      }
+    }
   }
 }
 
@@ -228,6 +316,23 @@ ACCOUNTS - NEW
   }
 }
 
+.pricing-plan{
+  h1{
+    font-size: 40px;
+    font-family: Baloo, cursive;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  ul{
+    li{
+
+    }
+  }
+  .btn-large{
+    padding-top: 17.5px;
+  }
+}
+
 .pricing-table{
   margin-top: 150px;
   margin-bottom: 250px;
@@ -236,7 +341,7 @@ ACCOUNTS - NEW
     tr{
       th{
         border-bottom: 1.5px solid $brand-default;
-        text-align: center;   
+        text-align: center;
         height: 75px;
         vertical-align: middle;
         font-size: 20px;

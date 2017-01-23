@@ -10,7 +10,8 @@ import {  FontPanel,
           ColorPanel,
           LayoutPanel,
           SectionTypePanel,
-          ImagePanel } from './toolPanel'
+          ImagePanel,
+          ComponentPanel } from './toolPanel'
 
 class ToolPanel extends React.Component{
   constructor(props){
@@ -18,18 +19,22 @@ class ToolPanel extends React.Component{
 
     this.state = {
       active: 'none',
+      id: props.id,
       styles: props.styles,
       fontFamilies: props.fontFamilies,
       colors: props.colors,
-      meta: props.meta, 
+      meta: props.meta,
+      saving: props.saving,
       zoom: props.zoom
     }
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
+      id: nextProps.id,
       colors: nextProps.colors,
       fontFamilies: nextProps.fontFamilies,
+      saving: nextProps.saving,
       styles: nextProps.styles,
       meta: nextProps.meta,
       zoom: nextProps.zoom
@@ -55,7 +60,7 @@ class ToolPanel extends React.Component{
     }
   }
 
-  exportCall = (zoom) => {
+  previewCall = (zoom) => {
     const { meta } = this.state
     const { applyZoom } = this.props.zoomActions
     const html = document.getElementById('entry-point').innerHTML
@@ -65,24 +70,26 @@ class ToolPanel extends React.Component{
     req.field('html', html)
     req.field('meta', JSON.stringify(meta))
     req.end((err, res)=>{
-      console.log(err, res)
       applyZoom(zoom)
       window.open(res.body.path, "_blank")
     })
   }
 
-  onExport = () => {
+  onPreview = () => {
     const { applyZoom } = this.props.zoomActions
     const { zoom } = this.state
-    applyZoom(100)
-    // this.exportCall()
-    setTimeout(this.exportCall(zoom), 100)
 
+    applyZoom(100)
+    setTimeout(this.previewCall(zoom), 100)
+  }
+
+  onExport = () => {
+    console.log("export call")
   }
 
   render(){
-    const { active } = this.state
-    
+    const { active, meta, id, saving } = this.state
+
     return(
       <section className="tool-panel" style={{padding: 25}}>
         <header>
@@ -91,34 +98,34 @@ class ToolPanel extends React.Component{
         </header>
         <div className="row" style={{marginBottom: 100}}>
           <div className="col-xs-12">
-            {active !== 'color' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('color')}}>Color</button>}
+            {active !== 'color' && _.findIndex(meta.allows, (f) => { return f === 'color' }) !== -1 && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('color')}}>Color</button>}
             {active === 'color' &&
               <ColorPanel
                 onClose={(e) => {this.onToggleActive('none')}}
               />
             }
-            {active !== 'font' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('font')}}>Font</button>}
+            {active !== 'font' && _.findIndex(meta.allows, (f) => { return f === 'font' }) !== -1 && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('font')}}>Font</button>}
             {active === 'font' &&
               <FontPanel
                 onClose={(e) => {this.onToggleActive('none')}}
               />
             }
-            {active !== 'layout' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('layout')}}>Layout</button>}
+            {active !== 'layout' && _.findIndex(meta.allows, (f) => { return f === 'layout' }) !== -1 && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('layout')}}>Layout</button>}
             {active === 'layout' &&
               <LayoutPanel
                 onClose={(e) => {this.onToggleActive('none')}}
               />
             }
-            {active !== 'add-section' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('add-section')}}>Add Component</button>}
+            {active !== 'add-section' && _.findIndex(meta.allows, (f) => { return f === 'component' }) !== -1 && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('add-section')}}>Add Component</button>}
             {active === 'add-section' &&
-              <SectionTypePanel 
+              <ComponentPanel
                 onClose={(e) => {this.onToggleActive('none')}}
                 getStyles={this.getStyles}
               />
             }
-            {active !== 'image-wiz' && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('image-wiz')}}>Image Library</button>}
+            {active !== 'image-wiz' && _.findIndex(meta.allows, (f) => { return f === 'image' }) !== -1 && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('image-wiz')}}>Image Library</button>}
             {active === 'image-wiz' &&
-              <ImagePanel 
+              <ImagePanel
                 onClose={(e) => {this.onToggleActive('none')}}
                 getStyles={this.getStyles}
               />
@@ -128,22 +135,24 @@ class ToolPanel extends React.Component{
         <div className="row">
           <div className="col-xs-6">
             <button className="btn-toolpanel-action btn-block" onClick={(e) => {
-              if(this.props.mode === "edit"){
+              if(this.props.mode === "edit" || id !== null){
                 this.props.onUpdate(e)
               }
               else{
                 this.props.onSave(e)
               }
-            }}>Save</button>
+            }} disabled={saving}>{saving ? 'Saving...' : 'Save'}</button>
           </div>
           <div className="col-xs-6">
-            <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onExport()}}>Preview</button>
+            <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onPreview()}}>Preview</button>
           </div>
-          <div className="col-xs-12">
-            <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onExport()}}>Export</button>
-          </div>
+          {(this.props.mode === "edit" || id !== null) &&
+            <div className="col-xs-12">
+              <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onExport()}}>Export</button>
+            </div>
+          }
         </div>
-        
+
       </section>
     )
   }
@@ -155,13 +164,15 @@ ToolPanel.propTypes = {
 function mapStateToProps(state, ownProps){
   // console.log(state)
   return {
-    zoom: state.zoom,
-    sections: state.sections,
-    fontFamilies: state.fontFamilies,
-    structure: state.structure,
-    meta: state.meta,
+    id: state.menu.object.id,
     colors: state.colors,
-    styles: state.styles
+    fontFamilies: state.fontFamilies,
+    meta: state.meta,
+    saving: state.saving,
+    sections: state.sections,
+    structure: state.structure,
+    styles: state.styles,
+    zoom: state.zoom,
   }
 }
 

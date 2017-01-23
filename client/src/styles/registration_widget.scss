@@ -18,6 +18,11 @@ REGISTRATION WIDGET
       font-size: 46px;
       padding: 7.5px;
       color: white;
+
+      @media(max-width: 480px) {
+        font-size: 25px;
+        padding: 20px;
+      }
     }
   }
 }

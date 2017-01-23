@@ -10,8 +10,14 @@ SHOW
   &:-ms-input-placeholder { @content }
 }
 .user-avatar{
-  max-width: 90%;
-  max-height: 90%;
+  // max-width: 90%;
+  // max-height: 90%;
+    width: 93%;
+    height: 88%;
+    margin-top: 5px;
+    margin-right: 2.5px;
+    border-radius: 7.5px;
+    vertical-align: initial;
 }
 .update-avatar-trigger{
   cursor: pointer;

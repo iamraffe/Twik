@@ -39,11 +39,15 @@ if Apartment::Tenant.current == "public"
   col_2_id = SecureRandom.uuid
   col_3_id = SecureRandom.uuid
   col_logo_id = SecureRandom.uuid
+  section_id = SecureRandom.uuid
 
   Template.create({
     name: "Bufalina",
     canon: true,
     ext: SecureRandom.uuid,
+    allows: ['component'],
+    accepts: ['text'],
+    printAt: ['home'],
     structure: {
       colors: {
         primary_color: 'black',
@@ -127,7 +131,7 @@ if Apartment::Tenant.current == "public"
           name: "Section Title",
           id: SecureRandom.uuid,
           structure: {
-            type: "SECTION_TITLE",
+            type: "SINGLE_ELEMENT",
             elements: [
               {             
                 styles: section_title_id,
@@ -140,7 +144,7 @@ if Apartment::Tenant.current == "public"
           name: "Dishes & Beers",
           id: SecureRandom.uuid,
           structure: {
-            type: "SECTION_ELEMENT",
+            type: "COMPOUND_ELEMENT",
             inline: true,
             elements: [
               {
@@ -175,7 +179,7 @@ if Apartment::Tenant.current == "public"
           name: "Wines",
           id: SecureRandom.uuid,
           structure: {
-            type: "SECTION_ELEMENT",
+            type: "COMPOUND_ELEMENT",
             inline: true,
             elements: [
               {
@@ -211,114 +215,276 @@ if Apartment::Tenant.current == "public"
         {
           id: SecureRandom.uuid,
           name: "TWO_COLUMNS",
+          multiPage: false,
+          orientation: 'portrait',
           structure: [
             {
-              type: 'CONTAINER',
+              type: 'PAGE',
               position: 0,
               background: '',
-              span: 0.5,
-              paddingTop: 15,
-              paddingBottom: 15,
-              paddingLeft: 15,
-              paddingRight: 15,
               id: SecureRandom.uuid,
               elements: [
                 {
-                  type: "ROW",
+                  type: 'CONTAINER',
                   position: 0,
+                  background: '',
+                  span: 0.5,
                   id: SecureRandom.uuid,
-                  vertical: 'top',
                   elements: [
                     {
-                      type: "COLUMN",
-                      span: 1,
-                      id: col_logo_id,
+                      type: "ROW",
                       position: 0,
-                      accepts: ['img'],
-                      elements: [],
-                      styles: {
-                        # marginTop: '2cm', #While there's no logo
-                        marginTop: '2.006cm',
-                        marginLeft: '1cm',
-                        marginRight: '1cm',
-                        marginBottom: '1.202cm'
-                      }
-                    },
-                    {
-                      type: "COLUMN",
-                      span: 1,
                       id: SecureRandom.uuid,
-                      position: 1,
-                      accepts: ['text'],
-                      elements: [],
-                      styles: {
-                        marginLeft: '1cm',
-                        marginRight: '1cm',
-                      }
+                      vertical: 'top',
+                      elements: [
+                        {
+                          type: "COLUMN",
+                          span: 1,
+                          id: col_logo_id,
+                          position: 0,
+                          styles: {
+                            marginTop: '2.006cm',
+                            marginLeft: '1cm',
+                            marginRight: '1cm',
+                          }
+                        }
+                      ]
+                    },
+                  ]
+                },
+                {
+                  type: 'CONTAINER',
+                  position: 0,
+                  background: '',
+                  span: 0.5,
+                  paddingTop: 15,
+                  paddingBottom: 15,
+                  paddingLeft: 15,
+                  paddingRight: 15,
+                  id: SecureRandom.uuid,
+                  elements: [
+                    {
+                      type: "ROW",
+                      position: 0,
+                      id: SecureRandom.uuid,
+                      vertical: 'top',
+                      elements: [
+                        {
+                          type: "COLUMN",
+                          span: 1,
+                          id: SecureRandom.uuid,
+                          position: 0,
+                          styles: {
+                            marginTop: '2.79cm',
+                            marginLeft: '1cm',
+                            marginRight: '1cm',
+                          }
+                        },
+                      ]
+                    }
+                  ]
+                },
+              ]
+            }
+          ],
+          sections: [
+            {
+              id: section_id,
+              type: "SECTION",
+              position: 0,
+              columnId: col_logo_id,
+              accepts: ['img'],
+              readOnly: true,
+              styles: {
+                marginBottom: '1.202cm'
+              }
+            }
+          ],
+          components: [
+            {
+              sectionId: section_id,
+              type: "IMAGE_ELEMENT",
+              url: 'http://bufalinadue.menustyler.com/img/bufalina-logo-greyscale.png',
+              styles: {
+                height: 61,
+                width: 66
+              },
+              hide: true,
+              position: 0,
+              id: SecureRandom.uuid
+            }
+          ]
+        },
+        {
+          id: SecureRandom.uuid,
+          name: "TWO_COLUMNS",
+          multiPage: true,
+          orientation: 'landscape',
+          structure: [
+            {
+              type: 'PAGE',
+              position: 0,
+              background: '',
+              id: SecureRandom.uuid,
+              elements: [
+                {
+                  type: 'CONTAINER',
+                  position: 0,
+                  background: '',
+                  span: 0.5,
+                  id: SecureRandom.uuid,
+                  elements: [
+                    {
+                      type: "ROW",
+                      position: 0,
+                      id: SecureRandom.uuid,
+                      vertical: 'top',
+                      elements: [
+                        {
+                          type: "COLUMN",
+                          span: 1,
+                          id: col_logo_id,
+                          position: 0,
+                          styles: {
+                            # marginTop: '2cm', #While there's no logo
+                            marginTop: '2.006cm',
+                            marginLeft: '1cm',
+                            marginRight: '1cm'
+                          }
+                        }
+                      ]
+                    },
+                  ]
+                },
+                {
+                  type: 'CONTAINER',
+                  position: 0,
+                  background: '',
+                  span: 0.5,
+                  id: SecureRandom.uuid,
+                  elements: [
+                    {
+                      type: "ROW",
+                      position: 0,
+                      id: SecureRandom.uuid,
+                      vertical: 'top',
+                      elements: [
+                        {
+                          type: "COLUMN",
+                          span: 1,
+                          id: SecureRandom.uuid,
+                          position: 0,
+                          styles: {
+                            marginTop: '2.79cm',
+                            marginLeft: '1cm',
+                            marginRight: '1cm',
+                          }
+                        },
+                      ]
                     }
                   ]
                 },
               ]
             },
             {
-              type: 'CONTAINER',
-              position: 0,
+              type: 'PAGE',
+              position: 1,
               background: '',
-              span: 0.5,
-              paddingTop: 15,
-              paddingBottom: 15,
-              paddingLeft: 15,
-              paddingRight: 15,
               id: SecureRandom.uuid,
               elements: [
                 {
-                  type: "ROW",
+                  type: 'CONTAINER',
                   position: 0,
+                  background: '',
+                  span: 0.5,
                   id: SecureRandom.uuid,
-                  vertical: 'top',
                   elements: [
                     {
-                      type: "COLUMN",
-                      span: 1,
-                      id: col_2_id,
+                      type: "ROW",
                       position: 0,
-                      accepts: ['text'],
+                      id: SecureRandom.uuid,
+                      vertical: 'top',
                       elements: [
-                      ],
-                      styles: {
-                        marginTop: '2.79cm',
-                        marginLeft: '1cm',
-                        marginRight: '1cm',
-                      }
+                        {
+                          type: "COLUMN",
+                          span: 1,
+                          id: SecureRandom.uuid,
+                          position: 1,
+                          styles: {
+                            marginLeft: '1cm',
+                            marginRight: '1cm',
+                          }
+                        }
+                      ]
                     },
                   ]
-                }
+                },
+                {
+                  type: 'CONTAINER',
+                  position: 0,
+                  background: '',
+                  span: 0.5,
+                  paddingTop: 15,
+                  paddingBottom: 15,
+                  paddingLeft: 15,
+                  paddingRight: 15,
+                  id: SecureRandom.uuid,
+                  elements: [
+                    {
+                      type: "ROW",
+                      position: 0,
+                      id: SecureRandom.uuid,
+                      vertical: 'top',
+                      elements: [
+                        {
+                          type: "COLUMN",
+                          span: 1,
+                          id: SecureRandom.uuid,
+                          position: 0,
+                          styles: {
+                            marginTop: '2.79cm',
+                            marginLeft: '1cm',
+                            marginRight: '1cm',
+                          }
+                        },
+                      ]
+                    }
+                  ]
+                },
               ]
-            },
+            }
           ],
           sections: [
             {
-              id: SecureRandom.uuid,
+              id: section_id,
               type: "SECTION",
               position: 0,
               columnId: col_logo_id,
-              elements: [{
-                  type: "IMAGE_ELEMENT",
-                  url: 'http://bufalinadue.menustyler.com/img/bufalina-logo-greyscale.png',
-                  styles: {
-                    height: 61,
-                    width: 66
-                  },
-                  hide: true,
-                  position: 0,
-                  id: SecureRandom.uuid
-              }]
+              accepts: ['img'],
+              readOnly: true,
+              style: {
+                marginBottom: '1.202cm'
+              }
+            }
+          ],
+          components: [
+            {
+              sectionId: section_id,
+              type: "IMAGE_ELEMENT",
+              url: 'http://bufalinadue.menustyler.com/img/bufalina-logo-greyscale.png',
+              styles: {
+                height: 61,
+                width: 66
+              },
+              hide: true,
+              position: 0,
+              id: SecureRandom.uuid
             }
           ]
         }
       ]
     }
-    })
+  })
 
   @user = {name: 'Steven Dilley', email: "example@example.com", password: "iamexample", password_confirmation: "iamexample"}
 
