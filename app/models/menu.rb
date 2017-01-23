@@ -5,11 +5,18 @@ class Menu < ActiveRecord::Base
   belongs_to :template
   belongs_to :society
   after_save :record_archive
+  has_attached_file :rendered_pdf,
+  :storage => :s3,
+  :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
+      :url => "/:subdomain/:id-:subdomain/renders/:style/:basename.:extension",
+      :path => ":subdomain/:id-:subdomain/renders/:style/:basename.:extension"
+  validates_attachment :rendered_pdf, content_type: { content_type: "application/pdf" }
+
   has_attached_file :preview,
   :storage => :s3,
   :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
-      :url => "/:subdomain/:id-:subdomain/:style/:basename.:extension",
-      :path => ":subdomain/:id-:subdomain/:style/:basename.:extension",
+      :url => "/:subdomain/:id-:subdomain/preview/:style/:basename.:extension",
+      :path => ":subdomain/:id-:subdomain/preview/:style/:basename.:extension",
   :styles => {
     :thumb => "500x350>" },
   :convert_options => {
@@ -39,11 +46,8 @@ class Menu < ActiveRecord::Base
         template_id: self.template_id,
         society_id: self.society_id,
         menu_id: self.id,
-        meta: self.meta,
-        components: self.components,
-        sections: self.sections,
-        component_styles: self.component_styles,
-        subdomain: self.subdomain 
+        subdomain: self.subdomain,
+        rendered_pdf: self.rendered_pdf
       })
     end
 end

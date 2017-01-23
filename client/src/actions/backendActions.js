@@ -23,10 +23,12 @@ export function updateError(){
 }
 
 //THUNKS ALWAYS AT THE BOTTOM
-export function saveMenu(menu, society, preview){
+export function saveMenu(menu, society, preview, rendered_pdf){
+  console.log(rendered_pdf)
+  debugger;
   return dispatch => {
     dispatch(opreationInProgress())
-    return API.post(`/menus`, {menu, society, preview}).then((menu) =>{
+    return API.post(`/menus`, {menu, society, preview, rendered_pdf}).then((menu) =>{
       dispatch(createSuccess(menu.id))
       toastr.success("Great news! Document saved correctly", "", {positionClass: "toast-top-center"})
     })
@@ -37,10 +39,10 @@ export function saveMenu(menu, society, preview){
   }
 }
 
-export function updateMenu(menu, society, preview, object){
+export function updateMenu(menu, society, preview, object, rendered_pdf){
   return dispatch => {
     dispatch(opreationInProgress())
-    return API.put(`/menus/${object.id}`, {menu, society, preview}).then((menu) =>{
+    return API.put(`/menus/${object.id}`, {menu, society, preview, rendered_pdf}).then((menu) =>{
       dispatch(updateSuccess())
       toastr.success("Great news! Document saved correctly", "", {positionClass: "toast-top-center"})
     })

@@ -43,7 +43,7 @@ class MenuWidget extends React.Component{
     // window.removeEventListener("onbeforeunload", this.onUnload)
     window.removeEventListener("beforeunload", this.onUnload)
   }
-  
+
   componentDidMount(){
     window.addEventListener("beforeunload", this.onUnload)
     // window.addEventListener("onbeforeunload", this.onUnload)
@@ -96,8 +96,9 @@ class MenuWidget extends React.Component{
   }
 
   onSave = (e) => {
-    const { meta, sections, template, components } = this.state 
+    const { meta, sections, template, components } = this.state
     let canvas = document.getElementById('entry-point')
+    // let rendered_pdf = document.getElementById('entry-point')
     let preview
     canvas.parentElement.style.height = 'auto'
     html2canvas(canvas).then((render) => {
@@ -111,14 +112,16 @@ class MenuWidget extends React.Component{
         template_id: template.id
       },
       meta.society,
-      preview)
+      preview,
+      canvas.innerHTML)
     })
   }
 
   onUpdate = (e) => {
-    const { meta, sections, template, components, menu } = this.state 
+    const { meta, sections, template, components, menu } = this.state
     // const { menu } = this.props
     let canvas = document.getElementById('entry-point')
+    // let rendered_pdf = document.getElementById('entry-point')
     let preview
     canvas.parentElement.style.height = 'auto'
     html2canvas(canvas).then((render) => {
@@ -133,7 +136,8 @@ class MenuWidget extends React.Component{
       },
       meta.society,
       preview,
-      menu.object)
+      menu.object,
+      canvas.innerHTML)
     })
   }
 

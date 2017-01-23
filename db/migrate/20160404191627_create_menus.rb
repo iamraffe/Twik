@@ -10,6 +10,7 @@ class CreateMenus < ActiveRecord::Migration
       t.json :sections
       t.json :component_styles
       t.attachment :preview
+      t.attachment :rendered_pdf
       t.string :subdomain
       t.references :template, index: true
       t.references :society, index: true

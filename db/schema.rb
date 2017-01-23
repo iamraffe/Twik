@@ -25,19 +25,19 @@ ActiveRecord::Schema.define(version: 20161220214033) do
   create_table "archives", force: :cascade do |t|
     t.string   "name"
     t.integer  "menu_id"
-    t.json     "meta"
-    t.json     "components"
-    t.json     "sections"
-    t.json     "component_styles"
     t.string   "preview_file_name"
     t.string   "preview_content_type"
     t.integer  "preview_file_size"
     t.datetime "preview_updated_at"
+    t.string   "rendered_pdf_file_name"
+    t.string   "rendered_pdf_content_type"
+    t.integer  "rendered_pdf_file_size"
+    t.datetime "rendered_pdf_updated_at"
     t.string   "subdomain"
     t.integer  "template_id"
     t.integer  "society_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["menu_id"], name: "index_archives_on_menu_id", using: :btree
     t.index ["society_id"], name: "index_archives_on_society_id", using: :btree
     t.index ["template_id"], name: "index_archives_on_template_id", using: :btree
@@ -72,11 +72,15 @@ ActiveRecord::Schema.define(version: 20161220214033) do
     t.string   "preview_content_type"
     t.integer  "preview_file_size"
     t.datetime "preview_updated_at"
+    t.string   "rendered_pdf_file_name"
+    t.string   "rendered_pdf_content_type"
+    t.integer  "rendered_pdf_file_size"
+    t.datetime "rendered_pdf_updated_at"
     t.string   "subdomain"
     t.integer  "template_id"
     t.integer  "society_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["society_id"], name: "index_menus_on_society_id", using: :btree
     t.index ["template_id"], name: "index_menus_on_template_id", using: :btree
   end
