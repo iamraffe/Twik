@@ -24,8 +24,6 @@ export function updateError(){
 
 //THUNKS ALWAYS AT THE BOTTOM
 export function saveMenu(menu, society, preview, rendered_pdf){
-  console.log(rendered_pdf)
-  debugger;
   return dispatch => {
     dispatch(opreationInProgress())
     return API.post(`/menus`, {menu, society, preview, rendered_pdf}).then((menu) =>{

@@ -42,7 +42,7 @@
           <a href="/menus/new" class="btn btn-primary btn-med hide">Create New</a>
         </div>
       </header>
-      <section class="actions right-dashboard col-md-5 col-md-offset-1">
+      <section class="actions right-dashboard col-md-5 col-md-offset-1" style="margin-top: 0">
         <header class="row">
           <h1>Latest Menus</h1>
         </header>
@@ -50,8 +50,11 @@
           <% @menus.each do |menu| %>
             <div class="col-sm-4">
               <img src="<%= menu.preview.url(:thumb) %>" alt="<%= menu.name %>" class="img-responsive">
-              <%= link_to menu.name, edit_menu_path(menu) %>
+              <p><%=  menu.name %> (<%=  menu.template.name %>)</p>
               <p><%= menu.updated_at.strftime("Last edited on %m/%d/%Y, at %I:%M%p") %></p>
+              <%= link_to "Edit", edit_menu_path(menu) %>
+              <a href="<%= menu.rendered_pdf %>" target="_blank">View</a>
+              <a href="<%= menu.rendered_pdf %>" download>Download</a>
               <a href="/menus/<%= menu.id %>/archives">View menu history</a>
             </div>
           <% end %>
