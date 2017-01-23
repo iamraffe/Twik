@@ -33,6 +33,7 @@ class Menu < ActiveRecord::Base
 
   def self.export(filename, pdf)
     save_path = Rails.root.join('public/pdf',"#{filename}.pdf")
+    Dir.mkdir('public/pdf') unless Dir.exist?('public/pdf')
     File.open(save_path, 'wb') do |file|
       file << pdf
     end
