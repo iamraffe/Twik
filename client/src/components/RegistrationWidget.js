@@ -106,11 +106,15 @@ class RegistrationWidget extends React.Component{
             </div>
             <div className="row form-group">
               <div className="col-xs-12">
-                <div className="input-group email-group">
+                <div className="input-group email-group hidden-xs">
                   <input type="email" placeholder="email" name="email" className="form-control" />
                   <div className="input-group-addon text-primary">
-                    <button className="btn btn-primary btn-large signup-button" disabled={!canSubmit}>Sign Up</button>
+                    <button className="btn btn-primary btn-small signup-button" disabled={!canSubmit}>Sign Up</button>
                   </div>
+                </div>
+                <div className="visible-xs">
+                  <input type="email" placeholder="email" name="email" className="form-control" />
+                  <button className="btn btn-primary btn-large btn-block signup-button" disabled={!canSubmit}>Sign Up</button>
                 </div>
               </div>
             </div>
