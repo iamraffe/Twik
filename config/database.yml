@@ -113,7 +113,7 @@ production:
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
   encoding: unicode
-  username: <%= ENV["PGUSER"] %>
+  username: raffe
   password: <%= ENV["PGPASSWORD"] %>
-  database: <%= ENV["PGDATABASE"] %>
+  database: twik_production
   host: localhost
