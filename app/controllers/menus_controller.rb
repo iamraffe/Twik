@@ -15,7 +15,7 @@ class MenusController < ApplicationController
     else
       @society = Society.find(params[:society][:id])
     end
-    @menu = Menu.create(menu_params)
+    @menu = Menu.new(menu_params)
     Tempfile.open(["#{@menu.name.parameterize}-#{Time.now.to_i}" , ".png"] , Rails.root.join('tmp')) do |f|
       f << Base64.decode64(params[:preview]['data:image/png;base64,'.length..-1]).force_encoding('UTF-8')
       @menu.preview = f
