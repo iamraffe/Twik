@@ -20,7 +20,7 @@ class LayoutElement extends React.Component{
     switch(type){
       case "PAGE":
         return(
-          <div>
+          <div style={{height: '100%'}}>
             {_.map(this.props.elements, (element, i) => {
               return(
                 <LayoutElement
@@ -39,15 +39,30 @@ class LayoutElement extends React.Component{
       case "CONTAINER":
         return (
           <div
-            className=""
+            className={`container-align-${this.props.align}`}
             style={{
               width: this.props.span*100+'%',
               float: 'left',
               position: 'relative',
+              minHeight: 10,
               height: '100%',
+              // display: '-webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex',
+              // display: '-webkit-box',
               display: '-webkit-flex',
               display: 'flex',
-              flexDirection: 'row'
+              flexDirection: 'row',
+              // position: 'static',
+              // outline: '1px solid red',
+              // background: 'blue',
+              // WebkitBoxAlign: 'start',
+              // boxAlign: 'start',
+              // boxPack: 'end',
+              // WebkitBoxPack: 'end',
+              // BoxOrient: 'vertical',           /* As specified */
+              // WebkitBoxOrient: 'vertical',   /* WebKit */
+              // WebkitBoxDirection: 'reverse',
+              // WebkitFlexWrap: 'wrap',
+              // flexWrap: 'wrap'
             }}
           >
             {_.map(this.props.elements, (element, i) => {
@@ -58,6 +73,7 @@ class LayoutElement extends React.Component{
                   zoom={this.props.zoom}
                   hover={this.props.hover}
                   activeSection={this.props.activeSection}
+                  vertical={this.props.align}
                   {...element}
                   getStyles={this.getStyles}
                   onSectionSelect={this.onSectionSelect}
@@ -72,8 +88,11 @@ class LayoutElement extends React.Component{
             className="row-canvas"
             style={{
               width: '100%',
+              // WebkitBoxDirection: this.props.vertical === 'bottom' ? 'reverse' : 'normal',
               alignSelf: this.props.vertical === 'bottom' ? 'flex-end' : 'flex-start',
-              position: 'relative'
+              // background: "yellow",
+              position: 'relative',
+              // outline: '1px solid green',
             }}
           >
             {_.map(this.props.elements, (element, i) => {

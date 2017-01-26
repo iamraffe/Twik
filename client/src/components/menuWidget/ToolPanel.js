@@ -67,7 +67,7 @@ class ToolPanel extends React.Component{
   previewCall = (zoom) => {
     const { meta } = this.state
     const { applyZoom } = this.props.zoomActions
-    const html = document.getElementById('entry-point').innerHTML
+    const html = document.getElementById('entry-point').outerHTML
     const req = request.post(`/menus/export`)
     req.query({ format: 'json' })
     req.field('authenticity_token', $('meta[name="csrf-token"]').attr('content') )

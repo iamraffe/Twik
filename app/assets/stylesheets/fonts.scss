@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Pea Mystie';
-    src: asset-url('heyyyy-webfont.eot');
-    src: asset-url('heyyyy-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-url('heyyyy-webfont.woff2') format('woff2'),
-         asset-url('heyyyy-webfont.woff') format('woff'),
-         asset-url('heyyyy-webfont.ttf') format('truetype'),
-         asset-url('heyyyy-webfont.svg#pea_mystieregular') format('svg');
+    src: asset-url('heyyyy-webfont.ttf');
+    // src: asset-url('heyyyy-webfont.eot?#iefix') format('embedded-opentype'),
+    //      asset-url('heyyyy-webfont.woff2') format('woff2'),
+    //      asset-url('heyyyy-webfont.woff') format('woff'),
+    //      asset-url('heyyyy-webfont.ttf') format('truetype'),
+         // asset-url('heyyyy-webfont.svg#pea_mystieregular') format('svg');
     font-weight: normal;
     font-style: normal;
 

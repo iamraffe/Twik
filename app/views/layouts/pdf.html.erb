@@ -12,7 +12,7 @@
         //     urls: ["<%= wicked_pdf_stylesheet_link_tag "fonts" -%>"]
         //   }
         // });
-      }); 
+      });
     </script>
     <style>
       html, body{
@@ -20,6 +20,9 @@
         padding:0 !important;
         overflow: hidden;
         border: 1px black !important;
+      }
+      #entry-point{
+        border: none !important;
       }
       .section-element{
         border: none !important;
@@ -46,6 +49,19 @@
       @font-face {
         font-family: 'Avenir Next Condensed';
         src: url("<%= wicked_pdf_asset_base64('AvenirNextCondensed-Regular.ttf')%>");
+      }
+      .container-align-bottom{
+        display: -webkit-box;
+        display: -moz-box;
+        /* Children should be oriented vertically */
+        box-orient: vertical;           /* As specified */
+        -moz-box-orient: vertical;      /* Mozilla */
+        -webkit-box-orient: vertical;   /* WebKit */
+
+        /* Pack children to the bottom of this box */
+        box-pack: end;                  /* As specified */
+        -moz-box-pack: end;             /* Mozilla */
+        -webkit-box-pack: end;
       }
     </style>
   </head>

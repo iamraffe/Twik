@@ -17,7 +17,7 @@ const containerTarget = {
     const { index } = props
     const { element } = monitor.getItem()
     const sectionComponents = _.filter(props.components, (component, i) => {return component.sectionId === props.id})
-    
+
     return {
       sectionId: props.id,
       position: sectionComponents.length  > 0 ? _.last(sectionComponents).position+1 : 0
@@ -137,6 +137,7 @@ class Section extends React.Component{
           }}
         >
           {_.map(_.orderBy(components, ['position']), (component, i) => {
+            console.log("component", component)
             return (
               <div key={i} data-id={JSON.stringify(component)}>
                 <LayoutElement
@@ -163,7 +164,7 @@ class Section extends React.Component{
               <span
                 data-toggle="tooltip"
                 title="DRAG TO REODER SECTION"
-                className="column-element-handle ion ion-arrow-move" 
+                className="column-element-handle ion ion-arrow-move"
                 style={{position: 'absolute', top: -27.5, left: -25, cursor: 'move', zIndex: 99999}}
               />
              <span

@@ -13,7 +13,7 @@ class MenuElement extends React.Component{
       elements: props.elements,
       position: props.position
     }
-    
+
     this.onAdd = props.onAdd
     this.getStyles = props.getStyles
     this.onUpdate = props.onUpdate
@@ -32,7 +32,7 @@ class MenuElement extends React.Component{
   }
 
   render(){
-    const { type, activeSection, id, inline } = this.props
+    const { type, activeSection, id, inline, styles } = this.props
     const { elements, position } = this.state
 
     switch(type){
@@ -58,7 +58,7 @@ class MenuElement extends React.Component{
           <ImageElement
             type={type}
             id={id}
-            styles={this.props.styles}
+            styles={styles}
             position={position}
             url={this.props.url}
             hide={this.props.hide}
@@ -79,6 +79,7 @@ class MenuElement extends React.Component{
             elements={elements}
             inline={inline}
             activeSection={activeSection}
+            styles={styles}
             getStyles={this.getStyles}
             onAdd={this.onAdd}
             onUpdate={this.onUpdate}

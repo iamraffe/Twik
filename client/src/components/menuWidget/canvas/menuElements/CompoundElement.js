@@ -71,17 +71,17 @@ class CompoundElement extends React.Component{
 
   render(){
     const { elements, editing } = this.state
-    const { type, activeSection, inline } = this.props
+    const { type, activeSection, inline, styles } = this.props
 
     if(inline){
       return (
-        <article className={`${type} compound-element`} style={{position: 'relative', display: 'block'}}>
+        <article className={`${type} compound-element`} style={{position: 'relative', display: 'block', ...styles}}>
           {_.map(elements, (e, i) => {
             return (
               <span key={i}>
                 {editing === 'none' &&
                   <span>
-                    {activeSection && (i%this.props.elements.length === 0) && 
+                    {activeSection && (i%this.props.elements.length === 0) &&
                       <span
                         data-toggle="tooltip"
                         title="DRAG TO REODER ELEMENTS"
@@ -96,7 +96,7 @@ class CompoundElement extends React.Component{
                         data-toggle="tooltip"
                         title="CLICK TO DELETE ELEMENT"
                         onClick={(e) => {
-                          if (window.confirm("Are you sure you want to delete this item?")){  
+                          if (window.confirm("Are you sure you want to delete this item?")){
                             this.onDelete(this.props.position)
                           }
                         }}
