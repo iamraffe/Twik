@@ -1,7 +1,7 @@
 <% if @menus.count > 0 %>
   <section class="dashboard">
     <div class="row">
-      <header class="col-lg-3 left-dashboard col-md-3">
+      <header class="col-lg-2 col-lg-offset-1 left-dashboard col-md-3">
         <div class="row">
           <div class="col-xs-12">
             <span id="update-avatar-trigger" class="pull-right update-avatar-trigger ion ion-ios-checkmark-outline hide"></span>
@@ -42,7 +42,7 @@
           <a href="/menus/new" class="btn btn-primary btn-small btn-create-new">Create New</a>
         </div>
       </header>
-      <section class="actions right-dashboard col-md-9 col-lg-8 col-lg-offset-1" style="margin-top: 0">
+      <section class="actions right-dashboard col-md-9 col-lg-8" style="margin-top: 0">
         <div class="row">
           <% @menus.each do |menu| %>
             <div class="col-sm-6 dashboard-menu">
@@ -84,7 +84,7 @@
 <% else %>
   <section class="dashboard fresh-user">
     <div class="row">
-      <header class="col-md-2 col-md-offset-2 left-dashboard">
+      <header class="col-lg-2 col-lg-offset-1 left-dashboard col-md-3">
         <div class="row">
           <div class="col-xs-12">
             <span id="update-avatar-trigger" class="pull-right update-avatar-trigger ion ion-ios-checkmark-outline hide"></span>
@@ -126,7 +126,7 @@
           <a href="/menus/new" class="btn btn-primary btn-small btn-create-new">Create New</a>
         </div>
       </header>
-      <section class="actions right-dashboard col-md-5 col-md-offset-1">
+      <section class="actions right-dashboard col-md-9 col-lg-8">
         <header class="row border-bottom">
           <h1>Welcome!</h1>
           <h2>Let's get started.</h2>
