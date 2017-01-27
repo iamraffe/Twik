@@ -102,7 +102,7 @@ class Canvas extends React.Component{
                 activeSection={activeSection}
                 getStyles={this.getStyles}
                 onSectionSelect={this.onSectionSelect}
-              />    
+              />
             </div>
           </div>
         </div>
@@ -114,7 +114,7 @@ class Canvas extends React.Component{
             getStyles={this.getStyles}
           />
         }
-        <ZoomUtility/>
+        {false && <ZoomUtility/>}
       </div>
     )
   }

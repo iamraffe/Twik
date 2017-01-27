@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import ReactDom from 'react-dom'
 import _ from 'lodash'
+import $ from 'jquery'
 
 import InlineEditor from '../../common/InlineEditor'
 
@@ -36,9 +37,6 @@ class CompoundElement extends React.Component{
     })
   }
 
-  componentDidMount(){
-  }
-
   onToggleEditing = (type) => {
     this.setState({
       editing: type
@@ -69,51 +67,71 @@ class CompoundElement extends React.Component{
     })
   }
 
+  componentDidMount(){
+    const { id } = this.props
+    // console.log('componendDidMount')
+    let compoundElement = $(`#${id}`)
+    // console.log(compoundElement)
+    let width = 0
+    _.each(compoundElement.children(), (children, i) => {
+      compoundElement.css('white-space', 'nowrap')
+      // console.log(compoundElement)
+      width += $(children).width()
+      compoundElement.css('white-space', 'normal')
+      // compoundElement.css('width', '-=1000px')
+    })
+    if((compoundElement.width() < width) && ((width%compoundElement.width()) < (compoundElement.width()*0.5))){
+      console.log(compoundElement, width%compoundElement.width(), width, compoundElement.width())
+      compoundElement.css('width', '-='+compoundElement.width()*0.25+'px')
+      // while((width%compoundElement.width()) < (compoundElement.width()*0.15)){
+      //   console.log(compoundElement.width())
+      //   compoundElement.css('width', '-=10px')
+      // }
+      // console.log("viuda")
+    }
+  }
+
   render(){
     const { elements, editing } = this.state
     const { type, activeSection, inline, styles } = this.props
 
     if(inline){
       return (
-        <article className={`${type} compound-element`} style={{position: 'relative', display: 'block', ...styles}}>
+        <article id={this.props.id} className={`${type} compound-element`} style={{position: 'relative', display: 'block', ...styles}}>
           {_.map(elements, (e, i) => {
             return (
               <span key={i}>
-                {editing === 'none' &&
-                  <span>
-                    {activeSection && (i%this.props.elements.length === 0) &&
-                      <span
-                        data-toggle="tooltip"
-                        title="DRAG TO REODER ELEMENTS"
-                        className="section-element-handle ion ion-ios-drag"
-                        style={{position: 'absolute', top: 2.5, left: -25, cursor: 'move'}}
-                      />
-                    }
-                    {activeSection && (i%this.props.elements.length === 0) &&
-                      <span
-                        style={{cursor: 'pointer', position: 'absolute', right: -32.5, top: 4, color: 'red'}}
-                        className="ion ion-ios-close-outline"
-                        data-toggle="tooltip"
-                        title="CLICK TO DELETE ELEMENT"
-                        onClick={(e) => {
-                          if (window.confirm("Are you sure you want to delete this item?")){
-                            this.onDelete(this.props.position)
-                          }
-                        }}
-                      />
-                    }
-                    {activeSection && (i%this.props.elements.length === 0) &&
-                      <span
-                        className="ion ion-ios-plus-outline"
-                        data-toggle="tooltip"
-                        title="CLICK TO ADD ELEMENT"
-                        style={{cursor: 'pointer', position: 'absolute', top: 4, right: -12.5}}
-                        onClick={(e) => {
-                          this.onAdd(e)
-                        }}
-                      />
-                    }
-                  </span>
+                {editing === 'none' && activeSection && (i%this.props.elements.length === 0) &&
+                  <span
+                    data-toggle="tooltip"
+                    title="DRAG TO REODER ELEMENTS"
+                    className="section-element-handle ion ion-ios-drag"
+                    style={{position: 'absolute', top: 2.5, left: -25, cursor: 'move'}}
+                  />
+                }
+                {editing === 'none' && activeSection && (i%this.props.elements.length === 0) &&
+                  <span
+                    style={{cursor: 'pointer', position: 'absolute', right: -32.5, top: 4, color: 'red'}}
+                    className="ion ion-ios-close-outline"
+                    data-toggle="tooltip"
+                    title="CLICK TO DELETE ELEMENT"
+                    onClick={(e) => {
+                      if (window.confirm("Are you sure you want to delete this item?")){
+                        this.onDelete(this.props.position)
+                      }
+                    }}
+                  />
+                }
+                {editing === 'none' && activeSection && (i%this.props.elements.length === 0) &&
+                  <span
+                    className="ion ion-ios-plus-outline"
+                    data-toggle="tooltip"
+                    title="CLICK TO ADD ELEMENT"
+                    style={{cursor: 'pointer', position: 'absolute', top: 4, right: -12.5}}
+                    onClick={(e) => {
+                      this.onAdd(e)
+                    }}
+                  />
                 }
                 {editing !== e.type &&
                   <span

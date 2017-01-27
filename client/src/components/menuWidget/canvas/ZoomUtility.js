@@ -23,7 +23,7 @@ class ZoomUtility extends React.Component{
 
   onZoom = (amount) => {
     const { applyZoom } = this.props.zoomActions
-    
+
     this.setState({
       zoom: parseFloat(amount)
     })
@@ -36,11 +36,18 @@ class ZoomUtility extends React.Component{
     })
   }
 
+  componentDidMount(){
+    // const { applyZoom } = this.props.zoomActions
+    // if (window.matchMedia("(max-width: 1200px)").matches){
+    //   applyZoom(parseFloat(75))
+    // }
+  }
+
   render(){
     const { zoom, manualZoom } = this.state
 
     return (
-      <div className="row" style={{maxWidth: '100%', textAlign: 'center', marginTop: 10}}>
+      <div className="row hide" style={{maxWidth: '100%', textAlign: 'center', marginTop: 10}}>
         <span className="ion ion-minus-round" style={{cursor: 'pointer', marginRight: 15, fontSize: '0.75em', verticalAlign: '5px'}} onClick={(e) => {this.onZoom(zoom-5)}}></span>
         <span className="ion ion-ios-search" style={{marginRight: 10, fontSize: '1.25em'}}></span>
         <span className="ion ion-plus-round" style={{cursor: 'pointer', fontSize: '0.75em', verticalAlign: '5px'}} onClick={(e) => {this.onZoom(zoom+5)}}></span>

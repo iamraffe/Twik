@@ -113,7 +113,7 @@ class MenuWidget extends React.Component{
       },
       meta.society,
       preview,
-      canvas.innerHTML)
+      canvas.outerHTML)
     })
   }
 
@@ -137,7 +137,7 @@ class MenuWidget extends React.Component{
       meta.society,
       preview,
       menu.object,
-      canvas.innerHTML)
+      canvas.outerHTML)
     })
   }
 
@@ -153,7 +153,7 @@ class MenuWidget extends React.Component{
         {step === 'widget' &&
           <div className="row">
             <div
-              className={meta.orientation === 'landscape' ? `col-xs-10` : `col-xs-7 col-xs-offset-3`}
+              className={meta.orientation === 'landscape' ? `col-lg-9 col-md-9` : `col-lg-9 col-md-9`}
               style={{opacity: saving ? 0.2 : 1, position: 'relative'}}
             >
               {saving &&
@@ -172,7 +172,7 @@ class MenuWidget extends React.Component{
               }
               <Canvas />
             </div>
-            <div className="col-xs-2">
+            <div className="col-lg-3 col-md-3">
               {this.props.editor && <ToolPanel mode={mode} onUpdate={this.onUpdate} onSave={this.onSave}/>}
             </div>
           </div>

@@ -224,6 +224,36 @@ if Apartment::Tenant.current == "public"
           }
         },
         {
+          name: "Dishes & Beers (without description)",
+          id: SecureRandom.uuid,
+          structure: {
+            type: "COMPOUND_ELEMENT",
+            inline: true,
+            styles: {
+              display: 'block',
+              lineHeight: 0,
+              marginBottom: 10.5
+            },
+            elements: [
+              {
+                type: "DISH_TITLE",
+                text: '',
+                styles: dish_title_id
+              },
+              {
+                type: "ELEMENT_SEPARATOR",
+                text: '... ',
+                styles: dish_description_id
+              },
+              {
+                type: "DISH_PRICE",
+                text: '',
+                styles: dish_price_id
+              }
+            ]
+          }
+        },
+        {
           name: "Wines",
           id: SecureRandom.uuid,
           structure: {
@@ -249,6 +279,36 @@ if Apartment::Tenant.current == "public"
                 type: "WINE_TITLE",
                 text: '',
                 styles: dish_title_id
+              },
+              {
+                type: "ELEMENT_SEPARATOR",
+                text: '... ',
+                styles: dish_description_id
+              },
+              {
+                type: "WINE_PRICE",
+                text: '',
+                styles: dish_price_id
+              }
+            ]
+          }
+        },
+        {
+          name: "Wines (alternate/simplified)",
+          id: SecureRandom.uuid,
+          structure: {
+            type: "COMPOUND_ELEMENT",
+            inline: true,
+            styles: {
+              display: 'block',
+              lineHeight: 0,
+              marginBottom: 10.5
+            },
+            elements: [
+              {
+                type: "WINE_DESCRIPTION",
+                text: '',
+                styles: dish_description_id
               },
               {
                 type: "ELEMENT_SEPARATOR",
