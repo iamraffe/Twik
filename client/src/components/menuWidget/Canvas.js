@@ -76,14 +76,16 @@ class Canvas extends React.Component{
     return (
       <div>
         <div className="row" style={{height: 650, overflow: 'auto', maxWidth: '100%', marginBottom: 0, borderBottom: '1px solid silver'}}>
-          <div className="col-xs-12">
+          <div className="col-xs-12" style={{paddingTop: 25, paddingBottom: 25}}>
             <div
               id="entry-point"
               style={{
                 border: '1px solid black',
                 margin: '0 auto',
                 width: (width*(zoom/100))+'in',
-                height: (height*(zoom/100))+'in'
+                height: (height*(zoom/100))+'in',
+                // paddingTop: 25,
+                // paddingBottom: 25
               }}
               onMouseEnter={(e) => {
                 this.setState({hover: true})

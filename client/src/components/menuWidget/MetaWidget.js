@@ -17,7 +17,7 @@ class MetaWidget extends React.Component{
       societies: [],
       society: {},
       value: '',
-      paperSettings: 'size', 
+      paperSettings: 'size',
       templates: props.templates,
       filteredTemplates: props.templates,
       canSubmit: false
@@ -84,7 +84,7 @@ class MetaWidget extends React.Component{
     }
   }
   // onBlur = (event, wat) => {
-   
+
   //   debugger;
   // }
 
@@ -118,7 +118,7 @@ class MetaWidget extends React.Component{
 
   matchSocietyToTerm = (society, value) => {
     return (
-      society.name.toLowerCase().indexOf(value.toLowerCase()) !== -1 
+      society.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
     )
   }
 
@@ -137,14 +137,14 @@ class MetaWidget extends React.Component{
 
   onSubmit = (e) => {
     e.preventDefault()
-    const { society, value } = this.state    
+    const { society, value } = this.state
     const form = e.target
     let restaurant = {
       name: society.name ? society.name : value,
       id: society.id ? society.id : null
     }
     const formData = getFormData(form)
-    
+
     this.props.metaActions.setMetaInfo({
       society: restaurant,
       ..._.omit(formData, ['paperUsage']),
@@ -176,7 +176,7 @@ class MetaWidget extends React.Component{
                                 return this.matchTemplateToSettings(layout, paperUsage.value)
                               })) && (_.findIndex(template.printAt, (p) => { return p === printOption.value }) !== -1)
                             })
-      })    
+      })
     }
   }
 
@@ -218,7 +218,7 @@ class MetaWidget extends React.Component{
                 <div className="col-sm-6">
                   <Autosuggest
                     suggestions={societies}
-                    focusFirstSuggestion={true} 
+                    focusFirstSuggestion={true}
                     onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
                     onSuggestionsClearRequested={this.onSuggestionsClearRequested}
                     onSuggestionsUpdateRequested={this.onSuggestionsUpdateRequested}
@@ -305,7 +305,7 @@ class MetaWidget extends React.Component{
                       </label>
                     </div>
                   </div>
-                </div>                
+                </div>
                 <div className="col-sm-8 col-sm-push-2">
                   <div className="row">
                     <div className="col-xs-3">
@@ -366,7 +366,7 @@ class MetaWidget extends React.Component{
             </div>
           </div>
           <button className="btn btn-link" style={{outline: 'none', fontSize: 40, display: 'block', margin: '0 auto'}}>
-            {filteredTemplates.length > 0 && canSubmit && <span className="ion ion-ios-checkmark-outline"></span>}
+            {filteredTemplates.length > 0 && canSubmit && <span className="ion ion-ios-checkmark-outline animated infinite flash text-success"></span>}
           </button>
         </form>
       </section>

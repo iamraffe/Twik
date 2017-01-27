@@ -42,6 +42,13 @@ class Column extends React.Component{
     }
   }
 
+  containsActiveSectionAndIsLast = () => {
+    const { activeSection } = this.state
+    const sections = _.orderBy(this.state.sections, ['position'])
+    console.log("sections => ", sections, activeSection, _.last(sections).id === activeSection)
+    return _.last(sections).id === activeSection
+  }
+
   render(){
     const { type, styles, span, id, hover, rowId, containerId } = this.props
     const { sections, activeSection } = this.state
@@ -116,8 +123,9 @@ class Column extends React.Component{
             width: '100%',
             alignSelf: this.props.vertical === 'bottom' ? 'flex-end' : 'flex-start',
             position: 'absolute',
-            bottom: -10,
+            bottom: (this.containsActiveSectionAndIsLast() && hover) ? -47.5 : -10,
             textAlign: 'left',
+
           }}
         >
           <span
@@ -138,7 +146,7 @@ class Column extends React.Component{
             }}
           >
             Add Section
-          </span> 
+          </span>
         </div>
       </div>
     )

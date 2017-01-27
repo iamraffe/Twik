@@ -155,7 +155,7 @@ class Section extends React.Component{
         </Sortable>
         {components.length === 0 &&
           <p className="hide-on-export" style={{fontFamily: 'Open Sans', fontWeight: 200, fontSize: 12, textAlign: 'center', margin: 10, marginTop: 0, color: '#310100', border: '1px dashed #f6303e', padding: 5}}>
-            Use the sidebar menu to add components to this section
+            To add text to a section, select a component type from the right hand menu and drag and drop the style. Then click on the component to edit the text.
           </p>
         }
         {(hover === true && active === false && this.props.readOnly !== true) && <div className="section-overlay"></div>}
@@ -177,6 +177,9 @@ class Section extends React.Component{
                   this.onDeleteSection()
               }}}
             />
+            <p className="hide-on-export prompty-prompt" style={{fontFamily: 'Open Sans', position: 'absolute', top: -135, fontWeight: 'bold', fontSize: 12, textAlign: 'center', padding: 10, color: 'white', backgroundColor: 'rgb(246, 48, 62)'}}>
+              To add text to a section, select a component type from the right hand menu and drag and drop the style. Then click on the component to edit the text.
+            </p>
           </span>
         }
       </div>
