@@ -45,8 +45,7 @@ class Column extends React.Component{
   containsActiveSectionAndIsLast = () => {
     const { activeSection } = this.state
     const sections = _.orderBy(this.state.sections, ['position'])
-    console.log("sections => ", sections, activeSection, _.last(sections).id === activeSection)
-    return _.last(sections).id === activeSection
+    return sections.length > 0 && _.last(sections).id === activeSection
   }
 
   render(){
