@@ -28,13 +28,13 @@ $(document).on('click', '#update-avatar-trigger', function(e){
 $(document).on('change', '#avatar-update-form input[type="file"]', function(e){
   console.log(e.target.value, e, e.target, e.target.files[0], URL.createObjectURL(e.target.files[0]) )
   $('#upload-user-avatar').html('<img src="'+URL.createObjectURL(e.target.files[0])+'" class="user-avatar" />')
-  $('#update-avatar-trigger').removeClass('hide')
+  $('#update-avatar-trigger').removeClass('hide').addClass('animated infinite flash text-success')
   // $('#avatar-update-form').submit()
 })
 
 $(document).on('click', '.js-user-edit-trigger.ion-ios-compose-outline', function(e){
   // console.log(e)
-  $(this).removeClass('ion-ios-compose-outline').addClass('ion-ios-checkmark-outline')
+  $(this).removeClass('ion-ios-compose-outline').addClass('ion-ios-checkmark-outline animated infinite flash text-success')
   $(this).siblings('input').removeAttr('readonly').focus()
 })
 

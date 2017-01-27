@@ -40,9 +40,12 @@
     <nav class="navbar navigation-actions">
       <ul class="nav navbar-nav action-navbar">
         <% if user_signed_in? %>
+          <% unless current_page?(root_path) %>
+            <li><%= link_to "Dashboard", root_path %> <span class="nav-separator">|</span></li>
+          <% end %>
           <li><%= link_to "Create New", new_menu_path %> <span class="nav-separator">|</span></li>
           <li class="hide"><%= link_to "My Templates", '#' %> <span class="nav-separator">|</span></li>
-          <li><%= link_to "My Account", user_path(current_user) %> <span class="nav-separator">|</span></li>
+          <li><%= link_to "My Account", user_path(current_user) %> <span class="nav-separator hide">|</span></li>
           <li class="hide"><a href="#"><span class="fa fa-inverse fa-search"></span></a></li>
         <% end %>
       </ul>

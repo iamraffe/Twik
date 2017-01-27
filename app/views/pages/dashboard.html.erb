@@ -38,6 +38,9 @@
         <div class="action-items col-xs-12 border-bottom">
           <a href="/users/<%= current_user.id %>" class="btn-link text-default">My Account</a>
         </div>
+        <div class="action-items col-xs-12 border-bottom">
+          <%= link_to('Sign into a different account', account_sign_in_url(subdomain: false), class: "btn-link text-default") %>
+        </div>
         <div class="action-items col-xs-12">
           <a href="/menus/new" class="btn btn-primary btn-small btn-create-new">Create New</a>
         </div>
@@ -121,6 +124,9 @@
         </div>
         <div class="action-items col-xs-12 border-bottom">
           <a href="/users/<%= current_user.id %>" class="btn-link text-default">My Account</a>
+        </div>
+        <div class="action-items col-xs-12 border-bottom">
+          <%= link_to('Sign into a different account', account_sign_in_url(subdomain: false), class: "btn-link text-default") %>
         </div>
         <div class="action-items col-xs-12">
           <a href="/menus/new" class="btn btn-primary btn-small btn-create-new">Create New</a>
