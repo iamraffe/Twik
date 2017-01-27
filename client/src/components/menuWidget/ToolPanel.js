@@ -43,6 +43,15 @@ class ToolPanel extends React.Component{
       meta: nextProps.meta,
       zoom: nextProps.zoom
     })
+    if(this.state.id === null && nextProps.id !== null){
+      if(location.port !== 0){
+        window.history.pushState({}, document.title, location.protocol + "//" + location.hostname + ":" + location.port + '/menus/'+nextProps.id+'/edit')
+      }
+      else{
+        window.history.pushState({}, document.title, location.protocol + "//" + location.hostname + '/menus/'+nextProps.id+'/edit')
+      }
+
+    }
   }
 
   onToggleActive = (active) => {
