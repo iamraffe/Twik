@@ -2,8 +2,33 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <% @archives.each do |archive| %>
-          <div class="col-md-6">
-            <img src="<%= archive.preview.url(:thumb) %>" alt="<%= archive.name %>" class="img-responsive">
+            <div class="col-sm-6 dashboard-menu">
+              <div class="row">
+                <div class="col-xs-12">
+                  <img class="menu-preview" src="<%= archive.preview.url %>" alt="<%= archive.name %>" class="img-responsive">
+                </div>
+                <div class="col-xs-12 menu-name-wrapper">
+                  <p class="menu-name">
+                    <%= archive.name %> (Style: <%=  archive.template.name %>)
+                  </p>
+                  <% if archive.rendered_pdf? %>
+                    <a href="<%= archive.rendered_pdf %>" class="pull-right text-default download-menu" download data-toggle="tooltip" title="DOWNLOAD LATEST VERSION OF THIS MENU">
+                      <span class="ion ion-ios-cloud-download"></span>
+                    </a>
+                  <% end %>
+                </div>
+                <div class="col-xs-12 last-version-wrapper">
+                  <p class="last-version"><%= archive.updated_at.strftime("%m/%d/%Y") %></p>
+                  <% if archive.rendered_pdf? %>
+                    <a href="<%= archive.rendered_pdf %>" target="_blank">
+                      <img src="data:image/png;base64,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" alt="View this menu" data-toggle="tooltip" title="VIEW THIS MENU" class="view-menu">
+                    </a>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <div class="col-md-6 hide">
+            <img src="<%= archive.preview.url %>" alt="<%= archive.name %>" class="img-responsive">
             <p><%= archive.name %> (<%= archive.template.name %>)</p>
             <p><%= archive.created_at.strftime("%m/%d/%Y") %></p>
             <a href="<%= archive.rendered_pdf %>" target="_blank">View</a>
