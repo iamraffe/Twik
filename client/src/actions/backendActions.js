@@ -6,12 +6,12 @@ export function opreationInProgress(){
   return { type: "SAVING_IN_PROGRESS" }
 }
 
-export function createSuccess(id){
-  return { type: "CREATE_SUCCESS", id }
+export function createSuccess(menu){
+  return { type: "CREATE_SUCCESS", menu }
 }
 
-export function updateSuccess(){
-  return { type: "UPDATE_SUCCESS" }
+export function updateSuccess(menu){
+  return { type: "UPDATE_SUCCESS", menu }
 }
 
 export function createError(){
@@ -27,7 +27,8 @@ export function saveMenu(menu, society, preview, rendered_pdf){
   return dispatch => {
     dispatch(opreationInProgress())
     return API.post(`/menus`, {menu, society, preview, rendered_pdf}).then((menu) =>{
-      dispatch(createSuccess(menu.id))
+      console.log("saved menu", menu)
+      dispatch(createSuccess(menu))
       toastr.success("Great news! Document saved correctly", "", {positionClass: "toast-top-center"})
     })
     .catch((error) => {
@@ -41,7 +42,8 @@ export function updateMenu(menu, society, preview, object, rendered_pdf){
   return dispatch => {
     dispatch(opreationInProgress())
     return API.put(`/menus/${object.id}`, {menu, society, preview, rendered_pdf}).then((menu) =>{
-      dispatch(updateSuccess())
+      console.log("updated menu", menu)
+      dispatch(updateSuccess(menu))
       toastr.success("Great news! Document saved correctly", "", {positionClass: "toast-top-center"})
     })
     .catch((error) => {

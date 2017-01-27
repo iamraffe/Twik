@@ -441,3 +441,25 @@ ACCOUNTS - NEW
   font-size: 12px;
   color: #57090F;
 }
+
+
+/*
+
+ACCOUNTS - FIND/SIGNIN
+
+ */
+
+.sign-in{
+  .btn-wrapper{
+    margin-top: 25px;
+  }
+}
+
+.account-switcher-form-wrapper{
+  .form-control{
+    border-bottom: 1px solid $brand-primary;
+  }
+  .input-group-addon{
+    border: none; background: transparent; font-family: Baloo, cursive;
+  }
+}

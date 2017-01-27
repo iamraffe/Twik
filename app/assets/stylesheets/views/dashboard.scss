@@ -37,8 +37,14 @@
         input.form-control{
           border-bottom: none;
           padding: 0;
-          width: 94%;
+          width: 90%;
         }
+      }
+      .btn-create-new{
+        padding-top: 12.5px;
+        float: right;
+        margin-right: -10px;
+        margin-top: 10px;
       }
     }
   }
@@ -70,5 +76,54 @@
         font-weight: bold;
       }
     }
+  }
+}
+
+.dashboard-menu{
+  .menu-preview{
+    max-height: 175px;
+    margin: 0 auto;
+    display: block;
+  }
+  .menu-name-wrapper{
+    font-family: Baloo, cursive;
+    border-bottom: 1px solid $brand-default;
+    margin-top: 10px;
+    padding-bottom: 5px;
+
+    .menu-name{
+      color: $brand-default;
+      font-size: 16px;
+      width: 80%;
+      display: inline-block;
+    }
+  }
+  .last-version-wrapper{
+    border-bottom: 1px solid $brand-default;
+    margin-top: 10px;
+    padding-bottom: 2.5px;
+
+    .last-version{
+      color: $brand-default;
+      font-size: 14px;
+      width: 50%;
+      display: inline-block;
+    }
+  }
+  .menu-archives{
+    margin-left: 10px;
+    font-size: 18px;
+  }
+  .download-menu{
+    font-size: 18px;
+  }
+  .view-menu{
+    height: 20.5px;
+    margin-top: 2.5px;
+    float: right;
+  }
+  .edit-menu{
+    height: 22px;
+    float: right;
   }
 }

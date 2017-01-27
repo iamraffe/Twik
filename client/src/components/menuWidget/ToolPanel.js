@@ -154,7 +154,7 @@ class ToolPanel extends React.Component{
           <div className="col-xs-6">
             <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onPreview()}}>Preview</button>
           </div>
-          {(this.props.mode === "edit" || id !== null) &&
+          {(this.props.mode === "edit" || id !== null) && this.state.rendered_pdf !== "/rendered_pdfs/original/missing.png" &&
             <div className="col-xs-12">
               <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onExport()}}>Export</button>
             </div>
