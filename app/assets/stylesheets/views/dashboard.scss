@@ -1,6 +1,13 @@
 .dashboard{
   margin-top: 75px;
 
+  .pagination{
+    text-align: center;
+    font-family: Baloo, cursive;
+    margin: 50px auto;
+    display: block;
+  }
+
   .border-bottom{
     border-bottom: 1px solid $brand-default;
   }
