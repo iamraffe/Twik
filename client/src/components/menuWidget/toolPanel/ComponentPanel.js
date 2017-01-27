@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import _ from 'lodash'
 import { DragSource } from 'react-dnd'
 import uuid from 'node-uuid'
+import toastr from 'toastr'
 
 import * as componentActions from '../../../actions/componentActions'
 import * as styleActions from '../../../actions/styleActions'
@@ -16,7 +17,7 @@ const sectionSource = {
   endDrag(props, monitor, component) {
     const item = monitor.getItem()
     const dropResult = monitor.getDropResult()
-    
+
     if (dropResult) {
       const { id, structure } = component.state.sectionStyle
       let newComponent = {
@@ -30,6 +31,9 @@ const sectionSource = {
       props.componentActions.addComponent(newComponent)
       component.state.sectionStyle = {}
       component.state.newSection = false
+      if(!component.state.hasAdded){
+        component.showFirstDragGuide()
+      }
     }
   }
 }
@@ -73,6 +77,11 @@ class SectionTypePanel extends React.Component{
     })
   }
 
+  showFirstDragGuide = () => {
+    this.setState({hasAdded: true})
+    toastr.success("To add a line with a different style to the section, select and drag any component from the menu.”", "", {positionClass: "toast-top-center"})
+  }
+
   onUpdateStyle = (e) => {
     alert("Overwriting this style will affect any documents that use this template style and will erase the settings you had. This cannot be undone.")
     console.log("on update style")
@@ -104,11 +113,11 @@ class SectionTypePanel extends React.Component{
             </select>
           </div>
         </div>
-        {sectionStyle.structure && 
+        {sectionStyle.structure &&
           <section style={{marginTop: 15}}>
             {_.map(sectionStyle.structure.elements, (element, i) => {
               let styles = this.getStyles(element.styles)
-              
+
               return (
                 <div key={i} className="style-item hide" style={{overflowX: 'hidden'}}>
                   {editing === element.styles &&
@@ -192,17 +201,17 @@ class SectionTypePanel extends React.Component{
                     onClick={(e) => {this.onEditStyle(element.styles)}}
                   />
                   <hr/>
-                </div>  
+                </div>
               )
             })}
             {connectDragSource(
               <div className="section-preview" style={{cursor: 'move', marginTop: 25, overflowX: 'hidden'}}>
                 {!sectionStyle.structure.inline && _.map(sectionStyle.structure.elements, (element, i) => {
                   return (
-                    <p key={i} style={{...this.getStyles(element.styles)}}>Lorem Ipsum</p>
+                    <span key={i} style={{...this.getStyles(element.styles)}}>Lorem Ipsum</span>
                   )
                 })}
-                {sectionStyle.structure.inline && 
+                {sectionStyle.structure.inline &&
                   <p>
                     {_.map(sectionStyle.structure.elements, (element, i) => {
                       if(element.type === 'ELEMENT_SEPARATOR'){

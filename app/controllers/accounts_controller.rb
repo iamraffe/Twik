@@ -15,9 +15,8 @@ class AccountsController < ApplicationController
   def find
     @account = Account.where(subdomain: params[:subdomain]).first
     if @account.nil?
-      # flash[:notice] = "User deleted successfully"
-      redirect_to :back , :alert => "Whoops! We can't find a Twik account by that name"
-      #there is no such account
+      flash[:alert] = "Whoops! We can't find a Twik account by that name"
+      redirect_to :back
     else
       redirect_to new_user_session_url(subdomain: @account.subdomain)
     end

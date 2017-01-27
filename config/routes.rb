@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       match '/user/confirmation' => 'users/confirmations#update', :via => :patch, :as => :update_user_confirmation
     end
 
-    devise_ios_rails_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations", :confirmations => "users/confirmations" }
+    devise_ios_rails_for :users, :controllers => { :invitations => 'users/invitations', :registrations => "users/registrations", :confirmations => "users/confirmations", :sessions => "users/sessions" }
     resources :users, only: [:index, :destroy, :update, :show]
     resources :subscriptions, only: [:new, :create]
     resources :images

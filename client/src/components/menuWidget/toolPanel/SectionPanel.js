@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import _ from 'lodash'
 import { DragSource } from 'react-dnd'
 import uuid from 'node-uuid'
+import toastr from 'toastr'
 
 import * as sectionActions from '../../../actions/sectionActions'
 import * as styleActions from '../../../actions/styleActions'
@@ -75,6 +76,9 @@ const sectionSource = {
       // props.sectionActions.addSectionStructure(component.state.sectionStyle)
       component.state.sectionStyle = {}
       component.state.newSection = false
+      if(!component.state.hasAdded){
+        component.showFirstDragGuide()
+      }
     }
   }
 }
@@ -94,7 +98,8 @@ class SectionPanel extends React.Component{
       sectionStyle: {},
       newSection: false,
       colors: props.colors,
-      fontFamilies: props.fontFamilies
+      fontFamilies: props.fontFamilies,
+      hasAdded: false
     }
 
     this.onClose = props.onClose
@@ -110,7 +115,11 @@ class SectionPanel extends React.Component{
   }
 
   componentDidMount(){
+  }
 
+  showFirstDragGuide = () => {
+    this.setState({hasAdded: true})
+    toastr.success("To add a line with a different style to the section, select and drag any component from the menu.", "", {positionClass: "toast-top-center"})
   }
 
   onSectionStyleSelect = (e) => {
@@ -195,7 +204,7 @@ class SectionPanel extends React.Component{
   render(){
     const { section_types, sectionStyle, newSection } = this.state
     const { isDragging, connectDragSource, connectDragPreview } = this.props
-    
+
     return (
       <section className="section-panel tool-panel-element">
         <header>
@@ -275,7 +284,7 @@ class SectionPanel extends React.Component{
         {!newSection && <button className="btn-block btn-toolpanel" onClick={(e) => {this.onAddNewSection(e)}}>Add new section</button>}
       </section>
     )
-    
+
   }
 }
 

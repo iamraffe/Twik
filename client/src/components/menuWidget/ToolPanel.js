@@ -64,7 +64,7 @@ class ToolPanel extends React.Component{
 
     return {
       ...styles[index].extra,
-      fontSize: `${styles[index].extra.fontSize*zoom/100}pt`,
+      fontSize: (styles[index].extra.fontSize*zoom/100),
       color: `${colors[styles[index].color]}`,
       fontFamily: fontFamilies[styles[index].fontFamily].fontFamily,
       fontWeight: fontFamilies[styles[index].fontFamily].fontWeight,
