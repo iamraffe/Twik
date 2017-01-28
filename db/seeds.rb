@@ -129,7 +129,7 @@ if Apartment::Tenant.current == "public"
             fontSize: 14,
             textDecoration: 'none',
             letterSpacing: 4.5,
-            marginBottom: 5
+            marginBottom: 10
           }
         },
         {

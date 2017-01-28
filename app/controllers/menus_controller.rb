@@ -16,17 +16,16 @@ class MenusController < ApplicationController
       @society = Society.find(params[:society][:id])
     end
     @menu = Menu.new(menu_params)
-    Tempfile.open(["#{@menu.name.parameterize}-#{Time.now.to_i}" , ".png"] , Rails.root.join('tmp')) do |f|
+    @filename = "#{@menu.name.parameterize}-#{Time.now.to_i}"
+    Tempfile.open([@filename, ".png"] , Rails.root.join('tmp')) do |f|
       f << Base64.decode64(params[:preview]['data:image/png;base64,'.length..-1]).force_encoding('UTF-8')
       @menu.preview = f
     end
     @html = params[:rendered_pdf]
     @meta = JSON.parse(params[:menu][:meta])
-    pdf = render_to_string pdf: "#{@menu.name.parameterize}-#{Time.now.to_i}",  zoom: 1.001, dpi: '120', template: "menus/export.pdf.erb", layout: 'layouts/pdf.html.erb', page_size: @meta['size'], encoding: "UTF-8", javascript_delay: 50, orientation: @meta['orientation'], lowquality: false, no_pdf_compression: true, margin:  { top:0, bottom: 0, left: 0, right: 0 }, print_media_type: true, disable_smart_shrinking: true
-    Tempfile.open(["#{@menu.name.parameterize}-#{Time.now.to_i}" , ".pdf"] , Rails.root.join('tmp')) do |f|
-      f << pdf.force_encoding('UTF-8')
-      @menu.rendered_pdf = f
-    end
+    pdf = render_to_string pdf: @filename, zoom: 1, dpi: '120', template: "menus/export.pdf.erb", layout: 'layouts/pdf.html.erb', page_size: @meta['size'], encoding: "UTF-8", javascript_delay: 50, orientation: @meta['orientation'], lowquality: false, no_pdf_compression: true, margin:  { top:0, bottom: 0, left: 0, right: 0 }, print_media_type: true, disable_smart_shrinking: true
+    Menu.export(@filename, pdf)
+    @menu.rendered_pdf = File.open(Rails.root.join('public/pdf',"#{@filename}.pdf"))
     @menu.society_id = @society.id
     @menu.subdomain = current_user.subdomain
     @menu.save
@@ -46,17 +45,16 @@ class MenusController < ApplicationController
   def update
     @menu = Menu.find(params[:id])
     @menu.assign_attributes(menu_params)
-    Tempfile.open(["#{@menu.name.parameterize}-#{Time.now.to_i}" , ".png"] , Rails.root.join('tmp')) do |f|
+    @filename = "#{@menu.name.parameterize}-#{Time.now.to_i}"
+    Tempfile.open([@filename , ".png"] , Rails.root.join('tmp')) do |f|
       f << Base64.decode64(params[:preview]['data:image/png;base64,'.length..-1]).force_encoding('UTF-8')
       @menu.preview = f
     end
     @html = params[:rendered_pdf]
     @meta = JSON.parse(params[:menu][:meta])
-    pdf = render_to_string pdf: "#{@menu.name.parameterize}-#{Time.now.to_i}",  zoom: 1.001, dpi: '120', template: "menus/export.pdf.erb", layout: 'layouts/pdf.html.erb', page_size: @meta['size'], encoding: "UTF-8", javascript_delay: 50, orientation: @meta['orientation'], lowquality: false, no_pdf_compression: true, margin:  { top:0, bottom: 0, left: 0, right: 0 }, print_media_type: true, disable_smart_shrinking: true
-    Tempfile.open(["#{@menu.name.parameterize}-#{Time.now.to_i}" , ".pdf"] , Rails.root.join('tmp')) do |f|
-      f << pdf.force_encoding('UTF-8')
-      @menu.rendered_pdf = f
-    end
+    pdf = render_to_string pdf: @filename, zoom: 1, dpi: '120', template: "menus/export.pdf.erb", layout: 'layouts/pdf.html.erb', page_size: @meta['size'], encoding: "UTF-8", javascript_delay: 50, orientation: @meta['orientation'], lowquality: false, no_pdf_compression: true, margin:  { top:0, bottom: 0, left: 0, right: 0 }, print_media_type: true, disable_smart_shrinking: true
+    Menu.export(@filename, pdf)
+    @menu.rendered_pdf = File.open(Rails.root.join('public/pdf',"#{@filename}.pdf"))
     @menu.save
     render json: @menu
   end

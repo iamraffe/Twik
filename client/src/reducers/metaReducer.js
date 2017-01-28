@@ -26,6 +26,14 @@ export default function metaReducer(state = initialState.meta, action){
         accepts: action.accepts,
         printAt: action.printAt
       }
+    case "CREATE_SUCCESS":
+      return {
+        ...state,
+        society: {
+          ...state.society,
+          id: action.menu.society_id
+        }
+      }
     default:
       return state
   }

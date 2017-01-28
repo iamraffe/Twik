@@ -81,7 +81,7 @@ class CompoundElement extends React.Component{
       // compoundElement.css('width', '-=1000px')
     })
     if((compoundElement.width() < width) && ((width%compoundElement.width()) < (compoundElement.width()*0.5))){
-      console.log(compoundElement, width%compoundElement.width(), width, compoundElement.width())
+      // console.log(compoundElement, width%compoundElement.width(), width, compoundElement.width())
       compoundElement.css('width', '-='+compoundElement.width()*0.25+'px')
       // while((width%compoundElement.width()) < (compoundElement.width()*0.15)){
       //   console.log(compoundElement.width())
