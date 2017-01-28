@@ -97,7 +97,7 @@ class ToolPanel extends React.Component{
   }
 
   onExport = () => {
-    console.log("export call")
+    console.log("export call", this.state.rendered_pdf)
     var a = document.createElement('a')
     a.href = this.state.rendered_pdf
     a.download = this.state.rendered_pdf_file_name
@@ -165,7 +165,7 @@ class ToolPanel extends React.Component{
           </div>
           {(this.props.mode === "edit" || id !== null) && this.state.rendered_pdf !== "/rendered_pdfs/original/missing.png" &&
             <div className="col-xs-12">
-              <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onExport()}}>Export</button>
+              <a className="btn-toolpanel-action btn-block" href={this.state.rendered_pdf} download>Export</a>
             </div>
           }
         </div>

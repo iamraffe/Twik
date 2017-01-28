@@ -1,3 +1,12 @@
+.btn-toolpanel-action{
+  text-align: center;
+  &:hover, &:active, &:focus{
+    text-decoration: none;
+    color: white;
+
+  }
+}
+
 .landing-logo{
   max-height: 175px;
 }
