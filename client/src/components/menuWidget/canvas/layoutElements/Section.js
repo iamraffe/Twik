@@ -65,7 +65,7 @@ class Section extends React.Component{
       styles = {
         ...styles,
         outline: 'thick dashed #f6303e',
-        outlineOffset: 40,
+        outlineOffset: 30,
         zIndex: 9999
       }
     }
@@ -87,7 +87,7 @@ class Section extends React.Component{
       <div
         className={`${(hover === true && active === false) ? 'section-hover' : '' } section-element`}
         id={this.props.id}
-        style={{backgroundColor, width: '100%', border: 'none', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles, ...this.styles()}}
+        style={{backgroundColor, width: '100%', border: 'none', minHeight: 'auto', marginTop: 0, marginBottom: 20, display: 'inline-block', verticalAlign: 'top', ...styles, ...this.styles()}}
         onClick={(e) => {
           if(active === false && this.props.readOnly !== true){
             this.onSectionSelect(id)
