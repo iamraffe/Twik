@@ -15,11 +15,11 @@
       });
     </script>
     <style>
-      html, body{
+      html, body, #pdf-document{
         margin:0 !important;
         padding:0 !important;
-        overflow: hidden;
-        border: 1px black !important;
+        overflow: hidden !important;
+        /*border: 1px black !important;*/
       }
       #entry-point{
         border: none !important;
@@ -65,7 +65,7 @@
       }
     </style>
   </head>
-  <body id="pdf-document">
+  <body id="pdf-document" style="outline: red 1px solid">
     <%= yield %>
   </body>
 </html>
