@@ -7,7 +7,6 @@ import routes from './routes'
 import configureStore from './store/configureStore'
 import { syncHistoryWithStore } from 'react-router-redux'
 import _ from 'lodash'
-import d3 from 'd3'
 import moment from 'moment'
 import uuid from 'node-uuid'
 

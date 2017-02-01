@@ -15,7 +15,7 @@ export default {
       id: null
     }
   },
-  saving: false,
+  operationInProgress: false,
   section_types: [],
   sections: [],
   structure: [],

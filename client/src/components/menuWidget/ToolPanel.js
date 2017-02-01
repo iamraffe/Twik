@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import request from 'superagent'
 
 import * as zoomActions from '../../actions/zoomActions'
+import * as backendActions from '../../actions/backendActions'
 
 import {  FontPanel,
           ColorPanel,
@@ -26,7 +27,7 @@ class ToolPanel extends React.Component{
       meta: props.meta,
       rendered_pdf: props.rendered_pdf,
       rendered_pdf_file_name: props.rendered_pdf_file_name,
-      saving: props.saving,
+      operationInProgress: props.operationInProgress,
       zoom: props.zoom
     }
   }
@@ -39,7 +40,7 @@ class ToolPanel extends React.Component{
       fontFamilies: nextProps.fontFamilies,
       rendered_pdf: nextProps.rendered_pdf,
       rendered_pdf_file_name: nextProps.rendered_pdf_file_name,
-      saving: nextProps.saving,
+      operationInProgress: nextProps.operationInProgress,
       styles: nextProps.styles,
       meta: nextProps.meta,
       zoom: nextProps.zoom
@@ -85,6 +86,7 @@ class ToolPanel extends React.Component{
     req.field('meta', JSON.stringify(meta))
     req.end((err, res)=>{
       applyZoom(zoom)
+      this.props.backendActions.previewSuccess()
       window.open(res.body.path, "_blank")
     })
   }
@@ -93,6 +95,7 @@ class ToolPanel extends React.Component{
     const { applyZoom } = this.props.zoomActions
     const { zoom } = this.state
 
+    this.props.backendActions.operationInProgress()
     applyZoom(100)
     setTimeout(this.previewCall(zoom), 100)
   }
@@ -106,7 +109,7 @@ class ToolPanel extends React.Component{
   }
 
   render(){
-    const { active, meta, id, saving } = this.state
+    const { active, meta, id, operationInProgress } = this.state
 
     return(
       <section className="tool-panel" style={{padding: 25}}>
@@ -159,10 +162,10 @@ class ToolPanel extends React.Component{
               else{
                 this.props.onSave(e)
               }
-            }} disabled={saving}>{saving ? 'Saving...' : 'Save'}</button>
+            }} disabled={operationInProgress}>Save</button>
           </div>
           <div className="col-xs-6">
-            <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onPreview()}}>Preview</button>
+            <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onPreview()}} disabled={operationInProgress}>Preview</button>
           </div>
           {(this.props.mode === "edit" || id !== null) && this.state.rendered_pdf !== "/rendered_pdfs/original/missing.png" &&
             <div className="col-xs-12">
@@ -189,7 +192,7 @@ function mapStateToProps(state, ownProps){
     meta: state.meta,
     rendered_pdf: state.menu.object.rendered_pdf,
     rendered_pdf_file_name: state.menu.object.rendered_pdf_file_name,
-    saving: state.saving,
+    operationInProgress: state.operationInProgress,
     sections: state.sections,
     structure: state.structure,
     styles: state.styles,
@@ -199,7 +202,8 @@ function mapStateToProps(state, ownProps){
 
 function mapDispatchToProps(dispatch){
   return {
-    zoomActions: bindActionCreators(zoomActions, dispatch)
+    zoomActions: bindActionCreators(zoomActions, dispatch),
+    backendActions: bindActionCreators(backendActions, dispatch)
   }
 }
 

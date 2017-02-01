@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
   fontFamilies: fontReducer,
   menu: menuReducer,
   meta: metaReducer,
-  saving: backendReducer,
+  operationInProgress: backendReducer,
   section_types: sectionTypeReducer,
   sections: sectionReducer,
   structure: structureReducer,

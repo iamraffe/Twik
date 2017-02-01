@@ -28,8 +28,11 @@ class MenusController < ApplicationController
     @menu.rendered_pdf = File.open(Rails.root.join('public/pdf',"#{@filename}.pdf"))
     @menu.society_id = @society.id
     @menu.subdomain = current_user.subdomain
-    @menu.save
-    render json: @menu
+    if @menu.save
+      render json: { menu: @menu, :message => "Menu created", ok: true, status: 200}, :status => :ok
+    else
+      render json: { menu: @menu, errors: @menu.errors, :message => "Unable to create menu", ok: false, status: 422}, :status => :unprocessable_entity
+    end
   end
 
   def show
@@ -55,8 +58,13 @@ class MenusController < ApplicationController
     pdf = render_to_string pdf: @filename, zoom: 1, dpi: '120', template: "menus/export.pdf.erb", layout: 'layouts/pdf.html.erb', page_size: @meta['size'], encoding: "UTF-8", javascript_delay: 50, orientation: @meta['orientation'], lowquality: false, no_pdf_compression: true, margin:  { top:0, bottom: 0, left: 0, right: 0 }, print_media_type: true, disable_smart_shrinking: true
     Menu.export(@filename, pdf)
     @menu.rendered_pdf = File.open(Rails.root.join('public/pdf',"#{@filename}.pdf"))
-    @menu.save
-    render json: @menu
+    if @menu.save
+      render json: { menu: @menu, :message => "Menu updated", ok: true, status: 200}, :status => :ok
+    else
+      render json: { menu: @menu, errors: @menu.errors, :message => "Unable to update menu", ok: false, status: 422}, :status => :unprocessable_entity
+    end
+    # @menu.save
+    # render json: @menu
   end
 
   def destroy
