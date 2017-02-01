@@ -99,8 +99,8 @@ NEW & EDIT
   background: rgba(235, 235, 235, 0.45);
   border: 0.25px solid $brand-default;
   position: absolute;
-  width: calc(100% + 20px);
-  height: calc(100% + 20px);
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
   left: -10px;
   top: -10px;
   // bottom: -15px;
@@ -136,7 +136,7 @@ NEW & EDIT
     padding-top: 22.5px;
     position: relative;
     border: 1px solid black;
-    
+
     .hide-on-inactive{
       display: none
     }
@@ -226,7 +226,7 @@ META SETTINGS
   .react-autosuggest__suggestions-container{
     width: 94%;
     position: absolute;
-    
+
     // left: 0px;
     z-index: 9;
     background: white;
