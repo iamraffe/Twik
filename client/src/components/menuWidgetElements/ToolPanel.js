@@ -12,7 +12,7 @@ import {  FontPanel,
           LayoutPanel,
           SectionTypePanel,
           ImagePanel,
-          ComponentPanel } from './toolPanel'
+          ComponentPanel } from './toolPanelElements'
 
 class ToolPanel extends React.Component{
   constructor(props){

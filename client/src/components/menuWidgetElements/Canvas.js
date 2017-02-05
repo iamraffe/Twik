@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import { PAPER_SIZES } from '../../lib/utils'
 
-import { LayoutElement, ZoomUtility, PageIndex } from './canvas'
+import { LayoutElement, ZoomUtility, PageIndex } from './canvasElements'
 
 class Canvas extends React.Component{
   constructor(props){

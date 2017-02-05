@@ -14,7 +14,7 @@ import * as metaActions from '../actions/metaActions'
 import * as sectionActions from '../actions/sectionActions'
 import * as componentActions from '../actions/componentActions'
 
-import { ToolPanel, Canvas, MetaWidget } from './menuWidget'
+import { ToolPanel, Canvas, MetaWidget } from './menuWidgetElements'
 
 @DragDropContext(HTML5Backend)
 class MenuWidget extends React.Component{
