@@ -15,7 +15,7 @@ class AccountsController < ApplicationController
   def find
     @account = Account.where(subdomain: params[:subdomain]).first
     if @account.nil?
-      flash[:alert] = "Whoops! We can't find a Twik account by that name"
+      flash[:alert] = "Whoops! We are unable find a Twik account by that name"
       redirect_to :back
     else
       redirect_to new_user_session_url(subdomain: @account.subdomain)
