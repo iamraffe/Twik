@@ -7,7 +7,7 @@ export default function sectionReducer(state = initialState.components, action){
   switch(action.type){
     case types.SET_META_INFO:
       let layouts = JSON.parse(action.template).structure.layouts
-      return _.find(layouts, (layout) => {return layout.name === action.layout}).components
+      return _.find(layouts, (l) => {return l.name === action.layout && l.multiPage.toString() === action.multiPage}).components
     case types.LOAD_COMPONENTS:
       return action.components
     case types.ADD_COMPONENT:

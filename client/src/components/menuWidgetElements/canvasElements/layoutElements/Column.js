@@ -15,6 +15,8 @@ class Column extends React.Component{
   constructor(props){
     super(props)
 
+    // console.log("styles on constructor", props.styles, props.id, props.span)
+
     this.state = {
       sections: _.filter(props.sections, (section, i) => {return section.columnId === props.id}),
       activeSection: props.activeSection
@@ -33,6 +35,8 @@ class Column extends React.Component{
 
   componentDidMount(){
     const { id, span, styles } = this.props
+    // console.log("styles on mount", styles, id, span)
+
     $(`#${id}`).css('width', `${span*100}%`)
     if(styles.marginLeft){
       $(`#${id}`).css('width', `-=${styles.marginLeft}`)
@@ -51,7 +55,7 @@ class Column extends React.Component{
   render(){
     const { type, styles, span, id, hover, rowId, containerId } = this.props
     const { sections, activeSection } = this.state
-
+    // console.log("render", styles, id, span)
     return(
       <div
         id={this.props.id}

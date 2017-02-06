@@ -19,6 +19,7 @@ class LayoutElement extends React.Component{
 
     switch(type){
       case "PAGE":
+        // console.log("page activeContainer", this.props.activeContainer)
         return(
           <div style={{height: '100%'}}>
             {_.map(this.props.elements, (element, i) => {
@@ -28,6 +29,8 @@ class LayoutElement extends React.Component{
                   {...element}
                   zoom={this.props.zoom}
                   hover={this.props.hover}
+                  landscapeMode={this.props.landscapeMode}
+                  activeContainer={this.props.activeContainer}
                   activeSection={this.props.activeSection}
                   getStyles={this.getStyles}
                   onSectionSelect={this.onSectionSelect}
@@ -37,51 +40,106 @@ class LayoutElement extends React.Component{
           </div>
         )
       case "CONTAINER":
-        return (
-          <div
-            className={`container-align-${this.props.align}`}
-            style={{
-              width: this.props.span*100+'%',
-              float: 'left',
-              position: 'relative',
-              minHeight: 10,
-              height: '100%',
-              // display: '-webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex',
-              // display: '-webkit-box',
-              display: '-webkit-flex',
-              display: 'flex',
-              flexDirection: 'row',
-              // position: 'static',
-              // outline: '1px solid red',
-              // background: 'blue',
-              // WebkitBoxAlign: 'start',
-              // boxAlign: 'start',
-              // boxPack: 'end',
-              // WebkitBoxPack: 'end',
-              // BoxOrient: 'vertical',           /* As specified */
-              // WebkitBoxOrient: 'vertical',   /* WebKit */
-              // WebkitBoxDirection: 'reverse',
-              // WebkitFlexWrap: 'wrap',
-              // flexWrap: 'wrap'
-            }}
-          >
-            {_.map(this.props.elements, (element, i) => {
-              return (
-                <LayoutElement
-                  key={i}
-                  containerId={this.props.id}
-                  zoom={this.props.zoom}
-                  hover={this.props.hover}
-                  activeSection={this.props.activeSection}
-                  vertical={this.props.align}
-                  {...element}
-                  getStyles={this.getStyles}
-                  onSectionSelect={this.onSectionSelect}
-                />
-              )
-            })}
-          </div>
-        )
+        // console.log(this.props)
+        if(this.props.landscapeMode && (this.props.position !== this.props.activeContainer)){
+          return null
+        }
+        else if(this.props.landscapeMode && this.props.position === this.props.activeContainer){
+          return (
+            <div
+              className={`container-align-${this.props.align}`}
+              style={{
+                width: this.props.landscapeMode ? '100%' : this.props.span*100+'%',
+                float: 'left',
+                position: 'relative',
+                minHeight: 10,
+                height: '100%',
+                // display: '-webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex',
+                // display: '-webkit-box',
+                display: '-webkit-flex',
+                display: 'flex',
+                flexDirection: 'row',
+                overflowX: 'hidden',
+                // position: 'static',
+                // outline: '1px solid red',
+                // background: 'blue',
+                // WebkitBoxAlign: 'start',
+                // boxAlign: 'start',
+                // boxPack: 'end',
+                // WebkitBoxPack: 'end',
+                // BoxOrient: 'vertical',           /* As specified */
+                // WebkitBoxOrient: 'vertical',   /* WebKit */
+                // WebkitBoxDirection: 'reverse',
+                // WebkitFlexWrap: 'wrap',
+                // flexWrap: 'wrap'
+              }}
+            >
+              {_.map(this.props.elements, (element, i) => {
+                return (
+                  <LayoutElement
+                    key={i}
+                    containerId={this.props.id}
+                    zoom={this.props.zoom}
+                    hover={this.props.hover}
+                    activeSection={this.props.activeSection}
+                    vertical={this.props.align}
+                    {...element}
+                    getStyles={this.getStyles}
+                    onSectionSelect={this.onSectionSelect}
+                  />
+                )
+              })}
+            </div>
+          )
+        }
+        else{
+          return (
+            <div
+              className={`container-align-${this.props.align}`}
+              style={{
+                width: this.props.landscapeMode ? '100%' : this.props.span*100+'%',
+                float: 'left',
+                position: 'relative',
+                minHeight: 10,
+                height: '100%',
+                // display: '-webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex',
+                // display: '-webkit-box',
+                display: '-webkit-flex',
+                display: 'flex',
+                flexDirection: 'row',
+                overflowX: 'hidden',
+                // position: 'static',
+                // outline: '1px solid red',
+                // background: 'blue',
+                // WebkitBoxAlign: 'start',
+                // boxAlign: 'start',
+                // boxPack: 'end',
+                // WebkitBoxPack: 'end',
+                // BoxOrient: 'vertical',           /* As specified */
+                // WebkitBoxOrient: 'vertical',   /* WebKit */
+                // WebkitBoxDirection: 'reverse',
+                // WebkitFlexWrap: 'wrap',
+                // flexWrap: 'wrap'
+              }}
+            >
+              {_.map(this.props.elements, (element, i) => {
+                return (
+                  <LayoutElement
+                    key={i}
+                    containerId={this.props.id}
+                    zoom={this.props.zoom}
+                    hover={this.props.hover}
+                    activeSection={this.props.activeSection}
+                    vertical={this.props.align}
+                    {...element}
+                    getStyles={this.getStyles}
+                    onSectionSelect={this.onSectionSelect}
+                  />
+                )
+              })}
+            </div>
+          )
+        }
       case "ROW":
         return (
           <div

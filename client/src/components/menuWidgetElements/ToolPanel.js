@@ -33,7 +33,7 @@ class ToolPanel extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("rendered_pdf", this.state.rendered_pdf, nextProps.rendered_pdf)
+    // console.log("rendered_pdf", this.state.rendered_pdf, nextProps.rendered_pdf)
     this.setState({
       id: nextProps.id,
       colors: nextProps.colors,
@@ -183,7 +183,7 @@ ToolPanel.propTypes = {
 }
 
 function mapStateToProps(state, ownProps){
-  console.log("rendered_pdf", state.menu.object.rendered_pdf)
+  // console.log("rendered_pdf", state.menu.object.rendered_pdf)
 //  debugger;
   return {
     id: state.menu.object.id,

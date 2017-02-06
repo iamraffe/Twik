@@ -21,6 +21,7 @@ class Canvas extends React.Component{
       styles: props.styles,
       sections: props.sections,
       activePage: props.structure[0],
+      activeContainer: 0,
       hover: false,
       activeSection: ''
     }
@@ -60,10 +61,19 @@ class Canvas extends React.Component{
     })
   }
 
-  onPageSelected = (index) => {
-    this.setState({
-      activePage: this.state.structure[index]
-    })
+  onPageSelected = (index, containerIndex) => {
+    // console.log("onPageSelected", containerIndex)
+    if(containerIndex > -1){
+      this.setState({
+        activePage: this.state.structure[index],
+        activeContainer: containerIndex
+      })
+    }
+    else{
+      this.setState({
+        activePage: this.state.structure[index]
+      })
+    }
   }
 
   // shouldComponentUpdate(nextProps, nextState){
@@ -71,8 +81,9 @@ class Canvas extends React.Component{
   // }
 
   render(){
-    const { width, height, zoom, colors, fonts, structure, hover, activeSection, activePage } = this.state
-
+    const { width, height, zoom, colors, fonts, structure, hover, activeSection, activePage, activeContainer } = this.state
+    const { meta } = this.props
+    // console.log("meta", meta)
     return (
       <div>
         <div className="row" style={{height: 650, overflow: 'auto', maxWidth: '100%', marginBottom: 0, borderBottom: '1px solid silver'}}>
@@ -82,7 +93,7 @@ class Canvas extends React.Component{
               style={{
                 border: '1px solid black',
                 margin: '0 auto',
-                width: (width*(zoom/100))+'in',
+                width: meta.orientation === 'landscape' ? ((width/2)*(zoom/100))+'in' : (width*(zoom/100))+'in',
                 height: (height*(zoom/100))+'in',
                 // paddingTop: 25,
                 // paddingBottom: 25
@@ -100,6 +111,8 @@ class Canvas extends React.Component{
               <LayoutElement
                 {...activePage}
                 zoom={zoom}
+                landscapeMode={meta.orientation === 'landscape'}
+                activeContainer={activeContainer}
                 hover={hover}
                 activeSection={activeSection}
                 getStyles={this.getStyles}
@@ -111,6 +124,7 @@ class Canvas extends React.Component{
         {structure.length > 1 &&
           <PageIndex
             pages={structure}
+            activeContainer={activeContainer}
             hidden={true}
             onPageSelected={this.onPageSelected}
             getStyles={this.getStyles}
