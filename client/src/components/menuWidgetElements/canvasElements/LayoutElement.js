@@ -149,6 +149,7 @@ class LayoutElement extends React.Component{
               alignSelf: this.props.vertical === 'bottom' ? 'flex-end' : 'flex-start',
               // background: "yellow",
               position: 'relative',
+              overflowX: 'hidden',
               // outline: '1px solid green',
             }}
           >
