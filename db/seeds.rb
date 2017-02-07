@@ -624,6 +624,70 @@ p_1_c_2_s0 = SecureRandom.uuid
                 },
               ]
             },
+            {
+              type: 'PAGE',
+              position: 3,
+              background: '',
+              id: SecureRandom.uuid,
+              elements: [
+                {
+                  type: 'CONTAINER',
+                  align: 'top',
+                  position: 6,
+                  background: '',
+                  span: 0.5,
+                  id: SecureRandom.uuid,
+                  elements: [
+                    {
+                      type: "ROW",
+                      position: 0,
+                      id: SecureRandom.uuid,
+                      elements: [
+                        {
+                          type: "COLUMN",
+                          span: 1,
+                          id: "73c97de5-b9d8-4ec7-8a17-17309ff89162",
+                          position: 0,
+                          styles: {
+                            marginLeft: '1cm',
+                            marginRight: '1cm',
+                            marginTop: '1.917cm'
+                          }
+                        }
+                      ]
+                    },
+                  ]
+                },
+                {
+                  type: 'CONTAINER',
+                  align: 'top',
+                  position: 7,
+                  background: '',
+                  span: 0.5,
+                  id: SecureRandom.uuid,
+                  elements: [
+                    {
+                      type: "ROW",
+                      position: 0,
+                      id: SecureRandom.uuid,
+                      elements: [
+                        {
+                          type: "COLUMN",
+                          span: 1,
+                          id: "d02038a4-71a7-4947-ae66-ae7a10ab7fae",
+                          position: 0,
+                          styles: {
+                            marginLeft: '1cm',
+                            marginRight: '1cm',
+                            marginTop: 117.454
+                          }
+                        }
+                      ]
+                    },
+                  ]
+                },
+              ]
+            },
           ],
           sections: [
             # PAGE 0 - !
@@ -719,8 +783,122 @@ p_1_c_2_s0 = SecureRandom.uuid
               readOnly: false,
               styles: {}
             },
+            # PAGE 3 - COL 1 "73c97de5-b9d8-4ec7-8a17-17309ff89162" COL 2 "d02038a4-71a7-4947-ae66-ae7a10ab7fae"
+            {
+              id: "26559cb7-1643-4402-8f04-331dc9702f31",
+              type: "SECTION",
+              position: 0,
+              columnId: "73c97de5-b9d8-4ec7-8a17-17309ff89162",
+              accepts: ['text'],
+              readOnly: false,
+              styles: {}
+            },
+            {
+              id: "ef70882e-0ec5-4a05-aba8-6522eae0b4f7",
+              type: "SECTION",
+              position: 1,
+              columnId: "73c97de5-b9d8-4ec7-8a17-17309ff89162",
+              accepts: ['img'],
+              readOnly: true,
+              styles: {}
+            },
+            {
+              id: "e6c1cc27-f910-4dc6-b2ec-17f3d13a4a64",
+              type: "SECTION",
+              position: 2,
+              columnId: "73c97de5-b9d8-4ec7-8a17-17309ff89162",
+              accepts: ['text'],
+              readOnly: false,
+              styles: {}
+            },
+            {
+              id: "cedd4822-c1d4-4be6-a7e5-04566bdffb67",
+              type: "SECTION",
+              position: 0,
+              columnId: "d02038a4-71a7-4947-ae66-ae7a10ab7fae",
+              accepts: ['img'],
+              readOnly: true,
+              styles: {}
+            },
+            {
+              id: "08dd99eb-a1af-4c6d-bad2-49aa8ba68538",
+              type: "SECTION",
+              position: 1,
+              columnId: "d02038a4-71a7-4947-ae66-ae7a10ab7fae",
+              accepts: ['text'],
+              readOnly: false,
+              styles: {
+                marginTop: 45
+              }
+            },
           ],
           components: [
+            # PAGE 3
+            {
+              sectionId: "26559cb7-1643-4402-8f04-331dc9702f31",
+              type: "SINGLE_ELEMENT",
+              elements: [
+                {
+                  styles: section_title_id,
+                  text: 'By the bottle'
+                }
+              ],
+              hide: false,
+              position: 0,
+              id: SecureRandom.uuid
+            },
+            {
+              sectionId: "ef70882e-0ec5-4a05-aba8-6522eae0b4f7",
+              type: "IMAGE_ELEMENT",
+              url: wine_separator_big,
+              styles: {
+                marginBottom: '0.25cm',
+                marginTop: 0,
+                marginLeft: -5,
+              },
+              hide: true,
+              position: 0,
+              id: SecureRandom.uuid
+            },
+            {
+              sectionId: "e6c1cc27-f910-4dc6-b2ec-17f3d13a4a64",
+              type: "SINGLE_ELEMENT",
+              elements: [
+                {
+                  styles: section_title_id,
+                  text: 'reds'
+                }
+              ],
+              hide: false,
+              position: 0,
+              id: SecureRandom.uuid
+            },
+            {
+              sectionId: "cedd4822-c1d4-4be6-a7e5-04566bdffb67",
+              type: "IMAGE_ELEMENT",
+              url: wine_separator,
+              styles: {
+                marginBottom: '0.25cm',
+                marginTop: 0,
+                marginLeft: '-1cm',
+              },
+              hide: true,
+              position: 0,
+              id: SecureRandom.uuid
+            },
+            {
+              sectionId: "08dd99eb-a1af-4c6d-bad2-49aa8ba68538",
+              type: "SINGLE_ELEMENT",
+              elements: [
+                {
+                  styles: section_title_id,
+                  text: 'wines, continued'
+                }
+              ],
+              hide: false,
+              position: 0,
+              id: SecureRandom.uuid
+            },
             # PAGE 2
             {
               sectionId: "89198a52-2e45-458d-b4d4-d412ee65dc67",
@@ -833,7 +1011,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               elements: [
                 {
                   styles: section_title_id,
-                  text: 'sparkling'
+                  text: 'beer'
                 }
               ],
               hide: false,
