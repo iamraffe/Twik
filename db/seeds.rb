@@ -447,7 +447,7 @@ p_1_c_2_s0 = SecureRandom.uuid
           ]
         },
         {
-          id: SecureRandom.uuid,
+          id: "61eba2db-7ca8-49d7-9917-647154a11ba9",
           name: "TWO_COLUMNS",
           multiPage: true,
           orientation: 'landscape',
@@ -456,7 +456,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               type: 'PAGE',
               position: 0,
               background: '',
-              id: SecureRandom.uuid,
+              id: "9fcaaeed-4720-4edb-b029-0af76d7a4c07",
               elements: [
                 {
                   type: 'CONTAINER',
@@ -464,7 +464,7 @@ p_1_c_2_s0 = SecureRandom.uuid
                   position: 0,
                   background: '',
                   span: 0.5,
-                  id: SecureRandom.uuid,
+                  id: "3e603a16-a853-4089-8f81-90358c8afa12",
                   elements: []
                 },
                 {
@@ -473,12 +473,12 @@ p_1_c_2_s0 = SecureRandom.uuid
                   position: 1,
                   background: '',
                   span: 0.5,
-                  id: SecureRandom.uuid,
+                  id: "c0602c9c-9b8e-4949-91e6-866617ad2abe",
                   elements: [
                     {
                       type: "ROW",
                       position: 0,
-                      id: SecureRandom.uuid,
+                      id: "ab1dca67-d7ec-48ad-ab71-c4afd817db96",
                       elements: [
                         {
                           type: "COLUMN",
@@ -500,7 +500,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               type: 'PAGE',
               position: 1,
               background: '',
-              id: SecureRandom.uuid,
+              id: "6d7fcf51-0be8-43bb-b8b2-37697672542b",
               elements: [
                 {
                   type: 'CONTAINER',
@@ -508,12 +508,12 @@ p_1_c_2_s0 = SecureRandom.uuid
                   position: 2,
                   background: '',
                   span: 0.5,
-                  id: SecureRandom.uuid,
+                  id: "8db78d89-e04f-4470-8d7e-60ba203d9184",
                   elements: [
                     {
                       type: "ROW",
                       position: 0,
-                      id: SecureRandom.uuid,
+                      id: "1050d3e5-9b5a-47ae-8815-b1a81d8ba5fc",
                       elements: [
                         {
                           type: "COLUMN",
@@ -536,12 +536,12 @@ p_1_c_2_s0 = SecureRandom.uuid
                   position: 3,
                   background: '',
                   span: 0.5,
-                  id: SecureRandom.uuid,
+                  id: "656d18a3-3711-456d-ae7c-6cd8a9212c10",
                   elements: [
                     {
                       type: "ROW",
                       position: 0,
-                      id: SecureRandom.uuid,
+                      id: "e98a0a97-bc14-4b67-8b04-aeea11f62473",
                       elements: [
                         {
                           type: "COLUMN",
@@ -564,7 +564,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               type: 'PAGE',
               position: 2,
               background: '',
-              id: SecureRandom.uuid,
+              id: "b141a94c-6361-4b5c-850a-f6d6ec65f021",
               elements: [
                 {
                   type: 'CONTAINER',
@@ -572,12 +572,12 @@ p_1_c_2_s0 = SecureRandom.uuid
                   position: 4,
                   background: '',
                   span: 0.5,
-                  id: SecureRandom.uuid,
+                  id: "7eb356c3-b6b0-454d-869e-6dd1f1220606",
                   elements: [
                     {
                       type: "ROW",
                       position: 0,
-                      id: SecureRandom.uuid,
+                      id: "29ea57ac-bdcd-4949-bee8-3546fa466489",
                       elements: [
                         {
                           type: "COLUMN",
@@ -600,12 +600,12 @@ p_1_c_2_s0 = SecureRandom.uuid
                   position: 5,
                   background: '',
                   span: 0.5,
-                  id: SecureRandom.uuid,
+                  id: "d08f2410-1256-43a2-90b7-74d269f9fa61",
                   elements: [
                     {
                       type: "ROW",
                       position: 0,
-                      id: SecureRandom.uuid,
+                      id: "9afebc48-88b7-4e1c-97a6-c3da11420a0d",
                       elements: [
                         {
                           type: "COLUMN",
@@ -628,7 +628,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               type: 'PAGE',
               position: 3,
               background: '',
-              id: SecureRandom.uuid,
+              id: "dda83656-a21b-42e7-ae94-50c0c3b2d8c1",
               elements: [
                 {
                   type: 'CONTAINER',
@@ -636,12 +636,12 @@ p_1_c_2_s0 = SecureRandom.uuid
                   position: 6,
                   background: '',
                   span: 0.5,
-                  id: SecureRandom.uuid,
+                  id: "b74a0c2f-6243-4a03-a2f9-14050f477330",
                   elements: [
                     {
                       type: "ROW",
                       position: 0,
-                      id: SecureRandom.uuid,
+                      id: "8594b03f-91be-47ed-b9a1-2a175e968aa6",
                       elements: [
                         {
                           type: "COLUMN",
@@ -664,12 +664,12 @@ p_1_c_2_s0 = SecureRandom.uuid
                   position: 7,
                   background: '',
                   span: 0.5,
-                  id: SecureRandom.uuid,
+                  id: "7b71ec98-6fb2-4dee-93ce-711f193558c7",
                   elements: [
                     {
                       type: "ROW",
                       position: 0,
-                      id: SecureRandom.uuid,
+                      id: "67229b4c-7e32-4963-8f11-873fd9f1df55",
                       elements: [
                         {
                           type: "COLUMN",
@@ -845,7 +845,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               ],
               hide: false,
               position: 0,
-              id: SecureRandom.uuid
+              id: "ffd8c19a-8698-4e33-8ef6-717c613dab17"
             },
             {
               sectionId: "ef70882e-0ec5-4a05-aba8-6522eae0b4f7",
@@ -858,7 +858,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               },
               hide: true,
               position: 0,
-              id: SecureRandom.uuid
+              id: "a1fd54b7-006a-4b42-917f-2ca674cf5102"
             },
             {
               sectionId: "e6c1cc27-f910-4dc6-b2ec-17f3d13a4a64",
@@ -871,7 +871,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               ],
               hide: false,
               position: 0,
-              id: SecureRandom.uuid
+              id: "29a9d164-a33b-4194-a18e-b82bba9fc3b8"
             },
             {
               sectionId: "cedd4822-c1d4-4be6-a7e5-04566bdffb67",
@@ -884,7 +884,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               },
               hide: true,
               position: 0,
-              id: SecureRandom.uuid
+              id: "7a27349d-b3f7-414f-b374-9619bbde116f"
             },
             {
               sectionId: "08dd99eb-a1af-4c6d-bad2-49aa8ba68538",
@@ -897,7 +897,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               ],
               hide: false,
               position: 0,
-              id: SecureRandom.uuid
+              id: "965df707-2f38-4016-b46a-73b0060fc5db"
             },
             # PAGE 2
             {
@@ -911,7 +911,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               ],
               hide: false,
               position: 0,
-              id: SecureRandom.uuid
+              id: "d3764eec-09d2-4dae-a89d-1379a347f154"
             },
             {
               sectionId: "d7192fff-7cb7-4e3f-93a8-e7665e91d866",
@@ -924,7 +924,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               },
               hide: true,
               position: 0,
-              id: SecureRandom.uuid
+              id: "578ba65a-7d4c-4d82-b2f1-4d183ea04938"
             },
             {
               sectionId: "43590422-8074-4e8d-85ab-63826ea7d6df",
@@ -937,7 +937,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               ],
               hide: false,
               position: 0,
-              id: SecureRandom.uuid
+              id: "5cb826bf-c0bd-4fe1-bc30-ddfa4bb684ed"
             },
             {
               sectionId: "0d8a53db-c5da-4a70-b806-73612280bd45",
@@ -950,7 +950,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               },
               hide: true,
               position: 0,
-              id: SecureRandom.uuid
+              id: "631ff4aa-61dd-4cca-981c-066c07563ca4"
             },
             {
               sectionId: "3777afe9-143e-45a2-8078-d9098ad4c17c",
@@ -963,7 +963,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               ],
               hide: false,
               position: 0,
-              id: SecureRandom.uuid
+              id: "b1a640af-b1e7-4a59-8d32-517545ade794"
             },
             # PAGE 1
             {
@@ -977,7 +977,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               ],
               hide: false,
               position: 0,
-              id: SecureRandom.uuid
+              id: "299647a9-0bf4-4989-a680-a60932ef6125"
             },
             {
               sectionId: "efd30f81-9759-4b4a-94cb-375b90f66a72",
@@ -990,7 +990,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               },
               hide: true,
               position: 0,
-              id: SecureRandom.uuid
+              id: "b5a5c636-2254-483f-ad5c-1d4edda953b3"
             },
             {
               sectionId: "1300b60c-02a2-454c-9cd6-48fae29e5cab",
@@ -1003,7 +1003,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               ],
               hide: false,
               position: 0,
-              id: SecureRandom.uuid
+              id: "edfef56d-8164-4bdd-9868-577fa0de48a0"
             },
             {
               sectionId: "dbee2e2e-e341-483b-b0f6-f0e296b243c0",
@@ -1016,7 +1016,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               ],
               hide: false,
               position: 0,
-              id: SecureRandom.uuid
+              id: "92d2c052-788c-4c72-b2c7-79b6c576b7ac"
             },
             # PAGE 0
             {
@@ -1031,7 +1031,7 @@ p_1_c_2_s0 = SecureRandom.uuid
               },
               hide: true,
               position: 0,
-              id: SecureRandom.uuid
+              id: "169b6f1f-9ee2-4374-9656-3a1db0a88a2b"
             }
           ]
         }

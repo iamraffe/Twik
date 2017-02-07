@@ -21,7 +21,7 @@ class InlineEditor extends React.Component {
     const { editorState } = this.state
     this.focus()
   }
- 
+
   _onTab(e) {
     e.preventDefault()
     this.onSaveContent()
@@ -30,7 +30,7 @@ class InlineEditor extends React.Component {
   onSaveContent = () => {
     const { editorState } = this.state
     let htmlContent = stateToHTML(editorState.getCurrentContent())
-    
+
     htmlContent = _.replace(htmlContent,new RegExp("<p>","g"),"<span>")
     htmlContent = _.replace(htmlContent,new RegExp("</p>","g"),"</span>")
 

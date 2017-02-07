@@ -59,7 +59,6 @@ class LayoutElement extends React.Component{
                 display: '-webkit-flex',
                 display: 'flex',
                 flexDirection: 'row',
-                overflowX: 'hidden',
                 // position: 'static',
                 // outline: '1px solid red',
                 // background: 'blue',
