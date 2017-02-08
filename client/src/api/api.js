@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 class Api{
   static token(){
-    let el = document.querySelector('meta[name="csrf-token"')
+    let el = document.querySelector('meta[name="csrf-token"]')
     return el ? el.getAttribute("content") : '';
   }
 
