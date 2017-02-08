@@ -53,7 +53,7 @@ class Column extends React.Component{
   }
 
   render(){
-    const { type, styles, span, id, hover, rowId, containerId } = this.props
+    const { type, styles, span, id, hover, rowId, containerId, printView } = this.props
     const { sections, activeSection } = this.state
     // console.log("render", styles, id, span)
     return(
@@ -120,37 +120,39 @@ class Column extends React.Component{
             )
           })}
         </Sortable>
-        <div
-          style={{
-            border: 'none',
-            width: '100%',
-            alignSelf: this.props.vertical === 'bottom' ? 'flex-end' : 'flex-start',
-            position: 'absolute',
-            bottom: (this.containsActiveSectionAndIsLast() && hover) ? -47.5 : -10,
-            textAlign: 'left',
-
-          }}
-        >
-          <span
-            className="hide-on-export"
+        {printView !== true &&
+          <div
             style={{
-              cursor: 'pointer',
-              fontSize: 12,
-              textDecoration: 'underline'
-            }}
-            onClick={(e) => {
-              this.props.sectionActions.addSection({
-                id: uuid.v4(),
-                type: "SECTION",
-                position: sections.length+1,
-                columnId: this.props.id,
-                accepts: this.props.meta.accepts
-              })
+              border: 'none',
+              width: '100%',
+              alignSelf: this.props.vertical === 'bottom' ? 'flex-end' : 'flex-start',
+              position: 'absolute',
+              bottom: (this.containsActiveSectionAndIsLast() && hover) ? -47.5 : -10,
+              textAlign: 'left',
+
             }}
           >
-            Add Section
-          </span>
-        </div>
+            <span
+              className="hide-on-export"
+              style={{
+                cursor: 'pointer',
+                fontSize: 12,
+                textDecoration: 'underline'
+              }}
+              onClick={(e) => {
+                this.props.sectionActions.addSection({
+                  id: uuid.v4(),
+                  type: "SECTION",
+                  position: sections.length+1,
+                  columnId: this.props.id,
+                  accepts: this.props.meta.accepts
+                })
+              }}
+            >
+              Add Section
+            </span>
+          </div>
+        }
       </div>
     )
   }

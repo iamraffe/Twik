@@ -29,6 +29,7 @@ class LayoutElement extends React.Component{
                   {...element}
                   zoom={this.props.zoom}
                   hover={this.props.hover}
+                  printView={this.props.printView}
                   landscapeMode={this.props.landscapeMode}
                   activeContainer={this.props.activeContainer}
                   activeSection={this.props.activeSection}
@@ -54,23 +55,9 @@ class LayoutElement extends React.Component{
                 position: 'relative',
                 minHeight: 10,
                 height: '100%',
-                // display: '-webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex',
-                // display: '-webkit-box',
                 display: '-webkit-flex',
                 display: 'flex',
                 flexDirection: 'row',
-                // position: 'static',
-                // outline: '1px solid red',
-                // background: 'blue',
-                // WebkitBoxAlign: 'start',
-                // boxAlign: 'start',
-                // boxPack: 'end',
-                // WebkitBoxPack: 'end',
-                // BoxOrient: 'vertical',           /* As specified */
-                // WebkitBoxOrient: 'vertical',   /* WebKit */
-                // WebkitBoxDirection: 'reverse',
-                // WebkitFlexWrap: 'wrap',
-                // flexWrap: 'wrap'
               }}
             >
               {_.map(this.props.elements, (element, i) => {
@@ -82,6 +69,7 @@ class LayoutElement extends React.Component{
                     hover={this.props.hover}
                     activeSection={this.props.activeSection}
                     vertical={this.props.align}
+                    printView={this.props.printView}
                     {...element}
                     getStyles={this.getStyles}
                     onSectionSelect={this.onSectionSelect}
@@ -101,24 +89,10 @@ class LayoutElement extends React.Component{
                 position: 'relative',
                 minHeight: 10,
                 height: '100%',
-                // display: '-webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex',
-                // display: '-webkit-box',
                 display: '-webkit-flex',
                 display: 'flex',
                 flexDirection: 'row',
                 overflowX: 'hidden',
-                // position: 'static',
-                // outline: '1px solid red',
-                // background: 'blue',
-                // WebkitBoxAlign: 'start',
-                // boxAlign: 'start',
-                // boxPack: 'end',
-                // WebkitBoxPack: 'end',
-                // BoxOrient: 'vertical',           /* As specified */
-                // WebkitBoxOrient: 'vertical',   /* WebKit */
-                // WebkitBoxDirection: 'reverse',
-                // WebkitFlexWrap: 'wrap',
-                // flexWrap: 'wrap'
               }}
             >
               {_.map(this.props.elements, (element, i) => {
@@ -130,6 +104,7 @@ class LayoutElement extends React.Component{
                     hover={this.props.hover}
                     activeSection={this.props.activeSection}
                     vertical={this.props.align}
+                    printView={this.props.printView}
                     {...element}
                     getStyles={this.getStyles}
                     onSectionSelect={this.onSectionSelect}
@@ -145,12 +120,10 @@ class LayoutElement extends React.Component{
             className="row-canvas"
             style={{
               width: '100%',
-              // WebkitBoxDirection: this.props.vertical === 'bottom' ? 'reverse' : 'normal',
               alignSelf: this.props.vertical === 'bottom' ? 'flex-end' : 'flex-start',
               // background: "yellow",
               position: 'relative',
               overflowX: 'hidden',
-              // outline: '1px solid green',
             }}
           >
             {_.map(this.props.elements, (element, i) => {
@@ -161,6 +134,7 @@ class LayoutElement extends React.Component{
                   rowId={this.props.id}
                   hover={this.props.hover}
                   activeSection={this.props.activeSection}
+                  printView={this.props.printView}
                   {...element}
                   getStyles={this.getStyles}
                   onSectionSelect={this.onSectionSelect}

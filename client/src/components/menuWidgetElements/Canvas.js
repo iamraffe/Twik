@@ -85,18 +85,15 @@ class Canvas extends React.Component{
     const { meta } = this.props
     // console.log("meta", meta)
     return (
-      <div>
-        <div className="row" style={{height: 650, overflow: 'auto', maxWidth: '100%', marginBottom: 0, borderBottom: '1px solid silver'}}>
+      <div style={{}}>
+        <div className="row" style={{position: 'relative', height: 650, overflowX: 'hidden', overflowY: 'scroll', maxWidth: '100%', marginBottom: 0, borderBottom: '1px solid silver'}}>
           <div className="col-xs-12" style={{paddingTop: 25, paddingBottom: 25}}>
             <div
-              id="entry-point"
               style={{
                 border: '1px solid black',
                 margin: '0 auto',
                 width: meta.orientation === 'landscape' ? ((width/2)*(zoom/100))+'in' : (width*(zoom/100))+'in',
-                height: (height*(zoom/100))+'in',
-                // paddingTop: 25,
-                // paddingBottom: 25
+                height: (height*(zoom/100))+'in'
               }}
               onMouseEnter={(e) => {
                 this.setState({hover: true})
@@ -118,6 +115,39 @@ class Canvas extends React.Component{
                 getStyles={this.getStyles}
                 onSectionSelect={this.onSectionSelect}
               />
+            </div>
+          </div>
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 10000
+            }}
+          >
+            <div id="entry-point">
+              {_.map(structure, (element, i) => {
+                return(
+                  <div
+                    key={i}
+                    style={{
+                      width: (width*(zoom/100))+'in',
+                      height: (height*(zoom/100))+'in',
+                    }}
+                  >
+                    <LayoutElement
+                      {...element}
+                      zoom={100}
+                      landscapeMode={false}
+                      activeContainer={activeContainer}
+                      hover={false}
+                      activeSection={activeSection}
+                      printView={true}
+                      getStyles={this.getStyles}
+                      onSectionSelect={this.onSectionSelect}
+                    />
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>
