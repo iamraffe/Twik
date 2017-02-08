@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import 'whatwg-fetch'
+// import 'whatwg-fetch'
 
 class Api{
   static token(){
