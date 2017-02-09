@@ -856,7 +856,7 @@ p_1_c_2_s0 = SecureRandom.uuid
                 marginTop: 0,
                 marginLeft: -5,
               },
-              hide: true,
+              hide: false,
               position: 0,
               id: "a1fd54b7-006a-4b42-917f-2ca674cf5102"
             },
@@ -922,7 +922,7 @@ p_1_c_2_s0 = SecureRandom.uuid
                 marginTop: 0,
                 marginLeft: -5,
               },
-              hide: true,
+              hide: false,
               position: 0,
               id: "578ba65a-7d4c-4d82-b2f1-4d183ea04938"
             },
@@ -988,7 +988,7 @@ p_1_c_2_s0 = SecureRandom.uuid
                 marginTop: 0,
                 marginLeft: -5,
               },
-              hide: true,
+              hide: false,
               position: 0,
               id: "b5a5c636-2254-483f-ad5c-1d4edda953b3"
             },

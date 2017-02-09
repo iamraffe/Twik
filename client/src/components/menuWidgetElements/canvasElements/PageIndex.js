@@ -54,39 +54,55 @@ class PageIndex extends React.Component{
     }
     else{
       return(
-        <div className="row" style={{maxWidth: '100%'}}>
+        <div className="row" style={{width: '100%', height: 275}}>
           <div className="text-center" style={{...styles}} onClick={(e) => {this.onToggleHidden()}}>
             <span className="ion-ios-arrow-thin-down ion"></span>
           </div>
-          <div style={{width: '100%'}}>
+          <div style={{width: '100%', paddingLeft: 25, overflowX: 'auto', marginTop: 35}}>
             {_.map(pages, (page, i) => {
               return(
                 <div
                   key={i}
                   style={{
-                    height: '0.77in',
-                    width: '1in',
+                    height: '1.54in',
+                    width: '2in',
                     display: 'inline-block',
                     marginRight: 25,
                     cursor: 'pointer'
                   }}
                 >
-                  <div
-                    style={{
-                      border: '1px solid black',
-                      height: '100%',
-                      width: '50%',
-                      display: 'inline-block',
-                      background: activeContainer === (page.position*2) ? `url(${viewing})` : '',
-                      backgroundRepeat: activeContainer === (page.position*2) ? 'no-repeat' : '',
-                      backgroundPosition: activeContainer === (page.position*2) ? 'center center' : '',
-                      backgroundSize: activeContainer === (page.position*2) ? '75%' : '',
-                    }}
-                    onClick={(e) => {
-                      this.onPageSelected(i, page.position*2)
-                    }}
-                  >
-                  </div>
+                  {page.position*2 !== 0 &&
+                    <div
+                      style={{
+                        border: '1px solid black',
+                        height: '100%',
+                        width: '50%',
+                        display: 'inline-block',
+                        position: 'relative',
+                        background: activeContainer === (page.position*2) ? `url(${viewing})` : '',
+                        backgroundRepeat: activeContainer === (page.position*2) ? 'no-repeat' : '',
+                        backgroundPosition: activeContainer === (page.position*2) ? 'center center' : '',
+                        backgroundSize: activeContainer === (page.position*2) ? '75%' : '',
+                      }}
+                      onClick={(e) => {
+                        this.onPageSelected(i, page.position*2)
+                      }}
+                    >
+                      {activeContainer !== (page.position*2) &&
+                        <p style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, width: 20, height: 55, margin: 'auto', fontFamily: 'Baloo, cursive', fontSize: 40}}>{(page.position*2)}</p>
+                      }
+                    </div>
+                  }
+                  {page.position*2 === 0 &&
+                    <div
+                      style={{
+                        height: '100%',
+                        width: '50%',
+                        display: 'inline-block'
+                      }}
+                    >
+                    </div>
+                  }
                   <div
                     style={{
                       border: '1px solid black',
@@ -94,6 +110,7 @@ class PageIndex extends React.Component{
                       width: '50%',
                       display: 'inline-block',
                       marginLeft: '-1px',
+                      position: 'relative',
                       background: activeContainer === 1+(page.position*2) ? `url(${viewing})` : '',
                       backgroundRepeat: activeContainer === 1+(page.position*2) ? 'no-repeat' : '',
                       backgroundPosition: activeContainer === 1+(page.position*2) ? 'center center' : '',
@@ -103,10 +120,48 @@ class PageIndex extends React.Component{
                       this.onPageSelected(i, 1+(page.position*2))
                     }}
                   >
+                    {activeContainer !== 1+(page.position*2) && page.position !== 0 &&
+                      <p style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, width: 20, height: 55, margin: 'auto', fontFamily: 'Baloo, cursive', fontSize: 40}}>{1+(page.position*2)}</p>
+                    }
+                    {activeContainer !== 1+(page.position*2) && page.position === 0 &&
+                      <p style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, width: 52.5, height: 35, margin: 'auto', fontFamily: 'Baloo, cursive', fontSize: 20}}>Cover</p>
+                    }
                   </div>
                 </div>
               )
             })}
+            <div
+              style={{
+                height: '1.54in',
+                width: '2in',
+                display: 'inline-block',
+                marginRight: 25,
+                cursor: 'pointer'
+              }}
+            >
+              <div
+                style={{
+                  border: '1px solid black',
+                  position: 'relative',
+                  height: '100%',
+                  width: '50%',
+                  display: 'inline-block',
+                  background: activeContainer === 0 ? `url(${viewing})` : '',
+                  backgroundRepeat: activeContainer === 0 ? 'no-repeat' : '',
+                  backgroundPosition: activeContainer === 0 ? 'center center' : '',
+                  backgroundSize: activeContainer === 0 ? '75%' : '',
+                }}
+                onClick={(e) => {
+                  this.onPageSelected(0, 0)
+                }}
+              >
+                {activeContainer !== 0 &&
+                  <p style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, width: 45, height: 35, margin: 'auto', fontFamily: 'Baloo, cursive', fontSize: 20}}>
+                    Back
+                  </p>
+                }
+              </div>
+            </div>
           </div>
         </div>
       )

@@ -21,7 +21,7 @@ class Canvas extends React.Component{
       styles: props.styles,
       sections: props.sections,
       activePage: props.structure[0],
-      activeContainer: 0,
+      activeContainer: 1,
       hover: false,
       activeSection: ''
     }
@@ -76,6 +76,27 @@ class Canvas extends React.Component{
     }
   }
 
+  printingOrder = (pages) => {
+    let n = pages.length
+    let elements = []
+    let printingOrder = [0,1,2,7,6,3,4,5]
+    let sortObj = printingOrder.reduce((acc, value, index) => {
+                    acc[value] = index;
+                    return acc;
+                  }, {})
+
+    _.each(pages, (page, i) => {
+      elements = [
+        ...elements,
+        ...page.elements
+      ]
+    })
+
+    return _.sortBy(elements, (e) => {
+      return sortObj[e.position]
+    })
+  }
+
   // shouldComponentUpdate(nextProps, nextState){
   //   return nextState.hover !== this.state.hover
   // }
@@ -125,7 +146,7 @@ class Canvas extends React.Component{
             }}
           >
             <div id="entry-point">
-              {_.map(structure, (element, i) => {
+              {_.map(this.printingOrder(structure), (element, i) => {
                 return(
                   <div
                     key={i}
