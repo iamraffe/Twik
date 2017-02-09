@@ -97,10 +97,13 @@ class Canvas extends React.Component{
     })
 
     return _.map(pages, (page, i) => {
-      return page.elements = [
-        sorted[page.position*2],
-        sorted[1+(page.position*2)],
-      ]
+      return {
+        ...page,
+        elements: [
+              sorted[page.position*2],
+              sorted[1+(page.position*2)],
+            ]
+        }
     })
   }
 
