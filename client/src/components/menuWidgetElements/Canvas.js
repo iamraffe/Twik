@@ -92,8 +92,15 @@ class Canvas extends React.Component{
       ]
     })
 
-    return _.sortBy(elements, (e) => {
+    let sorted =  _.sortBy(elements, (e) => {
       return sortObj[e.position]
+    })
+
+    return _.map(pages, (page, i) => {
+      return page.elements = [
+        sorted[page.position*2],
+        sorted[1+(page.position*2)],
+      ]
     })
   }
 
