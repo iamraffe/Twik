@@ -83,6 +83,21 @@ class MenusController < ApplicationController
     render json: {path: "/pdf/#{@filename}.pdf"}
   end
 
+  def duplicate
+    @og = Menu.find(params[:menu_id])
+    @duplicate = @og.dup
+    @duplicate.name = "#{@og.name} [Duplicate]"
+    meta = JSON.parse(@og.meta)
+    meta["name"] = "#{@og.name} [Duplicate]"
+    @duplicate.meta = JSON.generate(meta)
+    @duplicate.rendered_pdf = URI.parse("https:#{@og.rendered_pdf}")
+    @duplicate.save
+    respond_to do |format|
+      format.js { }
+      format.html { redirect_to :back , :notice => "Menu copy created" }
+    end
+  end
+
   private
     def menu_params
       params.required(:menu).permit(:name, :orientation, :template_id, :layout, :size, :meta, :sections, :components)

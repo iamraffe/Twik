@@ -6,6 +6,7 @@ import request from 'superagent'
 
 import * as zoomActions from '../../actions/zoomActions'
 import * as backendActions from '../../actions/backendActions'
+import * as metaActions from '../../actions/metaActions'
 
 import {  FontPanel,
           ColorPanel,
@@ -101,7 +102,7 @@ class ToolPanel extends React.Component{
   }
 
   onExport = () => {
-    console.log("export call", this.state.rendered_pdf)
+    // console.log("export call", this.state.rendered_pdf)
     var a = document.createElement('a')
     a.href = this.state.rendered_pdf
     a.download = this.state.rendered_pdf_file_name
@@ -115,9 +116,12 @@ class ToolPanel extends React.Component{
       <section className="tool-panel" style={{padding: 0}}>
         <header>
           <img src={roboLogo} alt="Twik Robo Logo" style={{display: 'block', height: 75, margin: '0 auto'}}/>
-          <hr style={{marginBottom: 0, borderBottom: '1.5px solid black'}}/>
         </header>
         <div className="row" style={{marginBottom: 100}}>
+          <div className="col-xs-12">
+            <input type="text" value={meta.name} className="form-control menu-name-input" onChange={(e) => { this.props.metaActions.updateMetaInfo({name: e.target.value}) }}/>
+            <hr style={{marginBottom: 0, borderBottom: '1.5px solid black'}}/>
+          </div>
           <div className="col-xs-12">
             {active !== 'color' && _.findIndex(meta.allows, (f) => { return f === 'color' }) !== -1 && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('color')}}>Color</button>}
             {active === 'color' &&
@@ -203,7 +207,8 @@ function mapStateToProps(state, ownProps){
 function mapDispatchToProps(dispatch){
   return {
     zoomActions: bindActionCreators(zoomActions, dispatch),
-    backendActions: bindActionCreators(backendActions, dispatch)
+    backendActions: bindActionCreators(backendActions, dispatch),
+    metaActions: bindActionCreators(metaActions, dispatch),
   }
 }
 

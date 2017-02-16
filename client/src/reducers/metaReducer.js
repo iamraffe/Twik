@@ -34,6 +34,11 @@ export default function metaReducer(state = initialState.meta, action){
           id: action.menu.society_id
         }
       }
+    case "UPDATE_META_INFO":
+      return {
+        ...state,
+        ...action.updatedMetaInfo
+      }
     default:
       return state
   }

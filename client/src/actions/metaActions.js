@@ -12,3 +12,7 @@ export function changeLayout(orientation, layoutStructure){
 export function setMetaInfo(metaInfo){
   return { type: "SET_META_INFO", ...metaInfo }
 }
+
+export function updateMetaInfo(updatedMetaInfo){
+  return { type: "UPDATE_META_INFO", updatedMetaInfo }
+}
