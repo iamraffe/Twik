@@ -148,37 +148,39 @@ class Canvas extends React.Component{
               />
             </div>
           </div>
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 10000
-            }}
-          >
-            <div id="entry-point">
-              {_.map(this.printingOrder(structure), (element, i) => {
-                return(
-                  <div
-                    key={i}
-                    style={{
-                      width: (width*(zoom/100))+'in',
-                      height: (height*(zoom/100))+'in',
-                    }}
-                  >
-                    <LayoutElement
-                      {...element}
-                      zoom={100}
-                      landscapeMode={false}
-                      activeContainer={activeContainer}
-                      hover={false}
-                      activeSection={activeSection}
-                      printView={true}
-                      getStyles={this.getStyles}
-                      onSectionSelect={this.onSectionSelect}
-                    />
-                  </div>
-                )
-              })}
+          <div style={{position: 'relative', height: 1, width: '100%', overflow: 'hidden'}}>
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 10000
+              }}
+            >
+              <div id="entry-point">
+                {_.map(this.printingOrder(structure), (element, i) => {
+                  return(
+                    <div
+                      key={i}
+                      style={{
+                        width: (width*(zoom/100))+'in',
+                        height: (height*(zoom/100))+'in',
+                      }}
+                    >
+                      <LayoutElement
+                        {...element}
+                        zoom={100}
+                        landscapeMode={false}
+                        activeContainer={activeContainer}
+                        hover={false}
+                        activeSection={activeSection}
+                        printView={true}
+                        getStyles={this.getStyles}
+                        onSectionSelect={this.onSectionSelect}
+                      />
+                    </div>
+                  )
+                })}
+              </div>
             </div>
           </div>
         </div>
@@ -186,7 +188,7 @@ class Canvas extends React.Component{
           <PageIndex
             pages={structure}
             activeContainer={activeContainer}
-            hidden={true}
+            hidden={false}
             onPageSelected={this.onPageSelected}
             getStyles={this.getStyles}
           />

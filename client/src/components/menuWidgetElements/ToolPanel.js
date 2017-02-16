@@ -112,7 +112,7 @@ class ToolPanel extends React.Component{
     const { active, meta, id, operationInProgress } = this.state
 
     return(
-      <section className="tool-panel" style={{padding: 25}}>
+      <section className="tool-panel" style={{padding: 0}}>
         <header>
           <img src={roboLogo} alt="Twik Robo Logo" style={{display: 'block', height: 75, margin: '0 auto'}}/>
           <hr style={{marginBottom: 0, borderBottom: '1.5px solid black'}}/>
@@ -154,7 +154,7 @@ class ToolPanel extends React.Component{
           </div>
         </div>
         <div className="row">
-          <div className="col-xs-6">
+          <div className="col-lg-6">
             <button className="btn-toolpanel-action btn-block" onClick={(e) => {
               if(this.props.mode === "edit" || id !== null){
                 this.props.onUpdate(e)
@@ -164,12 +164,12 @@ class ToolPanel extends React.Component{
               }
             }} disabled={operationInProgress}>Save</button>
           </div>
-          <div className="col-xs-6">
+          <div className="col-lg-6">
             <button className="btn-toolpanel-action btn-block" onClick={(e) => {this.onPreview()}} disabled={operationInProgress}>Preview</button>
           </div>
           {(this.props.mode === "edit" || id !== null) && this.state.rendered_pdf !== "/rendered_pdfs/original/missing.png" &&
-            <div className="col-xs-12">
-              <a className="btn-toolpanel-action btn-block" href={this.state.rendered_pdf} download>Export</a>
+            <div className="col-lg-12">
+              <a className="btn-toolpanel-action btn-block" href={this.state.rendered_pdf} download style={{paddingTop: 2, paddingBottom: 3}}>Export</a>
             </div>
           }
         </div>

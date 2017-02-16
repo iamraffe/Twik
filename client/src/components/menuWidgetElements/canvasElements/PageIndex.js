@@ -55,10 +55,10 @@ class PageIndex extends React.Component{
     else{
       return(
         <div className="row" style={{width: '100%', height: 275}}>
-          <div className="text-center" style={{...styles}} onClick={(e) => {this.onToggleHidden()}}>
+          <div className="text-center hide" style={{...styles}} onClick={(e) => {this.onToggleHidden()}}>
             <span className="ion-ios-arrow-thin-down ion"></span>
           </div>
-          <div style={{width: '100%', paddingLeft: 25, overflowX: 'auto', marginTop: 35}}>
+          <div style={{width: '100%', paddingLeft: 0, overflowX: 'auto', marginTop: 35, whiteSpace: 'nowrap'}}>
             {_.map(pages, (page, i) => {
               return(
                 <div

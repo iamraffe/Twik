@@ -56,6 +56,7 @@ gem 'active_model_serializers', '~> 0.9.0'
 gem 'rmagick'
 gem 'imgkit'
 gem 'will_paginate'
+gem 'os'
 # gem 'devise_token_auth'
 
 group :development, :test do
