@@ -6,3 +6,9 @@
 
 I Indestructible templates so you can edit and collaborate directly on fully designed documents.
 Stop formatting and start making.
+
+/* Copyright (C) Twik, LLC - All Rights Reserved
+ * Unauthorized copying of this project, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Rafael Ramirez <raffe@weareinhouse.com>, November 2016
+ */
