@@ -67,6 +67,9 @@
                   <p class="menu-name">
                     <%= menu.name %> (Style: <%=  menu.template.name %>)
                   </p>
+                  <a href="/menus/<%= menu.id %>/duplicate" class="pull-right text-default menu-duplicate" data-toggle="tooltip" title="DUPLICATE MENU">
+                    <span class="ion ion-ios-copy-outline"></span>
+                  </a>
                   <a href="/menus/<%= menu.id %>/archives" class="pull-right text-default menu-archives" data-toggle="tooltip" title="VIEW MENU HISTORY">
                     <span class="ion ion-android-time"></span>
                   </a>

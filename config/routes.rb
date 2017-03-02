@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
     resources :menus do
       post "/export", to: "menus#export"
+      get "/duplicate", to: "menus#duplicate"
       resources :uploads
       resources :archives
     end
