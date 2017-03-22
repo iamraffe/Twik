@@ -69,7 +69,8 @@ class Component extends React.Component{
 
   render(){
     const { elements, activeSection } = this.state
-
+    // console.log(this.props, this.state)
+    // debugger;
     return(
       <div style={{position: 'relative'}}>
         <MenuElement

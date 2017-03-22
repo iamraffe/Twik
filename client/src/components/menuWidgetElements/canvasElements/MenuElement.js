@@ -34,7 +34,7 @@ class MenuElement extends React.Component{
   render(){
     const { type, activeSection, id, inline, styles } = this.props
     const { elements, position } = this.state
-
+    // console.log(type, this.state, this.props)
     switch(type){
       case "MENU_TITLE":
       case "SECTION_TITLE":

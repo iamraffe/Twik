@@ -176,7 +176,7 @@ class CompoundElement extends React.Component{
             return (
               <span key={i} style={{display: 'block'}}>
                 {editing !== e.type &&
-                  <span>
+                  <span style={{display: 'block'}}>
                     <span
                       className={e.type}
                       style={e.styles}

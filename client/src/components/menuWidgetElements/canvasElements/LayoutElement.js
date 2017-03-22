@@ -151,6 +151,8 @@ class LayoutElement extends React.Component{
         return (
           <Section {...this.props} />
         )
+      case undefined:
+        return null
       default:
         return (
           <Component {...this.props} />

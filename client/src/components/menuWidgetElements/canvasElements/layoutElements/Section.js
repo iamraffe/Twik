@@ -81,7 +81,7 @@ class Section extends React.Component{
     const { type, canDrop, isOver, connectDropTarget, styles, span, id, readOnly } = this.props
     const { components, hover, active } = this.state
     const isActive = canDrop && isOver
-    const backgroundColor = isActive ? 'rgba(192,192,192,0.3)' : '#FFF'
+    const backgroundColor = isActive ? 'rgba(192,192,192,0.3)' : 'transparent'
 
     return connectDropTarget(
       <div
