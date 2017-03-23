@@ -15,6 +15,7 @@ class Component extends React.Component{
     // debugger;
     this.state = {
       activeSection: props.activeSection,
+      colors: props.colors,
       // sections: props.sections,
       section_types: props.section_types,
       // elements: props.elements,
@@ -31,6 +32,7 @@ class Component extends React.Component{
 
   componentWillReceiveProps(nextProps){
     this.setState({
+      colors: nextProps.colors,
       activeSection: nextProps.activeSection,
       // sections: nextProps.sections,
       section_types: nextProps.section_types,
@@ -68,13 +70,14 @@ class Component extends React.Component{
   }
 
   render(){
-    const { elements, activeSection } = this.state
+    const { elements, activeSection, colors } = this.state
     // console.log(this.props, this.state)
     // debugger;
     return(
       <div style={{position: 'relative'}}>
         <MenuElement
           {...this.props}
+          colors={colors}
           onAdd={this.onAddComponent}
           onUpdate={this.onUpdateComponent}
           onDelete={this.onDeleteComponent}
@@ -88,6 +91,7 @@ class Component extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
+    colors: state.colors,
     // structure: state.structure,
     // sections: state.sections,
     section_types: state.section_types.custom ? [...state.section_types.custom, ...state.section_types.template] : state.section_types,

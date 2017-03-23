@@ -1043,7 +1043,7 @@ p_1_c_2_s0 = SecureRandom.uuid
     name: "BossBabes #1",
     canon: true,
     ext: SecureRandom.uuid,
-    allows: ['component'],
+    allows: ['component', 'color'],
     accepts: ['text'],
     printAt: ['home'],
     structure: {
@@ -1084,9 +1084,25 @@ p_1_c_2_s0 = SecureRandom.uuid
             fontSize: 16,
             textDecoration: 'none',
             letterSpacing: 1.25,
-            marginBottom: 2.5,
+            # marginBottom: 2.5,
             textAlign: 'center',
-            display: 'block'
+            display: 'block',
+            lineHeight: "16px"
+          }
+        },
+        {
+          id: event_title_id = SecureRandom.uuid,
+          name: 'event_title',
+          fontFamily: 'primary_font',
+          color: 'primary_color',
+          extra: {
+            fontSize: 18,
+            textDecoration: 'none',
+            letterSpacing: 1.25,
+            # marginBottom: 2.5,
+            textAlign: 'center',
+            display: 'block',
+            lineHeight: 1
           }
         },
         {
@@ -1095,18 +1111,19 @@ p_1_c_2_s0 = SecureRandom.uuid
           fontFamily: 'primary_font',
           color: 'primary_color',
           extra: {
-            fontSize: 14,
+            fontSize: 15,
             textDecoration: 'none',
             letterSpacing: 0.5,
             lineHeight: 1,
             textAlign: 'center',
-            display: 'block'
+            display: 'block',
+            # marginTop: 7.5
           }
         }
       ],
       section_types: [
         {
-          name: "Section Title",
+          name: "Title",
           id: SecureRandom.uuid,
           structure: {
             type: "SINGLE_ELEMENT",
@@ -1127,16 +1144,17 @@ p_1_c_2_s0 = SecureRandom.uuid
             styles: {
               display: 'block',
               lineHeight: 0,
-              marginBottom: 15
+              marginBottom: 15,
+              marginTop: "0.5cm"
             },
             elements: [
               {
-                type: "SINGLE_ELEMENT",
+                type: "SINGLE_ELEMENT_#{SecureRandom.uuid}",
                 text: '',
-                styles: section_title_id
+                styles: event_title_id
               },
               {
-                type: "SINGLE_ELEMENT",
+                type: "SINGLE_ELEMENT_#{SecureRandom.uuid}",
                 text: '',
                 styles: dish_title_id
               },
@@ -1152,21 +1170,22 @@ p_1_c_2_s0 = SecureRandom.uuid
             styles: {
               display: 'block',
               lineHeight: 0,
-              marginBottom: 15
+              marginBottom: 15,
+              marginTop: "0.5cm"
             },
             elements: [
               {
-                type: "SINGLE_ELEMENT",
+                type: "SINGLE_ELEMENT_#{SecureRandom.uuid}",
+                text: '',
+                styles: event_title_id
+              },
+              {
+                type: "SINGLE_ELEMENT_#{SecureRandom.uuid}",
                 text: '',
                 styles: dish_title_id
               },
               {
-                type: "SINGLE_ELEMENT",
-                text: '',
-                styles: dish_title_id
-              },
-              {
-                type: "SINGLE_ELEMENT",
+                type: "SINGLE_ELEMENT_#{SecureRandom.uuid}",
                 text: '',
                 styles: dish_title_id
               },
@@ -1199,22 +1218,30 @@ p_1_c_2_s0 = SecureRandom.uuid
                       type: "ROW",
                       position: 0,
                       id: SecureRandom.uuid,
+                      singleRow: true,
                       elements: [
                         {
                           type: "COLUMN",
                           span: 1,
                           id: col_logo_id,
                           position: 0,
+                          singleColumn: true,
                           styles: {
-                            marginTop: "0.9cm",
-                            marginLeft: "1.2cm",
-                            marginRight: "1.2cm",
-                            marginBottom: "0.9cm",
-                            paddingTop: "1.25cm",
-                            height: "10.275in",
-                            outline: "4px solid #F9B4A6",
-                            outlineOffset: 15,
-                            backgroundColor: "#F9B4A6"
+                            marginTop: "0.4cm",
+                            marginLeft: "0.65cm",
+                            marginRight: "0.65cm",
+                            marginBottom: "0.4cm",
+                            # marginTop: "0.9cm",
+                            # marginLeft: "1.2cm",
+                            # marginRight: "1.2cm",
+                            # marginBottom: "0.9cm",
+                            # paddingTop: "1.25cm",
+                            # height: "10.275in",
+                            border: "4.75px solid %%{secondary_color}%%",
+                            backgroundClip: "content-box",
+                            padding: "0.7cm 0.45cm",
+                            # outlineOffset: 15,
+                            backgroundColor: "%%{secondary_color}%%"
                           }
                         }
                       ]
@@ -1233,8 +1260,19 @@ p_1_c_2_s0 = SecureRandom.uuid
               accepts: ['img'],
               readOnly: true,
               styles: {
+                marginTop: "1.25cm"
               }
-            }
+            },
+            {
+              id: other_section_id,
+              type: "SECTION",
+              position: 1,
+              columnId: col_logo_id,
+              accepts: ['text'],
+              readOnly: false,
+              styles: {
+              }
+            },
           ],
           components: [
             {
@@ -1247,7 +1285,7 @@ p_1_c_2_s0 = SecureRandom.uuid
                 display: 'block',
                 margin: '0 auto',
               },
-              hide: true,
+              hide: false,
               position: 0,
               id: SecureRandom.uuid
             }

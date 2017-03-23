@@ -213,7 +213,7 @@ class MetaWidget extends React.Component{
             <div className="col-xs-12 settings-header-stripe">
               <h1>Step 1</h1>
             </div>
-            <div className="col-lg-6 col-lg-push-3 col-sm-10 col-sm-offset-1">
+            <div className="col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1">
               <div className="row">
                 <div className="col-sm-6">
                   <Autosuggest
@@ -251,7 +251,7 @@ class MetaWidget extends React.Component{
             <div className="col-xs-12 settings-header-stripe">
               <h1>Step 2</h1>
             </div>
-            <div className="col-lg-6 col-lg-push-3 col-sm-10 col-sm-offset-1">
+            <div className="col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1">
               <div className="row">
                 <div className="col-sm-8 col-sm-offset-2">
                   <select className="form-control" ref="paper_settings" value={paperSettings} onChange={this.onChangePaperSettings}>
@@ -261,7 +261,7 @@ class MetaWidget extends React.Component{
                 </div>
               </div>
               <div className={`row ${paperSettings === 'size' ? '' : 'hide'}`}>
-                <div className="col-sm-8 col-sm-push-2">
+                <div className="col-sm-8 col-sm-offset-2">
                   <div className="row">
                     <div className="col-xs-4">
                       <label className="text-default">
@@ -282,7 +282,7 @@ class MetaWidget extends React.Component{
                 </div>
               </div>
               <div className={`row ${paperSettings !== 'size' ? '' : 'hide'}`}>
-                <div className="col-sm-8 col-sm-push-2">
+                <div className="col-sm-8 col-sm-offset-2">
                   <div className="row">
                     <div className="col-xs-3">
                       <label className="text-default">
@@ -306,7 +306,7 @@ class MetaWidget extends React.Component{
                     </div>
                   </div>
                 </div>
-                <div className="col-sm-8 col-sm-push-2">
+                <div className="col-sm-8 col-sm-offset-2">
                   <div className="row">
                     <div className="col-xs-3">
                       <label className="text-default">
@@ -337,10 +337,10 @@ class MetaWidget extends React.Component{
             <div className="col-xs-12 settings-header-stripe">
               <h1>Step 3</h1>
             </div>
-            <div className="col-lg-6 col-lg-push-3 col-sm-10 col-sm-offset-1">
+            <div className="col-lg-6 col-lg-offset-3 col-sm-10 col-sm-offset-1">
               <div className="row">
                 {_.map(filteredTemplates, (template, i) => {
-                  const className = (i % 2 === 0) ? 'col-sm-5' : 'col-sm-5 col-sm-push-2'
+                  const className = (i % 2 === 0) ? 'col-sm-5' : 'col-sm-5 col-sm-offset-2'
                   return(
                     <div className={className} key={i}>
                         <label className="text-default">

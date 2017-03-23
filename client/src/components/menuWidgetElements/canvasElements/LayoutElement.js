@@ -123,6 +123,7 @@ class LayoutElement extends React.Component{
               alignSelf: this.props.vertical === 'bottom' ? 'flex-end' : 'flex-start',
               // background: "yellow",
               position: 'relative',
+              height: this.props.singleRow ? '100%' : 'auto',
               // overflowX: 'hidden',
             }}
           >

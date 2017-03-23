@@ -19,7 +19,16 @@ class Column extends React.Component{
 
     this.state = {
       sections: _.filter(props.sections, (section, i) => {return section.columnId === props.id}),
-      activeSection: props.activeSection
+      activeSection: props.activeSection,
+      colors: props.colors,
+      styles: _.mapValues(props.styles, (style, i) => {
+        // if(text.search(new RegExp("\[\[_(.*?)_\]\]")) === -1){
+          return style.replace(new RegExp('%%{secondary_color}%%'.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), props.colors.secondary_color)
+        // }
+        // else{
+        //   return style
+        // }
+      })
     }
 
     this.getStyles = props.getStyles
@@ -29,20 +38,43 @@ class Column extends React.Component{
   componentWillReceiveProps(nextProps){
     this.setState({
       activeSection: nextProps.activeSection,
-      sections: _.filter(nextProps.sections, (section, i) => {return section.columnId === nextProps.id})
+      sections: _.filter(nextProps.sections, (section, i) => {return section.columnId === nextProps.id}),
+      colors: nextProps.colors,
+      styles: _.mapValues(nextProps.styles, (style, i) => {
+        // if(){
+          return style.replace(new RegExp('%%{secondary_color}%%'.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), nextProps.colors.secondary_color)
+        // }
+        // else{
+        //   return style
+        // }
+      })
     })
   }
 
+  // dynamicColoring(colorKey){
+  //   return this.state[colorKey]
+  // }
+
   componentDidMount(){
-    const { id, span, styles } = this.props
+    const { id, span, styles, singleColumn } = this.props
     // console.log("styles on mount", styles, id, span)
 
-    $(`#${id}`).css('width', `${span*100}%`)
+    $(this.element).css('width', `${span*100}%`)
     if(styles.marginLeft){
-      $(`#${id}`).css('width', `-=${styles.marginLeft}`)
+      $(this.element).css('width', `-=${styles.marginLeft}`)
     }
     if(styles.marginRight){
-      $(`#${id}`).css('width', `-=${styles.marginRight}`)
+      $(this.element).css('width', `-=${styles.marginRight}`)
+    }
+
+    if(singleColumn){
+      $(this.element).css('height', `100%`)
+      if(styles.marginTop){
+        $(this.element).css('height', `-=${styles.marginTop}`)
+      }
+      if(styles.marginBottom){
+        $(this.element).css('height', `-=${styles.marginBottom}`)
+      }
     }
   }
 
@@ -53,11 +85,12 @@ class Column extends React.Component{
   }
 
   render(){
-    const { type, styles, span, id, hover, rowId, containerId, printView } = this.props
-    const { sections, activeSection } = this.state
+    const { type, span, id, hover, rowId, containerId, printView, singleColumn } = this.props
+    const { sections, activeSection, styles } = this.state
     // console.log("render", styles, id, span)
     return(
       <div
+        ref={(element) => { this.element = element }}
         id={this.props.id}
         style={{border: 'none', position: 'relative', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles}}
       >
@@ -120,7 +153,7 @@ class Column extends React.Component{
             )
           })}
         </Sortable>
-        {printView !== true &&
+        {printView !== true && singleColumn !== true &&
           <div
             style={{
               border: 'none',
@@ -161,7 +194,8 @@ class Column extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
     sections: state.sections,
-    meta: state.meta
+    meta: state.meta,
+    colors: state.colors
   }
 }
 

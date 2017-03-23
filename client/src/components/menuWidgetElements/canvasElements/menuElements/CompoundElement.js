@@ -8,9 +8,10 @@ import InlineEditor from '../../common/InlineEditor'
 class CompoundElement extends React.Component{
   constructor(props){
     super(props)
-
+    console.log("props compound", props.colors)
     this.state = {
       editing: 'none',
+      colors: props.colors,
       elements: _.map(props.elements, (e, i) => {
         return ({
             type: e.type,
@@ -26,7 +27,9 @@ class CompoundElement extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
+    console.log("new", nextProps.colors)
     this.setState({
+      colors: nextProps.colors,
       elements: _.map(nextProps.elements, (e, i) => {
         return ({
             type: e.type,
@@ -70,7 +73,7 @@ class CompoundElement extends React.Component{
   componentDidMount(){
     const { id } = this.props
     // console.log('componendDidMount')
-    let compoundElement = $(`#${id}`)
+    let compoundElement = $(this.element)
     // console.log(compoundElement)
     let width = 0
     _.each(compoundElement.children(), (children, i) => {
@@ -97,7 +100,7 @@ class CompoundElement extends React.Component{
 
     if(inline){
       return (
-        <article id={this.props.id} className={`${type} compound-element`} style={{position: 'relative', display: 'block', ...styles}}>
+        <article ref={(element) => { this.element = element }} id={this.props.id} className={`${type} compound-element`} style={{position: 'relative', display: 'block', ...styles}}>
           {_.map(elements, (e, i) => {
             return (
               <span key={i}>
@@ -163,7 +166,7 @@ class CompoundElement extends React.Component{
     }
     else{
       return (
-        <article className={`${type} compound-element`} style={{position: 'relative', display: 'block'}}>
+        <article className={`${type} compound-element`} style={{position: 'relative', display: 'block', ...styles}}>
           {activeSection &&
             <span
               data-toggle="tooltip"

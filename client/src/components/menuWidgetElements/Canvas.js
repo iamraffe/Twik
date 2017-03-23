@@ -28,6 +28,7 @@ class Canvas extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
+    console.log(nextProps.colors, this.state.colors)
     this.setState({
       width: PAPER_SIZES[`${nextProps.meta.size.toUpperCase()}_${nextProps.meta.orientation.toUpperCase()}`].width,
       height: PAPER_SIZES[`${nextProps.meta.size.toUpperCase()}_${nextProps.meta.orientation.toUpperCase()}`].height,
@@ -114,7 +115,7 @@ class Canvas extends React.Component{
   render(){
     const { width, height, zoom, colors, fonts, structure, hover, activeSection, activePage, activeContainer } = this.state
     const { meta } = this.props
-    // console.log("meta", meta)
+
     return (
       <div style={{}}>
         <div className="row" style={{position: 'relative', height: 650, overflowX: 'hidden', overflowY: 'scroll', maxWidth: '100%', marginBottom: 0, borderBottom: '1px solid silver'}}>

@@ -6,8 +6,9 @@ import InlineEditor from '../../common/InlineEditor'
 class SingleElement extends React.Component{
   constructor(props){
     super(props)
-    
+    console.log("props single", props.colors)
     this.state = {
+      colors: props.colors,
       text: props.text,
       styles: props.getStyles(props.styles),
       editing: false
@@ -19,7 +20,9 @@ class SingleElement extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
+    console.log("receive single", nextProps.colors)
     this.setState({
+      colors: nextProps.colors,
       text: nextProps.text,
       styles: nextProps.getStyles(nextProps.styles)
     })
@@ -46,7 +49,7 @@ class SingleElement extends React.Component{
   render(){
     const { text, styles, editing } = this.state
     const { type, activeSection } = this.props
-    
+
     return (
       <div className={`${type} single-element`}>
         {!editing && activeSection &&
@@ -64,7 +67,7 @@ class SingleElement extends React.Component{
           <span
             data-toggle="tooltip"
             title="DRAG TO REODER ELEMENTS"
-            className="section-element-handle ion ion-ios-drag" 
+            className="section-element-handle ion ion-ios-drag"
             style={{position: 'absolute', top: 2.5, left: -25, cursor: 'move'}}
           />
         }
@@ -80,7 +83,7 @@ class SingleElement extends React.Component{
               }}
             />
         }
-        {!editing && activeSection && 
+        {!editing && activeSection &&
           <span
             style={{cursor: 'pointer', position: 'absolute', right: -32.5, top: 4, color: 'red'}}
             className="ion ion-ios-close-outline"

@@ -11,7 +11,8 @@ class MenuElement extends React.Component{
 
     this.state = {
       elements: props.elements,
-      position: props.position
+      position: props.position,
+      colors: props.colors,
     }
 
     this.onAdd = props.onAdd
@@ -21,10 +22,11 @@ class MenuElement extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    // console.log("ME", nextProps)
+    console.log("ME", nextProps.colors)
     this.setState({
       elements: nextProps.elements,
-      position: nextProps.position
+      position: nextProps.position,
+      colors: nextProps.colors,
     })
   }
 
@@ -33,8 +35,8 @@ class MenuElement extends React.Component{
 
   render(){
     const { type, activeSection, id, inline, styles } = this.props
-    const { elements, position } = this.state
-    // console.log(type, this.state, this.props)
+    const { elements, position, colors } = this.state
+    console.log(type, colors)
     switch(type){
       case "MENU_TITLE":
       case "SECTION_TITLE":
@@ -42,6 +44,7 @@ class MenuElement extends React.Component{
         return (
           <SingleElement
             type={type}
+            colors={colors}
             id={id}
             position={position}
             text={elements[0].text}
@@ -57,6 +60,7 @@ class MenuElement extends React.Component{
         return (
           <ImageElement
             type={type}
+            colors={colors}
             id={id}
             styles={styles}
             position={position}
@@ -74,6 +78,7 @@ class MenuElement extends React.Component{
         return (
           <CompoundElement
             type={type}
+            colors={colors}
             id={id}
             position={position}
             elements={elements}
