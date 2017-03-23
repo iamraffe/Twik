@@ -49,6 +49,8 @@ class MenuWidget extends React.Component{
     window.addEventListener("beforeunload", this.onUnload)
     // window.addEventListener("onbeforeunload", this.onUnload)
     const { mode, menu } = this.props
+    console.log("menu", menu)
+    debugger;
     if(mode === 'edit' || mode === 'preview'){
       this.props.metaActions.setMetaInfo({
         ...JSON.parse(menu.object.meta),
@@ -97,7 +99,7 @@ class MenuWidget extends React.Component{
   }
 
   onSave = (e) => {
-    const { meta, sections, template, components } = this.state
+    const { meta, sections, template, components, menu } = this.state
     let canvas = document.getElementById('entry-point')
     // let rendered_pdf = document.getElementById('entry-point')
     let preview
@@ -106,11 +108,12 @@ class MenuWidget extends React.Component{
       preview = render.toDataURL()
       canvas.parentElement.style.height = '650px'
       this.props.backendActions.saveMenu({
-        ..._.omit(meta, ['editor',  'society']),
+        ..._.omit(meta, ['editor',  'society', 'wildcards']),
         meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
         sections: JSON.stringify(sections),
         components: JSON.stringify(components),
-        template_id: template.id
+        template_id: template.id,
+        wildcards: JSON.stringify(menu.object.wildcards)
       },
       meta.society,
       preview,
@@ -129,11 +132,12 @@ class MenuWidget extends React.Component{
       preview = render.toDataURL()
       canvas.parentElement.style.height = '650px'
       this.props.backendActions.updateMenu({
-        ..._.omit(meta, ['editor',  'society']),
+        ..._.omit(meta, ['editor',  'society', 'wildcards']),
         meta: JSON.stringify(_.omit(meta, ['editor', 'society'])),
         sections: JSON.stringify(sections),
         components: JSON.stringify(components),
-        template_id: template.id
+        template_id: template.id,
+        wildcards: JSON.stringify(menu.object.wildcards)
       },
       meta.society,
       preview,

@@ -100,7 +100,7 @@ class MenusController < ApplicationController
 
   private
     def menu_params
-      params.required(:menu).permit(:name, :orientation, :template_id, :layout, :size, :meta, :sections, :components)
+      params.required(:menu).permit(:name, :orientation, :template_id, :layout, :size, :meta, :sections, :components, :wildcards)
     end
 
     def society_params

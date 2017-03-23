@@ -12,7 +12,8 @@ export default {
   },
   menu: {
     object: {
-      id: null
+      id: null,
+      wildcards: []
     }
   },
   operationInProgress: false,

@@ -38,9 +38,14 @@ class ColorPanel extends React.Component{
 
   }
 
+  wildcardCheck(colorKey){
+    const { wildcards } = this.props.meta
+    return wildcards.length > 0 && _.findIndex(wildcards, (f) => { return f === colorKey }) !== -1
+  }
+
   onChange = (color, colorKey) => {
     const { changeColor } = this.props.colorActions
-    changeColor(color, colorKey)
+    changeColor(color, colorKey, this.wildcardCheck(colorKey))
     // this.setState({editing: 'none'})
   }
 
@@ -103,7 +108,7 @@ class ColorPanel extends React.Component{
         </header>
         <div className="swatches row">
           <div className="" style={{width: 75, display: 'block', margin: '15px auto 0'}}>
-            {primary_color &&
+            {primary_color && this.wildcardCheck('primary_color') &&
               <article className="swatch">
                 <span
                   onClick={(e) => {this.onEditColor('primary_color')}}
@@ -112,7 +117,7 @@ class ColorPanel extends React.Component{
                 </span>
               </article>
             }
-            {secondary_color &&
+            {secondary_color && this.wildcardCheck('secondary_color') &&
               <article className="swatch">
                 <span
                   onClick={(e) => {this.onEditColor('secondary_color')}}
@@ -121,7 +126,7 @@ class ColorPanel extends React.Component{
                 </span>
               </article>
             }
-            {tertiary_color &&
+            {tertiary_color && this.wildcardCheck('tertiary_color') &&
               <article  className="swatch">
                 <span
                   onClick={(e) => {this.onEditColor('tertiary_color')}}
@@ -145,7 +150,7 @@ class ColorPanel extends React.Component{
               </div>
             </article>
           }
-          {secondary_color && editing === 'secondary_color' && 
+          {secondary_color && editing === 'secondary_color' &&
             <article>
               <div style={popover}>
                 <div style={cover} onClick={this.onChangeComplete}/>
@@ -179,7 +184,7 @@ class ColorPanel extends React.Component{
         </footer>
       </section>
     )
-    
+
   }
 }
 
@@ -190,7 +195,8 @@ ColorPanel.propTypes = {
 function mapStateToProps(state, ownProps){
   // console.log(state)
   return {
-    colors: state.colors
+    colors: state.colors,
+    meta: state.meta
   }
 }
 

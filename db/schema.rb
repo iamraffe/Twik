@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161220214033) do
+ActiveRecord::Schema.define(version: 20170323043429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,8 +79,9 @@ ActiveRecord::Schema.define(version: 20161220214033) do
     t.string   "subdomain"
     t.integer  "template_id"
     t.integer  "society_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.text     "wildcards",                 default: [],              array: true
     t.index ["society_id"], name: "index_menus_on_society_id", using: :btree
     t.index ["template_id"], name: "index_menus_on_template_id", using: :btree
   end
@@ -110,6 +111,7 @@ ActiveRecord::Schema.define(version: 20161220214033) do
     t.text     "printAt",    default: [],              array: true
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.text     "wildcards",  default: [],              array: true
   end
 
   create_table "users", force: :cascade do |t|

@@ -113,6 +113,7 @@ p_1_c_2_s0 = SecureRandom.uuid
     allows: ['component'],
     accepts: ['text'],
     printAt: ['home'],
+    wildcards: [],
     structure: {
       colors: {
         primary_color: 'black',
@@ -1046,6 +1047,7 @@ p_1_c_2_s0 = SecureRandom.uuid
     allows: ['component', 'color'],
     accepts: ['text'],
     printAt: ['home'],
+    wildcards: ['secondary_color'],
     structure: {
       colors: {
         primary_color: 'black',

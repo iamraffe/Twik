@@ -152,7 +152,8 @@ class MetaWidget extends React.Component{
       layout: formData.paperUsage.split('__')[1],
       multiPage: formData.paperUsage.split('__')[2],
       allows: JSON.parse(formData.template).allows,
-      accepts: JSON.parse(formData.template).accepts
+      accepts: JSON.parse(formData.template).accepts,
+      wildcards: JSON.parse(formData.template).wildcards,
     })
     this.props.onSetStep('widget')
   }

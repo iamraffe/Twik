@@ -24,7 +24,8 @@ export default function metaReducer(state = initialState.meta, action){
         multiPage: action.multiPage,
         allows: action.allows,
         accepts: action.accepts,
-        printAt: action.printAt
+        printAt: action.printAt,
+        wildcards: action.wildcards,
       }
     case "CREATE_SUCCESS":
       return {

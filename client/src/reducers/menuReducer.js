@@ -27,6 +27,20 @@ export default function menuReducer(state = initialState.menu, action){
           rendered_pdf_updated_at: action.menu.rendered_pdf_updated_at
         }
       }
+    case types.CHANGE_COLOR:
+      if(action.wildcard){
+        return {
+          ...state,
+          object: {
+            ...state.object,
+            wildcards: [
+              ...state.object.wildcards,
+              {[action.colorKey]: action.color}
+            ]
+
+          }
+        }
+      }
     default:
       return state
   }
