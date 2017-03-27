@@ -57,6 +57,7 @@ gem 'rmagick'
 gem 'imgkit'
 gem 'will_paginate'
 gem 'os'
+gem "sentry-raven"
 # gem 'devise_token_auth'
 
 group :development, :test do

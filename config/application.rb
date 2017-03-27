@@ -25,5 +25,9 @@ module Twik
     config.to_prepare do
       Devise::Mailer.layout "layouts/mailer" # email.haml or email.erb
     end
+    Raven.configure do |config|
+      config.dsn = 'https://c5960e443be449da855c38b10e58baac:0f2f16b8b49b45f7a0e2853585f661fa@sentry.io/152509'
+      config.environments = ['production']
+    end
   end
 end

@@ -9,6 +9,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import _ from 'lodash'
 import moment from 'moment'
 import uuid from 'node-uuid'
+import Raven from 'raven-js'
 
 
 String.prototype.capitalize = function() {
@@ -26,19 +27,15 @@ function toUnderscore(str) {
 
 window.renderReact = (id, component, props) => {
   let store = {}
-  // props = {
-  //   ...props,
-  //   menu: {
-  //     ...props.menu,
-  //     object: {
-  //       ...props.menu.object,
-  //       wildcards: _.map(props.menu.object.wildcards, (wildcard, i) => {
-  //         console.log(wildcard)
-  //         return JSON.parse(wildcard)
-  //       })
-  //     }
-  //   }
-  // }
+
+  Raven
+      .config('https://c5960e443be449da855c38b10e58baac@sentry.io/152509', {
+        ...props,
+        component,
+        id
+      })
+      .install()
+
   store = configureStore(_.omit(props, ['editor', 'mode', 'templates', 'wilcards']))
   const history = syncHistoryWithStore(browserHistory, store)
   const c = require("./components/" + component).default
