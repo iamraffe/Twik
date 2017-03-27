@@ -16,6 +16,7 @@ class MenusController < ApplicationController
       @society = Society.find(params[:society][:id])
     end
     @menu = Menu.new(menu_params)
+    # @menu.wildcards = JSON.parse(params[:menu][:wildcards])
     @filename = "#{@menu.name.parameterize}-#{Time.now.to_i}"
     Tempfile.open([@filename, ".png"] , Rails.root.join('tmp')) do |f|
       f << Base64.decode64(params[:preview]['data:image/png;base64,'.length..-1]).force_encoding('UTF-8')
@@ -47,6 +48,8 @@ class MenusController < ApplicationController
 
   def update
     @menu = Menu.find(params[:id])
+    # byebug
+    # @menu.wildcards = JSON.parse(params[:menu][:wildcards])
     @menu.assign_attributes(menu_params)
     @filename = "#{@menu.name.parameterize}-#{Time.now.to_i}"
     Tempfile.open([@filename , ".png"] , Rails.root.join('tmp')) do |f|

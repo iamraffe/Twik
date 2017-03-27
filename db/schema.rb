@@ -79,9 +79,9 @@ ActiveRecord::Schema.define(version: 20170323043429) do
     t.string   "subdomain"
     t.integer  "template_id"
     t.integer  "society_id"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.text     "wildcards",                 default: [],              array: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.json     "wildcards"
     t.index ["society_id"], name: "index_menus_on_society_id", using: :btree
     t.index ["template_id"], name: "index_menus_on_template_id", using: :btree
   end

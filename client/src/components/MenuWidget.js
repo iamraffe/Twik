@@ -13,6 +13,7 @@ import * as backendActions from '../actions/backendActions'
 import * as metaActions from '../actions/metaActions'
 import * as sectionActions from '../actions/sectionActions'
 import * as componentActions from '../actions/componentActions'
+import * as menuActions from '../actions/menuActions'
 
 import { ToolPanel, Canvas, MetaWidget } from './menuWidgetElements'
 
@@ -50,13 +51,15 @@ class MenuWidget extends React.Component{
     // window.addEventListener("onbeforeunload", this.onUnload)
     const { mode, menu } = this.props
     console.log("menu", menu)
-    debugger;
+    // debugger;
     if(mode === 'edit' || mode === 'preview'){
       this.props.metaActions.setMetaInfo({
         ...JSON.parse(menu.object.meta),
         template: JSON.stringify(menu.template),
         society: _.omit(menu.restaurant, ['created_at', 'updated_at']),
       })
+
+      this.props.menuActions.setWildcardsInfo(JSON.parse(menu.object.wildcards))
       this.onSetStep('widget')
       this.props.sectionActions.loadSections(JSON.parse(menu.object.sections))
       this.props.componentActions.loadComponents(JSON.parse(menu.object.components))
@@ -223,7 +226,8 @@ function mapDispatchToProps(dispatch){
     backendActions: bindActionCreators(backendActions, dispatch),
     metaActions: bindActionCreators(metaActions, dispatch),
     sectionActions: bindActionCreators(sectionActions, dispatch),
-    componentActions: bindActionCreators(componentActions, dispatch)
+    componentActions: bindActionCreators(componentActions, dispatch),
+    menuActions: bindActionCreators(menuActions, dispatch),
   }
 }
 

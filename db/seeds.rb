@@ -1041,7 +1041,7 @@ p_1_c_2_s0 = SecureRandom.uuid
   })
 
   Template.create({
-    name: "BossBabes #1",
+    name: "Schedule [BossBabes]",
     canon: true,
     ext: SecureRandom.uuid,
     allows: ['component', 'color'],

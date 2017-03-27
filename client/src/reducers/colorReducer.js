@@ -1,10 +1,16 @@
 import * as types from '../actions/actionTypes'
 import initialState from './initialState'
+import _ from 'lodash'
 
 export default function colorReducer(state = initialState.colors, action){
   switch(action.type){
     case types.SET_META_INFO:
       return JSON.parse(action.template).structure.colors
+    case types.SET_WILDCARDS_INFO:
+      return {
+        ...state,
+        ...action.wildcards
+      }
     case types.CHANGE_PRIMARY_FONT:
       return {
         ...state,

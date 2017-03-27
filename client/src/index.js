@@ -26,7 +26,20 @@ function toUnderscore(str) {
 
 window.renderReact = (id, component, props) => {
   let store = {}
-  store = configureStore(_.omit(props, ['editor', 'mode', 'templates']))
+  // props = {
+  //   ...props,
+  //   menu: {
+  //     ...props.menu,
+  //     object: {
+  //       ...props.menu.object,
+  //       wildcards: _.map(props.menu.object.wildcards, (wildcard, i) => {
+  //         console.log(wildcard)
+  //         return JSON.parse(wildcard)
+  //       })
+  //     }
+  //   }
+  // }
+  store = configureStore(_.omit(props, ['editor', 'mode', 'templates', 'wilcards']))
   const history = syncHistoryWithStore(browserHistory, store)
   const c = require("./components/" + component).default
   render(
