@@ -43,7 +43,7 @@ class Column extends React.Component{
       colors: nextProps.colors,
       styles: _.mapValues(nextProps.styles, (style, i) => {
         // if(){
-        return isNaN(style) ? style.replace(new RegExp('%%{secondary_color}%%'.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), props.colors.secondary_color) : style
+        return isNaN(style) ? style.replace(new RegExp('%%{secondary_color}%%'.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), nextProps.colors.secondary_color) : style
         // }
         // else{
         //   return style
