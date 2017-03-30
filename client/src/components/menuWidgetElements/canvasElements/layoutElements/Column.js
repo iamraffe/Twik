@@ -16,14 +16,15 @@ class Column extends React.Component{
     super(props)
 
     // console.log("styles on constructor", props.styles, props.id, props.span)
-
+    console.log(props.styles)
     this.state = {
       sections: _.filter(props.sections, (section, i) => {return section.columnId === props.id}),
       activeSection: props.activeSection,
       colors: props.colors,
       styles: _.mapValues(props.styles, (style, i) => {
+        console.log(style)
         // if(text.search(new RegExp("\[\[_(.*?)_\]\]")) === -1){
-          return style.replace(new RegExp('%%{secondary_color}%%'.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), props.colors.secondary_color)
+          return isNaN(style) ? style.replace(new RegExp('%%{secondary_color}%%'.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), props.colors.secondary_color) : style
         // }
         // else{
         //   return style
