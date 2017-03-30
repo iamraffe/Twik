@@ -24,7 +24,7 @@ class Column extends React.Component{
       styles: _.mapValues(props.styles, (style, i) => {
         console.log(style)
         // if(text.search(new RegExp("\[\[_(.*?)_\]\]")) === -1){
-          return isNaN(style) ? style.replace(new RegExp('%%{secondary_color}%%'.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), props.colors.secondary_color) : style
+        return isNaN(style) ? style.replace(new RegExp('%%{secondary_color}%%'.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), props.colors.secondary_color) : style
         // }
         // else{
         //   return style
@@ -43,7 +43,7 @@ class Column extends React.Component{
       colors: nextProps.colors,
       styles: _.mapValues(nextProps.styles, (style, i) => {
         // if(){
-          return style.replace(new RegExp('%%{secondary_color}%%'.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), nextProps.colors.secondary_color)
+        return isNaN(style) ? style.replace(new RegExp('%%{secondary_color}%%'.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), props.colors.secondary_color) : style
         // }
         // else{
         //   return style
