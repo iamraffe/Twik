@@ -77,11 +77,27 @@ class Section extends React.Component{
     this.props.sectionActions.deleteSection(id)
   }
 
+  renderOverlay = (color) => {
+    return (
+      <div style={{
+        position: 'absolute',
+        top: -10,
+        left: -10,
+        height: 'calc(100% + 10px)',
+        width: 'calc(100% + 10px)',
+        zIndex: 1,
+        opacity: 0.5,
+        backgroundColor: color,
+        outline: '1px solid black',
+      }} />
+    );
+  }
+
   render(){
     const { type, canDrop, isOver, connectDropTarget, styles, span, id, readOnly } = this.props
     const { components, hover, active } = this.state
     const isActive = canDrop && isOver
-    const backgroundColor = isActive ? 'rgba(192,192,192,0.3)' : 'transparent'
+    const backgroundColor = 'transparent'
 
     return connectDropTarget(
       <div
@@ -94,6 +110,8 @@ class Section extends React.Component{
           }
         }}
       >
+        {!isOver && canDrop && this.renderOverlay('#FFFF82')}
+        {isOver && canDrop && this.renderOverlay('#B5D99C')}
         <Sortable
           options={{
               animation: 150,
