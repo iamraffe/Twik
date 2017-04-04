@@ -7,8 +7,8 @@ if OS.mac?
   }
 else
   WickedPdf.config = {
-    dpi: 72,
+    dpi: 96,
     print_media_type: true,
-    disable_smart_shrinking: true
+    disable_smart_shrinking: false
   }
 end
