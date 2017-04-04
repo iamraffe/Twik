@@ -93,7 +93,7 @@ class Column extends React.Component{
       <div
         ref={(element) => { this.element = element }}
         id={this.props.id}
-        style={{border: 'none', position: 'relative', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: 'inline-block', verticalAlign: 'top', ...styles}}
+        style={{border: 'none', position: 'relative', minHeight: 'auto', marginTop: 15, marginBottom: 15, display: printView !== true ? 'inline-block' : 'inline-table', verticalAlign: 'top', ...styles}}
       >
         <Sortable
           options={{
