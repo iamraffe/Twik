@@ -28,6 +28,8 @@ const sectionSource = {
         sectionId: dropResult.sectionId
       }
 
+      dropResult.onSectionSelect(dropResult.sectionId)
+
       props.componentActions.addComponent(newComponent)
       component.state.sectionStyle = {}
       component.state.newSection = false

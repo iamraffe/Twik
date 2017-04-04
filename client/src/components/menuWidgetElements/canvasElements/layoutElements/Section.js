@@ -20,7 +20,8 @@ const containerTarget = {
 
     return {
       sectionId: props.id,
-      position: sectionComponents.length  > 0 ? _.last(sectionComponents).position+1 : 0
+      position: sectionComponents.length  > 0 ? _.last(sectionComponents).position+1 : 0,
+      onSectionSelect: props.onSectionSelect
     }
   },
   canDrop(props, monitor){
