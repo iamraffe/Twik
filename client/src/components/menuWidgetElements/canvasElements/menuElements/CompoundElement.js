@@ -203,6 +203,17 @@ class CompoundElement extends React.Component{
                         }}
                       />
                     }
+                    {activeSection && (i%this.props.elements.length === 0) &&
+                      <span
+                        className="ion ion-ios-plus-outline"
+                        data-toggle="tooltip"
+                        title="CLICK TO ADD ELEMENT"
+                        style={{cursor: 'pointer', position: 'absolute', top: 4, right: -12.5}}
+                        onClick={(e) => {
+                          this.onAdd(e)
+                        }}
+                      />
+                    }
                   </span>
                 }
                 {editing === e.type &&
