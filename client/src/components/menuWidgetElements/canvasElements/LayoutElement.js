@@ -92,7 +92,7 @@ class LayoutElement extends React.Component{
                 display: '-webkit-flex',
                 display: 'flex',
                 flexDirection: 'row',
-                overflowX: 'hidden',
+                // overflowX: 'hidden',
               }}
             >
               {_.map(this.props.elements, (element, i) => {
