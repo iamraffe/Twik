@@ -93,7 +93,7 @@ class MenusController < ApplicationController
     meta = JSON.parse(@og.meta)
     meta["name"] = "#{@og.name} [Duplicate]"
     @duplicate.meta = JSON.generate(meta)
-    @duplicate.rendered_pdf = URI.parse("https:#{@og.rendered_pdf}")
+    @duplicate.rendered_pdf = URI.parse("http:#{@og.rendered_pdf}")
     @duplicate.save
     respond_to do |format|
       format.js { }
