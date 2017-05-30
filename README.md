@@ -1,3 +1,5 @@
+[![Build Status](http://104.131.21.8/api/badges/iamraffe/Twik/status.svg)](http://104.131.21.8/iamraffe/Twik)
+
 
 ![alt text1][twik]
 
