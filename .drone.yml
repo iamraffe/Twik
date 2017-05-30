@@ -1,12 +1,5 @@
-pipeline:
-  test:
-    image: wallasch/docker-ruby-node
-    commands:
-      - mkdir -p /tmp/bundle
-      - bundle install -j8 --path /tmp/bundle
-      - bundle exec rake db:create db:schema:load test
-      - bundle exec rake
-services:
-  database:
-    image: postgres
-
+image: 'ruby'
+script:
+  - bundle install
+  - bundle exec rake db:create db:migrate
+  - bundle exec rspec
