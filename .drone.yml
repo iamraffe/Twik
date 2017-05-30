@@ -1,0 +1,8 @@
+image: wallasch/docker-ruby-node
+services:
+  - library/postgres:9.6.3
+script:
+  - mkdir -p /tmp/bundle
+  - bundle install -j8 --path /tmp/bundle
+  - bundle exec rake db:create db:schema:load test
+  - bundle exec rake
