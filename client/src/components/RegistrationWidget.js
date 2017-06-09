@@ -111,12 +111,14 @@ class RegistrationWidget extends React.Component{
               </div>
             </div>
           </form>
-          <p style={{color: 'white', fontWeight: 600, display: 'inline'}}>Already have a Twik team?</p> <a href="/accounts/signin" class="btn btn-primary">Sign in</a>
+          <div className="col-lg-offset-1 col-lg-10 col-xs-12">
+            <p style={{color: 'white', fontWeight: 600, display: 'inline'}}>Already have a Twik team?</p> <a href="/accounts/signin" class="btn btn-primary">Sign in</a>
+          </div>
         </div>
         <div className="sign-up-form col-md-10 hidden-xs">
           <form onSubmit={this.onSignUp}>
             <div className="row form-group">
-              <div className="col-xs-12">
+              <div className="col-xs-12 col-lg-offset-1 col-lg-10">
                 <div className="input-group">
                   <input type="text" className="form-control" name="subdomain" placeholder="claim your twik name" onBlur={(e) => {this.verifySubdomain(e)}} autoFocus={true} />
                   <div className="input-group-addon text-primary">.twik.us</div>
@@ -124,7 +126,7 @@ class RegistrationWidget extends React.Component{
               </div>
             </div>
             <div className="row form-group">
-              <div className="col-xs-12">
+              <div className="col-xs-12 col-lg-offset-1 col-lg-10">
                 <div className="input-group email-group">
                   <input type="email" placeholder="email" name="email" className="form-control" />
                   <div className="input-group-addon text-primary">
@@ -134,7 +136,9 @@ class RegistrationWidget extends React.Component{
               </div>
             </div>
           </form>
-          <p style={{color: 'white', fontWeight: 600, display: 'inline'}}>Already have a Twik team?</p> <a href="/accounts/signin" class="btn btn-primary">Sign in</a>
+          <div className="col-lg-offset-1 col-lg-10 col-xs-12">
+            <p style={{color: 'white', fontWeight: 600, display: 'inline'}}>Already have a Twik team?</p> <a href="/accounts/signin" class="btn btn-primary">Sign in</a>
+          </div>
         </div>
       </div>
     )

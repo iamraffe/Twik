@@ -25,6 +25,12 @@ REGISTRATION WIDGET
       }
     }
   }
+
+  &.hidden-xs{
+    .form-group{
+      margin-bottom: 0;
+    }
+  }
 }
 .sign-up-completed{
   h1{
