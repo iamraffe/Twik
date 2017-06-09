@@ -366,9 +366,15 @@ class MetaWidget extends React.Component{
               </div>
             </div>
           </div>
-          <button className="btn btn-link" style={{outline: 'none', fontSize: 40, display: 'block', margin: '0 auto'}}>
-            {filteredTemplates.length > 0 && canSubmit && <span className="ion ion-ios-checkmark-outline animated infinite flash text-success"></span>}
-          </button>
+          {filteredTemplates.length > 0 && canSubmit &&
+            <div className="row">
+              <div className="col-xs-4 col-xs-offset-4">
+                <button className="btn btn-primary btn-block" style={{outline: 'none', fontSize: 30, display: 'block', margin: '0 auto 75px'}}>
+                  Save
+                </button>
+              </div>
+            </div>
+          }
         </form>
       </section>
     )

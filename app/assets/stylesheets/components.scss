@@ -41,6 +41,13 @@
 .text-default{
   color: $brand-default !important;
 }
+
+.btn{
+  &:hover, &:active, &:focus{
+    text-decoration: underline !important;
+  }
+}
+
 .btn-primary{
   border: none;
   background-size: 100% 100%;
