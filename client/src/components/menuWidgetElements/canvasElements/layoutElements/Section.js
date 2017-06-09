@@ -43,20 +43,30 @@ class Section extends React.Component{
       activeSection: props.activeSection,
       active: props.activeSection === props.id && props.readOnly !== true,
       hover: props.hover,
-      hideTooltip: false
+      hideTooltip: props.hideTooltip
     }
 
     this.getStyles = props.getStyles
     this.onSectionSelect = props.onSectionSelect
   }
 
+  // componentDidMount(){
+  //   if(this.props.activeSection === this.props.id && this.props.readOnly !== true){
+  //     this.props.hideTooltips()
+  //   }
+  // }
+
   componentWillReceiveProps(nextProps){
     this.setState({
       active: nextProps.activeSection === nextProps.id && nextProps.readOnly !== true,
       activeSection: nextProps.activeSection,
       components: _.filter(nextProps.components, (component, i) => {return component.sectionId === nextProps.id}),
-      hover: nextProps.hover
+      hover: nextProps.hover,
+      hideTooltip: nextProps.hideTooltip
     })
+    if((this.props.activeSection === this.props.id && this.props.readOnly !== true) && (nextProps.activeSection !== this.props.id)){
+      this.props.hideTooltips()
+    }
   }
 
   styles = () => {

@@ -21,6 +21,7 @@ class Column extends React.Component{
       sections: _.filter(props.sections, (section, i) => {return section.columnId === props.id}),
       activeSection: props.activeSection,
       colors: props.colors,
+      hideTooltip: false,
       styles: _.mapValues(props.styles, (style, i) => {
         console.log(style)
         // if(text.search(new RegExp("\[\[_(.*?)_\]\]")) === -1){
@@ -50,6 +51,11 @@ class Column extends React.Component{
         // }
       })
     })
+  }
+
+  hideTooltips = () => {
+    console.log('hiding')
+    this.setState({hideTooltip: true})
   }
 
   // dynamicColoring(colorKey){
@@ -87,7 +93,7 @@ class Column extends React.Component{
 
   render(){
     const { type, span, id, hover, rowId, containerId, printView, singleColumn } = this.props
-    const { sections, activeSection, styles } = this.state
+    const { sections, activeSection, styles, hideTooltip } = this.state
     // console.log("render", styles, id, span)
     return(
       <div
@@ -146,9 +152,11 @@ class Column extends React.Component{
                   columnId={id}
                   hover={hover}
                   activeSection={activeSection}
+                  hideTooltip={hideTooltip}
                   {...element}
                   getStyles={this.getStyles}
                   onSectionSelect={this.onSectionSelect}
+                  hideTooltips={this.hideTooltips}
                 />
               </div>
             )
