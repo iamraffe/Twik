@@ -1,19 +1,26 @@
-<section id="passwords-new">
-  <header class="container">
-    <h1 class="title">Resend confirmation instructions</h1>
-    <hr>
+<section class="row sign-in">
+  <header class="col-sm-4 col-sm-offset-2">
+    <%= image_tag "twik-logo-horizontal-red.png", class: "img-responsive" %>
   </header>
-  <section class="container-fluid">
-      <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-        <%= devise_error_messages! %>
+  <div class="col-sm-4 finish-registration-form-wrapper">
+    <%= devise_error_messages! %>
+    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
       <%= f.hidden_field :invitation_token %>
-      <%= form_group_for f, :email do %>
-        <%= f.email_field :email, autofocus: true, class:"form-control", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
-      <% end %>
-      <%= f.submit "Resend confirmation instructions", class: "btn btn-primary" %>
+      <div class="row">
+        <div class="col-xs-12">
+          <%= form_group_for f, :email, label: false do %>
+            <%= f.email_field :email, autofocus: true, class:"form-control", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row auth-actions" style="font-family: Baloo, cursive;">
+        <div class="col-xs-5 col-xs-offset-7">
+          <%= f.submit "Resend Instructions", class: "btn btn-primary btn-small pull-right", style: "padding: 7.5px 5px 5px 5px; font-size: 15px;" %>
+        </div>
+        <div class="col-xs-12">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
     <% end %>
-  </section>
-  <footer>
-    <%= render "devise/shared/links" %>
-  </footer>
+  </div>
 </section>
