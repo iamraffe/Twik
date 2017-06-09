@@ -79,6 +79,10 @@ button.toast-close-button {
 .toast-bottom-right {
   right: 12px;
   bottom: 12px;
+  // width: 25%;
+  > div{
+    padding: 15px 50px !important;
+  }
 }
 .toast-bottom-left {
   bottom: 12px;

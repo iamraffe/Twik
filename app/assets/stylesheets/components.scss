@@ -25,7 +25,7 @@
 .btn-toolpanel-action{
   text-align: center;
   &:hover, &:active, &:focus{
-    text-decoration: none;
+    text-decoration: underline;
     color: white;
 
   }
@@ -41,6 +41,17 @@
 .text-default{
   color: $brand-default !important;
 }
+
+
+.ion-ios-compose-outline,
+a.text-default{
+  cursor: pointer;
+
+  &:hover, &:active, &:focus{
+    color: $brand-primary !important;
+  }
+}
+
 
 .btn{
   &:hover, &:active, &:focus{
@@ -130,6 +141,9 @@
   border-bottom: 1px solid black;
   padding: 10px;
   font-size: 14px;
+  &:hover, &:focus, &:active{
+    text-decoration: underline;
+  }
 }
 
 .btn-toolpanel-action{

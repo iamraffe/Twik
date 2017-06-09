@@ -141,7 +141,15 @@ class ToolPanel extends React.Component{
                 onClose={(e) => {this.onToggleActive('none')}}
               />
             }
-            {active !== 'add-section' && _.findIndex(meta.allows, (f) => { return f === 'component' }) !== -1 && <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('add-section')}}>Add Component</button>}
+            {active !== 'add-section' && _.findIndex(meta.allows, (f) => { return f === 'component' }) !== -1 &&
+              <span>
+                <button className="btn-toolpanel btn-block" onClick={(e) => {this.onToggleActive('add-section')}} style={{position: 'relative'}}>
+                  Add Component
+                  <span className="fa fa-plus" style={{position: 'absolute', top: '35%', right: 10, fontSize: 12}} />
+                </button>
+              </span>
+
+            }
             {active === 'add-section' &&
               <ComponentPanel
                 onClose={(e) => {this.onToggleActive('none')}}
