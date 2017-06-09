@@ -111,6 +111,7 @@ class RegistrationWidget extends React.Component{
               </div>
             </div>
           </form>
+          <p style={{color: 'white', fontWeight: 600, display: 'inline'}}>Already have a Twik team?</p> <a href="/accounts/signin" class="btn btn-primary">Sign in</a>
         </div>
         <div className="sign-up-form col-md-10 hidden-xs">
           <form onSubmit={this.onSignUp}>
@@ -133,6 +134,7 @@ class RegistrationWidget extends React.Component{
               </div>
             </div>
           </form>
+          <p style={{color: 'white', fontWeight: 600, display: 'inline'}}>Already have a Twik team?</p> <a href="/accounts/signin" class="btn btn-primary">Sign in</a>
         </div>
       </div>
     )
