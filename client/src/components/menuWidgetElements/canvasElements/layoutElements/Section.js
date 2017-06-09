@@ -42,7 +42,8 @@ class Section extends React.Component{
       components: _.filter(props.components, (component, i) => {return component.sectionId === props.id}),
       activeSection: props.activeSection,
       active: props.activeSection === props.id && props.readOnly !== true,
-      hover: props.hover
+      hover: props.hover,
+      hideTooltip: false
     }
 
     this.getStyles = props.getStyles
@@ -96,7 +97,7 @@ class Section extends React.Component{
 
   render(){
     const { type, canDrop, isOver, connectDropTarget, styles, span, id, readOnly } = this.props
-    const { components, hover, active } = this.state
+    const { components, hover, active, hideTooltip } = this.state
     const isActive = canDrop && isOver
     const backgroundColor = 'transparent'
 
@@ -173,8 +174,21 @@ class Section extends React.Component{
           })}
         </Sortable>
         {components.length === 0 &&
-          <p className="hide-on-export" style={{fontFamily: 'Open Sans', fontWeight: 200, fontSize: 12, textAlign: 'center', margin: 10, marginTop: 0, color: '#310100', border: '1px dashed #f6303e', padding: 5}}>
-            To add text to a section, select a component type from the right hand menu and drag and drop the style. Then click on the component to edit the text.
+          <p
+            className="hide-on-export"
+            style={{
+              fontFamily: 'Open Sans',
+              fontWeight: 200,
+              fontSize: 12,
+              textAlign: 'center',
+              margin: 10,
+              marginTop: 0,
+              color: '#310100',
+              border: '1px dashed #f6303e',
+              padding: 5
+            }}
+          >
+              To add text to a section, select a component type from the right hand menu and drag and drop the style. Then click on the component to edit the text.
           </p>
         }
         {(hover === true && active === false && this.props.readOnly !== true) && <div className="section-overlay"></div>}
@@ -196,9 +210,32 @@ class Section extends React.Component{
                   this.onDeleteSection()
               }}}
             />
-            <p className="hide-on-export prompty-prompt" style={{fontFamily: 'Open Sans', position: 'absolute', top: -135, fontWeight: 'bold', fontSize: 12, textAlign: 'center', padding: 10, color: 'white', backgroundColor: 'rgb(246, 48, 62)'}}>
-              To add text to a section, select a component type from the right hand menu and drag and drop the style. Then click on the component to edit the text.
-            </p>
+            {!hideTooltip &&
+              <p
+                className="hide-on-export prompty-prompt"
+                style={{
+                  fontFamily: 'Open Sans',
+                  position: 'absolute',
+                  top: -135,
+                  fontWeight: 'bold',
+                  fontSize: 12,
+                  textAlign: 'center',
+                  padding: 10,
+                  color: 'white',
+                  backgroundColor: 'rgb(246, 48, 62)',
+                  zIndex: 99
+                }}
+                onClick={() => {
+                  this.setState({hideTooltip: true})
+                }}
+              >
+                <span
+                  className="fa fa-times"
+                  style={{position: 'absolute', right: 2.5, top: 2.5, color: 'white', zIndex: 999}}
+                />
+                To add text to a section, select a component type from the right hand menu and drag and drop the style. Then click on the component to edit the text.
+              </p>
+            }
           </span>
         }
       </div>
