@@ -112,7 +112,7 @@ class RegistrationWidget extends React.Component{
             </div>
           </form>
           <div className="col-lg-offset-1 col-lg-10 col-xs-12">
-            <p style={{color: 'white', fontWeight: 600, display: 'inline'}}>Already have a Twik team?</p> <a href="/accounts/signin" class="btn btn-primary">Sign in</a>
+            <p style={{color: 'white', fontWeight: 600, display: 'inline'}}>Already have a Twik team?</p> <a href="/accounts/signin" className="btn btn-primary">Sign in</a>
           </div>
         </div>
         <div className="sign-up-form col-md-10 hidden-xs">
@@ -137,7 +137,7 @@ class RegistrationWidget extends React.Component{
             </div>
           </form>
           <div className="col-lg-offset-1 col-lg-10 col-xs-12">
-            <p style={{color: 'white', fontWeight: 600, display: 'inline'}}>Already have a Twik team?</p> <a href="/accounts/signin" class="btn btn-primary">Sign in</a>
+            <p style={{color: 'white', fontWeight: 600, display: 'inline'}}>Already have a Twik team?</p> <a href="/accounts/signin" className="btn btn-primary">Sign in</a>
           </div>
         </div>
       </div>
