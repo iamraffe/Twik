@@ -26,41 +26,46 @@
           <%= form_for(current_user, html: { id: 'user-update-form', class: 'user-update-form'}) do |f| %>
             <div class="col-sm-6">
               <%= form_group_for f, :name, label: false do %>
-                <span class="pull-right ion js-user-edit-trigger ion-ios-compose-outline"></span>
                 <%= f.text_field :name, class:"form-control text-default", placeholder: "Name", :readonly => true %>
               <% end %>
             </div>
             <div class="col-sm-6">
               <%= form_group_for f, :title, label: false do %>
-                <span class="pull-right ion js-user-edit-trigger ion-ios-compose-outline"></span>
                 <%= f.text_field :title, class:"form-control text-default", placeholder: "Title", :readonly => true %>
               <% end %>
             </div>
             <div class="col-sm-6">
               <%= form_group_for f, :organization, label: false do %>
-                <span class="pull-right ion js-user-edit-trigger ion-ios-compose-outline"></span>
                 <%= f.text_field :organization, class:"form-control text-default", placeholder: "Company / Organization", :readonly => true %>
               <% end %>
             </div>
             <div class="col-sm-6">
               <%= form_group_for f, :phone, label: false do %>
-                <span class="pull-right ion js-user-edit-trigger ion-ios-compose-outline"></span>
                 <%= f.text_field :phone, class:"form-control text-default", placeholder: "Phone", :readonly => true %>
               <% end %>
             </div>
             <div class="col-sm-6">
               <%= form_group_for f, :email, label: false do %>
-                <span class="pull-right ion js-user-edit-trigger ion-ios-compose-outline"></span>
                 <%= f.email_field :email, class:"form-control text-default", placeholder: "Email", :readonly => true %>
               <% end %>
             </div>
             <div class="col-sm-6">
               <%= form_group_for f, :password, label: false do %>
-                <span class="pull-right ion js-user-edit-trigger ion-ios-compose-outline"></span>
                 <%= f.email_field :password, class:"form-control text-default", placeholder: "Password", :readonly => true %>
               <% end %>
             </div>
           <% end %>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-xs-offset-6">
+            <button class="btn btn-primary js-user-edit-trigger btn-block">Edit</button>
+          </div>
+          <div class="col-xs-6">
+            <button class="btn btn-primary btn-block js-user-edit-cancel-trigger hide">Discard</button>
+          </div>
+          <div class="col-xs-6">
+            <button class="btn btn-primary btn-block js-user-update-trigger hide">Save</button>
+          </div>
         </div>
       </div>
     </div>
