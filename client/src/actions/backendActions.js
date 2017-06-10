@@ -59,11 +59,11 @@ export function saveMenu(menu, society, preview, rendered_pdf){
       if (response.ok !== false) {
         console.log("saved menu", response.menu)
         dispatch(createSuccess(response.menu))
-        toastr.success("Great news! Document saved correctly", "", {positionClass: "toast-top-center"})
+        toastr.success("Great news! Document saved correctly", "", {positionClass: "toast-bottom-right"})
       }
       else{
         dispatch(createError())
-        toastr.error("Oops! Your document could not be saved", "Internal error", {positionClass: "toast-top-center"})
+        toastr.error("Oops! Your document could not be saved", "Internal error", {positionClass: "toast-bottom-right"})
       }
     })
     .catch((error) => {
@@ -80,11 +80,11 @@ export function updateMenu(menu, society, preview, object, rendered_pdf){
       if (response.ok !== false) {
         console.log("updated menu", response.menu)
         dispatch(updateSuccess(response.menu))
-        toastr.success("Great news! Document saved correctly", "", {positionClass: "toast-top-center"})
+        toastr.success("Great news! Document saved correctly", "", {positionClass: "toast-bottom-right"})
       }
       else{
         dispatch(updateError())
-        toastr.error("Oops! Your document could not be saved", "Internal error", {positionClass: "toast-top-center"})
+        toastr.error("Oops! Your document could not be saved", "Internal error", {positionClass: "toast-bottom-right"})
       }
     })
     .catch((error) => {
