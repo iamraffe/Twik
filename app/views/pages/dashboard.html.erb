@@ -27,7 +27,7 @@
         <div class="action-items col-xs-12 border-bottom">
           <%= form_for(current_user, html: { id: 'user-update-form', class: 'user-update-form'}) do |f| %>
             <%= form_group_for f, :name, label: false do %>
-              <span class="pull-right ion js-user-edit-trigger ion-ios-compose-outline"></span>
+              <span class="pull-right ion js-user-edit-trigger ion-ios-compose-outline hide"></span>
               <%= f.text_field :name, class:"form-control text-default", placeholder: "Name", :readonly => true %>
             <% end %>
           <% end %>

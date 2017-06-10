@@ -40,7 +40,7 @@ class UsersController < ApplicationController
     User.destroy(params[:id])
     flash[:notice] = "User deleted successfully"
     respond_to do |format|
-      format.html { redirect_to users_path }
+      format.html { redirect_to user_path }
       format.json { render json: {user: @user, :message => "User deleted.", ok: true, status: 200}, :status => :ok }
     end
   end
