@@ -201,7 +201,7 @@ class MetaWidget extends React.Component{
   render(){
     const { societies, society, value, paperSettings, templates, filteredTemplates, canSubmit } = this.state
     const inputProps = {
-      placeholder: 'Restaurant Name',
+      placeholder: 'Project Name',
       value,
       onChange: this.onChange,
       onBlur: this.onBlur
@@ -230,18 +230,26 @@ class MetaWidget extends React.Component{
                   />
                 </div>
                 <div className="col-sm-6">
-                  <input type="text" placeholder="Menu Name" name="name" />
+                  <input type="text" placeholder="Filename" name="name" />
                 </div>
                 <div className="col-sm-12">
                   <span className="border-bottom">
-                    How will you print this file?
+                    How will you use the file?
                     <label className="text-default" style={{marginLeft: 50}}>
                       <input onClick={(e) => {this.filterTemplates()}} type="radio" name="printAt" value="home" style={{verticalAlign: -4, marginRight: 10}} />
-                      Home Printer
+                      I'll print it myself
                     </label>
                     <label className="text-default" style={{marginLeft: 50}}>
                       <input onClick={(e) => {this.filterTemplates()}} type="radio" name="printAt" value="pro" style={{verticalAlign: -4, marginRight: 10}} />
-                      Professional Printer
+                      It'll be professionally printed
+                    </label>
+                    <label className="text-default" style={{marginLeft: 50}}>
+                      <input onClick={(e) => {this.filterTemplates()}} type="radio" name="printAt" value="home" style={{verticalAlign: -4, marginRight: 10}} disabled/>
+                      I just need the digital file
+                    </label>
+                    <label className="text-default" style={{marginLeft: 50}}>
+                      <input onClick={(e) => {this.filterTemplates()}} type="radio" name="printAt" value="pro" style={{verticalAlign: -4, marginRight: 10}} disabled/>
+                      HTML please!
                     </label>
                   </span>
                 </div>
@@ -285,9 +293,14 @@ class MetaWidget extends React.Component{
               <div className={`row ${paperSettings !== 'size' ? '' : 'hide'}`}>
                 <div className="col-sm-8 col-sm-offset-2">
                   <div className="row">
-                    <div className="col-xs-3">
+                    <div className="col-xs-3 hide">
                       <label className="text-default">
                         <input onClick={(e) => {this.filterTemplates()}} type="radio" name="paperUsage" value="portrait__ONE_COLUMN__false" /><br/> One Side Vertical (One Column)
+                      </label>
+                    </div>
+                    <div className="col-xs-3">
+                      <label className="text-default">
+                        <input onClick={(e) => {this.filterTemplates()}} type="radio" name="paperUsage" value="landscape__TWO_COLUMNS__true"/><br/> Folded <br/>Front & Back (4 Pages)
                       </label>
                     </div>
                     <div className="col-xs-3">
@@ -295,31 +308,31 @@ class MetaWidget extends React.Component{
                         <input onClick={(e) => {this.filterTemplates()}} type="radio" name="paperUsage" value="portrait__TWO_COLUMNS__false" /><br/> One Side Vertical (Two Columns)
                       </label>
                     </div>
-                    <div className="col-xs-3">
+                    <div className="col-xs-3 hide">
                       <label className="text-default">
                         <input onClick={(e) => {this.filterTemplates()}} type="radio" name="paperUsage" value="portrait__ONE_COLUMN__true"/><br/> Front & Back Vertical
                       </label>
                     </div>
-                    <div className="col-xs-3">
+                    <div className="col-xs-3 hide">
                       <label className="text-default">
                         <input onClick={(e) => {this.filterTemplates()}} type="radio" name="paperUsage" value="portrait__TWO_COLUMNS__true"/><br/> Folded <br/>Front & Back (4 Pages)
                       </label>
                     </div>
                   </div>
                 </div>
-                <div className="col-sm-8 col-sm-offset-2">
+                <div className="col-sm-8 col-sm-offset-2 hide">
                   <div className="row">
-                    <div className="col-xs-3">
+                    <div className="col-xs-3 hide">
                       <label className="text-default">
                         <input onClick={(e) => {this.filterTemplates()}} type="radio" name="paperUsage" value="landscape__ONE_COLUMN__false" /><br/> One Side Horizontal (One Column)
                       </label>
                     </div>
-                    <div className="col-xs-3">
+                    <div className="col-xs-3 hide">
                       <label className="text-default">
                         <input onClick={(e) => {this.filterTemplates()}} type="radio" name="paperUsage" value="landscape__TWO_COLUMNS__false" /><br/> One Side Horizontal (Two Columns)
                       </label>
                     </div>
-                    <div className="col-xs-3">
+                    <div className="col-xs-3 hide">
                       <label className="text-default">
                         <input onClick={(e) => {this.filterTemplates()}} type="radio" name="paperUsage" value="landscape__ONE_COLUMN__true"/><br/> Front & Back Horizontal
                       </label>
@@ -369,7 +382,7 @@ class MetaWidget extends React.Component{
           {filteredTemplates.length > 0 && canSubmit &&
             <div className="row">
               <div className="col-xs-4 col-xs-offset-4">
-                <button className="btn btn-primary btn-block" style={{outline: 'none', fontSize: 30, display: 'block', margin: '0 auto 75px'}}>
+                <button className="btn btn-block" style={{outline: 'none', fontSize: 16, display: 'block', margin: '0 auto 75px', color: 'white'}}>
                   Save
                 </button>
               </div>

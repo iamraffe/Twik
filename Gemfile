@@ -58,6 +58,7 @@ gem 'imgkit'
 gem 'will_paginate'
 gem 'os'
 gem "sentry-raven"
+gem 'jquery-ui-rails'
 # gem 'devise_token_auth'
 
 group :development, :test do
