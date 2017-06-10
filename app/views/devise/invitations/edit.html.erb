@@ -1,27 +1,32 @@
-
-<section id="invitations-edit">
-  <header class="container">
-    <h1 class="title"><%= t 'devise.invitations.edit.header' %></h1>
-    <hr>
+<section class="row sign-in">
+  <header class="col-sm-4 col-sm-offset-2">
+    <%= image_tag "twik-logo-horizontal-red.png", class: "img-responsive" %>
   </header>
-  <section class="container-fluid">
+  <div class="col-sm-4 finish-registration-form-wrapper">
+    <%= devise_error_messages! %>
     <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f| %>
-      <%= devise_error_messages! %>
       <%= f.hidden_field :invitation_token %>
-      <%= form_group_for f, :name do %>
-        <%= f.text_field :name, class:"form-control" %>
-      <% end %>
-      <%= form_group_for f, :password do %>
-        <%= f.password_field :password, class:"form-control" %>
-      <% end %>
-
-      <%= form_group_for f, :password_confirmation do %>
-        <%= f.password_field :password_confirmation, class:"form-control" %>
-      <% end %>
-
-
-      <%= f.submit t("devise.invitations.edit.submit_button"), class: "btn btn-primary" %>
+      <div class="row">
+        <div class="col-xs-12">
+          <%= form_group_for f, :name, label: false do %>
+            <%= f.text_field :name, class:"form-control", autofocus: true, placeholder: "Name" %>
+          <% end %>
+          <%= form_group_for f, :password, label: false do %>
+            <%= f.password_field :password, class:"form-control", placeholder: "Password" %>
+          <% end %>
+          <%= form_group_for f, :password_confirmation, label: false do %>
+            <%= f.password_field :password_confirmation, class:"form-control", placeholder: "Confirm Password" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row auth-actions" style="font-family: Baloo, cursive;">
+        <div class="col-xs-5 col-xs-offset-7">
+          <%= f.submit "Set Password", class: "btn btn-primary btn-small pull-right", style: "padding: 7.5px 5px 5px 5px; font-size: 16px;" %>
+        </div>
+        <div class="col-xs-12">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
     <% end %>
-  </section>
+  </div>
 </section>
-

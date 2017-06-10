@@ -51,14 +51,14 @@ $(document).on('change', '#avatar-update-form input[type="file"]', function(e){
 
 
 $(document).on('click', '.js-user-edit-trigger', function(e){
-  $(this).addClass('hide')
-  $('.js-user-update-trigger, .js-user-edit-cancel-trigger').removeClass('hide')
+  $(this).focus()
+  $('.js-user-update-trigger, .js-user-edit-cancel-trigger').removeClass('semi-hide')
   $('#user-update-form input').removeAttr('readonly')
-  $('input[name="user[name]"]').focus()
+  // $('input[name="user[name]"]').focus()
 })
 
 $(document).on('click', '.js-user-edit-cancel-trigger', function(e){
-  $('.js-user-update-trigger, .js-user-edit-cancel-trigger').addClass('hide')
+  $('.js-user-update-trigger, .js-user-edit-cancel-trigger').addClass('semi-hide')
   $('.js-user-edit-trigger').removeClass('hide')
   $('#user-update-form input').prop('readonly', true)
 })

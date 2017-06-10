@@ -10,6 +10,10 @@ class Users::InvitationsController < Devise::InvitationsController
       end
     end
 
+    def after_accept_path_for(resource)
+      root_url
+    end
+
     def after_invite_path_for(resource)
       user_path current_user
     end
