@@ -152,118 +152,214 @@
           </div>
         </div>
       </div>
-      <div class="row hidden-xs hidden-sm">
-        <table id="pricing" class="table pricing-table">
-          <thead>
-            <th></th>
-            <th>Team</th>
-            <th>Team Plus</th>
-            <th style="line-height: 18px; padding-bottom: 20px"><img class="th-crown-icon" src="<%=  asset_path 'crown-red.png' %>"><br>Designer Pro<br><span class="small">Coming Soon</span></th>
-            <th style="line-height: 18px">Studio Pro<br><span class="small">Coming Soon</span></th>
-          </thead>
-          <tbody>
-            <tr>
-              <td><img class="td-money-icon" src="<%=  asset_path 'money-icon-red.png' %>"></td>
-              <td><strong>$10 / month</strong></td>
-              <td><strong>$25 / month</strong></td>
-              <td><strong>$20 + 5% twik fees / month</strong></td>
-              <td><strong>$15 / designer<br>+ 5% twik fees / month</strong></td>
-            </tr>
-            <tr>
-              <td><strong>Team Pages</strong></td>
-              <td>2</td>
-              <td>3</td>
-              <td>1 designer dashboard <br>5 client pages</td>
-              <td>>3 designer dashboards <br>5 client pages each</td>
-            </tr>
-            <tr>
-              <td><strong>Users / Licenses</strong></td>
-              <td>5 standard</td>
-              <td>3 manager <br>5 standard / team</td>
-              <td>1 designer <br>5 standard / team</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><strong>Templates</strong></td>
-              <td>5</td>
-              <td>5 / team</td>
-              <td>5 / client page</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><strong>Custom subscription-based pages for your clients</strong></td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>5</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><strong>Add Team</strong></td>
-              <td>N/A</td>
-              <td>$5 / team / mo.</td>
-              <td>$2.5 / team / mo.</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td> </td>
-              <td><a href="#sign-up" class="box-background">Sign Up For Free Trial</a></td>
-              <td><a href="#sign-up" class="box-background">Sign Up For Free Trial</a></td>
-              <td><a href="#sign-up" class="box-background">Sign Up For Free Trial</a></td>
-              <td><a href="#sign-up" class="box-background">Sign Up For Free Trial</a></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="visible-xs visible-sm row pricing-plans">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#designer-mobile" aria-controls="designer-mobile" role="tab" data-toggle="tab">For Designers</a></li>
+          <li role="presentation"><a href="#business-mobile" aria-controls="business-mobile" role="tab" data-toggle="tab">For Business</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="designer-mobile">
+            <div id="pricing" class="col-xs-12">
+              <div class="row">
+                <div class="col-xs-12 pricing-plan">
+                  <h1>Individual</h1>
+                  <ul class="list-unstyled">
+                    <li><strong>1 Account</strong></li>
+                    <li><strong>Up to 20 Clients</strong></li>
+                    <li><strong>10 guest collaborators</strong></li>
+                  </ul>
+                  <div class="col-sm-6 col-sm-offset-3">
+                    <button class="btn btn-block btn-primary btn-large">
+                      Sign Up For Free Trial
+                    </button>
+                  </div>
+                </div>
+                <div class="col-xs-12 pricing-plan">
+                  <h1>Studio</h1>
+                  <ul class="list-unstyled">
+                    <li><strong>Up to 35 Accounts</strong></li>
+                    <li><strong>Up to 50 Clients</strong></li>
+                    <li><strong>30 guest collaborators</strong></li>
+                    <li><strong>Admin-managed team permissions</strong></li>
+                  </ul>
+                  <div class="col-sm-6 col-sm-offset-3">
+                    <button class="btn btn-block btn-primary btn-large">
+                      Sign Up For Free Trial
+                    </button>
+                  </div>
+                </div>
+                <div class="col-xs-12 pricing-plan">
+                  <h1>Agency</h1>
+                  <ul class="list-unstyled">
+                    <li><strong>Unlimited Accounts</strong></li>
+                    <li><strong>Unlimited Clients</strong></li>
+                    <li><strong>Unlimited guest collaborators</strong></li>
+                    <li><strong>Admin-managed team permissions</strong></li>
+                    <li><strong>Unlimited role types</strong></li>
+                  </ul>
+                  <p class="disclaimer hide">Designer accounts are not yet available, but you can still sign up for free "Teams" trial</p>
+                  <div class="col-sm-6 col-sm-offset-3">
+                    <button class="btn btn-block btn-primary btn-large">
+                      Sign Up For Free Trial
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="business-mobile">
+            <div id="pricing" class="col-xs-12">
+              <div class="row">
+                <div class="col-xs-12 pricing-plan">
+                  <h1>Entrepreneur</h1>
+                  <ul class="list-unstyled">
+                    <li><strong>2-10 Accounts</strong></li>
+                    <li><strong>Up to 40 Templates</strong></li>
+                    <li><strong>150MB document storage</strong></li>
+                  </ul>
+                  <div class="col-sm-6 col-sm-offset-3">
+                    <button class="btn btn-block btn-primary btn-large">
+                      Sign Up For Free Trial
+                    </button>
+                  </div>
+                </div>
+                <div class="col-xs-12 pricing-plan">
+                  <h1>Small Business</h1>
+                  <ul class="list-unstyled">
+                    <li><strong>2-10 Accounts</strong></li>
+                    <li><strong>Up to 40 Templates</strong></li>
+                    <li><strong>150MB document storage</strong></li>
+                  </ul>
+                  <div class="col-sm-6 col-sm-offset-3">
+                    <button class="btn btn-block btn-primary btn-large">
+                      Sign Up For Free Trial
+                    </button>
+                  </div>
+                </div>
+                <div class="col-xs-12 pricing-plan">
+                  <h1>Enterprise</h1>
+                  <ul class="list-unstyled">
+                    <li><strong>2-10 Accounts</strong></li>
+                    <li><strong>Up to 40 Templates</strong></li>
+                    <li><strong>150MB document storage</strong></li>
+                  </ul>
+                  <div class="col-sm-6 col-sm-offset-3">
+                    <button class="btn btn-block btn-primary btn-large">
+                      Sign Up For Free Trial
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="visible-xs visible-sm row">
-        <div id="pricing" class="col-xs-12">
-          <div class="row">
-            <div class="col-xs-12 pricing-plan">
-              <h1>Team</h1>
-              <ul class="list-unstyled">
-                <li><strong>$10 / month</strong></li>
-                <li><strong>1 Team Page</strong></li>
-                <li><strong>5 standard licenses</strong></li>
-                <li><strong>5 Document template types</strong></li>
-              </ul>
-              <div class="col-sm-6 col-sm-offset-3">
-                <button class="btn btn-block btn-primary btn-large">
-                  Sign Up For Free Trial
-                </button>
-              </div>
-            </div>
-            <div class="col-xs-12 pricing-plan">
-              <h1>Team Plus</h1>
-              <ul class="list-unstyled">
-                <li><strong>$25 / month</strong></li>
-                <li><strong>3 Team Pages</strong></li>
-                <li><strong>5 standard licenses / page</strong></li>
-                <li><strong>5 Document template types / page</strong></li>
-              </ul>
-              <div class="col-sm-6 col-sm-offset-3">
-                <button class="btn btn-block btn-primary btn-large">
-                  Sign Up For Free Trial
-                </button>
-              </div>
-            </div>
-            <div class="col-xs-12 pricing-plan">
-              <h1>Designer (Pro)</h1>
-              <ul class="list-unstyled">
-                <li><strong>$20 / month</strong></li>
-                <li><strong>+ 5% client charges</strong></li>
-                <li><strong>1 Designer dash and</strong></li>
-                <li><strong>+ 3 Client Pages</strong></li>
-                <li><strong>1 designer license</strong></li>
-                <li><strong>+ 5 standard licenses / page</strong></li>
-                <li><strong>5 Document template types / page</strong></li>
-                <li><strong>Secure recurring service billing to clients</strong></li>
-              </ul>
-              <p class="disclaimer">Designer accounts are not yet available, but you can still sign up for free "Teams" trial</p>
-              <div class="col-sm-6 col-sm-offset-3">
-                <button class="btn btn-block btn-primary btn-large">
-                  Sign Up For Free Trial
-                </button>
-              </div>
-            </div>
+      <div class="row pricing-plans hidden-xs hidden-sm">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#designer" aria-controls="designer" role="tab" data-toggle="tab">For Designers</a></li>
+          <li role="presentation"><a href="#business" aria-controls="business" role="tab" data-toggle="tab">For Business</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="designer">
+            <table id="pricing" class="table pricing-table">
+              <thead>
+                <th></th>
+                <th style="line-height: 18px">Individual<br><span class="small">Coming Soon</span></th>
+                <th style="line-height: 18px; padding-bottom: 20px"><img class="th-crown-icon" src="<%=  asset_path 'crown-red.png' %>"><br>Studio<br><span class="small">Coming Soon</span></th>
+                <th style="line-height: 18px">Agency<br><span class="small">Coming Soon</span></th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Users</strong></td>
+                  <td><strong>1 Account</strong></td>
+                  <td><strong>Up to 35 Accounts</strong></td>
+                  <td><strong>Unlimited Accounts</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Clients</strong></td>
+                  <td>Up to 20 Clients</td>
+                  <td>Up to 50 Clients</td>
+                  <td>Unlimited Clients</td>
+                </tr>
+                <tr>
+                  <td><strong></strong></td>
+                  <td>10 guest collaborators</td>
+                  <td>30 guest collaborators</td>
+                  <td>Unilimted guest collaborators</td>
+                </tr>
+                <tr>
+                  <td><strong>Roles</strong></td>
+                  <td></td>
+                  <td>Admin-managed team permissions</td>
+                  <td>Admin-managed team permissions</td>
+
+                </tr>
+                <tr>
+                  <td><strong></strong></td>
+                  <td></td>
+                  <td></td>
+                  <td>Unlimited role types</td>
+                </tr>
+                <tr>
+                  <td> </td>
+                  <td><a href="#sign-up" class="box-background">Sign Up For Free Trial</a></td>
+                  <td><a href="#sign-up" class="box-background">Sign Up For Free Trial</a></td>
+                  <td><a href="#sign-up" class="box-background">Sign Up For Free Trial</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="business">
+            <table id="pricing" class="table pricing-table">
+              <thead>
+                <th></th>
+                <th style="line-height: 18px">Entrepreneur<br><span class="small">Coming Soon</span></th>
+                <th style="line-height: 18px; padding-bottom: 20px"><img class="th-crown-icon" src="<%=  asset_path 'crown-red.png' %>"><br>Small Business<br><span class="small">Coming Soon</span></th>
+                <th style="line-height: 18px">Enterprise<br><span class="small">Coming Soon</span></th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Users</strong></td>
+                  <td><strong>2-10 Accounts</strong></td>
+                  <td><strong></strong></td>
+                  <td><strong></strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Templates</strong></td>
+                  <td>Up to 40 Clients</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><strong>Storage</strong></td>
+                  <td>150MB document storage</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><strong></strong></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><strong></strong></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td> </td>
+                  <td><a href="#sign-up" class="box-background">Sign Up For Free Trial</a></td>
+                  <td><a href="#sign-up" class="box-background">Sign Up For Free Trial</a></td>
+                  <td><a href="#sign-up" class="box-background">Sign Up For Free Trial</a></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
