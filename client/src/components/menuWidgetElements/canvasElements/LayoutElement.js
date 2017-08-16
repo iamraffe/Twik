@@ -48,7 +48,7 @@ class LayoutElement extends React.Component{
         else if(this.props.landscapeMode && this.props.position === this.props.activeContainer){
           return (
             <div
-              className={`container-align-${this.props.align}`}
+              className={`container-align-${this.props.align} ${this.props.classed}`}
               style={{
                 width: this.props.landscapeMode ? '100%' : this.props.span*100+'%',
                 float: 'left',
@@ -82,7 +82,7 @@ class LayoutElement extends React.Component{
         else{
           return (
             <div
-              className={`container-align-${this.props.align}`}
+              className={`container-align-${this.props.align} ${this.props.classed}`}
               style={{
                 width: this.props.landscapeMode ? '100%' : this.props.span*100+'%',
                 float: 'left',
@@ -103,7 +103,7 @@ class LayoutElement extends React.Component{
                     zoom={this.props.zoom}
                     hover={this.props.hover}
                     activeSection={this.props.activeSection}
-                    vertical={this.props.align}
+                    bottom={(this.props.align === 'bottom') && (element.align === 'bottom')}
                     printView={this.props.printView}
                     {...element}
                     getStyles={this.getStyles}
@@ -120,7 +120,7 @@ class LayoutElement extends React.Component{
             className="row-canvas"
             style={{
               width: '100%',
-              alignSelf: this.props.vertical === 'bottom' ? 'flex-end' : 'flex-start',
+              alignSelf: this.props.bottom ? 'flex-end' : 'flex-start',
               // background: "yellow",
               position: 'relative',
               height: this.props.singleRow ? '100%' : 'auto',

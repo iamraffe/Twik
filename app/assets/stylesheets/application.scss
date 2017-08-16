@@ -62,3 +62,9 @@
 .semi-hide{
   visibility: hidden;
 }
+
+.hide-on-web{
+  @media only screen{
+    visibility: hidden !important;
+  }
+}

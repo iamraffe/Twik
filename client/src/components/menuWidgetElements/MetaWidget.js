@@ -293,7 +293,7 @@ class MetaWidget extends React.Component{
               <div className={`row ${paperSettings !== 'size' ? '' : 'hide'}`}>
                 <div className="col-sm-8 col-sm-offset-2">
                   <div className="row">
-                    <div className="col-xs-3 hide">
+                    <div className="col-xs-3">
                       <label className="text-default">
                         <input onClick={(e) => {this.filterTemplates()}} type="radio" name="paperUsage" value="portrait__ONE_COLUMN__false" /><br/> One Side Vertical (One Column)
                       </label>
