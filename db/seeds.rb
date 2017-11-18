@@ -1214,6 +1214,56 @@ p_1_c_2_s0 = SecureRandom.uuid
           }
         },
         {
+          name: "Dishes & Beers (without price)",
+          id: SecureRandom.uuid,
+          structure: {
+            type: "COMPOUND_ELEMENT",
+            inline: true,
+            styles: {
+              display: 'block',
+              lineHeight: 0,
+              marginBottom: 10.5
+            },
+            elements: [
+              {
+                type: "DISH_TITLE",
+                text: '',
+                styles: dish_title_id
+              },
+              {
+                type: "ELEMENT_SEPARATOR",
+                text: ' - ',
+                styles: dish_description_id
+              },
+              {
+                type: "DISH_DESCRIPTION",
+                text: '',
+                styles: dish_description_id
+              }
+            ]
+          }
+        },
+        {
+          name: "Dishes & Beers (without description or price)",
+          id: SecureRandom.uuid,
+          structure: {
+            type: "COMPOUND_ELEMENT",
+            inline: true,
+            styles: {
+              display: 'block',
+              lineHeight: 0,
+              marginBottom: 10.5
+            },
+            elements: [
+              {
+                type: "DISH_TITLE",
+                text: '',
+                styles: dish_title_id
+              },
+            ]
+          }
+        },
+        {
           name: "Wines",
           id: SecureRandom.uuid,
           structure: {
@@ -1279,6 +1329,56 @@ p_1_c_2_s0 = SecureRandom.uuid
                 type: "WINE_PRICE",
                 text: '',
                 styles: dish_price_id
+              }
+            ]
+          }
+        },
+        {
+          name: "Wines (without price)",
+          id: SecureRandom.uuid,
+          structure: {
+            type: "COMPOUND_ELEMENT",
+            inline: true,
+            styles: {
+              display: 'block',
+              lineHeight: 0,
+              marginBottom: 10.5
+            },
+            elements: [
+              {
+                type: "WINE_DESCRIPTION",
+                text: '',
+                styles: dish_description_id
+              },
+              {
+                type: "ELEMENT_SEPARATOR",
+                text: ' ',
+                styles: dish_description_id
+              },
+              {
+                type: "WINE_TITLE",
+                text: '',
+                styles: dish_title_id
+              }
+            ]
+          }
+        },
+        {
+          name: "Wines (alternate/simplified, without price)",
+          id: SecureRandom.uuid,
+          structure: {
+            type: "COMPOUND_ELEMENT",
+            inline: true,
+            styles: {
+              display: 'block',
+              lineHeight: 0,
+              marginBottom: 10.5
+            },
+            elements: [
+              {
+                type: "WINE_DESCRIPTION",
+                text: '',
+                styles: dish_description_id
               }
             ]
           }
