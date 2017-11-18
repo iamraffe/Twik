@@ -6,7 +6,7 @@ import InlineEditor from '../../common/InlineEditor'
 class SingleElement extends React.Component{
   constructor(props){
     super(props)
-    console.log("props single", props.colors)
+    
     this.state = {
       colors: props.colors,
       text: props.text,
@@ -20,7 +20,6 @@ class SingleElement extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("receive single", nextProps.colors)
     this.setState({
       colors: nextProps.colors,
       text: nextProps.text,

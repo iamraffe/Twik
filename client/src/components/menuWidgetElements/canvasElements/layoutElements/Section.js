@@ -167,7 +167,6 @@ class Section extends React.Component{
           }}
         >
           {_.map(_.orderBy(components, ['position']), (component, i) => {
-            // console.log("component", component)
             return (
               <div key={i} data-id={JSON.stringify(component)}>
                 <LayoutElement
@@ -254,7 +253,6 @@ class Section extends React.Component{
 }
 
 function mapStateToProps(state, ownProps){
-  // console.log(state)
   return {
     sections: state.sections,
     components: state.components

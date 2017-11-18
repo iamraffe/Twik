@@ -8,7 +8,7 @@ import InlineEditor from '../../common/InlineEditor'
 class CompoundElement extends React.Component{
   constructor(props){
     super(props)
-    console.log("props compound", props.colors)
+
     this.state = {
       editing: 'none',
       colors: props.colors,
@@ -27,7 +27,6 @@ class CompoundElement extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("new", nextProps.colors)
     this.setState({
       colors: nextProps.colors,
       elements: _.map(nextProps.elements, (e, i) => {
@@ -72,25 +71,15 @@ class CompoundElement extends React.Component{
 
   componentDidMount(){
     const { id } = this.props
-    // console.log('componendDidMount')
     let compoundElement = $(this.element)
-    // console.log(compoundElement)
     let width = 0
     _.each(compoundElement.children(), (children, i) => {
       compoundElement.css('white-space', 'nowrap')
-      // console.log(compoundElement)
       width += $(children).width()
       compoundElement.css('white-space', 'normal')
-      // compoundElement.css('width', '-=1000px')
     })
     if((compoundElement.width() < width) && ((width%compoundElement.width()) < (compoundElement.width()*0.5))){
-      // console.log(compoundElement, width%compoundElement.width(), width, compoundElement.width())
       compoundElement.css('width', '-='+compoundElement.width()*0.15+'px')
-      // while((width%compoundElement.width()) < (compoundElement.width()*0.15)){
-      //   console.log(compoundElement.width())
-      //   compoundElement.css('width', '-=10px')
-      // }
-      // console.log("viuda")
     }
   }
 

@@ -15,21 +15,13 @@ class Column extends React.Component{
   constructor(props){
     super(props)
 
-    // console.log("styles on constructor", props.styles, props.id, props.span)
-    console.log(props.styles)
     this.state = {
       sections: _.filter(props.sections, (section, i) => {return section.columnId === props.id}),
       activeSection: props.activeSection,
       colors: props.colors,
       hideTooltip: false,
       styles: _.mapValues(props.styles, (style, i) => {
-        console.log(style)
-        // if(text.search(new RegExp("\[\[_(.*?)_\]\]")) === -1){
         return isNaN(style) ? style.replace(new RegExp('%%{secondary_color}%%'.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), props.colors.secondary_color) : style
-        // }
-        // else{
-        //   return style
-        // }
       })
     }
 
@@ -43,28 +35,17 @@ class Column extends React.Component{
       sections: _.filter(nextProps.sections, (section, i) => {return section.columnId === nextProps.id}),
       colors: nextProps.colors,
       styles: _.mapValues(nextProps.styles, (style, i) => {
-        // if(){
         return isNaN(style) ? style.replace(new RegExp('%%{secondary_color}%%'.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), nextProps.colors.secondary_color) : style
-        // }
-        // else{
-        //   return style
-        // }
       })
     })
   }
 
   hideTooltips = () => {
-    console.log('hiding')
     this.setState({hideTooltip: true})
   }
 
-  // dynamicColoring(colorKey){
-  //   return this.state[colorKey]
-  // }
-
   componentDidMount(){
     const { id, span, styles, singleColumn } = this.props
-    // console.log("styles on mount", styles, id, span)
 
     $(this.element).css('width', `${span*100}%`)
     if(styles.marginLeft){
@@ -94,7 +75,7 @@ class Column extends React.Component{
   render(){
     const { type, span, id, hover, rowId, containerId, printView, singleColumn } = this.props
     const { sections, activeSection, styles, hideTooltip } = this.state
-    // console.log("render", styles, id, span)
+
     return(
       <div
         ref={(element) => { this.element = element }}
@@ -113,11 +94,13 @@ class Column extends React.Component{
               put: true,
               delay: 0,
               onStart: (evt) => {
+                console.log('evt', evt)
                 _.each(document.querySelectorAll('.section-overlay'), overlay => {
                   overlay.style.display = 'none'
                 })
               },
               onEnd: (evt) => {
+                console.log('evt', evt)
                 _.each(document.querySelectorAll('.section-overlay'), overlay => {
                   overlay.style.display = 'block'
                 })

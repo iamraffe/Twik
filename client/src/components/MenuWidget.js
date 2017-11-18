@@ -37,21 +37,17 @@ class MenuWidget extends React.Component{
   onUnload = (event) => { // the method that will be used for both add and remove event
     // CHECK FOR CHANGES IF THERE ARE ANY THEN GO AHEAD AND CONFIRM
     // event.preventDefault()
-    // event.returnValue = true
-    // return true
+    event.returnValue = true
+    return true
   }
 
   componentWillUnmount() {
-    // window.removeEventListener("onbeforeunload", this.onUnload)
     window.removeEventListener("beforeunload", this.onUnload)
   }
 
   componentDidMount(){
     window.addEventListener("beforeunload", this.onUnload)
-    // window.addEventListener("onbeforeunload", this.onUnload)
     const { mode, menu } = this.props
-    console.log("menu", menu)
-    // debugger;
     if(mode === 'edit' || mode === 'preview'){
       this.props.metaActions.setMetaInfo({
         ...JSON.parse(menu.object.meta),

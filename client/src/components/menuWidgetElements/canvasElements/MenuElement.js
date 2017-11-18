@@ -22,7 +22,6 @@ class MenuElement extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("ME", nextProps.colors)
     this.setState({
       elements: nextProps.elements,
       position: nextProps.position,
@@ -36,7 +35,7 @@ class MenuElement extends React.Component{
   render(){
     const { type, activeSection, id, inline, styles } = this.props
     const { elements, position, colors } = this.state
-    console.log(type, colors)
+    
     switch(type){
       case "MENU_TITLE":
       case "SECTION_TITLE":
