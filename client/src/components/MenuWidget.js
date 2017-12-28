@@ -112,7 +112,7 @@ class MenuWidget extends React.Component{
         sections: JSON.stringify(sections),
         components: JSON.stringify(components),
         template_id: template.id,
-        wildcards: JSON.stringify(menu.object.wildcards)
+        // wildcards: JSON.stringify(menu.object.wildcards)
       },
       meta.society,
       preview,
@@ -136,7 +136,7 @@ class MenuWidget extends React.Component{
         sections: JSON.stringify(sections),
         components: JSON.stringify(components),
         template_id: template.id,
-        wildcards: JSON.stringify(menu.object.wildcards)
+        // wildcards: JSON.stringify(menu.object.wildcards)
       },
       meta.society,
       preview,
